@@ -1,0 +1,83 @@
+html {
+  font-family: sans-serif;
+}
+
+.mainHeading {
+  text-align: center;
+  color: green;
+}
+
+.guessSubmit {
+  background-color: skyblue;
+}
+
+.profileCard {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background: #101217;
+    border: 1px solid #292d35;
+    border-radius: 20px;
+
+    box-sizing: border-box;
+}
+
+.profileImage {
+    width: 180px;
+    height: 150px;
+    flex-shrink: 0;
+
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid #343844;
+    background: #181b21;
+}
+
+.profileImage img {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    object-fit: contain;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profileLabel {
+    color: #9b6cff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profileInfo h3 {
+    margin: 0;
+    color: #f4f4f5;
+    font-size: 22px;
+}
+
+.profileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.profileLinks a {
+    color: #9699a3;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.profileLinks a:hover {
+    color: #9b6cff;
+}

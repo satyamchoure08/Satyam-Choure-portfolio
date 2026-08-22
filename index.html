@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of a web developer.">
+  <title>Satyam Choure | Web Developer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="#home">SC<span>.</span></a>
+    <button class="menu-btn" aria-label="Toggle menu">☰</button>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">WEB DEVELOPER • CREATIVE BUILDER</p>
+        <h1>Hi, I'm <span>Satyam Choure.</span><br>I build for you. PEACE!</h1>
+        <p class="hero-text">
+          I'm learning modern web development and turning ideas into clean,
+          useful and interactive websites.
+        </p>
+        <div class="hero-buttons">
+          <a class="btn primary" href="#projects">View my work</a>
+          <a class="btn secondary" href="#contact">Contact me</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="code-window">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <pre><code><span>const</span> developer = {
+  name: <b>"Satyam"</b>,
+  skills: [<b>"HTML"</b>, <b>"CSS"</b>, <b>"JS"</b>],
+  goal: <b>"Build great things"</b>
+};</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <p class="eyebrow"> — ABOUT —</p>
+      <h2>A little about me</h2>
+      <div class="about-grid">
+        <p>
+          I'm a beginner web developer focused on learning by building.
+          I enjoy taking an idea, breaking it into smaller pieces and
+          turning it into a working website.
+        </p>
+        <p>
+          Right now I'm strengthening my HTML, CSS and JavaScript skills
+          through projects. My goal is to become a strong full-stack
+          developer and eventually build products that solve real problems.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <p class="eyebrow"> — SKILLS</p>
+      <h2>What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill"><strong>HTML</strong><span>Semantic structure</span></div>
+        <div class="skill"><strong>CSS</strong><span>Responsive design</span></div>
+        <div class="skill"><strong>JavaScript</strong><span>Interactive websites</span></div>
+        <div class="skill"><strong>Git</strong><span>Version control</span></div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+      <p class="eyebrow"> — PROJECTS</p>
+      <h2>Things I've built</h2>
+      <div class="projects-grid">
+        <article class="project">
+          <span class="project-number">01</span>
+          <h3>Number Guessing Game</h3>
+          <p>A JavaScript game with guesses, feedback, attempts and a restart flow.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a href="projects/numberGuessingGame/index.html" class="projectImg">
+            <span class="projectText"> View project ↗
+            </span>
+            </a>
+        </article>
+
+        <article class="project">
+          <span class="project-number">02</span>
+          <h3>WhatsApp UI</h3>
+          <p>A non-functional messaging interface recreated from scratch to practice layout and styling.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span></div>
+          <a href="projects/wassup/index.html" class="">
+            <span class="projectText"> View project ↗
+            </span>
+            </a>
+        </article>
+
+        <article class="project">
+          <span class="project-number">03</span>
+          <h3>Coming Soon</h3>
+          <p>The next project is already being built. This space will be updated soon.</p>
+          <div class="tags"><span>JavaScript</span><span>Web</span></div>
+         <span class="projectText">Coming soon</span>
+        </article>
+      </div>
+    </section>
+
+<div class="profileCard">
+
+  <div class="profileImage">
+        <img src="images/satyamCropped.jpg" alt="Satyam Choure">
+    </div>
+    <div class="profileInfo">
+        <span class="profileLabel">Satyam Choure</span>
+        <h3>Web Developer</h3>
+        <div class="profileLinks">
+            <a href="https://x.com/satyamchoure08" target="_blank" rel="noopener noreferrer">X — @satyamchoure08</a>
+            <a href="https://www.youtube.com/@SatyamChourex3k" target="_blank" rel="noopener noreferrer">YouTube — Satyam Choure x3k</a>
+        </div>
+    </div>
+
+</div>
+
+   <section id="contact" class="section contact">
+      
+      <p class="eyebrow"> — CONTACT</p>
+      <h2>Let's build something.</h2>
+      <p>Have a project or idea? Send me a message and let's talk.</p>
+      <a class="btn primary" href="mailto:satyamchoure08@gmail.com">satyamchoure08@gmail.com</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Satyam Choure. Built with HTML, CSS & JavaScript.</p>
+  </footer>
+
+  <button id="topBtn" class="top-btn" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
