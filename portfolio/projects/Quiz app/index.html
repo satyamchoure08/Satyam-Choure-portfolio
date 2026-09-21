@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satyam.quiz</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="quizContainer">
+
+    <!-- Intro / Start Screen -->
+    <section class="introScreen" id="introScreen">
+      <div class="introContent">
+        <p class="introTag">WEB DEVELOPER • CREATIVE BUILDER</p>
+        <h1>Hi, I'm Satyam Choure.</h1>
+        <p class="introLead">I build for you. PEACE!</p>
+        <p class="introAbout">
+          I'm learning modern web development and turning ideas into clean,
+          useful and interactive websites. This quiz is a small piece of that journey —
+          motivational, raw, and built with code.
+        </p>
+        <div class="introCode">
+          <code>
+            const developer = {<br>
+            &nbsp;&nbsp;name: "Satyam",<br>
+            &nbsp;&nbsp;skills: ["HTML", "CSS", "JS"],<br>
+            &nbsp;&nbsp;goal: "Build great things"<br>
+            };
+          </code>
+        </div>
+        <button id="startQuiz" class="startButton" type="button">Start Quiz</button>
+      </div>
+    </section>
+
+    <!-- Quiz Screen -->
+    <section class="quizScreen" id="quizScreen" hidden>
+      <div class="topSection">
+        <span id="questionCount">Question 1 of 7</span>
+        <span id="quizTimer">30</span>
+      </div>
+
+      <div class="progressBar">
+        <div id="quizProgress"></div>
+      </div>
+
+      <div class="quizCard">
+        <h2 id="question">Loading...</h2>
+        <div class="options" id="options"></div>
+        <button id="quizNext" type="button" class="nextButton" disabled>Next</button>
+      </div>
+    </section>
+
+    <!-- Results Screen -->
+    <section class="results" id="resultsScreen" hidden>
+      <h2 id="resultHeading">Quiz Completed</h2>
+      <p id="quizScore" class="quizScore"></p>
+      <p class="resultMessage" id="resultMessage"></p>
+      <button id="restartQuiz" class="restartButton" type="button">Restart Quiz</button>
+    </section>
+
+  </main>
+</body>
+
+</html>
