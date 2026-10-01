@@ -3,143 +3,317 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal portfolio of a web developer.">
-  <title>Satyam Choure | Web Developer</title>
+  <title>Satyam Choure — Web Developer</title>
+  <meta name="description" content="Satyam Choure is a web developer who learns by building: clean, useful and interactive websites today, products that solve real problems next.">
+  <meta name="author" content="Satyam Choure">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0B0B0C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Satyam Choure — Web Developer">
+  <meta property="og:description" content="I turn ideas into clean, useful websites, and I&rsquo;m building toward products that solve real problems.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@satyamchoure08">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Sets the theme before first paint so there is no flash. -->
+  <script>
+    (function () {
+      var root = document.documentElement, theme;
+      root.classList.add("js");
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      root.dataset.theme = theme;
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "light" ? "#F6F3EC" : "#0B0B0C");
+    })();
+  </script>
+
   <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Satyam Choure",
+      "jobTitle": "Web Developer",
+      "email": "mailto:satyamchoure08@gmail.com",
+      "sameAs": [
+        "https://x.com/satyamchoure08",
+        "https://www.youtube.com/@satyamchoure-x3k",
+        "https://github.com/satyamchoure08"
+      ]
+    }
+  </script>
 </head>
 <body>
-  <header class="navbar">
-    <a class="logo" href="#home">SC<span>.</span></a>
-    <button class="menu-btn" aria-label="Toggle menu">☰</button>
-    <nav class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H16"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="brand" href="#top" aria-label="Satyam Choure, back to top">
+        <span class="brand__mark" aria-hidden="true">S</span>
+        <span class="brand__name">Satyam Choure</span>
+      </a>
+
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a href="#work"><span class="nav__idx" aria-hidden="true">01</span>Work</a></li>
+          <li><a href="#about"><span class="nav__idx" aria-hidden="true">02</span>About</a></li>
+          <li><a href="#skills"><span class="nav__idx" aria-hidden="true">03</span>Skills</a></li>
+          <li><a href="#contact"><span class="nav__idx" aria-hidden="true">04</span>Contact</a></li>
+        </ul>
+        <a class="btn btn--primary nav__cta" href="mailto:satyamchoure08@gmail.com">Say hello <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
+          <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <a class="btn btn--primary btn--sm header-cta" href="#contact">Let&rsquo;s talk</a>
+        <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-content">
-        <p class="eyebrow">WEB DEVELOPER • CREATIVE BUILDER</p>
-        <h1>Hi, I'm <span>Satyam Choure.</span><br>I build for you. PEACE!</h1>
-        <p class="hero-text">
-          I'm learning modern web development and turning ideas into clean,
-          useful and interactive websites.
-        </p>
-        <div class="hero-buttons">
-          <a class="btn primary" href="#projects">View my work</a>
-          <a class="btn secondary" href="#contact">Contact me</a>
+  <main id="main">
+    <!-- ───────────── Hero ───────────── -->
+    <section class="hero" id="top" data-hero>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="pill hero-in" style="--i:0"><span class="pill__dot" aria-hidden="true"></span>Open to projects &amp; ideas</p>
+
+          <h1 class="hero__title">
+            <span class="line"><span class="hero-in" style="--i:1">I turn ideas into</span></span>
+            <span class="line"><span class="hero-in" style="--i:2"><em>clean, useful</em></span></span>
+            <span class="line"><span class="hero-in" style="--i:3">websites.</span></span>
+          </h1>
+
+          <p class="hero__lead hero-in" style="--i:4">
+            I&rsquo;m Satyam Choure, a web developer who learns by building. I ship clean, interactive
+            websites today and I&rsquo;m working toward products that solve real problems.
+          </p>
+
+          <div class="hero__cta hero-in" style="--i:5">
+            <a class="btn btn--primary btn--lg" href="#work">See my work <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost btn--lg" href="#contact">Get in touch</a>
+          </div>
+
+          <dl class="facts hero-in" style="--i:6">
+            <div><dt>Role</dt><dd>Web developer</dd></div>
+            <div><dt>Stack</dt><dd>HTML · CSS · JavaScript</dd></div>
+            <div><dt>Next up</dt><dd>Full-stack</dd></div>
+          </dl>
         </div>
+
+        <figure class="portrait hero-in" style="--i:2">
+          <div class="portrait__frame">
+            <picture>
+              <source type="image/webp" srcset="assets/img/satyam-480.webp 480w, assets/img/satyam-860.webp 860w" sizes="(min-width: 900px) 440px, 80vw">
+              <img src="assets/img/satyam-860.jpg" srcset="assets/img/satyam-480.jpg 480w, assets/img/satyam-860.jpg 860w" sizes="(min-width: 900px) 440px, 80vw" width="860" height="1075" alt="Portrait of Satyam Choure" fetchpriority="high" decoding="async">
+            </picture>
+          </div>
+          <figcaption class="chip">
+            <span class="pill__dot" aria-hidden="true"></span>
+            <span><small>Now building</small>My next project</span>
+          </figcaption>
+        </figure>
       </div>
-      <div class="hero-card">
-        <div class="code-window">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <pre><code><span>const</span> developer = {
-  name: <b>"Satyam"</b>,
-  skills: [<b>"HTML"</b>, <b>"CSS"</b>, <b>"JS"</b>],
-  goal: <b>"Build great things"</b>
-};</code></pre>
+    </section>
+
+    <!-- ───────────── Work ───────────── -->
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span>01</span> Selected work</p>
+          <h2 class="section__title" id="work-title">Things I&rsquo;ve <em>built</em>.</h2>
+          <p class="section__intro">Small, focused projects where I learn by building. Every one is live, so open one and try it.</p>
+        </header>
+
+        <div class="cards">
+          <!-- 01 · Number Guessing Game -->
+          <article class="card reveal" data-spotlight>
+            <div class="cover cover--guess" aria-hidden="true">
+              <div class="mock-guess">
+                <div class="mock-guess__top"><span>Guess 1–100</span><span>6 / 10</span></div>
+                <div class="mock-guess__num">?</div>
+                <div class="mock-guess__hints"><span>Too low</span><span class="is-on">Too high</span></div>
+                <div class="mock-guess__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <span class="card__idx">01</span>
+                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+              </div>
+              <h3 class="card__title"><a class="card__link" href="portfolio/projects/numberGuessingGame/index.html">Number Guessing Game</a></h3>
+              <p class="card__text">A browser game: find the hidden number from 1 to 100 in ten tries, with Too high / Too low hints and a one-click restart.</p>
+              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            </div>
+          </article>
+
+          <!-- 02 · Quiz -->
+          <article class="card reveal" style="--d:90ms" data-spotlight>
+            <div class="cover cover--quiz" aria-hidden="true">
+              <div class="mock-quiz">
+                <div class="mock-quiz__top"><span>Question 3 of 7</span><span class="mock-quiz__timer">0:18</span></div>
+                <div class="mock-quiz__bar"><i></i></div>
+                <div class="mock-quiz__lines"><i></i><i></i></div>
+                <div class="mock-quiz__opt"><b></b><i></i></div>
+                <div class="mock-quiz__opt is-on"><b></b><i></i></div>
+                <div class="mock-quiz__opt"><b></b><i></i></div>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <span class="card__idx">02</span>
+                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+              </div>
+              <h3 class="card__title"><a class="card__link" href="portfolio/projects/Quiz%20app/index.html">Motivational Quiz</a></h3>
+              <p class="card__text">A seven-question quiz with a 30-second timer, a live progress bar and a scored results screen.</p>
+              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            </div>
+          </article>
+
+          <!-- 03 · WhatsApp UI -->
+          <article class="card reveal" data-spotlight>
+            <div class="cover cover--chat" aria-hidden="true">
+              <div class="mock-chat">
+                <div class="mock-chat__title">WhatsApp</div>
+                <div class="mock-chat__search"></div>
+                <div class="mock-chat__chips"><span class="is-on">All</span><span>Unread</span><span>Groups</span></div>
+                <div class="mock-chat__row"><b></b><span><i></i><i></i></span></div>
+                <div class="mock-chat__row"><b></b><span><i></i><i></i></span></div>
+                <div class="mock-chat__row"><b></b><span><i></i><i></i></span></div>
+                <div class="mock-chat__fab"></div>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <span class="card__idx">03</span>
+                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
+              </div>
+              <h3 class="card__title"><a class="card__link" href="portfolio/projects/wassup/index.html">WhatsApp UI</a></h3>
+              <p class="card__text">A non-functional messaging interface recreated from scratch to practice layout and styling.</p>
+              <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+            </div>
+          </article>
+
+          <!-- 04 · In progress -->
+          <article class="card card--soon reveal" style="--d:90ms">
+            <div class="cover cover--soon" aria-hidden="true">
+              <span class="soon-label"><span class="pill__dot"></span>In progress</span>
+            </div>
+            <div class="card__body">
+              <div class="card__top"><span class="card__idx">04</span></div>
+              <h3 class="card__title">Coming soon</h3>
+              <p class="card__text">The next project is already being built. This space will be updated soon.</p>
+              <ul class="tags"><li>JavaScript</li><li>Web</li></ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <p class="eyebrow"> — ABOUT —</p>
-      <h2>A little about me</h2>
-      <div class="about-grid">
-        <p>
-          I'm a beginner web developer focused on learning by building.
-          I enjoy taking an idea, breaking it into smaller pieces and
-          turning it into a working website.
-        </p>
-        <p>
-          Right now I'm strengthening my HTML, CSS and JavaScript skills
-          through projects. My goal is to become a strong full-stack
-          developer and eventually build products that solve real problems.
-        </p>
+    <!-- ───────────── About ───────────── -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container about">
+        <header class="about__head reveal">
+          <p class="eyebrow"><span>02</span> About</p>
+          <h2 class="section__title" id="about-title">A little <em>about me</em>.</h2>
+        </header>
+
+        <div class="about__body">
+          <p class="about__lead reveal">I&rsquo;m a web developer who learns by building.</p>
+          <p class="about__text reveal">
+            I enjoy taking an idea, breaking it into smaller pieces and turning it into a working
+            website: clean structure, responsive layouts and interactions that feel right.
+          </p>
+
+          <ol class="path reveal">
+            <li><span class="path__when">Now</span><span class="path__what">Strengthening my HTML, CSS and JavaScript through real projects.</span></li>
+            <li><span class="path__when">Next</span><span class="path__what">Growing into a strong full-stack developer.</span></li>
+            <li><span class="path__when">Goal</span><span class="path__what">Building products that solve real problems.</span></li>
+          </ol>
+        </div>
       </div>
     </section>
 
-    <section id="skills" class="section">
-      <p class="eyebrow"> — SKILLS</p>
-      <h2>What I work with</h2>
-      <div class="skills-grid">
-        <div class="skill"><strong>HTML</strong><span>Semantic structure</span></div>
-        <div class="skill"><strong>CSS</strong><span>Responsive design</span></div>
-        <div class="skill"><strong>JavaScript</strong><span>Interactive websites</span></div>
-        <div class="skill"><strong>Git</strong><span>Version control</span></div>
-        </div>
-    </section>
+    <!-- ───────────── Skills ───────────── -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow"><span>03</span> Skills</p>
+          <h2 class="section__title" id="skills-title">What I <em>work with</em>.</h2>
+        </header>
 
-    <section id="projects" class="section">
-      <p class="eyebrow"> — PROJECTS</p>
-      <h2>Things I've built</h2>
-      <div class="projects-grid">
-        <article class="project">
-          <span class="project-number">01</span>
-          <h3>Number Guessing Game</h3>
-          <p>A JavaScript game with guesses, feedback, attempts and a restart flow.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-          <a href="portfolio/projects/numberGuessingGame/index.html" class="projectImg">
-            <span class="projectText"> View project ↗
-            </span>
-            </a>
-        </article>
-
-        <article class="project">
-          <span class="project-number">02</span>
-          <h3>WhatsApp UI</h3>
-          <p>A non-functional messaging interface recreated from scratch to practice layout and styling.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span></div>
-          <a href="portfolio/projects/wassup/index.html" class="">
-            <span class="projectText"> View project ↗
-            </span>
-            </a>
-        </article>
-
-        <article class="project">
-          <span class="project-number">03</span>
-          <h3>Coming Soon</h3>
-          <p>The next project is already being built. This space will be updated soon.</p>
-          <div class="tags"><span>JavaScript</span><span>Web</span></div>
-         <span class="projectText">Coming soon</span>
-        </article>
+        <ul class="skills reveal">
+          <li class="skill"><span class="skill__idx">01</span><span class="skill__name">HTML</span><span class="skill__desc">Semantic structure</span></li>
+          <li class="skill"><span class="skill__idx">02</span><span class="skill__name">CSS</span><span class="skill__desc">Responsive design</span></li>
+          <li class="skill"><span class="skill__idx">03</span><span class="skill__name">JavaScript</span><span class="skill__desc">Interactive websites</span></li>
+          <li class="skill"><span class="skill__idx">04</span><span class="skill__name">Git</span><span class="skill__desc">Version control</span></li>
+          <li class="skill skill--next"><span class="skill__idx">05</span><span class="skill__name">Full-stack</span><span class="skill__desc">Learning next <span class="skill__tag">Up next</span></span></li>
+        </ul>
       </div>
     </section>
 
-<div class="profileCard">
+    <!-- ───────────── Contact ───────────── -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact__panel reveal">
+          <p class="eyebrow"><span>04</span> Contact</p>
+          <h2 class="contact__title" id="contact-title">Have a project or idea?<br><em>Let&rsquo;s build something.</em></h2>
+          <p class="contact__lead">Send me a message and let&rsquo;s talk.</p>
 
-  <div class="profileImage">
-   <img src="portfolio/images/satyamCropped.jpg" alt="Satyam Choure">
-    </div>
-    <div class="profileInfo">
-        <span class="profileLabel">Satyam Choure</span>
-        <h3>Web Developer</h3>
-        <div class="profileLinks">
-            <a href="https://x.com/satyamchoure08" target="_blank" rel="noopener noreferrer">X — @satyamchoure08</a>
-            <a href="https://youtube.com/@satyamchoure-x3k?si=sQHj7a5vvbLmUJRQ" target="_blank" rel="noopener noreferrer">YouTube — Satyam Choure x3k</a>
+          <div class="contact__actions">
+            <a class="btn btn--primary btn--lg" href="mailto:satyamchoure08@gmail.com">satyamchoure08@gmail.com <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <button class="btn btn--ghost btn--lg" type="button" data-copy="satyamchoure08@gmail.com">
+              <svg class="icon-copy" aria-hidden="true"><use href="#i-copy"/></svg>
+              <svg class="icon-check" aria-hidden="true"><use href="#i-check"/></svg>
+              <span data-copy-label>Copy email</span>
+            </button>
+          </div>
+          <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
+
+          <ul class="socials">
+            <li><a href="https://x.com/satyamchoure08" target="_blank" rel="noopener noreferrer"><span>X</span> @satyamchoure08 <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+            <li><a href="https://www.youtube.com/@satyamchoure-x3k" target="_blank" rel="noopener noreferrer"><span>YouTube</span> Satyam Choure <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+            <li><a href="https://github.com/satyamchoure08" target="_blank" rel="noopener noreferrer"><span>GitHub</span> satyamchoure08 <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+          </ul>
         </div>
-    </div>
-
-</div>
-
-   <section id="contact" class="section contact">
-      
-      <p class="eyebrow"> — CONTACT</p>
-      <h2>Let's build something.</h2>
-      <p>Have a project or idea? Send me a message and let's talk.</p>
-      <a class="btn primary" href="mailto:satyamchoure08@gmail.com">satyamchoure08@gmail.com</a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>© <span id="year"></span> Satyam Choure. Built with HTML, CSS & JavaScript.</p>
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>© <span id="year">2026</span> Satyam Choure</p>
+      <p class="site-footer__note">Built with HTML, CSS &amp; JavaScript. <em>Peace.</em></p>
+      <a class="site-footer__top" href="#top">Back to top <svg aria-hidden="true"><use href="#i-up"/></svg></a>
+    </div>
   </footer>
 
-  <button id="topBtn" class="top-btn" aria-label="Back to top">↑</button>
-  <script src="script.js"></script>
+  <button class="to-top" id="topBtn" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
