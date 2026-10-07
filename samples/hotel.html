@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121631">
+<title>Your Hotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500..800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=3">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>
+:root{--night:#121631;--night2:#1d2350;--amber:#ffb547;--sand:#efe6d8;--teal:#3cc3b0;--focus:#ffb547}
+body{font-family:Jost,system-ui,sans-serif;background:var(--night);color:var(--sand);line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+
+.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
+.logo{width:42px;height:42px;border:1.5px solid var(--amber);color:var(--amber);display:grid;place-items:center;font-family:"Bodoni Moda",serif;font-weight:700;font-size:22px;border-radius:4px}
+.nav .nm{font-family:"Bodoni Moda",serif;font-weight:600;font-size:19px}
+.pill{margin-left:auto;font-size:13px;font-weight:600;padding:7px 12px;border-radius:99px;background:rgba(255,181,71,.14);color:var(--amber)}
+
+/* hero: floating ring of rooms */
+.hero{position:relative;min-height:max(720px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(90% 60% at 50% 30%,#262d66 0,var(--night) 70%)}
+.hero .stage{position:absolute;left:0;right:0;top:0;height:66%;z-index:2}
+.hero-text{position:relative;z-index:3;padding:0 18px 150px;max-width:1100px;margin:0 auto;width:100%;text-align:center}
+.hero h1{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(54px,15vw,150px);line-height:.92;letter-spacing:-.02em}
+.hero p{font-size:18px;margin:12px auto 0;max-width:30ch;color:#c9c6d8}
+.no-3d .stage{display:none}
+
+/* booking bar */
+.bar{position:relative;z-index:5;margin:-120px auto 0;max-width:760px;background:rgba(239,230,216,.96);color:var(--night);border-radius:28px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+@media(min-width:760px){.bar{grid-template-columns:1.3fr 1fr 1fr auto;align-items:end}}
+.bar .f{background:#fff;border-radius:18px;padding:10px 14px}
+.bar .f.wide{grid-column:1 / -1}
+@media(min-width:760px){.bar .f.wide{grid-column:auto}}
+.bar label,.bar .lab{display:block;font-size:12px;font-weight:600;opacity:.6}
+.bar input[type=date]{border:0;font-size:17px;font-weight:600;width:100%;background:transparent;color:var(--night);min-height:30px}
+.stp{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.stp button{width:34px;height:34px;border-radius:50%;background:var(--sand);font-size:20px;font-weight:600;display:grid;place-items:center}
+.stp output{font-size:18px;font-weight:700}
+.bar .go{grid-column:1 / -1;min-height:56px;border-radius:18px;background:var(--night);color:var(--amber);font-weight:700;font-size:16px;display:grid;place-items:center}
+@media(min-width:760px){.bar .go{grid-column:auto;padding:0 22px}}
+
+.sec{padding-top:90px}
+.h{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(44px,11vw,96px);line-height:.95;letter-spacing:-.015em}
+.sub{margin-top:10px;font-size:17px;color:#c9c6d8;max-width:40ch}
+
+/* rooms */
+.flow.rooms{--fw:72vw}
+@media(min-width:760px){.flow.rooms{--fw:440px}}
+.room{background:var(--night2);border-radius:30px;overflow:hidden;border:1.5px solid transparent;transition:border-color .3s}
+.room .pic{height:230px}
+.room .body{padding:18px 18px 20px}
+.room h3{font-family:"Bodoni Moda",serif;font-weight:700;font-size:28px;line-height:1.05}
+.room .feat{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.room .feat span{font-size:13px;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.08)}
+.room .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.room .price{font-family:"Bodoni Moda",serif;font-weight:700;font-size:30px}
+.room .price small{font-family:Jost,sans-serif;font-size:14px;font-weight:500;opacity:.7}
+.room button{min-height:48px;padding:0 20px;border-radius:99px;border:1.5px solid var(--amber);color:var(--amber);font-weight:700}
+.room.on{border-color:var(--amber)}
+.room.on button{background:var(--amber);color:var(--night)}
+
+/* amenities */
+.am{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+@media(min-width:760px){.am{grid-template-columns:repeat(6,1fr)}}
+.a{background:var(--night2);border-radius:22px;padding:18px 10px;text-align:center;font-size:14px;font-weight:600}
+.a svg{display:block;margin:0 auto 10px;width:30px;height:30px;stroke:var(--amber);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.flow.more{--fw:70vw}
+.shot{height:min(420px,90vw);border-radius:28px}
+
+.find{display:grid;gap:12px;margin-top:28px}
+@media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
+.fc{border:1px solid rgba(239,230,216,.18);border-radius:28px;padding:22px}
+.fc h3{font-size:13px;font-weight:500;color:#a9a6bd}
+.fc p{font-family:"Bodoni Moda",serif;font-weight:600;font-size:26px;line-height:1.15;margin-top:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 24px;border-radius:99px;font-weight:700;font-size:16px;white-space:nowrap;transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn-amber{background:var(--amber);color:var(--night)}
+.btn-line{border:1.5px solid rgba(239,230,216,.35)}
+.btn-wa{background:#25d366;color:#05351b}
+.fc .btn{margin-top:14px}
+footer{padding:50px 18px 130px;text-align:center;font-size:14px;color:#a9a6bd}
+
+.dock{background:rgba(18,22,49,.88);border:1px solid rgba(255,181,71,.25)}
+.dock .btn{min-height:52px}
+.dock .call{background:var(--sand);color:var(--night)}
+.dock .cart{justify-content:space-between;padding:0 18px}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="logo" data-initial>Y</div>
+  <div class="nm" data-k="name">Your Hotel</div>
+  <div class="pill" data-e>24h reception</div>
+</header>
+
+<section class="hero" data-stage>
+  <div class="stage"><canvas class="scene" aria-label="Room photos floating in a ring. Drag to turn." data-scene="ring" data-opts='{"images":["https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&h=540&q=70"]}'></canvas></div>
+  <div class="hero-text">
+    <h1 data-k="name">Your Hotel</h1>
+    <p data-e>Clean AC rooms near the bus stand. Book in one message.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="bar" id="stay">
+    <div class="f wide"><label for="ci">Check-in</label><input type="date" id="ci" data-default="0"></div>
+    <div class="f"><span class="lab">Nights</span><div class="stp"><button type="button" data-step="nights" data-d="-1" aria-label="Fewer nights">−</button><output id="nights">1</output><button type="button" data-step="nights" data-d="1" aria-label="More nights">+</button></div></div>
+    <div class="f"><span class="lab">Guests</span><div class="stp"><button type="button" data-step="guests" data-d="-1" aria-label="Fewer guests">−</button><output id="guests">2</output><button type="button" data-step="guests" data-d="1" aria-label="More guests">+</button></div></div>
+    <a class="go" href="#rooms">See rooms</a>
+  </div>
+</div>
+
+<section class="sec" id="rooms">
+  <div class="wrap"><h2 class="h" data-e>Choose a room</h2><p class="sub" id="roomsub">Prices are per night.</p></div>
+  <div class="flow rooms" data-flow data-single data-max="1">
+    <div class="room" data-item>
+      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=900&q=70')"></div>
+      <div class="body"><h3 data-name data-e>Standard</h3><div class="feat"><span data-e>Double bed</span><span data-e>Fan</span><span data-e>TV</span></div>
+      <div class="row"><span class="price"><span data-price data-e>₹1,200</span> <small>/ night</small></span><button type="button" data-add data-on="Chosen">Choose</button></div></div>
+    </div>
+    <div class="room" data-item>
+      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=70')"></div>
+      <div class="body"><h3 data-name data-e>Deluxe AC</h3><div class="feat"><span data-e>King bed</span><span data-e>AC</span><span data-e>Garden view</span></div>
+      <div class="row"><span class="price"><span data-price data-e>₹1,800</span> <small>/ night</small></span><button type="button" data-add data-on="Chosen">Choose</button></div></div>
+    </div>
+    <div class="room" data-item>
+      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=70')"></div>
+      <div class="body"><h3 data-name data-e>Family suite</h3><div class="feat"><span data-e>2 beds</span><span data-e>AC</span><span data-e>Sleeps 4</span></div>
+      <div class="row"><span class="price"><span data-price data-e>₹2,800</span> <small>/ night</small></span><button type="button" data-add data-on="Chosen">Choose</button></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <h2 class="h" data-e>Every stay has</h2>
+  <div class="am">
+    <div class="a" data-reveal><svg viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0"/><circle cx="12" cy="19.5" r="1"/></svg><span data-e>Free Wi-Fi</span></div>
+    <div class="a" data-reveal style="--delay:.05s"><svg viewBox="0 0 24 24"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg><span data-e>AC rooms</span></div>
+    <div class="a" data-reveal style="--delay:.1s"><svg viewBox="0 0 24 24"><path d="M12 2.7l5.7 6.3a8 8 0 1 1-11.4 0z"/></svg><span data-e>Hot water</span></div>
+    <div class="a" data-reveal style="--delay:.15s"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg><span data-e>Parking</span></div>
+    <div class="a" data-reveal style="--delay:.2s"><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg><span data-e>Restaurant</span></div>
+    <div class="a" data-reveal style="--delay:.25s"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-e>24h desk</span></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap"><h2 class="h" data-e>Around the hotel</h2></div>
+  <div class="flow more" data-flow>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=900&q=70')"></div>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <h2 class="h" data-e>Find us</h2>
+  <div class="find">
+    <div class="fc" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Near Bus Stand</span>, <span data-e>Your Town</span></p><button class="btn btn-amber" onclick="directions()">Get directions</button></div>
+    <div class="fc" data-reveal style="--delay:.08s"><h3>Check-in / check-out</h3><p data-e>12 PM / 11 AM</p><h3 style="margin-top:12px">Phone</h3><p data-k="phone">98XXX XXXXX</p></div>
+  </div>
+</section>
+
+<footer>© <span data-year></span> <span data-k="name">Your Hotel</span></footer>
+
+<nav class="dock" aria-label="Quick actions">
+  <button class="btn call idle" onclick="callNow()">Call</button>
+  <a class="btn btn-amber idle" href="#rooms">Book a room</a>
+  <button class="btn btn-wa cart" onclick="bookStay()"><span id="sumTxt">1 night</span><strong id="sumAmt">₹0</strong></button>
+</nav>
+
+<script>
+const S = { nights: 1, guests: 2 };
+const inr = n => '₹' + n.toLocaleString('en-IN');
+const chosen = () => document.querySelector('.room.on');
+const priceOf = r => parseInt(r.querySelector('[data-price]').textContent.replace(/\D/g, '')) || 0;
+function refresh() {
+  document.getElementById('nights').textContent = S.nights;
+  document.getElementById('guests').textContent = S.guests;
+  const r = chosen();
+  document.getElementById('roomsub').textContent = r ? `${r.querySelector('[data-name]').textContent.trim()} for ${S.nights} night${S.nights > 1 ? 's' : ''}: ${inr(priceOf(r) * S.nights)}` : 'Prices are per night.';
+  document.getElementById('sumTxt').textContent = `${S.nights} night${S.nights > 1 ? 's' : ''}, book`;
+  document.getElementById('sumAmt').textContent = r ? inr(priceOf(r) * S.nights) : '';
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-step]');
+  if (b) { const k = b.dataset.step; S[k] = Math.max(1, Math.min(k === 'nights' ? 30 : 12, S[k] + +b.dataset.d)); }
+  setTimeout(refresh);
+});
+function bookStay() {
+  const r = chosen(); if (!r) { toast('Choose a room first'); location.hash = '#rooms'; return; }
+  const d = new Date(document.getElementById('ci').value + 'T00:00');
+  const ci = isNaN(d) ? '' : d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+  waSend(`Hello ${bizName()}, I want to book a room.\nRoom: ${r.querySelector('[data-name]').textContent.trim()} (${inr(priceOf(r))} per night)\nCheck-in: ${ci}\nNights: ${S.nights}\nGuests: ${S.guests}\nTotal: ${inr(priceOf(r) * S.nights)}`);
+}
+</script>
+<script src="assets/core.js?v=3"></script>
+<script>refresh();</script>
+<script type="module" src="assets/fx.js?v=3"></script>
+</body>
+</html>

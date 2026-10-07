@@ -3,221 +3,229 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0b0d">
+<meta name="theme-color" content="#d7d6d1">
 <title>Your Gym</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=3">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
-:root{--bg:#0b0b0d;--card:#151518;--card2:#1d1d21;--ink:#f4f4f5;--muted:#a1a1aa;--brand:#ff5a1f;--brand2:#ffb020;--line:#27272c}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:90px;-webkit-font-smoothing:antialiased}
-button{font:inherit;border:0;cursor:pointer;color:inherit;background:none}
-.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
-section{padding:40px 0 0}
-h1,h2,.big,.amt{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-weight:400;letter-spacing:.02em}
-h2{font-size:38px;line-height:1}
-h2 em{font-style:normal;color:var(--brand)}
-.sub{color:var(--muted);font-size:14px;margin-top:6px}
-.top{position:sticky;top:0;z-index:20;background:rgba(11,11,13,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:10px;height:62px}
-.initial{width:38px;height:38px;border-radius:10px;background:var(--brand);color:#140700;display:grid;place-items:center;font-family:"Bebas Neue",Impact,sans-serif;font-size:24px;flex:none}
-.brand{font-family:"Bebas Neue",Impact,sans-serif;font-size:24px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.badge{margin-left:auto;font-size:12px;font-weight:600;color:var(--brand2);border:1px solid #3a2a12;background:#1c1409;padding:5px 10px;border-radius:99px;white-space:nowrap}
-.hero{position:relative;margin-top:16px;border-radius:24px;overflow:hidden;min-height:440px;display:flex;align-items:flex-end;background:radial-gradient(circle at 90% 0%,rgba(255,90,31,.55) 0,transparent 50%),radial-gradient(circle at 0% 100%,rgba(255,176,32,.18) 0,transparent 45%),linear-gradient(160deg,#1a1a1f,#0b0b0d);border:1px solid var(--line)}
-.hero .ph{position:absolute;inset:0;background-size:cover;background-position:center}
-.hero .ph.has::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 10%,rgba(0,0,0,.85))}
-.hero .art{position:absolute;right:6px;top:14px;font-size:96px;line-height:1;transform:rotate(-12deg);pointer-events:none;filter:drop-shadow(0 16px 30px rgba(255,90,31,.35))}
-.hero .ph.has~.art{display:none}
-.hero-in{position:relative;padding:108px 20px 24px;width:100%}
-.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand2)}
-.hero h1{font-size:clamp(56px,16vw,104px);line-height:.9;margin:8px 0 6px}
-.slogan{font-family:"Bebas Neue",Impact,sans-serif;font-size:clamp(24px,6.5vw,34px);line-height:1.05;color:var(--brand)}
-.hero p.d{font-size:15px;color:#d4d4d8;max-width:520px;margin-top:8px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
-.chips>span{font-size:12.5px;font-weight:500;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:6px 11px;border-radius:99px}
+:root{--concrete:#d7d6d1;--cobalt:#1f48ff;--black:#000;--white:#fff;--focus:#1f48ff}
+body{font-family:Archivo,system-ui,sans-serif;color:var(--black);background:var(--concrete);line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.86;letter-spacing:-.01em}
+
+.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
+.logo{width:40px;height:40px;background:var(--cobalt);color:#fff;display:grid;place-items:center;font-family:Anton,sans-serif;font-size:24px}
+.nav .nm{font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.01em}
+.status{margin-left:auto;font-size:13px;font-weight:700;padding:7px 12px;background:var(--black);color:#fff}
+.status.is-open{background:var(--cobalt)}
+
+/* hero: kinetic name rows behind a 3D dumbbell */
+.hero{position:relative;min-height:max(660px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(120% 70% at 50% 40%,#e6e5e1 0,var(--concrete) 60%,#c7c6c0 100%)}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.06) 1px,transparent 1px);background-size:4px 4px;pointer-events:none}
+.kin{position:absolute;z-index:1;left:0;right:0;top:50%;transform:translateY(-55%);pointer-events:none}
+.kin .row{white-space:nowrap;font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:clamp(96px,27vw,260px);line-height:.86;transform:translateX(calc(var(--sy,0) * .35px * var(--dir) + var(--o,-20%)))}
+.kin .row span{margin-right:.25em}
+.kin .row.out{color:transparent;-webkit-text-stroke:2px var(--black)}
+.kin .row.blue{color:var(--cobalt)}
+.hero .stage{position:absolute;inset:0;z-index:2}
+.hero-foot{position:relative;z-index:3;padding:0 18px 26px;width:100%;max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;pointer-events:none}
+.hero-foot>*{pointer-events:auto}
+.hero-foot p{font-size:20px;font-weight:700;font-variation-settings:"wdth" 80;max-width:15ch;line-height:1.1}
 .cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;padding:0 20px;border-radius:12px;font-weight:700;font-size:15px;white-space:nowrap}
-.btn-b{background:var(--brand);color:#140700}
-.btn-o{border:1.5px solid #3a3a40;background:transparent;color:var(--ink)}
-.btn-wa{background:#25d366;color:#06301a}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:18px}
-.plan{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:12px}
-.plan.hot{border-color:var(--brand);background:linear-gradient(180deg,#22140d,var(--card) 60%)}
-.flag{position:absolute;top:-11px;left:20px;background:var(--brand);color:#140700;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px}
-.plan h3{font-size:14px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.amt{font-size:52px;line-height:.9}
-.amt small{font-family:Inter,sans-serif;font-size:13px;color:var(--brand2);letter-spacing:0;margin-left:8px;font-weight:600}
-.plan ul{list-style:none;display:grid;gap:7px;font-size:14px;color:#d4d4d8}
-.plan li::before{content:"✓";color:var(--brand);font-weight:800;margin-right:9px}
-.plan .btn{margin-top:auto;width:100%}
-.fac{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
-.f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-.f b{display:block;font-size:28px;font-weight:400;margin-bottom:6px}
-.f span{font-size:14px;font-weight:600}
-.times{display:grid;gap:10px;margin-top:18px}
-.t{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;font-size:15px}
-.t span:first-child{color:var(--muted)}
-.t span:last-child{font-weight:600;text-align:right}
-.trial{position:relative;overflow:hidden;background:var(--brand);color:#140700;border-radius:24px;padding:26px 22px}
-.trial .big{font-size:clamp(40px,11vw,64px);line-height:.92}
-.trial p{font-size:15px;font-weight:500;margin:10px 0 18px;max-width:460px}
-.trial .btn{background:#140700;color:#fff}
-.trial::after{content:"💪";position:absolute;right:-8px;bottom:-14px;font-size:110px;opacity:.9;transform:rotate(-8deg);pointer-events:none}
-.gallery-sec{display:none}
-body.editing .gallery-sec,.gallery-sec.filled{display:block}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
-.gallery .ph{position:relative;aspect-ratio:1;border-radius:16px;background:var(--card2) center/cover no-repeat;border:2px dashed #3a3a40}
-.gallery .ph.has{border:0}
-body:not(.editing) .gallery .ph:not(.has){display:none}
-.visit{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:16px}
-.row{display:flex;gap:12px;align-items:flex-start;font-size:15px}
-.row b{font-size:20px;line-height:1.3;font-weight:400}
-.row small{display:block;color:var(--muted);font-size:12px}
-footer{text-align:center;color:var(--muted);font-size:12.5px;padding:36px 16px 12px}
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(11,11,13,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.bar .btn{flex:1;height:48px}
-.ph-btn{display:none;position:absolute;z-index:3;top:12px;right:12px;background:rgba(0,0,0,.75);color:#fff;font-size:12px;font-weight:600;padding:7px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2)}
-.gallery .ph-btn{top:50%;left:50%;right:auto;transform:translate(-50%,-50%);white-space:nowrap}
-body.editing .ph-btn{display:inline-block}
-[contenteditable=true]{outline:2px dashed var(--brand2);outline-offset:3px;border-radius:6px}
-.edit-ctl{position:fixed;right:12px;bottom:84px;z-index:40;display:flex;gap:8px}
-.edit-ctl button{background:rgba(40,40,46,.92);color:#fff;font-size:12.5px;font-weight:600;padding:9px 13px;border-radius:99px;border:1px solid #3a3a40;box-shadow:0 6px 18px rgba(0,0,0,.4)}
-#linkBtn{display:none}body.editing #linkBtn{display:block}
-#toast{position:fixed;left:50%;top:76px;transform:translate(-50%,-20px);opacity:0;pointer-events:none;z-index:50;background:#f4f4f5;color:#0b0b0d;font-size:13.5px;font-weight:500;padding:10px 16px;border-radius:12px;transition:.25s;width:max-content;max-width:calc(100% - 32px);text-align:center}
-#toast.show{opacity:1;transform:translate(-50%,0)}
-@media(min-width:760px){.fac{grid-template-columns:repeat(3,1fr)}.hero{min-height:500px}.hero-in{padding:44px}.hero .art{font-size:210px;right:50px;top:50px}.times{grid-template-columns:repeat(3,1fr)}}
-.gallery{grid-template-columns:repeat(2,1fr)}.gallery .ph{aspect-ratio:4/3}.gallery .ph:first-child{grid-column:span 2;aspect-ratio:16/9}
-@media(min-width:760px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery .ph,.gallery .ph:first-child{grid-column:auto;aspect-ratio:1}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 24px;font-weight:800;font-size:16px;white-space:nowrap;transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn-blue{background:var(--cobalt);color:#fff}
+.btn-black{background:var(--black);color:#fff}
+.btn-line{border:2.5px solid var(--black);background:transparent}
+.no-3d .stage{display:none}
+
+.sec{padding-top:84px}
+.h,.sec h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(56px,15vw,130px);line-height:.86}
+.sub{font-size:17px;margin-top:12px;max-width:40ch}
+
+/* flip plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px}
+.plan{height:340px;perspective:1100px;cursor:pointer}
+.plan-in{position:relative;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.plan.flip .plan-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;padding:24px;display:flex;flex-direction:column}
+.front{background:var(--white)}
+.plan:nth-child(2) .front{background:var(--cobalt);color:#fff}
+.plan:nth-child(3) .front{background:var(--black);color:#fff}
+.back{transform:rotateY(180deg);background:var(--black);color:#fff}
+.plan:nth-child(3) .back{background:var(--cobalt)}
+.face .len{font-size:18px;font-weight:800}
+.face .amt{font-family:Anton,Impact,sans-serif;font-size:96px;line-height:.9;margin-top:auto}
+.face .per{font-size:15px;font-weight:600;opacity:.75}
+.face .hint{margin-top:14px;font-size:13px;font-weight:700;opacity:.65}
+.back ul{list-style:none;display:grid;gap:12px;font-size:18px;font-weight:600;margin-top:8px}
+.back li::before{content:"";display:inline-block;width:10px;height:10px;background:var(--cobalt);margin-right:12px}
+.plan:nth-child(3) .back li::before{background:#fff}
+.back .btn{margin-top:auto;background:#fff;color:#000}
+.plan.on .back .btn{background:#25d366;color:#05351b}
+.plan.on .front{outline:5px solid #25d366;outline-offset:-5px}
+
+/* timings strip */
+.day{margin-top:30px;background:var(--white);padding:22px 18px}
+.bar{position:relative;height:72px;background:repeating-linear-gradient(90deg,#ececea 0 calc(100%/24 - 2px),transparent calc(100%/24 - 2px) calc(100%/24))}
+.bar i{position:absolute;top:0;bottom:0;background:var(--cobalt)}
+.bar .now{position:absolute;top:-10px;bottom:-10px;width:3px;background:#ff3b30}
+.bar .now::after{content:"Now";position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:#ff3b30}
+.ticks{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:8px;opacity:.6}
+.times{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.times div{font-size:15px}
+.times b{display:block;font-family:Anton,sans-serif;font-weight:400;font-size:34px;line-height:1}
+
+.flow{--fw:70vw;margin-top:12px}
+.shot{height:min(470px,100vw);background-color:#bbb}
+
+/* trial */
+.trial{margin-top:90px;background:var(--cobalt);color:#fff;padding:70px 0 110px;position:relative;overflow:hidden}
+.trial h2{color:#fff}
+.trial form{margin-top:28px;display:grid;gap:16px;max-width:520px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
+.field input{width:100%;height:56px;border:0;padding:0 16px;font-size:17px;background:#fff;color:#000}
+.chips-in span{background:rgba(255,255,255,.14);color:#fff;border-radius:0}
+.chips-in input:checked+span{background:#fff;color:var(--cobalt)}
+.trial .btn{background:#000;color:#fff;width:100%}
+.trial .big-o{position:absolute;right:-60px;bottom:-80px;width:320px;height:320px;border:44px solid rgba(255,255,255,.12);border-radius:50%;transform:rotateX(calc(var(--p,0) * 50deg));pointer-events:none}
+
+.find{display:grid;gap:14px;margin-top:28px}
+@media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
+.box{background:var(--white);padding:22px}
+.box h3{font-size:14px;font-weight:700;opacity:.6}
+.box p{font-size:22px;font-weight:800;margin-top:4px}
+.box .btn{margin-top:16px}
+footer{padding:50px 18px 130px;text-align:center;font-size:14px;opacity:.7}
+
+.dock{background:rgba(0,0,0,.86)}
+.dock .btn{min-height:52px}
+.dock .call{background:#fff;color:#000}
+.dock .cart{justify-content:space-between;background:#25d366;color:#05351b;padding:0 18px}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <div class="initial">Y</div>
-  <div class="brand" data-k="name">Your Gym</div>
-  <div class="badge" data-e>First day free</div>
-</div></header>
+<header class="nav">
+  <div class="logo" data-initial>Y</div>
+  <div class="nm" data-k="name">Your Gym</div>
+  <div class="status" data-status="5.5-10,16-22">Open now</div>
+</header>
 
-<main class="wrap">
-  <div class="hero">
-    <div class="ph has" role="img" aria-label="Lifting a barbell" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=70')"></div>
-    <div class="art">🏋️</div>
-    <div class="hero-in">
-      <span class="pill" data-e>Gym &amp; Fitness Centre</span>
-      <h1 data-k="name">Your Gym</h1>
-      <div class="slogan" data-e>Build strength. Build discipline.</div>
-      <p class="d" data-e>Proper equipment, a trainer who actually guides you, and a crowd that pushes you to show up every day.</p>
-      <div class="chips"><span data-e>🏋️ Weights + Cardio</span><span data-e>🧑‍🏫 Trainer support</span><span>📍 <span data-k="area">Main Road</span></span></div>
-      <div class="cta">
-        <button class="btn btn-b" onclick="trial()">🔥 Book free trial</button>
-        <button class="btn btn-o" onclick="callNow()">📞 Call</button>
+<section class="hero" data-stage>
+  <div class="kin" aria-hidden="true">
+    <div class="row out" style="--dir:1;--o:-8%"><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span></div>
+    <div class="row" style="--dir:-1;--o:-34%"><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span></div>
+    <div class="row blue" style="--dir:1;--o:-18%"><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span></div>
+  </div>
+  <h1 class="sr" data-k="name">Your Gym</h1>
+  <div class="stage"><canvas class="scene" aria-label="Chrome dumbbell. Drag to spin." data-scene="dumbbell" data-opts='{"color":"#1f48ff"}'></canvas></div>
+  <div class="hero-foot">
+    <p data-e>Real weights. A trainer who watches your form.</p>
+    <div class="cta">
+      <a class="btn btn-blue" href="#trial">Book a free trial</a>
+      <button class="btn btn-line" onclick="callNow()">Call</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="plans">
+  <h2 data-e>Pick your plan</h2>
+  <p class="sub" data-e>Tap a card to see what's included.</p>
+  <div class="plans" data-single data-max="1">
+    <div class="plan" data-item data-reveal>
+      <div class="plan-in">
+        <div class="face front"><span class="len" data-name data-e>1 month</span><span class="amt" data-price data-e>₹800</span><span class="per" data-e>Pay monthly</span><span class="hint">Tap to flip</span></div>
+        <div class="face back"><span class="len" data-e>Includes</span><ul><li data-e>Full gym access</li><li data-e>Trainer guidance</li><li data-e>Locker</li></ul><button class="btn" data-add data-on="Chosen ✓">Choose 1 month</button></div>
+      </div>
+    </div>
+    <div class="plan" data-item data-reveal style="--delay:.1s">
+      <div class="plan-in">
+        <div class="face front"><span class="len" data-name data-e>3 months</span><span class="amt" data-price data-e>₹2,100</span><span class="per" data-e>Save ₹300, most people pick this</span><span class="hint">Tap to flip</span></div>
+        <div class="face back"><span class="len" data-e>Includes</span><ul><li data-e>Everything in 1 month</li><li data-e>Your own workout plan</li><li data-e>Diet tips</li></ul><button class="btn" data-add data-on="Chosen ✓">Choose 3 months</button></div>
+      </div>
+    </div>
+    <div class="plan" data-item data-reveal style="--delay:.2s">
+      <div class="plan-in">
+        <div class="face front"><span class="len" data-name data-e>12 months</span><span class="amt" data-price data-e>₹7,000</span><span class="per" data-e>Save ₹2,600</span><span class="hint">Tap to flip</span></div>
+        <div class="face back"><span class="len" data-e>Includes</span><ul><li data-e>Everything in 3 months</li><li data-e>Monthly body check</li><li data-e>Best price per day</li></ul><button class="btn" data-add data-on="Chosen ✓">Choose 12 months</button></div>
       </div>
     </div>
   </div>
+</section>
 
-  <section>
-    <h2 data-e>Membership <em>plans</em></h2>
-    <p class="sub" data-e>No hidden charges. Pay by cash or UPI.</p>
-    <div class="plans">
-      <div class="plan">
-        <h3 data-e>Monthly</h3>
-        <div class="amt"><span data-e>₹800</span><small data-e>per month</small></div>
-        <ul><li data-e>Full gym access</li><li data-e>Trainer guidance</li><li data-e>Locker &amp; changing room</li></ul>
-        <button class="btn btn-o" onclick="join(this)">Join now</button>
-      </div>
-      <div class="plan hot">
-        <span class="flag">Most popular</span>
-        <h3 data-e>3 Months</h3>
-        <div class="amt"><span data-e>₹2,100</span><small data-e>save ₹300</small></div>
-        <ul><li data-e>Everything in Monthly</li><li data-e>Personal workout plan</li><li data-e>Basic diet guidance</li></ul>
-        <button class="btn btn-b" onclick="join(this)">Join now</button>
-      </div>
-      <div class="plan">
-        <h3 data-e>12 Months</h3>
-        <div class="amt"><span data-e>₹7,000</span><small data-e>save ₹2,600</small></div>
-        <ul><li data-e>Everything in 3 Months</li><li data-e>Monthly progress check</li><li data-e>Best value</li></ul>
-        <button class="btn btn-o" onclick="join(this)">Join now</button>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2 data-e>What you <em>get</em></h2>
-    <div class="fac">
-      <div class="f"><b>🏋️</b><span data-e>Free weights</span></div>
-      <div class="f"><b>🏃</b><span data-e>Cardio machines</span></div>
-      <div class="f"><b>🧑‍🏫</b><span data-e>Personal training</span></div>
-      <div class="f"><b>🥗</b><span data-e>Diet guidance</span></div>
-      <div class="f"><b>👩</b><span data-e>Ladies batch</span></div>
-      <div class="f"><b>🔒</b><span data-e>Lockers</span></div>
-    </div>
-  </section>
-
-  <section>
-    <h2 data-e>Gym <em>timings</em></h2>
+<section class="sec wrap" id="hours">
+  <h2 data-e>When we're open</h2>
+  <div class="day" data-reveal>
+    <div class="bar" id="bar" data-hours="5.5-10,16-22"><span class="now" id="now"></span></div>
+    <div class="ticks"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>12 AM</span></div>
     <div class="times">
-      <div class="t"><span data-e>Morning</span><span data-e>5:30 – 10:00 AM</span></div>
-      <div class="t"><span data-e>Evening</span><span data-e>4:00 – 10:00 PM</span></div>
-      <div class="t"><span data-e>Sunday</span><span data-e>Morning only</span></div>
+      <div><b data-e>5:30–10 AM</b><span data-e>Morning batch</span></div>
+      <div><b data-e>4–10 PM</b><span data-e>Evening batch</span></div>
+      <div><b data-e>Sunday</b><span data-e>Morning only</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="trial">
-      <div class="big" data-e>Your first workout is free</div>
-      <p data-e>Come in, try the equipment, meet the trainer. No fees for day one.</p>
-      <button class="btn" onclick="trial()">Book my free trial →</button>
-    </div>
-  </section>
+<section class="sec" id="inside">
+  <div class="wrap"><h2 data-e>Inside</h2></div>
+  <div class="flow" data-flow>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1623874514711-0f321325f318?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=900&q=70')"></div>
+    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=70')"></div>
+  </div>
+</section>
 
-  <section class="gallery-sec filled">
-    <h2 data-e>Inside the <em>gym</em></h2>
-    <div class="gallery"><div class="ph has" role="img" aria-label="Weights area" style="background-image:url('https://images.unsplash.com/photo-1623874514711-0f321325f318?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Dumbbell rack" style="background-image:url('https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Gym equipment" style="background-image:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=800&q=70')"></div></div>
-  </section>
+<section class="trial" id="trial">
+  <span class="big-o" data-depth aria-hidden="true"></span>
+  <div class="wrap">
+    <h2 class="h" data-e>First workout free</h2>
+    <form data-wa="I want to book a free trial workout." data-with-picks>
+      <div class="field"><label for="tn">Your name</label><input id="tn" data-label="Name" required autocomplete="given-name"></div>
+      <div class="field"><label>When can you come?</label>
+        <div class="chips-in">
+          <label><input type="radio" name="when" value="Tomorrow morning" data-label="When" required><span>Tomorrow morning</span></label>
+          <label><input type="radio" name="when" value="Tomorrow evening" data-label="When"><span>Tomorrow evening</span></label>
+          <label><input type="radio" name="when" value="This weekend" data-label="When"><span>This weekend</span></label>
+        </div>
+      </div>
+      <button class="btn" type="submit">Book trial on WhatsApp</button>
+    </form>
+  </div>
+</section>
 
-  <section>
-    <h2 data-e>Find <em>us</em></h2>
-    <div class="visit">
-      <div class="row"><b>📍</b><div><small>Address</small><span id="addr"><span data-k="area">Main Road</span>, <span data-e>Your Town</span></span></div></div>
-      <div class="row"><b>📞</b><div><small>Phone</small><span data-k="phone">98XXX XXXXX</span></div></div>
-      <button class="btn btn-o" onclick="directions()">🗺️ Get directions</button>
-    </div>
-  </section>
-</main>
+<section class="sec wrap">
+  <h2 data-e>Find us</h2>
+  <div class="find">
+    <div class="box" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Main Road</span>, <span data-e>Your Town</span></p><button class="btn btn-black" onclick="directions()">Get directions</button></div>
+    <div class="box" data-reveal style="--delay:.1s"><h3>Phone</h3><p data-k="phone">98XXX XXXXX</p><button class="btn btn-blue" onclick="callNow()">Call now</button></div>
+  </div>
+</section>
 
-<footer>© <span class="yr"></span> <span data-k="name">Your Gym</span>. All rights reserved.</footer>
+<footer>© <span data-year></span> <span data-k="name">Your Gym</span></footer>
 
-<div class="bar">
-  <button class="btn btn-o" onclick="callNow()">📞 Call</button>
-  <button class="btn btn-b" onclick="trial()">🔥 Free trial</button>
-</div>
-<div class="edit-ctl"><button id="linkBtn" onclick="copyLink()">🔗 Copy link</button><button id="editBtn" onclick="toggleEdit()">✏️ Edit</button></div>
-<div id="toast"></div>
+<nav class="dock" aria-label="Quick actions">
+  <button class="btn call idle" onclick="callNow()">Call</button>
+  <a class="btn btn-blue idle" href="#trial">Free trial</a>
+  <button class="btn cart" onclick="sendPicks('I want to join this plan:')"><span data-pick-list></span><strong>Join</strong></button>
+</nav>
 
+<script src="assets/core.js?v=3"></script>
 <script>
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-// Details can come from the link: page.html?name=Iron%20House&phone=9876543210&area=Station%20Road
-const P=new URLSearchParams(location.search);
-$$('[data-k]').forEach(el=>{const v=P.get(el.dataset.k);if(v)el.textContent=v});
-const bizName=()=>$('[data-k="name"]').textContent.trim();
-function syncTitle(){const n=bizName();document.title=n||'Website';$$('.initial').forEach(i=>i.textContent=(n.charAt(0)||'•').toUpperCase())}
-syncTitle();
-$$('[data-k]').forEach(el=>el.addEventListener('input',()=>{$$('[data-k="'+el.dataset.k+'"]').forEach(o=>{if(o!==el)o.textContent=el.textContent});if(el.dataset.k==='name')syncTitle()}));
-$$('.yr').forEach(e=>e.textContent=new Date().getFullYear());
-let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2800)}
-const num=()=>$('[data-k="phone"]').textContent.replace(/\D/g,'').slice(-10);
-function hasNum(){if(num().length===10)return true;toast('Add the phone number first — tap ✏️ Edit');return false}
-function callNow(){if(hasNum())location.href='tel:+91'+num()}
-function waSend(msg){if(hasNum())window.open('https://wa.me/91'+num()+'?text='+encodeURIComponent(msg),'_blank')}
-function directions(){window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(bizName()+', '+$('#addr').textContent.trim()),'_blank')}
-let editing=false;
-function toggleEdit(){editing=!editing;document.body.classList.toggle('editing',editing);$$('[data-k],[data-e]').forEach(el=>el.contentEditable=editing?'true':'false');$('#editBtn').textContent=editing?'✓ Done':'✏️ Edit';if(editing)toast('Tap any text to change it. Use 📷 to add photos.')}
-$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:slot.classList.contains('has')?'📷 Change':'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
-async function copyLink(){if(location.protocol==='file:'){toast('Put this site online first, then links will work');return}const u=new URL(location.origin+location.pathname);u.searchParams.set('name',bizName());if(num().length===10)u.searchParams.set('phone',num());const a=$('[data-k="area"]');if(a)u.searchParams.set('area',a.textContent.trim());try{await navigator.clipboard.writeText(u.href);toast('Link copied — paste it on WhatsApp')}catch(e){prompt('Copy this link:',u.href)}}
-
-function trial(){waSend('Hi '+bizName()+', I want to book a free trial workout. When can I come?')}
-function join(btn){const p=btn.closest('.plan');waSend('Hi '+bizName()+', I want to join the '+p.querySelector('h3').textContent.trim()+' plan ('+p.querySelector('.amt span').textContent.trim()+').')}
+// flip plan cards
+document.querySelectorAll('.plan').forEach(p => p.addEventListener('click', e => { if (e.target.closest('button') || document.body.classList.contains('editing')) return; p.classList.toggle('flip'); }));
+// draw opening hours on the 24h strip + live "now" marker
+(function () {
+  const bar = document.getElementById('bar'), now = document.getElementById('now');
+  bar.dataset.hours.split(',').forEach(r => { const [a, b] = r.split('-').map(Number); const i = document.createElement('i'); i.style.left = (a / 24 * 100) + '%'; i.style.width = ((b - a) / 24 * 100) + '%'; bar.prepend(i); });
+  const tick = () => { const d = new Date(); now.style.left = ((d.getHours() + d.getMinutes() / 60) / 24 * 100) + '%'; };
+  tick(); setInterval(tick, 60000);
+})();
 </script>
+<script type="module" src="assets/fx.js?v=3"></script>
 </body>
 </html>

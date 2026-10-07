@@ -3,203 +3,196 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1b7a3e">
+<meta name="theme-color" content="#ffc21a">
 <title>Your Store</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=3">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
-:root{--bg:#fffaf1;--ink:#17261b;--muted:#5b6a5e;--brand:#1b7a3e;--brand-d:#115a2b;--accent:#f59e0b;--card:#fff;--line:#efe3cc;--soft:#e4f3e8}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:90px;-webkit-font-smoothing:antialiased}
-button{font:inherit;border:0;cursor:pointer;color:inherit;background:none}
-.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
-section{padding:34px 0 0}
-h2{font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
-.sub{color:var(--muted);font-size:14px;margin-top:4px}
-.top{position:sticky;top:0;z-index:20;background:rgba(255,250,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:10px;height:62px}
-.initial{width:38px;height:38px;border-radius:12px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px;flex:none}
-.brand{font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.badge{margin-left:auto;font-size:12px;font-weight:600;color:var(--brand-d);background:var(--soft);padding:5px 10px;border-radius:99px;white-space:nowrap}
-.badge::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;margin-right:6px;vertical-align:1px}
-.hero{position:relative;margin-top:16px;border-radius:26px;overflow:hidden;min-height:400px;display:flex;align-items:flex-end;color:#fff;background:radial-gradient(circle at 85% 12%,#34a862 0,transparent 55%),linear-gradient(140deg,#1b7a3e,#0c3f20)}
-.hero .ph{position:absolute;inset:0;background-size:cover;background-position:center}
-.hero .ph.has::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 20%,rgba(0,0,0,.75))}
-.hero .art{position:absolute;right:-6px;top:14px;font-size:96px;line-height:1;transform:rotate(-10deg);filter:drop-shadow(0 12px 24px rgba(0,0,0,.25));pointer-events:none}
-.hero .ph.has~.art{display:none}
-.hero-in{position:relative;padding:108px 20px 24px;width:100%}
-.pill{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:5px 11px;border-radius:99px}
-.hero h1{font-size:clamp(34px,9vw,56px);line-height:1.05;font-weight:800;letter-spacing:-.02em;margin:12px 0 8px}
-.hero p{font-size:15px;opacity:.93;max-width:520px}
-.hi{font-size:14px;opacity:.8!important;margin-top:4px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
-.chips>span{font-size:13px;background:rgba(0,0,0,.24);padding:6px 11px;border-radius:99px}
+:root{--turmeric:#ffc21a;--chilli:#e0301e;--leaf:#12804a;--ink:#1e1b4b;--paper:#ffffff;--focus:#1e1b4b}
+body{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+
+/* nav */
+.nav{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
+.logo{width:42px;height:42px;border-radius:14px;background:var(--ink);color:var(--turmeric);display:grid;place-items:center;font-weight:800;font-size:22px;transform:rotate(-6deg)}
+.nav .nm{font-weight:700;font-size:17px}
+.status{margin-left:auto;font-size:13px;font-weight:700;padding:7px 12px;border-radius:99px;background:var(--paper);border:2px solid var(--ink)}
+.status.is-open::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--leaf);margin-right:7px}
+.status.is-closed{background:var(--ink);color:#fff}
+
+/* hero */
+.hero{position:relative;min-height:max(640px,100svh);background:var(--turmeric);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.hero .stage{position:absolute;inset:0;z-index:2}
+.hero h1{position:absolute;z-index:1;left:0;right:0;top:50%;transform:translateY(-58%);text-align:center;font-weight:800;font-stretch:75%;font-variation-settings:"wdth" 75;font-size:clamp(84px,24vw,300px);line-height:.82;letter-spacing:-.045em;color:var(--ink);padding:0 10px;overflow-wrap:anywhere;pointer-events:none}
+.hero h1[contenteditable=true]{pointer-events:auto;z-index:5}
+.hero-foot{position:relative;z-index:3;padding:0 18px 20px;max-width:1100px;width:100%;margin:0 auto;pointer-events:none}
+.hero-foot>*{pointer-events:auto}
+.hi{font-family:Kalam,cursive;font-size:22px;line-height:1.2;margin-bottom:14px;max-width:16ch}
 .cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;padding:0 20px;border-radius:14px;font-weight:600;font-size:15px;white-space:nowrap}
-.btn-w{background:#fff;color:var(--brand-d)}
-.btn-wa{background:#25d366;color:#06301a}
-.btn-o{border:1.5px solid var(--line);background:#fff;color:var(--ink)}
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
-.cat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 4px;text-align:center;font-size:12px;font-weight:500;line-height:1.3}
-.cat b{display:block;font-size:30px;margin-bottom:6px;font-weight:400}
-.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
-.offer{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;align-items:center;gap:14px;position:relative}
-.offer .em{font-size:36px;width:62px;height:62px;border-radius:14px;background:#fff1d6;display:grid;place-items:center;flex:none}
-.offer h3{font-size:15px;font-weight:600;padding-right:70px}
-.offer .pr{font-size:19px;font-weight:700;color:var(--brand)}
-.offer s{color:var(--muted);font-size:13px;margin-left:6px;font-weight:400}
-.offer .tag{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;background:var(--accent);color:#3d2600;padding:3px 8px;border-radius:99px}
-.order{background:var(--brand);color:#fff;border-radius:24px;padding:22px 18px}
-.order .note{opacity:.88;font-size:14px;margin-top:4px}
-.order textarea{width:100%;min-height:128px;border:0;border-radius:14px;padding:14px;font:inherit;font-size:15px;color:var(--ink);resize:vertical;margin:14px 0 12px;outline:none}
-.order .btn{width:100%}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
-.step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-.step i{font-style:normal;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--brand-d);font-weight:700;font-size:14px;margin-bottom:8px}
-.step h3{font-size:15px;font-weight:600}.step p{font-size:13.5px;color:var(--muted)}
-.gallery-sec{display:none}
-body.editing .gallery-sec,.gallery-sec.filled{display:block}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-.gallery .ph{position:relative;aspect-ratio:1;border-radius:16px;background:#f3ead8 center/cover no-repeat;border:2px dashed #dccaa6}
-.gallery .ph.has{border:0}
-body:not(.editing) .gallery .ph:not(.has){display:none}
-.visit{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:16px}
-.row{display:flex;gap:12px;align-items:flex-start;font-size:15px}
-.row b{font-size:20px;line-height:1.3}
-.row small{display:block;color:var(--muted);font-size:12px}
-footer{text-align:center;color:var(--muted);font-size:12.5px;padding:34px 16px 12px}
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,250,241,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-.bar .btn{flex:1;height:48px}
-/* edit tools */
-.ph-btn{display:none;position:absolute;z-index:3;top:12px;right:12px;background:rgba(0,0,0,.68);color:#fff;font-size:12px;font-weight:600;padding:7px 12px;border-radius:99px}
-.gallery .ph-btn{top:50%;left:50%;right:auto;transform:translate(-50%,-50%);white-space:nowrap}
-body.editing .ph-btn{display:inline-block}
-[contenteditable=true]{outline:2px dashed var(--accent);outline-offset:3px;border-radius:6px}
-.edit-ctl{position:fixed;right:12px;bottom:84px;z-index:40;display:flex;gap:8px}
-.edit-ctl button{background:rgba(23,38,27,.85);color:#fff;font-size:12.5px;font-weight:600;padding:9px 13px;border-radius:99px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
-#linkBtn{display:none}body.editing #linkBtn{display:block}
-#toast{position:fixed;left:50%;top:76px;transform:translate(-50%,-20px);opacity:0;pointer-events:none;z-index:50;background:#17261b;color:#fff;font-size:13.5px;padding:10px 16px;border-radius:12px;transition:.25s;width:max-content;max-width:calc(100% - 32px);text-align:center}
-#toast.show{opacity:1;transform:translate(-50%,0)}
-@media(min-width:760px){.cats{grid-template-columns:repeat(8,1fr)}.hero{min-height:460px}.hero-in{padding:40px}.hero .art{font-size:200px;right:40px;top:40px}}
-.gallery{grid-template-columns:repeat(2,1fr)}.gallery .ph{aspect-ratio:4/3}.gallery .ph:first-child{grid-column:span 2;aspect-ratio:16/9}
-@media(min-width:760px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery .ph,.gallery .ph:first-child{grid-column:auto;aspect-ratio:1}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 22px;border-radius:18px;font-weight:700;font-size:16px;white-space:nowrap;transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn-ink{background:var(--ink);color:#fff;box-shadow:0 6px 0 #000}
+.btn-line{background:var(--paper);border:2.5px solid var(--ink);box-shadow:0 6px 0 var(--ink)}
+.btn-wa{background:#25d366;color:#05351b;box-shadow:0 6px 0 #0f7a3a}
+.drag-hint{position:absolute;z-index:3;right:16px;top:50%;writing-mode:vertical-rl;font-size:12px;font-weight:700;opacity:.65;pointer-events:none}
+.marquee{position:relative;z-index:3;background:var(--chilli);color:#fff;overflow:hidden;white-space:nowrap;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(-2deg) scale(1.04);margin:6px 0 -14px}
+.marquee div{display:inline-block;padding:12px 0;font-weight:800;font-size:22px;animation:mq 22s linear infinite}
+.marquee span{margin:0 18px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.no-3d .stage{display:none}
+
+/* offers: hanging price tags */
+.sec{padding-top:72px}
+.sec h2{font-weight:800;font-variation-settings:"wdth" 80;font-size:clamp(40px,10vw,76px);line-height:.9;letter-spacing:-.03em;max-width:12ch}
+.sub{font-size:16px;margin-top:10px;max-width:42ch;opacity:.8}
+.tags{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px 18px;margin-top:34px;perspective:1000px}
+.tag-wrap{transform-origin:50% 0;transform:rotateX(calc(var(--p,0) * 14deg)) rotateZ(calc(var(--p,0) * var(--sw,4deg)))}
+.tag{position:relative;background:var(--paper);border:3px solid var(--ink);border-radius:22px 22px 26px 26px;padding:30px 18px 18px;box-shadow:0 10px 0 var(--ink);transition:background .25s,transform .25s}
+.tag::before{content:"";position:absolute;top:12px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;border:3px solid var(--ink);background:var(--turmeric)}
+.tag .pic{height:150px;border-radius:14px;margin:8px 0 14px;border:2px solid var(--ink)}
+.tag h3{font-size:19px;font-weight:700;line-height:1.2}
+.tag .row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:8px}
+.price{font-size:44px;font-weight:800;font-variation-settings:"wdth" 75;line-height:1;letter-spacing:-.02em}
+.was{font-size:15px;text-decoration:line-through;opacity:.55;margin-left:6px}
+.add{min-height:46px;padding:0 16px;border-radius:14px;background:var(--turmeric);border:2.5px solid var(--ink);font-weight:800;font-size:15px}
+.tag.on{background:#fff4cf;transform:translateY(4px)}
+.tag.on .add{background:var(--leaf);color:#fff}
+.save{position:absolute;top:-16px;right:14px;background:var(--chilli);color:#fff;font-weight:800;font-size:14px;padding:6px 12px;border-radius:99px;border:2.5px solid var(--ink);transform:rotate(6deg)}
+
+/* aisles coverflow */
+.flow{--fw:68vw;margin-top:14px}
+.aisle{height:min(440px,95vw);border-radius:28px;border:3px solid var(--ink);overflow:hidden;display:flex;align-items:flex-end;box-shadow:0 12px 0 var(--ink)}
+.aisle p{position:relative;z-index:1;margin:14px;background:var(--paper);border:2.5px solid var(--ink);border-radius:14px;padding:8px 14px;font-weight:800;font-size:18px}
+
+/* parchi */
+.parchi-sec{background:var(--leaf);margin-top:80px;padding:70px 0 120px;color:#fff;position:relative;overflow:hidden}
+.parchi-sec h2{color:#fff}
+.parchi{position:relative;margin-top:30px;max-width:520px;background:#fffef6;color:#273469;border-radius:6px;padding:26px 22px 22px 54px;box-shadow:0 30px 60px rgba(0,0,0,.35);transform:perspective(1200px) rotateX(calc(var(--p,0) * 14deg)) rotateZ(-2deg);background-image:linear-gradient(transparent 33px,#b9c7ff 34px);background-size:100% 34px;background-position:0 12px}
+.parchi::before{content:"";position:absolute;top:0;bottom:0;left:38px;width:2px;background:#ff9a9a}
+.parchi-title{font-family:Kalam,cursive;font-weight:700;font-size:26px;line-height:34px}
+.picked{font-family:Kalam,cursive;font-size:20px;line-height:34px;color:var(--chilli)}
+.parchi textarea{display:block;width:100%;min-height:170px;border:0;background:transparent;font-family:Kalam,cursive;font-size:21px;line-height:34px;color:#273469;resize:vertical;outline:none}
+.parchi textarea::placeholder{color:#9aa6d6}
+.parchi .btn{margin-top:14px;width:100%}
+
+/* visit */
+.visit{display:grid;gap:14px;margin-top:30px}
+@media(min-width:760px){.visit{grid-template-columns:1.2fr 1fr}}
+.card{border:3px solid var(--ink);border-radius:24px;padding:22px;box-shadow:0 10px 0 var(--ink);background:var(--paper)}
+.card.y{background:var(--turmeric)}
+.card h3{font-size:14px;font-weight:700;opacity:.7}
+.card p{font-size:22px;font-weight:700;line-height:1.25;margin-top:4px}
+.card .btn{margin-top:16px}
+footer{padding:50px 18px 130px;text-align:center;font-size:14px;opacity:.7}
+
+/* dock */
+.dock{background:rgba(30,27,75,.88);border:2px solid rgba(255,255,255,.12)}
+.dock .btn{min-height:52px;box-shadow:none;border-radius:16px}
+.dock .call{background:#fff;color:var(--ink)}
+.dock .cart{justify-content:space-between;background:var(--turmeric);color:var(--ink);padding:0 18px}
+@media(min-width:900px){.hero h1{font-size:clamp(120px,17vw,260px)}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <div class="initial">Y</div>
-  <div class="brand" data-k="name">Your Store</div>
-  <div class="badge" data-e>Open 8 AM – 10 PM</div>
-</div></header>
+<header class="nav">
+  <div class="logo" data-initial>Y</div>
+  <div class="nm" data-k="name">Your Store</div>
+  <div class="status" data-status="8-22">Open now</div>
+</header>
 
-<main class="wrap">
-  <div class="hero">
-    <div class="ph has" role="img" aria-label="Store front" style="background-image:url('https://images.unsplash.com/photo-1739066598279-1297113f5c6a?auto=format&fit=crop&w=1400&q=70')"></div>
-    <div class="art">🛒</div>
-    <div class="hero-in">
-      <span class="pill" data-e>Kirana &amp; General Store</span>
-      <h1 data-k="name">Your Store</h1>
-      <p data-e>Daily groceries, fresh stock and fair prices — delivered to your door.</p>
-      <p class="hi" data-e>रोज़ का सामान, सही दाम पर</p>
-      <div class="chips"><span data-e>🚚 Home delivery</span><span data-e>📲 UPI accepted</span><span>📍 <span data-k="area">Main Market</span></span></div>
-      <div class="cta">
-        <button class="btn btn-w" onclick="callNow()">📞 Call now</button>
-        <button class="btn btn-wa" onclick="waSend('Hello '+bizName()+', I want to place an order.')">💬 Order on WhatsApp</button>
-      </div>
+<section class="hero" data-stage>
+  <h1 data-k="name">Your Store</h1>
+  <div class="stage"><canvas class="scene" aria-label="Floating grocery boxes. Drag to spin." data-scene="boxes" data-opts='{"images":["https://images.unsplash.com/photo-1739065882919-03c8ae1a3da3?auto=format&fit=crop&w=512&h=512&q=70","https://images.unsplash.com/photo-1757802261994-3c31584daafd?auto=format&fit=crop&w=512&h=512&q=70","https://images.unsplash.com/photo-1739065883249-3ac226faaa9d?auto=format&fit=crop&w=512&h=512&q=70","https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=512&h=512&q=70","https://images.unsplash.com/photo-1716816211590-c15a328a5ff0?auto=format&fit=crop&w=512&h=512&q=70","https://images.unsplash.com/photo-1739066598279-1297113f5c6a?auto=format&fit=crop&w=512&h=512&q=70"],"colors":["#e0301e","#12804a","#1e1b4b","#ff8fb1","#ffffff","#e0301e"]}'></canvas></div>
+  <span class="drag-hint" aria-hidden="true">drag the boxes</span>
+  <div class="hero-foot">
+    <p class="hi" data-e>रोज़ का सामान, सही दाम पर</p>
+    <div class="cta">
+      <a class="btn btn-ink" href="#list">Write my list</a>
+      <button class="btn btn-line" onclick="callNow()">Call</button>
     </div>
   </div>
+  <div class="marquee" aria-hidden="true"><div><span>Atta</span>✦<span>Dal</span>✦<span>Masale</span>✦<span>Oil &amp; ghee</span>✦<span>Snacks</span>✦<span>Cold drinks</span>✦<span>Home delivery</span>✦<span>UPI</span>✦<span>Atta</span>✦<span>Dal</span>✦<span>Masale</span>✦<span>Oil &amp; ghee</span>✦<span>Snacks</span>✦<span>Cold drinks</span>✦<span>Home delivery</span>✦<span>UPI</span>✦</div></div>
+</section>
 
-  <section>
-    <h2 data-e>Everything for your home</h2>
-    <p class="sub" data-e>Groceries, daily needs and household items under one roof.</p>
-    <div class="cats">
-      <div class="cat"><b>🌾</b><span data-e>Atta &amp; Rice</span></div>
-      <div class="cat"><b>🫘</b><span data-e>Dal &amp; Pulses</span></div>
-      <div class="cat"><b>🫙</b><span data-e>Oil &amp; Ghee</span></div>
-      <div class="cat"><b>🌶️</b><span data-e>Masale</span></div>
-      <div class="cat"><b>🥛</b><span data-e>Dairy</span></div>
-      <div class="cat"><b>🍪</b><span data-e>Snacks</span></div>
-      <div class="cat"><b>🥤</b><span data-e>Cold Drinks</span></div>
-      <div class="cat"><b>🧼</b><span data-e>Household</span></div>
+<section class="sec wrap" id="offers">
+  <h2 data-e>This week's prices</h2>
+  <p class="sub" data-e>Tap Add and it goes straight onto your list.</p>
+  <div class="tags">
+    <div class="tag-wrap" data-depth style="--sw:3deg"><div class="tag" data-item data-reveal>
+      <span class="save" data-e>Save ₹40</span>
+      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1739065883249-3ac226faaa9d?auto=format&fit=crop&w=700&q=70')"></div>
+      <h3 data-name data-e>Wheat atta, 10 kg</h3>
+      <div class="row"><div><span class="price" data-price data-e>₹420</span><span class="was" data-e>₹460</span></div><button class="add" data-add data-on="Added ✓">Add</button></div>
+    </div></div>
+    <div class="tag-wrap" data-depth style="--sw:-4deg"><div class="tag" data-item data-reveal style="--delay:.08s">
+      <span class="save" data-e>Save ₹20</span>
+      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1757802261994-3c31584daafd?auto=format&fit=crop&w=700&q=70')"></div>
+      <h3 data-name data-e>Mustard oil, 1 L</h3>
+      <div class="row"><div><span class="price" data-price data-e>₹165</span><span class="was" data-e>₹185</span></div><button class="add" data-add data-on="Added ✓">Add</button></div>
+    </div></div>
+    <div class="tag-wrap" data-depth style="--sw:5deg"><div class="tag" data-item data-reveal style="--delay:.16s">
+      <span class="save" data-e>Save ₹15</span>
+      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=700&q=70')"></div>
+      <h3 data-name data-e>Toor dal, 1 kg</h3>
+      <div class="row"><div><span class="price" data-price data-e>₹150</span><span class="was" data-e>₹165</span></div><button class="add" data-add data-on="Added ✓">Add</button></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="sec" id="aisles">
+  <div class="wrap"><h2 data-e>Walk the shop</h2><p class="sub" data-e>Swipe through the aisles.</p></div>
+  <div class="flow" data-flow>
+    <div class="aisle" data-photo style="background-image:url('https://images.unsplash.com/photo-1739066598279-1297113f5c6a?auto=format&fit=crop&w=900&q=70')"><p data-e>Our shop</p></div>
+    <div class="aisle" data-photo style="background-image:url('https://images.unsplash.com/photo-1739065882919-03c8ae1a3da3?auto=format&fit=crop&w=900&q=70')"><p data-e>Snacks &amp; namkeen</p></div>
+    <div class="aisle" data-photo style="background-image:url('https://images.unsplash.com/photo-1757802261994-3c31584daafd?auto=format&fit=crop&w=900&q=70')"><p data-e>Masale</p></div>
+    <div class="aisle" data-photo style="background-image:url('https://images.unsplash.com/photo-1739065883249-3ac226faaa9d?auto=format&fit=crop&w=900&q=70')"><p data-e>Daily groceries</p></div>
+    <div class="aisle" data-photo style="background-image:url('https://images.unsplash.com/photo-1716816211590-c15a328a5ff0?auto=format&fit=crop&w=900&q=70')"><p data-e>Whole spices</p></div>
+  </div>
+</section>
+
+<section class="parchi-sec" id="list">
+  <div class="wrap">
+    <h2 data-e>Send us your parchi</h2>
+    <p class="sub" data-e>Write your list like you always do. We pack it and confirm the total on WhatsApp.</p>
+    <form class="parchi" data-depth data-wa="here is my order:" data-with-picks data-need-any="Write your list first">
+      <div class="parchi-title">My list</div>
+      <div class="picked" data-pick-list data-empty=""></div>
+      <label class="sr" for="listbox">Your list</label>
+      <textarea id="listbox" data-label="List" placeholder="Sugar 2 kg&#10;Milk 2 packets&#10;Maggi 4"></textarea>
+      <button class="btn btn-wa" type="submit">Send list on WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<section class="sec wrap">
+  <h2 data-e>Come by</h2>
+  <div class="visit">
+    <div class="card y" data-reveal>
+      <h3>Address</h3>
+      <p id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></p>
+      <button class="btn btn-ink" onclick="directions()">Get directions</button>
     </div>
-  </section>
-
-  <section>
-    <h2 data-e>This week's offers</h2>
-    <div class="offers">
-      <div class="offer"><span class="tag" data-e>SAVE ₹40</span><div class="em">🌾</div><div><h3 data-e>Wheat Atta · 10 kg</h3><div class="pr"><span data-e>₹420</span><s data-e>₹460</s></div></div></div>
-      <div class="offer"><span class="tag" data-e>SAVE ₹20</span><div class="em">🫙</div><div><h3 data-e>Mustard Oil · 1 L</h3><div class="pr"><span data-e>₹165</span><s data-e>₹185</s></div></div></div>
-      <div class="offer"><span class="tag" data-e>SAVE ₹15</span><div class="em">🫘</div><div><h3 data-e>Toor Dal · 1 kg</h3><div class="pr"><span data-e>₹150</span><s data-e>₹165</s></div></div></div>
+    <div class="card" data-reveal style="--delay:.1s">
+      <h3>Open every day</h3>
+      <p data-e>8 AM to 10 PM</p>
+      <h3 style="margin-top:14px">Phone</h3>
+      <p data-k="phone">98XXX XXXXX</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="order">
-      <h2 data-e>Send your list, we'll pack it</h2>
-      <p class="note" data-e>Write what you need. We'll confirm the total on WhatsApp and keep it ready or deliver it.</p>
-      <textarea id="list" placeholder="Example:&#10;Atta 10 kg&#10;Sugar 2 kg&#10;Toor dal 1 kg&#10;Milk 2 packets"></textarea>
-      <button class="btn btn-wa" onclick="sendList()">💬 Send list on WhatsApp</button>
-    </div>
-  </section>
+<footer>© <span data-year></span> <span data-k="name">Your Store</span></footer>
 
-  <section>
-    <h2 data-e>How ordering works</h2>
-    <div class="steps">
-      <div class="step"><i>1</i><h3 data-e>Send your list</h3><p data-e>On WhatsApp or with a quick call.</p></div>
-      <div class="step"><i>2</i><h3 data-e>We pack it</h3><p data-e>Fresh stock, checked before packing.</p></div>
-      <div class="step"><i>3</i><h3 data-e>Pick up or get delivery</h3><p data-e>Pay by cash or UPI.</p></div>
-    </div>
-  </section>
+<nav class="dock" aria-label="Quick actions">
+  <button class="btn call idle" onclick="callNow()">Call</button>
+  <button class="btn btn-wa idle" onclick="waSend('Hello '+bizName()+', I want to place an order.')">WhatsApp</button>
+  <a class="btn cart" href="#list"><span data-pick-count>0 items</span><strong data-pick-total>₹0</strong></a>
+</nav>
 
-  <section class="gallery-sec filled">
-    <h2 data-e>Inside our store</h2>
-    <div class="gallery"><div class="ph has" role="img" aria-label="Shelves of groceries" style="background-image:url('https://images.unsplash.com/photo-1739065882919-03c8ae1a3da3?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Grocery aisle" style="background-image:url('https://images.unsplash.com/photo-1739065883249-3ac226faaa9d?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Spices on shelves" style="background-image:url('https://images.unsplash.com/photo-1757802261994-3c31584daafd?auto=format&fit=crop&w=800&q=70')"></div></div>
-  </section>
-
-  <section>
-    <h2 data-e>Visit us</h2>
-    <div class="visit">
-      <div class="row"><b>📍</b><div><small>Address</small><span id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></span></div></div>
-      <div class="row"><b>🕗</b><div><small>Timings</small><span data-e>Every day, 8 AM – 10 PM</span></div></div>
-      <div class="row"><b>📞</b><div><small>Phone</small><span data-k="phone">98XXX XXXXX</span></div></div>
-      <button class="btn btn-o" onclick="directions()">🗺️ Get directions</button>
-    </div>
-  </section>
-</main>
-
-<footer>© <span class="yr"></span> <span data-k="name">Your Store</span>. All rights reserved.</footer>
-
-<div class="bar">
-  <button class="btn btn-o" onclick="callNow()">📞 Call</button>
-  <button class="btn btn-wa" onclick="waSend('Hello '+bizName()+', I want to place an order.')">💬 WhatsApp</button>
-</div>
-<div class="edit-ctl"><button id="linkBtn" onclick="copyLink()">🔗 Copy link</button><button id="editBtn" onclick="toggleEdit()">✏️ Edit</button></div>
-<div id="toast"></div>
-
-<script>
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-// Details can come from the link: page.html?name=Sharma%20Store&phone=9876543210&area=Station%20Road
-const P=new URLSearchParams(location.search);
-$$('[data-k]').forEach(el=>{const v=P.get(el.dataset.k);if(v)el.textContent=v});
-const bizName=()=>$('[data-k="name"]').textContent.trim();
-function syncTitle(){const n=bizName();document.title=n||'Website';$$('.initial').forEach(i=>i.textContent=(n.charAt(0)||'•').toUpperCase())}
-syncTitle();
-$$('[data-k]').forEach(el=>el.addEventListener('input',()=>{$$('[data-k="'+el.dataset.k+'"]').forEach(o=>{if(o!==el)o.textContent=el.textContent});if(el.dataset.k==='name')syncTitle()}));
-$$('.yr').forEach(e=>e.textContent=new Date().getFullYear());
-let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2800)}
-const num=()=>$('[data-k="phone"]').textContent.replace(/\D/g,'').slice(-10);
-function hasNum(){if(num().length===10)return true;toast('Add the phone number first — tap ✏️ Edit');return false}
-function callNow(){if(hasNum())location.href='tel:+91'+num()}
-function waSend(msg){if(hasNum())window.open('https://wa.me/91'+num()+'?text='+encodeURIComponent(msg),'_blank')}
-function directions(){window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(bizName()+', '+$('#addr').textContent.trim()),'_blank')}
-let editing=false;
-function toggleEdit(){editing=!editing;document.body.classList.toggle('editing',editing);$$('[data-k],[data-e]').forEach(el=>el.contentEditable=editing?'true':'false');$('#editBtn').textContent=editing?'✓ Done':'✏️ Edit';if(editing)toast('Tap any text to change it. Use 📷 to add photos.')}
-$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:slot.classList.contains('has')?'📷 Change':'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
-async function copyLink(){if(location.protocol==='file:'){toast('Put this site online first, then links will work');return}const u=new URL(location.origin+location.pathname);u.searchParams.set('name',bizName());if(num().length===10)u.searchParams.set('phone',num());const a=$('[data-k="area"]');if(a)u.searchParams.set('area',a.textContent.trim());try{await navigator.clipboard.writeText(u.href);toast('Link copied — paste it on WhatsApp')}catch(e){prompt('Copy this link:',u.href)}}
-
-function sendList(){const l=$('#list').value.trim();if(!l){toast('Write your list first');return}waSend('Hello '+bizName()+', I want to order:\n'+l)}
-</script>
+<script src="assets/core.js?v=3"></script>
+<script type="module" src="assets/fx.js?v=3"></script>
 </body>
 </html>
