@@ -101,7 +101,11 @@
     }
     const pl = f.hasAttribute('data-with-picks') ? pickLines() : '';
     if (f.hasAttribute('data-need-picks') && !pl) { toast(f.dataset.needPicks || 'Pick something first'); return; }
-    if (f.hasAttribute('data-need-any') && !pl && !lines.length) { toast(f.dataset.needAny || 'Add something first'); return; }
+    if (f.hasAttribute('data-need-any')) {
+      const any = (f.dataset.anyOf || '').split(',').filter(Boolean);
+      const counted = any.length ? lines.filter(l => any.some(a => l.startsWith(a + ':'))) : lines;
+      if (!pl && !counted.length) { toast(f.dataset.needAny || 'Add something first'); return; }
+    }
     waSend('Hello ' + bizName() + ', ' + f.dataset.wa + '\n' + lines.join('\n') + (pl ? '\n' + pl : ''));
   });
   // default dates: today / tomorrow
