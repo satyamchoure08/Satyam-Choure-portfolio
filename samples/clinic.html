@@ -88,6 +88,10 @@ body.editing .ph-btn{display:inline-block}
 #toast{position:fixed;left:50%;top:76px;transform:translate(-50%,-20px);opacity:0;pointer-events:none;z-index:50;background:#0f2530;color:#fff;font-size:13.5px;padding:10px 16px;border-radius:12px;transition:.25s;width:max-content;max-width:calc(100% - 32px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:760px){.hero{padding:44px}.svc{grid-template-columns:repeat(3,1fr)}.hero::after{font-size:260px;right:40px;top:-10px}}
+.gallery{grid-template-columns:repeat(2,1fr)}.gallery .ph{aspect-ratio:4/3}.gallery .ph:first-child{grid-column:span 2;aspect-ratio:16/9}
+@media(min-width:760px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery .ph,.gallery .ph:first-child{grid-column:auto;aspect-ratio:1}}
+.hero::after{display:none}.hero .banner{position:relative;aspect-ratio:16/10;border-radius:18px;background-size:cover;background-position:center;margin-bottom:18px}
+@media(min-width:760px){.hero .banner{aspect-ratio:21/8}}
 </style>
 </head>
 <body>
@@ -99,6 +103,7 @@ body.editing .ph-btn{display:inline-block}
 
 <main class="wrap">
   <div class="hero">
+    <div class="ph banner has" role="img" aria-label="Doctor talking with a patient" style="background-image:url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1400&q=70')"></div>
     <span class="pill" data-e>Accepting patients today</span>
     <h1 data-k="name">Your Clinic</h1>
     <p class="d" data-e>Trusted family care close to home — checkups, fever, BP and sugar, child care and more.</p>
@@ -157,9 +162,9 @@ body.editing .ph-btn{display:inline-block}
     </div>
   </section>
 
-  <section class="gallery-sec">
+  <section class="gallery-sec filled">
     <h2 data-e>Our clinic</h2>
-    <div class="gallery"><div class="ph"></div><div class="ph"></div><div class="ph"></div></div>
+    <div class="gallery"><div class="ph has" role="img" aria-label="Blood pressure check" style="background-image:url('https://images.unsplash.com/photo-1631815590058-860e4f83c1e8?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Stethoscope" style="background-image:url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Doctor consultation" style="background-image:url('https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&w=800&q=70')"></div></div>
   </section>
 
   <section>
@@ -199,7 +204,7 @@ function waSend(msg){if(hasNum())window.open('https://wa.me/91'+num()+'?text='+e
 function directions(){window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(bizName()+', '+$('#addr').textContent.trim()),'_blank')}
 let editing=false;
 function toggleEdit(){editing=!editing;document.body.classList.toggle('editing',editing);$$('[data-k],[data-e]').forEach(el=>el.contentEditable=editing?'true':'false');$('#editBtn').textContent=editing?'✓ Done':'✏️ Edit';if(editing)toast('Tap any text to change it. Use 📷 to add photos.')}
-$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
+$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:slot.classList.contains('has')?'📷 Change':'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
 async function copyLink(){if(location.protocol==='file:'){toast('Put this site online first, then links will work');return}const u=new URL(location.origin+location.pathname);u.searchParams.set('name',bizName());if(num().length===10)u.searchParams.set('phone',num());const a=$('[data-k="area"]');if(a)u.searchParams.set('area',a.textContent.trim());try{await navigator.clipboard.writeText(u.href);toast('Link copied — paste it on WhatsApp')}catch(e){prompt('Copy this link:',u.href)}}
 
 function bookAppt(){const n=$('#pName').value.trim();if(!n){toast('Enter the patient name first');return}const w=$('#pWhy').value.trim();waSend('Hello '+bizName()+', I want to book an appointment.\nName: '+n+'\nDay: '+$('#pDay').value+'\nTime: '+$('#pTime').value+(w?'\nReason: '+w:''))}

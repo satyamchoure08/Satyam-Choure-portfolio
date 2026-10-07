@@ -99,6 +99,9 @@ body.editing .ph-btn{display:inline-block}
 #toast{position:fixed;left:50%;top:76px;transform:translate(-50%,-20px);opacity:0;pointer-events:none;z-index:50;background:#2a1610;color:#fff;font-size:13.5px;padding:10px 16px;border-radius:12px;transition:.25s;width:max-content;max-width:calc(100% - 32px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:760px){.hero{min-height:460px}.hero-in{padding:40px}.hero .art{font-size:200px;right:40px;top:40px}.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.tabs{margin:14px 0 0;padding:12px 0}}
+.gallery{grid-template-columns:repeat(2,1fr)}.gallery .ph{aspect-ratio:4/3}.gallery .ph:first-child{grid-column:span 2;aspect-ratio:16/9}
+@media(min-width:760px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery .ph,.gallery .ph:first-child{grid-column:auto;aspect-ratio:1}}
+.special .em.img{width:96px;height:96px;border-radius:16px;background-size:cover;background-position:center;font-size:0;box-shadow:0 8px 20px rgba(90,40,0,.2)}
 </style>
 </head>
 <body>
@@ -110,7 +113,7 @@ body.editing .ph-btn{display:inline-block}
 
 <main class="wrap">
   <div class="hero">
-    <div class="ph"></div>
+    <div class="ph has" role="img" aria-label="Indian meal on a platter" style="background-image:url('https://images.unsplash.com/photo-1742281258189-3b933879867a?auto=format&fit=crop&w=1400&q=70')"></div>
     <div class="art">🍛</div>
     <div class="hero-in">
       <span class="pill" data-e>Pure Veg · Family Restaurant</span>
@@ -126,7 +129,7 @@ body.editing .ph-btn{display:inline-block}
 
   <section>
     <div class="special">
-      <div class="em">🍱</div>
+      <div class="em img" role="img" aria-label="Special thali" style="background-image:url('https://images.unsplash.com/photo-1742281257687-092746ad6021?auto=format&fit=crop&w=400&q=70')"></div>
       <div style="flex:1;min-width:0">
         <small data-e>Today's special</small>
         <h3 data-e>Special Thali · ₹199</h3>
@@ -156,9 +159,9 @@ body.editing .ph-btn{display:inline-block}
     </div>
   </section>
 
-  <section class="gallery-sec">
+  <section class="gallery-sec filled">
     <h2 data-e>A look inside</h2>
-    <div class="gallery"><div class="ph"></div><div class="ph"></div><div class="ph"></div></div>
+    <div class="gallery"><div class="ph has" role="img" aria-label="Dining hall" style="background-image:url('https://images.unsplash.com/photo-1729394405518-eaf2a0203aa7?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Fresh roti" style="background-image:url('https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Thali dishes" style="background-image:url('https://images.unsplash.com/photo-1589778655375-3e622a9fc91c?auto=format&fit=crop&w=800&q=70')"></div></div>
   </section>
 
   <section>
@@ -215,7 +218,7 @@ function waSend(msg){if(hasNum())window.open('https://wa.me/91'+num()+'?text='+e
 function directions(){window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(bizName()+', '+$('#addr').textContent.trim()),'_blank')}
 let editing=false;
 function toggleEdit(){editing=!editing;document.body.classList.toggle('editing',editing);$$('[data-k],[data-e]').forEach(el=>el.contentEditable=editing?'true':'false');$('#editBtn').textContent=editing?'✓ Done':'✏️ Edit';if(editing)toast('Tap any text to change it. Use 📷 to add photos.');else updateCart()}
-$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
+$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:slot.classList.contains('has')?'📷 Change':'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
 async function copyLink(){if(location.protocol==='file:'){toast('Put this site online first, then links will work');return}const u=new URL(location.origin+location.pathname);u.searchParams.set('name',bizName());if(num().length===10)u.searchParams.set('phone',num());const a=$('[data-k="area"]');if(a)u.searchParams.set('area',a.textContent.trim());try{await navigator.clipboard.writeText(u.href);toast('Link copied — paste it on WhatsApp')}catch(e){prompt('Copy this link:',u.href)}}
 
 // ---- Cart ----

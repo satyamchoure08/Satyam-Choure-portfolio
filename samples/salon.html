@@ -99,6 +99,8 @@ body.editing .ph-btn{display:inline-block}
 #toast{position:fixed;left:50%;top:76px;transform:translate(-50%,-20px);opacity:0;pointer-events:none;z-index:50;background:#161412;color:#fff;font-size:13.5px;padding:10px 16px;border-radius:12px;transition:.25s;width:max-content;max-width:calc(100% - 32px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @media(min-width:760px){.hero{min-height:480px}.hero-in{padding:44px}.hero .art{font-size:200px;right:50px;top:50px}.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.svc-grid .list{margin-top:16px}}
+.gallery{grid-template-columns:repeat(2,1fr)}.gallery .ph{aspect-ratio:4/3}.gallery .ph:first-child{grid-column:span 2;aspect-ratio:16/9}
+@media(min-width:760px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery .ph,.gallery .ph:first-child{grid-column:auto;aspect-ratio:1}}
 </style>
 </head>
 <body>
@@ -110,7 +112,7 @@ body.editing .ph-btn{display:inline-block}
 
 <main class="wrap">
   <div class="hero">
-    <div class="ph"></div>
+    <div class="ph has" role="img" aria-label="Customer in barber chair" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=70')"></div>
     <div class="art">💈</div>
     <div class="hero-in">
       <span class="pill" data-e>Men's Hair &amp; Beard Studio</span>
@@ -170,9 +172,9 @@ body.editing .ph-btn{display:inline-block}
     </div>
   </section>
 
-  <section class="gallery-sec">
+  <section class="gallery-sec filled">
     <h2 data-e>Our work</h2>
-    <div class="gallery"><div class="ph"></div><div class="ph"></div><div class="ph"></div></div>
+    <div class="gallery"><div class="ph has" role="img" aria-label="Haircut in progress" style="background-image:url('https://images.unsplash.com/photo-1635273051368-de31ef6a8cc4?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Razor finish" style="background-image:url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=70')"></div><div class="ph has" role="img" aria-label="Barber tools" style="background-image:url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=70')"></div></div>
   </section>
 
   <section>
@@ -215,7 +217,7 @@ function waSend(msg){if(hasNum())window.open('https://wa.me/91'+num()+'?text='+e
 function directions(){window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(bizName()+', '+$('#addr').textContent.trim()),'_blank')}
 let editing=false;
 function toggleEdit(){editing=!editing;document.body.classList.toggle('editing',editing);$$('[data-k],[data-e]').forEach(el=>el.contentEditable=editing?'true':'false');$('#editBtn').textContent=editing?'✓ Done':'✏️ Edit';if(editing)toast('Tap any text to change it. Use 📷 to add photos.');else updateSel()}
-$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
+$$('.ph').forEach(slot=>{const inp=Object.assign(document.createElement('input'),{type:'file',accept:'image/*',hidden:true});const b=Object.assign(document.createElement('button'),{type:'button',className:'ph-btn',textContent:slot.classList.contains('has')?'📷 Change':'📷 Add photo'});slot.append(inp,b);b.onclick=e=>{e.stopPropagation();inp.click()};inp.onchange=()=>{const f=inp.files[0];if(!f)return;slot.style.backgroundImage='url("'+URL.createObjectURL(f)+'")';slot.classList.add('has');b.textContent='📷 Change';const g=slot.closest('.gallery-sec');if(g)g.classList.add('filled')}});
 async function copyLink(){if(location.protocol==='file:'){toast('Put this site online first, then links will work');return}const u=new URL(location.origin+location.pathname);u.searchParams.set('name',bizName());if(num().length===10)u.searchParams.set('phone',num());const a=$('[data-k="area"]');if(a)u.searchParams.set('area',a.textContent.trim());try{await navigator.clipboard.writeText(u.href);toast('Link copied — paste it on WhatsApp')}catch(e){prompt('Copy this link:',u.href)}}
 
 // ---- Pick services ----
