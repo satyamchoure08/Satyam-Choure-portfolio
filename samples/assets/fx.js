@@ -97,14 +97,15 @@ export function boxes(canvas, { images, colors }) {
     m.position.set(x, y, z);
     m.rotation.set(i * 1.3, i * 0.7, i * 0.4);
     m.scale.setScalar(0.8 + (i % 3) * 0.14);
-    m.userData = { y, sp: 0.18 + (i % 4) * 0.08, ph: i * 1.7 };
+    m.userData = { x, y, sp: 0.18 + (i % 4) * 0.08, ph: i * 1.7 };
     group.add(m); return m;
   });
   s.onFit((w, h, st) => group.scale.setScalar(st.narrow ? 0.74 : 1));
   s.start((dt, t, st) => {
     items.forEach(m => {
       const u = m.userData;
-      m.position.y = u.y + Math.sin(t * 0.8 + u.ph) * 0.28;
+      m.position.x = u.x * (st.narrow ? 0.66 : 1);
+      m.position.y = u.y * (st.narrow ? 1.25 : 1) + Math.sin(t * 0.8 + u.ph) * 0.28;
       m.rotation.x += dt * u.sp + st.vel * 0.4;
       m.rotation.y += dt * u.sp * 0.8 + st.vel;
     });
@@ -118,7 +119,7 @@ export function dumbbell(canvas, { color = '#1f48ff' } = {}) {
   const s = stage(canvas, { z: 9, env: true, exposure: 1.05 });
   lights(s.scene);
   const g = new THREE.Group(); s.scene.add(g);
-  const chrome = new THREE.MeshStandardMaterial({ color: '#e6e9ee', metalness: 1, roughness: 0.16 });
+  const chrome = new THREE.MeshStandardMaterial({ color: '#ffffff', metalness: 1, roughness: 0.14, envMapIntensity: 1.5 });
   const rubber = new THREE.MeshPhysicalMaterial({ color, metalness: 0.05, roughness: 0.35, clearcoat: 1, clearcoatRoughness: 0.25 });
   const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 2.4, 48), chrome);
   handle.rotation.z = Math.PI / 2; g.add(handle);
@@ -135,7 +136,7 @@ export function dumbbell(canvas, { color = '#1f48ff' } = {}) {
     collar.rotation.z = Math.PI / 2; collar.position.x = sd * 1.08; g.add(collar);
   });
   const sh = softShadow(0.45); sh.scale.set(5.5, 1.6, 1); sh.position.y = -2.1; s.scene.add(sh);
-  s.onFit((w, h, st) => { const k = st.narrow ? 0.62 : 1; g.scale.setScalar(k); sh.scale.set(5.5 * k, 1.6 * k, 1); });
+  s.onFit((w, h, st) => { const k = st.narrow ? 0.62 : 1; g.scale.setScalar(k); sh.scale.set(5.5 * k, 1.6 * k, 1); sh.position.y = -1.7 * k; });
   s.start((dt, t, st) => {
     g.rotation.y = t * 0.45 + st.spin + st.px * 0.5;
     g.rotation.x = 0.35 + st.py * 0.25 + Math.sin(t * 0.7) * 0.08;
@@ -244,7 +245,7 @@ const BLOB_VS = NOISE + `
 uniform float uTime; uniform float uAmp; uniform float uFreq; uniform float uBeat;
 varying vec3 vN; varying vec3 vV; varying float vD;
 vec3 orth(vec3 v){return normalize(abs(v.x)>abs(v.z)?vec3(-v.y,v.x,0.0):vec3(0.0,-v.z,v.y));}
-float field(vec3 p){return snoise(p*uFreq+vec3(0.0,uTime*0.22,uTime*0.14))*uAmp+snoise(p*uFreq*2.2-uTime*0.18)*uAmp*0.3;}
+float field(vec3 p){return snoise(p*uFreq+vec3(0.0,uTime*0.22,uTime*0.14))*uAmp+snoise(p*uFreq*1.8-uTime*0.15)*uAmp*0.12;}
 void main(){
   vec3 n=normalize(normal); vec3 t=orth(n); vec3 b=normalize(cross(n,t)); float e=0.015;
   vec3 p0=position+n*field(position);
@@ -301,13 +302,13 @@ export function blob(canvas, { colors = ['#0f766e', '#67e8f9', '#ffffff'], pearl
 export function ring(canvas, { images, fog = '#121631', glow = '#ffb547' }) {
   const s = stage(canvas, { z: 10.5, fov: 40 });
   s.scene.fog = new THREE.Fog(fog, 7.5, 16.5);
-  const R = 4.6, W = 2.7, H = 1.8, N = images.length;
+  const R = 4.6, W = 3.2, H = 2.1, N = images.length;
   const g = new THREE.Group(); s.scene.add(g);
   images.forEach((url, i) => {
     const geo = new THREE.PlaneGeometry(W, H, 24, 1);
     const pos = geo.attributes.position;
     for (let k = 0; k < pos.count; k++) { const a = pos.getX(k) / R; pos.setX(k, Math.sin(a) * R); pos.setZ(k, Math.cos(a) * R - R); }
-    const m = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex(url), side: THREE.DoubleSide, fog: true }));
+    const m = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex(url), side: THREE.FrontSide, fog: true }));
     m.position.z = R;
     const pivot = new THREE.Group(); pivot.rotation.y = (i / N) * Math.PI * 2; pivot.position.y = (i % 2 ? 0.35 : -0.35);
     pivot.add(m); g.add(pivot);
@@ -318,7 +319,7 @@ export function ring(canvas, { images, fog = '#121631', glow = '#ffb547' }) {
   const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pts, 3));
   const dots = new THREE.Points(pg, new THREE.PointsMaterial({ color: glow, size: 0.07, transparent: true, opacity: 0.8, fog: false }));
   s.scene.add(dots);
-  s.onFit((w, h, st) => { s.camera.position.z = st.narrow ? 14 : 10.5; });
+  s.onFit((w, h, st) => { const cz = st.narrow ? 14 : 10.5; s.camera.position.z = cz; s.scene.fog.near = cz - R - 0.5; s.scene.fog.far = cz + R * 0.6; });
   s.start((dt, t, st) => {
     g.rotation.y = t * 0.09 + st.spin * 0.7 + st.px * 0.2;
     g.rotation.x = 0.1 + st.py * 0.06;

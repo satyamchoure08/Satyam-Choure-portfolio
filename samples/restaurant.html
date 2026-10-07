@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=3">
+<link rel="stylesheet" href="assets/base.css?v=4">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
 :root{--leaf:#0f3b2c;--leaf2:#1b5a41;--brass:#d6ab4f;--rice:#fbf6ea;--chilli:#c2352b;--focus:#d6ab4f}
@@ -108,7 +108,7 @@ footer{padding:50px 18px 130px;text-align:center;font-size:14px;color:#b9cfc1}
 </header>
 
 <section class="hero" data-stage>
-  <div class="stage"><canvas class="scene" aria-label="Spinning thali. Drag to turn it." data-scene="thali" data-opts='{"image":"https://images.unsplash.com/photo-1589778655375-3e622a9fc91c?auto=format&fit=crop&w=1024&h=1024&q=75"}'></canvas></div>
+  <div class="stage"><canvas class="scene" aria-label="Spinning thali. Drag to turn it." data-scene="thali" data-opts='{"image":"https://images.unsplash.com/photo-1589778655375-3e622a9fc91c?auto=format&fit=crop&crop=focalpoint&fp-x=.6&fp-y=.46&fp-z=1.5&w=1024&h=1024&q=75"}'></canvas></div>
   <div class="hero-text">
     <h1 data-k="name">Your Restaurant</h1>
     <p data-e>Pure veg. Fresh tandoor. Full thalis, made the home way.</p>
@@ -201,7 +201,7 @@ document.getElementById('menuList').innerHTML = MENU.map(c => `<div class="cat" 
 // "Add" becomes "+" once something is picked
 document.addEventListener('click', e => { const b = e.target.closest('.step-q [data-add],.step-q [data-sub]'); if (!b) return; setTimeout(() => { const it = b.closest('[data-item]'); const a = it.querySelector('[data-add]'); a.textContent = +(it.dataset.q || 0) > 0 ? '+' : 'Add'; }); });
 </script>
-<script src="assets/core.js?v=3"></script>
-<script type="module" src="assets/fx.js?v=3"></script>
+<script src="assets/core.js?v=4"></script>
+<script type="module" src="assets/fx.js?v=4"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=3">
+<link rel="stylesheet" href="assets/base.css?v=4">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
 :root{--wine:#3d0c25;--wine2:#56173a;--rose:#e8a8a0;--gold:#d9b36c;--pearl:#fff4f0;--henna:#b4471c;--focus:#d9b36c}
@@ -103,7 +103,7 @@ footer{padding:50px 18px 130px;text-align:center;font-size:14px;color:#d7a9b3}
 
 <section class="hero" data-stage>
   <div class="mandala" aria-hidden="true"></div>
-  <div class="stage"><canvas class="scene" aria-label="Glowing 3D pearl. Drag to turn it." data-scene="blob" data-opts='{"colors":["#e8a8a0","#fff4f0","#d9b36c"],"pearl":true,"amp":0.2,"freq":0.7,"orbit":6}'></canvas></div>
+  <div class="stage"><canvas class="scene" aria-label="Glowing 3D pearl. Drag to turn it." data-scene="blob" data-opts='{"colors":["#e8a8a0","#fff4f0","#d9b36c"],"pearl":true,"amp":0.12,"freq":0.55,"orbit":6}'></canvas></div>
   <div class="hero-text">
     <h1 data-k="name">Your Beauty Parlour</h1>
     <p data-e>Threading to bridal makeup. Ladies only, with home visits for brides.</p>
@@ -191,7 +191,7 @@ document.getElementById('seg').addEventListener('click', e => {
   document.querySelectorAll('.pane').forEach((p, i) => p.classList.toggle('on', i === +b.dataset.i));
 });
 </script>
-<script src="assets/core.js?v=3"></script>
-<script type="module" src="assets/fx.js?v=3"></script>
+<script src="assets/core.js?v=4"></script>
+<script type="module" src="assets/fx.js?v=4"></script>
 </body>
 </html>

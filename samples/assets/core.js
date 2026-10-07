@@ -122,7 +122,7 @@
       if (off.includes(day)) txt = 'Closed today';
       else {
         const cur = ranges.find(([a, b]) => h >= a && h < b);
-        if (cur) { open = true; txt = 'Open now, until ' + fmtH(cur[1]); }
+        if (cur) { open = true; txt = 'Open till ' + fmtH(cur[1]); }
         else { const next = ranges.find(([a]) => h < a); txt = next ? 'Opens at ' + fmtH(next[0]) : 'Closed now'; }
       }
       el.textContent = txt; el.classList.toggle('is-open', open); el.classList.toggle('is-closed', !open);
