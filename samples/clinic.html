@@ -3,196 +3,195 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eef7f8">
+<meta name="theme-color" content="#1257a8">
 <title>Your Clinic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=4">
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=5">
 <style>
-:root{--ice:#eef7f8;--deep:#0b4a55;--mint:#8fe3cf;--coral:#ff6b5e;--white:#fff;--focus:#0b4a55}
-body{font-family:"Instrument Sans",system-ui,sans-serif;background:var(--ice);color:var(--deep);line-height:1.5}
-.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+:root{--blue:#1257a8;--blue-d:#0b3d78;--sky:#eaf2fb;--green:#12805c;--red:#c62828;--ink:#13233a;--white:#fff;--focus:#1257a8}
+body{font-family:Hind,system-ui,sans-serif;font-size:18px;background:var(--white);color:var(--ink);line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+.hi{display:block;font-size:.82em;font-weight:500;color:#5c6b80}
 
-.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
-.logo{width:42px;height:42px;border-radius:14px;background:var(--deep);color:var(--mint);display:grid;place-items:center;font-family:"Instrument Serif",serif;font-size:26px}
-.nav .nm{font-weight:700;font-size:17px}
-.status{margin-left:auto;font-size:13px;font-weight:700;padding:7px 12px;border-radius:99px;background:var(--white);box-shadow:0 4px 14px rgba(11,74,85,.1)}
-.status.is-open::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#16a34a;margin-right:7px;animation:pulse 1.05s infinite}
-.status.is-closed{color:var(--coral)}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}}
+/* top bar */
+.top{display:flex;align-items:center;gap:10px;padding:14px 16px;max-width:1000px;margin:0 auto}
+.cross{width:40px;height:40px;border-radius:10px;background:var(--blue);display:grid;place-items:center;flex:none}
+.cross svg{width:22px;height:22px}
+.top .nm{font-weight:700;font-size:20px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* hero */
-.hero{position:relative;min-height:max(700px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(70% 50% at 50% 34%,#ffffff 0,var(--ice) 70%)}
-.ecg{position:absolute;left:0;right:0;top:32%;height:120px;z-index:1;opacity:.7}
-.ecg path{fill:none;stroke:var(--coral);stroke-width:2.5;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:ecg 3.2s linear infinite}
-@keyframes ecg{to{stroke-dashoffset:-1400}}
-.hero .stage{position:absolute;left:0;right:0;top:4%;height:62%;z-index:2}
-.hero-text{position:relative;z-index:3;padding:0 18px 30px;max-width:1100px;margin:0 auto;width:100%}
-.hero h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(60px,16vw,150px);line-height:.92;letter-spacing:-.02em}
-.doc{display:flex;align-items:center;gap:14px;margin:18px 0;background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:24px;padding:12px 16px 12px 12px;max-width:380px;box-shadow:0 16px 40px rgba(11,74,85,.1)}
-.doc .face{flex:none;width:64px;height:64px;border-radius:50%;background-color:var(--mint);display:grid;place-items:center;font-family:"Instrument Serif",serif;font-size:30px;color:var(--deep)}
-.doc .face .ph-btn{top:auto;right:auto;bottom:-8px;left:50%;transform:translateX(-50%);font-size:10px;padding:4px 8px;white-space:nowrap}
-.doc b{display:block;font-size:17px}
-.doc span{font-size:14px;opacity:.75}
-.cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 24px;border-radius:18px;font-weight:700;font-size:16px;white-space:nowrap;transition:transform .15s}
-.btn:active{transform:scale(.96)}
-.btn-deep{background:var(--deep);color:#fff}
-.btn-white{background:var(--white);box-shadow:0 6px 18px rgba(11,74,85,.12)}
-.btn-wa{background:#25d366;color:#05351b}
-.no-3d .stage{display:none}
+/* doctor first */
+.doc{display:grid;gap:16px;padding:6px 0 0}
+@media(min-width:800px){.doc{grid-template-columns:1fr 1fr;align-items:center}}
+.photo{position:relative;height:min(440px,100vw);border-radius:28px;background:var(--sky) center 20%/cover no-repeat}
+.photo .tag{position:absolute;left:12px;bottom:12px;background:var(--white);border-radius:16px;padding:10px 14px;box-shadow:0 8px 24px rgba(19,35,58,.15)}
+.photo .tag b{display:block;font-size:22px;line-height:1.1}
+.photo .tag span{font-size:15px;color:#5c6b80}
+.status{display:flex;align-items:center;gap:12px;border-radius:20px;padding:16px 18px;font-weight:700;font-size:22px;line-height:1.2}
+.status .dot{width:16px;height:16px;border-radius:50%;flex:none}
+.status.is-open{background:#e7f6ef;color:var(--green)}
+.status.is-open .dot{background:var(--green);animation:beat 1.2s infinite}
+.status.is-closed{background:#fdecec;color:var(--red)}
+.status.is-closed .dot{background:var(--red)}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.2)}}
+.today{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.today div{background:var(--sky);border-radius:18px;padding:14px}
+.today span{font-size:15px;color:#5c6b80;display:block}
+.today b{font-size:24px}
+.fee{margin-top:10px;font-size:17px;color:#5c6b80}
+.fee b{color:var(--ink)}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:60px;padding:0 18px;border-radius:18px;font-weight:700;font-size:19px;line-height:1.15;text-align:center;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-out{border:2px solid var(--blue);color:var(--blue);background:#fff}
+.btn-wa{background:#1fa855;color:#fff}
+.btn small{display:block;font-weight:500;font-size:14px;opacity:.85}
+.cta .btn{flex-direction:column;gap:0}
 
-.sec{padding-top:84px}
-.h{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(46px,11vw,92px);line-height:.95;letter-spacing:-.015em}
-.sub{margin-top:10px;font-size:17px;max-width:40ch;opacity:.8}
-
-/* treatments: glass tiles */
-.treat{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
-@media(min-width:760px){.treat{grid-template-columns:repeat(3,1fr)}}
-.t{position:relative;background:var(--white);border-radius:26px;padding:20px 18px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
-.t::after{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--gx,50%) var(--gy,0%),rgba(143,227,207,.35),transparent 60%);pointer-events:none}
-.t svg{width:34px;height:34px;stroke:var(--deep);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.t b{font-size:17px;line-height:1.2}
+.sec{padding-top:56px}
+.h2{font-size:clamp(30px,7vw,44px);font-weight:700;line-height:1.1}
 
 /* week */
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:28px}
-.wd{background:var(--white);border-radius:18px;padding:12px 4px;text-align:center;font-weight:700;font-size:14px}
-.wd small{display:block;font-weight:500;font-size:11px;margin-top:4px;opacity:.65}
-.wd.today{background:var(--deep);color:#fff}
-.wd.off{color:var(--coral)}
-.slots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.slot{background:var(--white);border-radius:22px;padding:18px}
-.slot span{font-size:14px;opacity:.7}
-.slot b{display:block;font-family:"Instrument Serif",serif;font-weight:400;font-size:34px;line-height:1.05}
+.week{margin-top:16px;border:2px solid var(--sky);border-radius:20px;overflow:hidden}
+.wrow{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 16px;border-top:2px solid var(--sky);font-size:18px}
+.wrow:first-child{border-top:0}
+.wrow.now{background:var(--sky);font-weight:700}
+.wrow .off{color:var(--red);font-weight:700}
 
-/* booking */
-.book{background:var(--deep);color:#fff;border-radius:34px;padding:28px 20px;margin-top:28px;display:grid;gap:18px;max-width:620px}
-.book .lbl{display:block;font-weight:700;font-size:14px;margin-bottom:8px;color:var(--mint)}
-.book input[type=text]{width:100%;height:54px;border:0;border-radius:16px;padding:0 16px;font-size:16px;background:rgba(255,255,255,.1);color:#fff}
-.book input::placeholder{color:rgba(255,255,255,.5)}
-.chips-in span{background:rgba(255,255,255,.1);color:#fff}
-.chips-in input:checked+span{background:var(--mint);color:var(--deep)}
-.book .btn{width:100%}
-.sos{display:flex;align-items:center;gap:14px;background:#fff1ef;border-radius:24px;padding:16px 18px;margin-top:14px;max-width:620px}
-.sos p{flex:1;font-size:15px}
-.sos b{display:block;color:#c2352b}
-.sos a{background:var(--coral);color:#fff;font-weight:700;padding:12px 16px;border-radius:14px;white-space:nowrap}
+/* what we treat */
+.treat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.tc{display:flex;gap:12px;align-items:center;background:var(--sky);border-radius:18px;padding:14px}
+.tc svg{flex:none;width:34px;height:34px;stroke:var(--blue);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tc b{font-size:17px;line-height:1.2}
 
-.flow{--fw:72vw;margin-top:10px}
-.room{height:min(420px,92vw);border-radius:32px}
-
-.find{display:grid;gap:12px;margin-top:28px}
+/* token */
+.token{margin-top:16px;background:var(--blue);color:#fff;border-radius:26px;padding:22px 18px;display:grid;gap:16px}
+.token .l{display:block;font-weight:700;margin-bottom:6px;font-size:16px}
+.token input{width:100%;height:56px;border:0;border-radius:14px;padding:0 14px;font-size:18px;color:var(--ink)}
+.two{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+.chips-in span{background:rgba(255,255,255,.16);color:#fff;min-height:48px;font-size:17px}
+.chips-in input:checked+span{background:#fff;color:var(--blue)}
+.token .btn{background:#fff;color:var(--blue);width:100%}
+.token .note{font-size:15px;opacity:.85}
+.sos{display:flex;align-items:center;gap:12px;margin-top:12px;background:#fdecec;border-radius:20px;padding:14px 16px}
+.sos p{flex:1;font-size:17px;line-height:1.3}
+.sos b{color:var(--red)}
+.sos a{background:var(--red);color:#fff;font-weight:700;padding:14px 16px;border-radius:14px;white-space:nowrap}
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.pics div{height:150px;border-radius:18px;background:var(--sky) center/cover}
+.find{display:grid;gap:10px;margin-top:16px;padding-bottom:120px}
 @media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
-.fc{background:var(--white);border-radius:26px;padding:22px}
-.fc h3{font-size:13px;font-weight:600;opacity:.65}
-.fc p{font-family:"Instrument Serif",serif;font-size:30px;line-height:1.1}
-.fc .btn{margin-top:14px}
-footer{padding:50px 18px 130px;text-align:center;font-size:14px;opacity:.7}
-
-.dock{background:rgba(255,255,255,.8);border:1px solid rgba(11,74,85,.1);box-shadow:0 10px 30px rgba(11,74,85,.15)}
-.dock .btn{min-height:52px}
+.fc{border:2px solid var(--sky);border-radius:20px;padding:18px}
+.fc .k{font-size:15px;color:#5c6b80}
+.fc p{font-size:22px;font-weight:700;line-height:1.25}
+.fc .btn{margin-top:12px;width:100%}
+footer{text-align:center;font-size:15px;color:#5c6b80;margin-top:-90px;padding-bottom:110px}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:8px;transition:transform .4s,opacity .3s}
+body:not(.show-dock) .bar{transform:translateY(140%);opacity:0;pointer-events:none}
+.bar .btn{box-shadow:0 10px 30px rgba(19,35,58,.25)}
 </style>
 </head>
 <body>
-<header class="nav">
-  <div class="logo" data-initial>Y</div>
+<header class="top">
+  <div class="cross" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></div>
   <div class="nm" data-k="name">Your Clinic</div>
-  <div class="status" data-status="10-13,17-21" data-off="0">Open now</div>
 </header>
 
-<section class="hero" data-stage>
-  <svg class="ecg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 H380 L410 60 L425 20 L445 105 L465 8 L485 60 H700 L720 48 L740 60 H1200"/></svg>
-  <div class="stage"><canvas class="scene" aria-label="Beating 3D heart shape" data-scene="blob" data-opts='{"colors":["#0b6b78","#8fe3cf","#ffffff"],"heartbeat":true,"amp":0.1,"freq":0.6}'></canvas></div>
-  <div class="hero-text">
-    <h1 data-k="name">Your Clinic</h1>
-    <div class="doc">
-      <div class="face" data-photo><span data-initial-doc>D</span></div>
-      <div><b data-e>Dr. Your Name</b><span data-e>MBBS, General Physician, 10+ years</span></div>
+<main class="wrap">
+  <section class="doc">
+    <div class="photo" data-photo style="background-image:url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=900&q=72')">
+      <div class="tag"><b data-e>Dr. Your Name</b><span data-e>MBBS, General Physician</span></div>
     </div>
-    <div class="cta">
-      <a class="btn btn-deep" href="#book">Book appointment</a>
-      <button class="btn btn-white" onclick="callNow()">Call</button>
+    <div>
+      <div class="status" data-status-box><span class="dot"></span><span><span data-status="10-13,17-21" data-off="0">Open</span><span class="hi" id="statusHi"></span></span></div>
+      <div class="today">
+        <div><span>Morning <span lang="hi">सुबह</span></span><b data-e>10 AM–1 PM</b></div>
+        <div><span>Evening <span lang="hi">शाम</span></span><b data-e>5–9 PM</b></div>
+      </div>
+      <p class="fee">Consultation fee <b data-e>₹200</b>. Bring your old prescriptions.</p>
+      <div class="cta">
+        <a class="btn btn-blue" href="#token">Get a token<small lang="hi">टोकन लें</small></a>
+        <button class="btn btn-out" onclick="callNow()">Call clinic<small lang="hi">फ़ोन करें</small></button>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>What we treat</h2>
-  <div class="treat">
-    <div class="t" data-tilt="8" data-reveal><svg viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v3a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/></svg><b data-e>Checkups</b></div>
-    <div class="t" data-tilt="8" data-reveal style="--delay:.06s"><svg viewBox="0 0 24 24"><path d="M14 14.76V4a2 2 0 0 0-4 0v10.76a4 4 0 1 0 4 0z"/></svg><b data-e>Fever and cough</b></div>
-    <div class="t" data-tilt="8" data-reveal style="--delay:.12s"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/><path d="M3.5 12h4l2-3 3 6 2-3h5"/></svg><b data-e>BP check</b></div>
-    <div class="t" data-tilt="8" data-reveal style="--delay:.18s"><svg viewBox="0 0 24 24"><path d="M12 2.7l5.7 6.3a8 8 0 1 1-11.4 0z"/></svg><b data-e>Sugar test</b></div>
-    <div class="t" data-tilt="8" data-reveal style="--delay:.24s"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9.5 14.5a3.5 3.5 0 0 0 5 0"/></svg><b data-e>Child care</b></div>
-    <div class="t" data-tilt="8" data-reveal style="--delay:.3s"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><b data-e>Medical certificates</b></div>
-  </div>
-</section>
+  <section class="sec">
+    <h2 class="h2" data-e>What we treat <span class="hi" lang="hi">हम क्या देखते हैं</span></h2>
+    <div class="treat">
+      <div class="tc"><svg viewBox="0 0 24 24"><path d="M14 14.76V4a2 2 0 0 0-4 0v10.76a4 4 0 1 0 4 0z"/></svg><b data-e>Fever, cold, cough</b></div>
+      <div class="tc"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg><b data-e>BP check</b></div>
+      <div class="tc"><svg viewBox="0 0 24 24"><path d="M12 2.7l5.7 6.3a8 8 0 1 1-11.4 0z"/></svg><b data-e>Sugar test</b></div>
+      <div class="tc"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9.5 14.5a3.5 3.5 0 0 0 5 0"/></svg><b data-e>Children</b></div>
+      <div class="tc"><svg viewBox="0 0 24 24"><path d="M4.2 14.6l10.4-10.4a3 3 0 0 1 4.2 4.2L8.4 18.8a3 3 0 0 1-4.2-4.2z"/><path d="M9.5 9.5l5 5"/></svg><b data-e>Cuts and dressing</b></div>
+      <div class="tc"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><b data-e>Medical certificate</b></div>
+    </div>
+  </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>Clinic hours</h2>
-  <div class="week" id="week"></div>
-  <div class="slots">
-    <div class="slot" data-reveal><span>Morning</span><b data-e>10 AM–1 PM</b></div>
-    <div class="slot" data-reveal style="--delay:.08s"><span>Evening</span><b data-e>5–9 PM</b></div>
-  </div>
-</section>
+  <section class="sec" id="token">
+    <h2 class="h2" data-e>Get a token <span class="hi" lang="hi">टोकन लें</span></h2>
+    <form class="token" data-wa="I want a token for the doctor.">
+      <div class="two">
+        <div><label class="l" for="pn">Patient name</label><input id="pn" data-label="Patient" required></div>
+        <div><label class="l" for="pa">Age</label><input id="pa" data-label="Age" inputmode="numeric" maxlength="3"></div>
+      </div>
+      <div><span class="l">When?</span><div class="chips-in">
+        <label><input type="radio" name="s" value="Today morning" data-label="When" required><span>Today morning</span></label>
+        <label><input type="radio" name="s" value="Today evening" data-label="When"><span>Today evening</span></label>
+        <label><input type="radio" name="s" value="Tomorrow morning" data-label="When"><span>Tomorrow morning</span></label></div></div>
+      <div><label class="l" for="pw">Problem (optional)</label><input id="pw" data-label="Problem" placeholder="Fever since 2 days"></div>
+      <button class="btn" type="submit">Send on WhatsApp</button>
+      <p class="note">The clinic replies with your token number and time.</p>
+    </form>
+    <div class="sos"><p><b>Emergency?</b> Don't wait for a token. Call an ambulance.</p><a href="tel:108">Call 108</a></div>
+  </section>
 
-<section class="sec wrap" id="book">
-  <h2 class="h" data-e>Skip the waiting line</h2>
-  <form class="book" data-wa="I want to book an appointment.">
-    <div><label class="lbl" for="pn">Patient name</label><input type="text" id="pn" data-label="Patient" required placeholder="Full name"></div>
-    <div><span class="lbl">Day</span><div class="chips-in">
-      <label><input type="radio" name="d" value="Today" data-label="Day" required><span>Today</span></label>
-      <label><input type="radio" name="d" value="Tomorrow" data-label="Day"><span>Tomorrow</span></label></div></div>
-    <div><span class="lbl">Time</span><div class="chips-in">
-      <label><input type="radio" name="tm" value="Morning" data-label="Time" required><span>Morning</span></label>
-      <label><input type="radio" name="tm" value="Evening" data-label="Time"><span>Evening</span></label></div></div>
-    <div><label class="lbl" for="why">Reason (optional)</label><input type="text" id="why" data-label="Reason" placeholder="Fever, checkup…"></div>
-    <button class="btn btn-wa" type="submit">Book on WhatsApp</button>
-  </form>
-  <div class="sos"><p><b>Emergency?</b>Call an ambulance right away.</p><a href="tel:108">Call 108</a></div>
-</section>
+  <section class="sec">
+    <h2 class="h2" data-e>Clinic days</h2>
+    <div class="week" id="week"></div>
+  </section>
 
-<section class="sec">
-  <div class="wrap"><h2 class="h" data-e>Inside the clinic</h2></div>
-  <div class="flow" data-flow>
-    <div class="room" data-photo style="background-image:url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="room" data-photo style="background-image:url('https://images.unsplash.com/photo-1631815590058-860e4f83c1e8?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="room" data-photo style="background-image:url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="room" data-photo style="background-image:url('https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&w=900&q=70')"></div>
-  </div>
-</section>
+  <section class="sec">
+    <h2 class="h2" data-e>Inside the clinic</h2>
+    <div class="pics">
+      <div data-photo style="background-image:url('https://images.unsplash.com/photo-1631815590058-860e4f83c1e8?auto=format&fit=crop&w=600&q=65')"></div>
+      <div data-photo style="background-image:url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=65')"></div>
+    </div>
+  </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>Find us</h2>
-  <div class="find">
-    <div class="fc" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Near Main Chowk</span>, <span data-e>Your Town</span></p><button class="btn btn-deep" onclick="directions()">Get directions</button></div>
-    <div class="fc" data-reveal style="--delay:.08s"><h3>Phone</h3><p data-k="phone">98XXX XXXXX</p><button class="btn btn-white" onclick="callNow()">Call now</button></div>
-  </div>
-</section>
-
+  <section class="sec">
+    <h2 class="h2" data-e>How to reach</h2>
+    <div class="find">
+      <div class="fc"><span class="k">Address</span><p id="addr"><span data-k="area">Near Main Chowk</span>, <span data-e>Your Town</span></p><button class="btn btn-blue" onclick="directions()">Get directions</button></div>
+      <div class="fc"><span class="k">Phone</span><p data-k="phone">98XXX XXXXX</p><button class="btn btn-out" onclick="callNow()">Call clinic</button></div>
+    </div>
+  </section>
+</main>
 <footer>© <span data-year></span> <span data-k="name">Your Clinic</span></footer>
 
-<nav class="dock" aria-label="Quick actions">
-  <button class="btn btn-white" onclick="callNow()">Call</button>
-  <a class="btn btn-deep" href="#book">Book</a>
-</nav>
+<div class="bar">
+  <a class="btn btn-blue" href="#token">Get a token</a>
+  <button class="btn btn-out" onclick="callNow()">Call</button>
+</div>
 
 <script>
-// week strip: today highlighted, Sunday closed
+// week table, today highlighted
 (function () {
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], today = new Date().getDay();
-  document.getElementById('week').innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => `<div class="wd${d === today ? ' today' : ''}${d === 0 ? ' off' : ''}">${days[d]}<small>${d === 0 ? 'Closed' : 'Open'}</small></div>`).join('');
-  // doctor initial follows the doctor's name
-  const nm = document.querySelector('.doc b'), ini = document.querySelector('[data-initial-doc]');
-  const sync = () => { const t = nm.textContent.replace(/^Dr\.?\s*/i, '').trim(); ini.textContent = (t[0] || 'D').toUpperCase(); };
-  sync(); nm.addEventListener('input', sync);
+  const days = [['Monday', 'सोमवार', 1], ['Tuesday', 'मंगलवार', 2], ['Wednesday', 'बुधवार', 3], ['Thursday', 'गुरुवार', 4], ['Friday', 'शुक्रवार', 5], ['Saturday', 'शनिवार', 6], ['Sunday', 'रविवार', 0]];
+  const t = new Date().getDay();
+  document.getElementById('week').innerHTML = days.map(([en, hi, d]) => `<div class="wrow${d === t ? ' now' : ''}"><span>${en} <span class="hi" lang="hi" style="display:inline">${hi}</span></span>${d === 0 ? '<span class="off">Closed</span>' : '<span>10–1, 5–9</span>'}</div>`).join('');
 })();
+// mirror open/closed onto the big status box, with Hindi
+function syncStatus() {
+  const s = document.querySelector('[data-status]'), box = document.querySelector('[data-status-box]');
+  const open = s.classList.contains('is-open');
+  box.classList.toggle('is-open', open); box.classList.toggle('is-closed', !open);
+  document.getElementById('statusHi').textContent = open ? 'क्लिनिक अभी खुला है' : 'क्लिनिक अभी बंद है';
+}
 </script>
-<script src="assets/core.js?v=4"></script>
-<script type="module" src="assets/fx.js?v=4"></script>
+<script src="assets/core.js?v=5"></script>
+<script>syncStatus(); setInterval(syncStatus, 60000);</script>
 </body>
 </html>

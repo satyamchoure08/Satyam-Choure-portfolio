@@ -3,203 +3,230 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#121631">
+<meta name="theme-color" content="#14213d">
 <title>Your Hotel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500..800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=4">
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link rel="stylesheet" href="assets/base.css?v=5">
 <style>
-:root{--night:#121631;--night2:#1d2350;--amber:#ffb547;--sand:#efe6d8;--teal:#3cc3b0;--focus:#ffb547}
-body{font-family:Jost,system-ui,sans-serif;background:var(--night);color:var(--sand);line-height:1.5}
-.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+:root{--navy:#14213d;--gold:#e9b44c;--light:#f4f6fa;--green:#1e8e5a;--ink:#14213d;--muted:#5f6b80;--focus:#e9b44c}
+body{font-family:Jost,system-ui,sans-serif;background:var(--light);color:var(--ink);line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
 
-.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
-.logo{width:42px;height:42px;border:1.5px solid var(--amber);color:var(--amber);display:grid;place-items:center;font-family:"Bodoni Moda",serif;font-weight:700;font-size:22px;border-radius:4px}
-.nav .nm{font-family:"Bodoni Moda",serif;font-weight:600;font-size:19px}
-.pill{margin-left:auto;font-size:13px;font-weight:600;padding:7px 12px;border-radius:99px;background:rgba(255,181,71,.14);color:var(--amber)}
+.top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;gap:10px;padding:16px;color:#fff}
+.logo{width:42px;height:42px;border:1.5px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-family:"Bodoni Moda",serif;font-weight:700;font-size:22px}
+.top .nm{font-family:"Bodoni Moda",serif;font-weight:600;font-size:20px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .pill{margin-left:auto;flex:none;font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 
-/* hero: floating ring of rooms */
-.hero{position:relative;min-height:max(720px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(90% 60% at 50% 30%,#262d66 0,var(--night) 70%)}
-.hero .stage{position:absolute;left:0;right:0;top:0;height:66%;z-index:2}
-.hero-text{position:relative;z-index:3;padding:0 18px 150px;max-width:1100px;margin:0 auto;width:100%;text-align:center}
-.hero h1{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(54px,15vw,150px);line-height:.92;letter-spacing:-.02em}
-.hero p{font-size:18px;margin:12px auto 0;max-width:30ch;color:#c9c6d8}
-.no-3d .stage{display:none}
+/* hero: the room */
+.hero{position:relative;height:max(520px,72svh);color:#fff;background:#222 center/cover no-repeat;display:flex;align-items:flex-end}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,16,30,.55) 0,rgba(10,16,30,0) 35%,rgba(10,16,30,.8) 100%)}
+.hero .in{position:relative;padding:0 16px 96px;max-width:1000px;width:100%;margin:0 auto}
+.hero h1{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(48px,13vw,112px);line-height:.95;letter-spacing:-.01em}
+.near{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:16px;font-weight:600;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:7px 14px;border-radius:99px}
 
-/* booking bar */
-.bar{position:relative;z-index:5;margin:-120px auto 0;max-width:760px;background:rgba(239,230,216,.96);color:var(--night);border-radius:28px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;box-shadow:0 30px 70px rgba(0,0,0,.45)}
-@media(min-width:760px){.bar{grid-template-columns:1.3fr 1fr 1fr auto;align-items:end}}
-.bar .f{background:#fff;border-radius:18px;padding:10px 14px}
-.bar .f.wide{grid-column:1 / -1}
-@media(min-width:760px){.bar .f.wide{grid-column:auto}}
-.bar label,.bar .lab{display:block;font-size:12px;font-weight:600;opacity:.6}
-.bar input[type=date]{border:0;font-size:17px;font-weight:600;width:100%;background:transparent;color:var(--night);min-height:30px}
-.stp{display:flex;align-items:center;justify-content:space-between;gap:6px}
-.stp button{width:34px;height:34px;border-radius:50%;background:var(--sand);font-size:20px;font-weight:600;display:grid;place-items:center}
-.stp output{font-size:18px;font-weight:700}
-.bar .go{grid-column:1 / -1;min-height:56px;border-radius:18px;background:var(--night);color:var(--amber);font-weight:700;font-size:16px;display:grid;place-items:center}
-@media(min-width:760px){.bar .go{grid-column:auto;padding:0 22px}}
+/* booking card */
+.search{position:relative;z-index:6;margin:-70px auto 0;max-width:760px;background:#fff;border-radius:22px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;box-shadow:0 20px 50px rgba(20,33,61,.18)}
+@media(min-width:760px){.search{grid-template-columns:1.3fr 1fr 1fr 1.1fr;align-items:stretch}}
+.f{background:var(--light);border-radius:14px;padding:10px 12px}
+.f.date{grid-column:1 / -1}
+@media(min-width:760px){.f.date{grid-column:auto}}
+.f label,.f .lab{display:block;font-size:12.5px;font-weight:600;color:var(--muted)}
+.f input{border:0;background:transparent;font-size:17px;font-weight:600;color:var(--ink);width:100%;min-height:30px}
+.stp{display:flex;align-items:center;justify-content:space-between}
+.stp button{width:36px;height:36px;border-radius:50%;background:#fff;font-size:20px;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.stp output{font-size:19px;font-weight:700}
+.search .go{grid-column:1 / -1;min-height:54px;border-radius:14px;background:var(--navy);color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+@media(min-width:760px){.search .go{grid-column:auto}}
 
-.sec{padding-top:90px}
-.h{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(44px,11vw,96px);line-height:.95;letter-spacing:-.015em}
-.sub{margin-top:10px;font-size:17px;color:#c9c6d8;max-width:40ch}
+.sec{padding-top:56px}
+.h2{font-family:"Bodoni Moda",Georgia,serif;font-weight:700;font-size:clamp(34px,8vw,60px);line-height:1}
+.sub{color:var(--muted);margin-top:6px}
 
 /* rooms */
-.flow.rooms{--fw:72vw}
-@media(min-width:760px){.flow.rooms{--fw:440px}}
-.room{background:var(--night2);border-radius:30px;overflow:hidden;border:1.5px solid transparent;transition:border-color .3s}
-.room .pic{height:230px}
-.room .body{padding:18px 18px 20px}
-.room h3{font-family:"Bodoni Moda",serif;font-weight:700;font-size:28px;line-height:1.05}
-.room .feat{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
-.room .feat span{font-size:13px;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.08)}
-.room .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.room .price{font-family:"Bodoni Moda",serif;font-weight:700;font-size:30px}
-.room .price small{font-family:Jost,sans-serif;font-size:14px;font-weight:500;opacity:.7}
-.room button{min-height:48px;padding:0 20px;border-radius:99px;border:1.5px solid var(--amber);color:var(--amber);font-weight:700}
-.room.on{border-color:var(--amber)}
-.room.on button{background:var(--amber);color:var(--night)}
+.rooms{display:grid;gap:16px;margin-top:18px}
+@media(min-width:860px){.rooms{grid-template-columns:repeat(3,1fr)}}
+.room{background:#fff;border-radius:22px;overflow:hidden;border:2px solid transparent;transition:border-color .25s,box-shadow .25s}
+.room.on{border-color:var(--gold);box-shadow:0 14px 40px rgba(233,180,76,.25)}
+.gal{position:relative;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal div{flex:none;width:100%;height:220px;scroll-snap-align:start;background:#ddd center/cover}
+.dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px;pointer-events:none}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.6)}
+.dots i.on{background:#fff}
+.room .b{padding:16px}
+.room h3{font-family:"Bodoni Moda",serif;font-weight:700;font-size:26px;line-height:1.05}
+.feat{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.feat span{font-size:13.5px;font-weight:500;padding:4px 10px;border-radius:99px;background:var(--light)}
+.pr{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.pr .night{font-size:14px;color:var(--muted)}
+.pr .night b{font-family:"Bodoni Moda",serif;font-size:26px;color:var(--ink)}
+.pr .stay{font-size:14px;color:var(--green);font-weight:600}
+.room button.pick{min-height:48px;padding:0 18px;border-radius:12px;border:2px solid var(--navy);font-weight:700;color:var(--navy)}
+.room.on button.pick{background:var(--navy);color:#fff}
+.room .warn{font-size:13.5px;color:#b5651d;margin-top:8px;display:none}
+.room.small .warn{display:block}
 
-/* amenities */
-.am{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
-@media(min-width:760px){.am{grid-template-columns:repeat(6,1fr)}}
-.a{background:var(--night2);border-radius:22px;padding:18px 10px;text-align:center;font-size:14px;font-weight:600}
-.a svg{display:block;margin:0 auto 10px;width:30px;height:30px;stroke:var(--amber);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
-
-.flow.more{--fw:70vw}
-.shot{height:min(420px,90vw);border-radius:28px}
-
-.find{display:grid;gap:12px;margin-top:28px}
-@media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
-.fc{border:1px solid rgba(239,230,216,.18);border-radius:28px;padding:22px}
-.fc h3{font-size:13px;font-weight:500;color:#a9a6bd}
-.fc p{font-family:"Bodoni Moda",serif;font-weight:600;font-size:26px;line-height:1.15;margin-top:4px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 24px;border-radius:99px;font-weight:700;font-size:16px;white-space:nowrap;transition:transform .15s}
+/* info */
+.know{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.k{background:#fff;border-radius:18px;padding:14px}
+.k span{font-size:13.5px;color:var(--muted)}
+.k b{display:block;font-size:19px;line-height:1.2}
+.route{margin-top:18px;background:var(--navy);color:#fff;border-radius:22px;padding:6px 18px}
+.route div{display:flex;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:17px}
+.route div:last-child{border-bottom:0}
+.route b{color:var(--gold)}
+.more{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:150px;gap:8px;margin-top:18px}
+.more div{border-radius:16px;background:#ddd center/cover}
+.more div:first-child{grid-column:span 2;grid-row:span 1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 22px;border-radius:14px;font-weight:700;font-size:16px;white-space:nowrap;transition:transform .15s}
 .btn:active{transform:scale(.96)}
-.btn-amber{background:var(--amber);color:var(--night)}
-.btn-line{border:1.5px solid rgba(239,230,216,.35)}
-.btn-wa{background:#25d366;color:#05351b}
-.fc .btn{margin-top:14px}
-footer{padding:50px 18px 130px;text-align:center;font-size:14px;color:#a9a6bd}
-
-.dock{background:rgba(18,22,49,.88);border:1px solid rgba(255,181,71,.25)}
-.dock .btn{min-height:52px}
-.dock .call{background:var(--sand);color:var(--night)}
-.dock .cart{justify-content:space-between;padding:0 18px}
+.btn-n{background:var(--navy);color:#fff}
+.btn-g{background:var(--gold);color:var(--navy)}
+.btn-wa{background:#25d366;color:#04361b}
+.find{display:grid;gap:10px;margin-top:18px;padding-bottom:130px}
+@media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
+.fc{background:#fff;border-radius:20px;padding:18px}
+.fc>span{font-size:13.5px;color:var(--muted)}
+.fc p{font-family:"Bodoni Moda",serif;font-weight:600;font-size:24px;line-height:1.15}
+.fc .btn{margin-top:12px}
+footer{text-align:center;font-size:14px;color:var(--muted);margin-top:-100px;padding-bottom:110px}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;display:flex;gap:8px;transition:transform .4s,opacity .3s}
+body:not(.show-dock):not(.has-picks) .bar{transform:translateY(140%);opacity:0;pointer-events:none}
+.bar .btn{flex:1;box-shadow:0 10px 30px rgba(20,33,61,.3)}
+.bar .book{display:none;justify-content:space-between;padding:0 18px;text-align:left}
+.bar .book small{display:block;font-weight:500;font-size:12.5px;opacity:.85}
+body.has-picks .bar .book{display:flex}
+body.has-picks .bar .idle{display:none}
 </style>
 </head>
 <body>
-<header class="nav">
+<div class="top">
   <div class="logo" data-initial>Y</div>
   <div class="nm" data-k="name">Your Hotel</div>
-  <div class="pill" data-e>24h reception</div>
+  <div class="pill" data-e>24h check-in desk</div>
+</div>
+
+<header class="hero" data-photo style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1400&q=72')">
+  <div class="in">
+    <h1 data-k="name">Your Hotel</h1>
+    <span class="near" data-e>2 minutes walk from the bus stand</span>
+  </div>
 </header>
 
-<section class="hero" data-stage>
-  <div class="stage"><canvas class="scene" aria-label="Room photos floating in a ring. Drag to turn." data-scene="ring" data-opts='{"images":["https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&h=540&q=70","https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&h=540&q=70"]}'></canvas></div>
-  <div class="hero-text">
-    <h1 data-k="name">Your Hotel</h1>
-    <p data-e>Clean AC rooms near the bus stand. Book in one message.</p>
-  </div>
-</section>
-
 <div class="wrap">
-  <div class="bar" id="stay">
-    <div class="f wide"><label for="ci">Check-in</label><input type="date" id="ci" data-default="0"></div>
+  <div class="search">
+    <div class="f date"><label for="ci">Check-in</label><input type="date" id="ci" data-default="0"></div>
     <div class="f"><span class="lab">Nights</span><div class="stp"><button type="button" data-step="nights" data-d="-1" aria-label="Fewer nights">−</button><output id="nights">1</output><button type="button" data-step="nights" data-d="1" aria-label="More nights">+</button></div></div>
     <div class="f"><span class="lab">Guests</span><div class="stp"><button type="button" data-step="guests" data-d="-1" aria-label="Fewer guests">−</button><output id="guests">2</output><button type="button" data-step="guests" data-d="1" aria-label="More guests">+</button></div></div>
-    <a class="go" href="#rooms">See rooms</a>
+    <a class="go" href="#rooms">See rooms and prices</a>
   </div>
 </div>
 
-<section class="sec" id="rooms">
-  <div class="wrap"><h2 class="h" data-e>Choose a room</h2><p class="sub" id="roomsub">Prices are per night.</p></div>
-  <div class="flow rooms" data-flow data-single data-max="1">
-    <div class="room" data-item>
-      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=900&q=70')"></div>
-      <div class="body"><h3 data-name data-e>Standard</h3><div class="feat"><span data-e>Double bed</span><span data-e>Fan</span><span data-e>TV</span></div>
-      <div class="row"><span class="price"><span data-price data-e>₹1,200</span> <small>/ night</small></span><button type="button" data-add data-on="Chosen">Choose</button></div></div>
+<section class="wrap sec" id="rooms">
+  <h2 class="h2" data-e>Rooms</h2>
+  <p class="sub" id="stayline">For 1 night, 2 guests</p>
+  <div class="rooms" data-single data-max="1">
+    <div class="room" data-item data-cap="2">
+      <div class="gal" data-gal><div data-photo style="background-image:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=68')"></div><div data-photo style="background-image:url('https://images.unsplash.com/photo-1718894070114-6de0e98449a2?auto=format&fit=crop&w=800&q=68')"></div></div>
+      <div class="b"><h3 data-name data-e>Standard room</h3>
+        <div class="feat"><span data-e>Double bed</span><span data-e>Fan</span><span data-e>TV</span><span>Up to 2</span></div>
+        <div class="pr"><div><div class="night"><b data-price data-e>₹1,200</b> a night</div><div class="stay" data-stay></div></div><button type="button" class="pick" data-add data-on="Chosen">Choose</button></div>
+        <p class="warn">Fits 2 guests. For more, choose the family room.</p></div>
     </div>
-    <div class="room" data-item>
-      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=70')"></div>
-      <div class="body"><h3 data-name data-e>Deluxe AC</h3><div class="feat"><span data-e>King bed</span><span data-e>AC</span><span data-e>Garden view</span></div>
-      <div class="row"><span class="price"><span data-price data-e>₹1,800</span> <small>/ night</small></span><button type="button" data-add data-on="Chosen">Choose</button></div></div>
+    <div class="room" data-item data-cap="2">
+      <div class="gal" data-gal><div data-photo style="background-image:url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=68')"></div><div data-photo style="background-image:url('https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=68')"></div><div data-photo style="background-image:url('https://images.unsplash.com/photo-1718894070114-6de0e98449a2?auto=format&fit=crop&w=800&q=68')"></div></div>
+      <div class="b"><h3 data-name data-e>Deluxe AC room</h3>
+        <div class="feat"><span data-e>Queen bed</span><span data-e>AC</span><span data-e>TV</span><span>Up to 2</span></div>
+        <div class="pr"><div><div class="night"><b data-price data-e>₹1,800</b> a night</div><div class="stay" data-stay></div></div><button type="button" class="pick" data-add data-on="Chosen">Choose</button></div>
+        <p class="warn">Fits 2 guests. For more, choose the family room.</p></div>
     </div>
-    <div class="room" data-item>
-      <div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=70')"></div>
-      <div class="body"><h3 data-name data-e>Family suite</h3><div class="feat"><span data-e>2 beds</span><span data-e>AC</span><span data-e>Sleeps 4</span></div>
-      <div class="row"><span class="price"><span data-price data-e>₹2,800</span> <small>/ night</small></span><button type="button" data-add data-on="Chosen">Choose</button></div></div>
+    <div class="room" data-item data-cap="4">
+      <div class="gal" data-gal><div data-photo style="background-image:url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=68')"></div><div data-photo style="background-image:url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=68')"></div></div>
+      <div class="b"><h3 data-name data-e>Family room</h3>
+        <div class="feat"><span data-e>2 beds</span><span data-e>AC</span><span data-e>Sofa</span><span>Up to 4</span></div>
+        <div class="pr"><div><div class="night"><b data-price data-e>₹2,800</b> a night</div><div class="stay" data-stay></div></div><button type="button" class="pick" data-add data-on="Chosen">Choose</button></div>
+        <p class="warn">Fits 4 guests. Call us for bigger groups.</p></div>
     </div>
   </div>
 </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>Every stay has</h2>
-  <div class="am">
-    <div class="a" data-reveal><svg viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0"/><circle cx="12" cy="19.5" r="1"/></svg><span data-e>Free Wi-Fi</span></div>
-    <div class="a" data-reveal style="--delay:.05s"><svg viewBox="0 0 24 24"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg><span data-e>AC rooms</span></div>
-    <div class="a" data-reveal style="--delay:.1s"><svg viewBox="0 0 24 24"><path d="M12 2.7l5.7 6.3a8 8 0 1 1-11.4 0z"/></svg><span data-e>Hot water</span></div>
-    <div class="a" data-reveal style="--delay:.15s"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg><span data-e>Parking</span></div>
-    <div class="a" data-reveal style="--delay:.2s"><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg><span data-e>Restaurant</span></div>
-    <div class="a" data-reveal style="--delay:.25s"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-e>24h desk</span></div>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Good to know</h2>
+  <div class="know">
+    <div class="k"><span>Check-in</span><b data-e>12 noon</b></div>
+    <div class="k"><span>Check-out</span><b data-e>11 AM</b></div>
+    <div class="k"><span>Bring</span><b data-e>A photo ID for each adult</b></div>
+    <div class="k"><span>Also</span><b data-e>Free parking, hot water all day</b></div>
+  </div>
+  <div class="route">
+    <div><span data-e>Bus stand</span><b data-e>2 min walk</b></div>
+    <div><span data-e>Railway station</span><b data-e>10 min by auto</b></div>
+    <div><span data-e>Main market</span><b data-e>5 min walk</b></div>
+  </div>
+  <div class="more">
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=900&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=500&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1611971263575-ab653c31a5a9?auto=format&fit=crop&w=500&q=65')"></div>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap"><h2 class="h" data-e>Around the hotel</h2></div>
-  <div class="flow more" data-flow>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1621293954908-907159247fc8?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=900&q=70')"></div>
-  </div>
-</section>
-
-<section class="sec wrap">
-  <h2 class="h" data-e>Find us</h2>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Find us</h2>
   <div class="find">
-    <div class="fc" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Near Bus Stand</span>, <span data-e>Your Town</span></p><button class="btn btn-amber" onclick="directions()">Get directions</button></div>
-    <div class="fc" data-reveal style="--delay:.08s"><h3>Check-in / check-out</h3><p data-e>12 PM / 11 AM</p><h3 style="margin-top:12px">Phone</h3><p data-k="phone">98XXX XXXXX</p></div>
+    <div class="fc"><span>Address</span><p id="addr"><span data-k="area">Near Bus Stand</span>, <span data-e>Your Town</span></p><button class="btn btn-n" onclick="directions()">Get directions</button></div>
+    <div class="fc"><span>Reception, open all night</span><p data-k="phone">98XXX XXXXX</p><button class="btn btn-g" onclick="callNow()">Call reception</button></div>
   </div>
 </section>
-
 <footer>© <span data-year></span> <span data-k="name">Your Hotel</span></footer>
 
-<nav class="dock" aria-label="Quick actions">
-  <button class="btn call idle" onclick="callNow()">Call</button>
-  <a class="btn btn-amber idle" href="#rooms">Book a room</a>
-  <button class="btn btn-wa cart" onclick="bookStay()"><span id="sumTxt">1 night</span><strong id="sumAmt">₹0</strong></button>
-</nav>
+<div class="bar">
+  <a class="btn btn-n idle" href="#rooms">Choose a room</a>
+  <button class="btn btn-g idle" style="flex:none" onclick="callNow()">Call</button>
+  <button class="btn btn-wa book" onclick="bookStay()"><span><span id="sumRoom"></span><small id="sumStay"></small></span><strong id="sumAmt"></strong></button>
+</div>
 
 <script>
 const S = { nights: 1, guests: 2 };
 const inr = n => '₹' + n.toLocaleString('en-IN');
-const chosen = () => document.querySelector('.room.on');
 const priceOf = r => parseInt(r.querySelector('[data-price]').textContent.replace(/\D/g, '')) || 0;
+const nameOf = r => r.querySelector('[data-name]').textContent.trim();
+const plural = (n, w) => n + ' ' + w + (n > 1 ? 's' : '');
 function refresh() {
   document.getElementById('nights').textContent = S.nights;
   document.getElementById('guests').textContent = S.guests;
-  const r = chosen();
-  document.getElementById('roomsub').textContent = r ? `${r.querySelector('[data-name]').textContent.trim()} for ${S.nights} night${S.nights > 1 ? 's' : ''}: ${inr(priceOf(r) * S.nights)}` : 'Prices are per night.';
-  document.getElementById('sumTxt').textContent = `${S.nights} night${S.nights > 1 ? 's' : ''}, book`;
-  document.getElementById('sumAmt').textContent = r ? inr(priceOf(r) * S.nights) : '';
+  document.getElementById('stayline').textContent = `For ${plural(S.nights, 'night')}, ${plural(S.guests, 'guest')}`;
+  document.querySelectorAll('.room').forEach(r => {
+    r.querySelector('[data-stay]').textContent = S.nights > 1 ? `${inr(priceOf(r) * S.nights)} for ${S.nights} nights` : '';
+    r.classList.toggle('small', S.guests > +r.dataset.cap);
+  });
+  const r = document.querySelector('.room.on');
+  if (r) {
+    document.getElementById('sumRoom').textContent = nameOf(r);
+    document.getElementById('sumStay').textContent = `${plural(S.nights, 'night')}, ${plural(S.guests, 'guest')}`;
+    document.getElementById('sumAmt').textContent = inr(priceOf(r) * S.nights);
+  }
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-step]');
   if (b) { const k = b.dataset.step; S[k] = Math.max(1, Math.min(k === 'nights' ? 30 : 12, S[k] + +b.dataset.d)); }
   setTimeout(refresh);
 });
+document.querySelectorAll('[data-gal]').forEach(g => {
+  const dots = document.createElement('div'); dots.className = 'dots'; dots.innerHTML = [...g.children].map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('');
+  g.parentElement.style.position = 'relative'; g.after(dots);
+  dots.style.top = (g.offsetHeight - 22) + 'px'; dots.style.bottom = 'auto';
+  g.addEventListener('scroll', () => { const i = Math.round(g.scrollLeft / g.clientWidth); [...dots.children].forEach((d, j) => d.classList.toggle('on', i === j)); }, { passive: true });
+});
 function bookStay() {
-  const r = chosen(); if (!r) { toast('Choose a room first'); location.hash = '#rooms'; return; }
+  const r = document.querySelector('.room.on'); if (!r) { toast('Choose a room first'); return; }
   const d = new Date(document.getElementById('ci').value + 'T00:00');
   const ci = isNaN(d) ? '' : d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
-  waSend(`Hello ${bizName()}, I want to book a room.\nRoom: ${r.querySelector('[data-name]').textContent.trim()} (${inr(priceOf(r))} per night)\nCheck-in: ${ci}\nNights: ${S.nights}\nGuests: ${S.guests}\nTotal: ${inr(priceOf(r) * S.nights)}`);
+  waSend(`Hello ${bizName()}, I want to book a room.\nRoom: ${nameOf(r)} (${inr(priceOf(r))} a night)\nCheck-in: ${ci}\nNights: ${S.nights}\nGuests: ${S.guests}\nTotal: ${inr(priceOf(r) * S.nights)}\nIs it available?`);
 }
 </script>
-<script src="assets/core.js?v=4"></script>
+<script src="assets/core.js?v=5"></script>
 <script>refresh();</script>
-<script type="module" src="assets/fx.js?v=4"></script>
 </body>
 </html>

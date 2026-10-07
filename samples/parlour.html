@@ -3,195 +3,185 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#3d0c25">
+<meta name="theme-color" content="#5b1a3a">
 <title>Your Beauty Parlour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=4">
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link rel="stylesheet" href="assets/base.css?v=5">
 <style>
-:root{--wine:#3d0c25;--wine2:#56173a;--rose:#e8a8a0;--gold:#d9b36c;--pearl:#fff4f0;--henna:#b4471c;--focus:#d9b36c}
-body{font-family:Outfit,system-ui,sans-serif;background:var(--wine);color:var(--pearl);line-height:1.5}
-.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
-.serif{font-family:"Cormorant Garamond",Georgia,serif}
+:root{--blush:#fbeff1;--plum:#5b1a3a;--plum2:#7a2a50;--rose:#c98a7a;--gold:#c8a15a;--ink:#2d1422;--focus:#5b1a3a}
+body{font-family:Outfit,system-ui,sans-serif;background:var(--blush);color:var(--ink);line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.cg{font-family:"Cormorant Garamond",Georgia,serif}
 
-.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
-.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--rose));color:var(--wine);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-weight:600;font-style:italic;font-size:26px}
-.nav .nm{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:21px}
-.status{margin-left:auto;font-size:13px;font-weight:600;padding:7px 12px;border-radius:99px;border:1px solid rgba(232,168,160,.5);color:var(--rose)}
-.status.is-open{background:var(--rose);color:var(--wine)}
+.top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;gap:10px;padding:16px;color:#fff}
+.logo{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;font-size:24px;color:#fff}
+.top .nm{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:22px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .st{margin-left:auto;flex:none;font-size:13px;font-weight:600;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.top .st.is-open{background:#fff;color:var(--plum)}
 
-/* hero */
-.hero{position:relative;min-height:max(700px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(70% 50% at 50% 34%,var(--wine2) 0,var(--wine) 70%)}
-.mandala{position:absolute;left:50%;top:34%;width:150vmax;aspect-ratio:1;transform:translate(-50%,-50%) rotate(calc(var(--sy,0) * .06deg));background:repeating-conic-gradient(rgba(217,179,108,.09) 0 3deg,transparent 3deg 12deg),repeating-radial-gradient(circle,rgba(232,168,160,.08) 0 1px,transparent 1px 38px);-webkit-mask:radial-gradient(circle,#000 0 22%,transparent 52%);mask:radial-gradient(circle,#000 0 22%,transparent 52%);pointer-events:none}
-.hero .stage{position:absolute;left:0;right:0;top:3%;height:62%;z-index:2}
-.hero-text{position:relative;z-index:3;padding:0 18px 74px;max-width:1100px;margin:0 auto;width:100%;text-align:center}
-.hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(56px,15vw,150px);line-height:.9;letter-spacing:-.02em;background:linear-gradient(100deg,var(--pearl) 20%,var(--rose) 50%,var(--gold) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero h1[contenteditable=true]{color:var(--pearl);-webkit-background-clip:border-box;background:none}
-.hero p{font-size:18px;margin:14px auto 0;max-width:30ch;color:#f1cdd2}
-.cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+/* hero: the bride */
+.hero{position:relative;min-height:max(660px,96svh);display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:#3a1026 center 18%/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,8,24,.45) 0,rgba(40,8,24,0) 30%,rgba(60,14,38,.55) 60%,rgba(91,26,58,.96) 92%)}
+.hero .in{position:relative;padding:0 16px 30px;max-width:1100px;width:100%;margin:0 auto}
+.hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(50px,14vw,128px);line-height:.92;letter-spacing:-.01em}
+.hero p{font-size:18px;margin:10px 0 18px;max-width:30ch;color:#f6dfe6}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 26px;border-radius:99px;font-weight:600;font-size:16px;white-space:nowrap;transition:transform .15s}
 .btn:active{transform:scale(.96)}
-.btn-rose{background:linear-gradient(135deg,var(--gold),var(--rose));color:var(--wine)}
-.btn-line{border:1px solid rgba(255,244,240,.4)}
-.btn-wa{background:#25d366;color:#05351b}
-.no-3d .stage{display:none}
+.btn-g{background:linear-gradient(135deg,#e6c58a,var(--gold));color:var(--ink)}
+.btn-l{border:1.5px solid rgba(255,255,255,.55)}
+.btn-p{background:var(--plum);color:#fff}
+.btn-wa{background:#25d366;color:#04361b}
 
-.sec{padding-top:84px}
-.h{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(46px,12vw,100px);line-height:.92;letter-spacing:-.015em}
-.sub{margin-top:10px;font-size:17px;color:#f1cdd2;max-width:40ch}
+.sec{padding-top:64px}
+.h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(40px,10vw,80px);line-height:.95}
+.sub{font-size:17px;margin-top:8px;color:#7a5a68;max-width:40ch}
 
-/* bridal card */
-.bridal{position:relative;margin-top:28px;height:min(560px,125vw);border-radius:34px;overflow:hidden;display:flex;align-items:flex-end;box-shadow:0 40px 80px rgba(0,0,0,.4)}
-.bridal::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(61,12,37,.92));z-index:1;pointer-events:none}
-.bridal::after{content:"";position:absolute;inset:0;z-index:2;background:radial-gradient(300px circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.18),transparent 60%);pointer-events:none}
-.bridal .in{position:relative;z-index:3;padding:24px 22px;transform:translateZ(40px)}
-.bridal h3{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:44px;line-height:1}
-.bridal p{color:#f1cdd2;margin:8px 0 16px;max-width:34ch}
-
-/* services: segmented tabs */
-.seg{display:flex;gap:8px;overflow-x:auto;margin-top:26px;padding-bottom:6px;scrollbar-width:none}
-.seg::-webkit-scrollbar{display:none}
-.seg button{flex:none;min-height:44px;padding:0 18px;border-radius:99px;border:1px solid rgba(232,168,160,.35);font-weight:600;font-size:14px;color:var(--rose)}
-.seg button[aria-selected=true]{background:var(--rose);color:var(--wine);border-color:var(--rose)}
-.pane{display:none;margin-top:14px;gap:10px}
-.pane.on{display:grid;animation:paneIn .5s cubic-bezier(.2,.8,.2,1)}
-@keyframes paneIn{from{opacity:0;transform:perspective(800px) rotateY(-18deg) translateX(30px)}}
-@media(min-width:760px){.pane.on{grid-template-columns:1fr 1fr}}
-.svc{display:flex;align-items:center;gap:12px;padding:16px 16px 16px 20px;border-radius:22px;background:var(--wine2);border:1px solid transparent;transition:.25s}
-.svc .info{flex:1;min-width:0}
-.svc .n{font-weight:600;font-size:17px}
-.svc .d{font-size:13.5px;color:#d7a9b3}
-.svc .p{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:26px;white-space:nowrap}
-.svc button{flex:none;min-width:82px;height:44px;border-radius:99px;border:1px solid var(--rose);color:var(--rose);font-weight:600;font-size:14px}
-.svc.on{border-color:var(--gold);background:#6a1f48}
-.svc.on button{background:var(--gold);border-color:var(--gold);color:var(--wine)}
-
-.flow{--fw:64vw;margin-top:10px}
-.look{aspect-ratio:3/4;border-radius:200px 200px 26px 26px}
+/* occasion planner */
+.occ{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
+.oc{position:relative;height:170px;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;padding:10px;color:#fff;text-align:left;background:#555 center/cover;border:3px solid transparent;transition:transform .25s,border-color .25s}
+.oc::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(45,20,34,.85))}
+.oc span{position:relative;font-family:"Cormorant Garamond",serif;font-weight:600;font-size:22px;line-height:1}
+.oc[aria-selected=true]{border-color:var(--gold);transform:translateY(-5px)}
+@media(min-width:760px){.oc{height:260px}.oc span{font-size:30px}}
+.pack{display:none;margin-top:14px;background:#fff;border-radius:22px;padding:8px 16px 16px}
+.pack.on{display:block;animation:rise .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.it{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 0;border-bottom:1px solid #f1e3e7}
+.it .box{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid #d9bcc6;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:700}
+.it .n{flex:1;font-size:17px;font-weight:500}
+.it .p{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:22px}
+.it.on .box{background:var(--plum);border-color:var(--plum)}
+.it.on .box::after{content:"✓"}
+.pack .tot{display:flex;justify-content:space-between;align-items:center;padding-top:14px;gap:10px;flex-wrap:wrap}
+.pack .tot b{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:34px}
+.ask{display:inline-block;margin-top:12px;color:var(--plum);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 
 /* booking */
-.book{margin-top:28px;background:var(--pearl);color:var(--wine);border-radius:34px;padding:26px 20px;display:grid;gap:18px;max-width:640px}
-.book .lbl{display:block;font-weight:700;font-size:14px;margin-bottom:8px}
-.book input[type=text],.book input[type=date]{width:100%;height:54px;border:1.5px solid #ecd2cf;border-radius:16px;padding:0 16px;font-size:16px;background:#fff;color:var(--wine)}
-.picked{font-weight:600;font-size:15px;color:var(--henna)}
-.chips-in span{background:#f6e2df;color:var(--wine)}
-.chips-in input:checked+span{background:var(--wine);color:var(--pearl)}
+.book{margin-top:20px;background:var(--plum);color:#fff;border-radius:26px;padding:22px 18px;display:grid;gap:16px;max-width:640px}
+.book .l{display:block;font-weight:600;font-size:14px;margin-bottom:8px;color:#f0cfdb}
+.book input[type=text],.book input[type=date]{width:100%;height:52px;border:0;border-radius:14px;padding:0 14px;font-size:16px;color:var(--ink);background:#fff}
+.book .picked{font-size:15px;color:#f0cfdb}
+.chips-in span{background:rgba(255,255,255,.14);color:#fff}
+.chips-in input:checked+span{background:#fff;color:var(--plum)}
 .book .btn{width:100%}
 
-.find{display:grid;gap:12px;margin-top:28px}
+/* work */
+.work{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:150px;gap:8px;margin-top:20px}
+.work div{border-radius:16px;background:#ddd center/cover}
+.work .tall{grid-row:span 2}
+@media(min-width:760px){.work{grid-template-columns:repeat(4,1fr);grid-auto-rows:200px}}
+.find{display:grid;gap:10px;margin-top:20px;padding-bottom:130px}
 @media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
-.fc{border:1px solid rgba(232,168,160,.3);border-radius:28px;padding:22px}
-.fc h3{font-size:13px;font-weight:500;color:#d7a9b3}
-.fc p{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:28px;line-height:1.15;margin-top:4px}
-.fc .btn{margin-top:14px}
-footer{padding:50px 18px 130px;text-align:center;font-size:14px;color:#d7a9b3}
-
-.dock{background:rgba(61,12,37,.86);border:1px solid rgba(232,168,160,.25)}
-.dock .btn{min-height:52px}
-.dock .call{background:var(--pearl);color:var(--wine)}
-.dock .cart{justify-content:space-between;padding:0 20px}
+.fc{background:#fff;border-radius:20px;padding:20px}
+.fc .k{font-size:14px;color:#7a5a68}
+.fc p{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:28px;line-height:1.1}
+.fc .btn{margin-top:12px}
+footer{text-align:center;font-size:14px;color:#7a5a68;margin-top:-100px;padding-bottom:110px}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;display:flex;gap:8px;transition:transform .4s,opacity .3s}
+body:not(.show-dock):not(.has-picks) .bar{transform:translateY(140%);opacity:0;pointer-events:none}
+.bar .btn{flex:1;box-shadow:0 10px 30px rgba(45,20,34,.3)}
+.bar .go{display:none;justify-content:space-between;padding:0 20px}
+body.has-picks .bar .go{display:flex}
+body.has-picks .bar .idle{display:none}
 </style>
 </head>
 <body>
-<header class="nav">
+<div class="top">
   <div class="logo" data-initial>Y</div>
   <div class="nm" data-k="name">Your Beauty Parlour</div>
-  <div class="status" data-status="10-20">Open now</div>
+  <div class="st" data-status="10-20">Open</div>
+</div>
+
+<header class="hero" data-photo style="background-image:url('https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9?auto=format&fit=crop&w=1400&q=72')">
+  <div class="in">
+    <h1 data-k="name">Your Beauty Parlour</h1>
+    <p data-e>Bridal makeup, party looks and everyday care. Ladies only, with home visits for brides.</p>
+    <div class="cta">
+      <a class="btn btn-g" href="#plan">Plan my look</a>
+      <button class="btn btn-l" onclick="callNow()">Call</button>
+    </div>
+  </div>
 </header>
 
-<section class="hero" data-stage>
-  <div class="mandala" aria-hidden="true"></div>
-  <div class="stage"><canvas class="scene" aria-label="Glowing 3D pearl. Drag to turn it." data-scene="blob" data-opts='{"colors":["#e8a8a0","#fff4f0","#d9b36c"],"pearl":true,"amp":0.12,"freq":0.55,"orbit":6}'></canvas></div>
-  <div class="hero-text">
-    <h1 data-k="name">Your Beauty Parlour</h1>
-    <p data-e>Threading to bridal makeup. Ladies only, with home visits for brides.</p>
-    <div class="cta">
-      <a class="btn btn-rose" href="#services">See services</a>
-      <button class="btn btn-line" onclick="callNow()">Call</button>
-    </div>
+<section class="wrap sec" id="plan">
+  <h2 class="h2" data-e>What's the occasion?</h2>
+  <p class="sub" data-e>Pick one. We've ticked what most women book for it. Untick anything you don't need.</p>
+  <div class="occ" role="tablist">
+    <button class="oc" role="tab" aria-selected="false" data-occ="0" style="background-image:url('https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9?auto=format&fit=crop&w=500&q=65');background-position:center 20%"><span>My wedding</span></button>
+    <button class="oc" role="tab" aria-selected="false" data-occ="1" style="background-image:url('https://images.unsplash.com/photo-1636023730877-233b9237d4ec?auto=format&fit=crop&w=500&q=65')"><span>Party or function</span></button>
+    <button class="oc" role="tab" aria-selected="false" data-occ="2" style="background-image:url('https://images.unsplash.com/photo-1709477542170-f11ee7d471a0?auto=format&fit=crop&w=500&q=65')"><span>Everyday care</span></button>
   </div>
+  <div id="packs" data-max="1"></div>
+  <a class="ask" href="#" onclick="event.preventDefault();waSend('Hello '+bizName()+', I want to ask about a service.')" data-e>Looking for something else? Ask us</a>
 </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>Brides</h2>
-  <div class="bridal" data-photo data-tilt="6" style="background-image:url('https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9?auto=format&fit=crop&w=1000&q=72');background-position:center 22%">
-    <div class="in">
-      <h3 data-e>Bridal package</h3>
-      <p data-e>Makeup, hair, mehendi and draping, all in one booking. Trial session first.</p>
-      <button class="btn btn-rose" onclick="waSend('Hello '+bizName()+', I want to ask about the bridal package. Wedding date: ')">Ask about my date</button>
-    </div>
-  </div>
-</section>
-
-<section class="sec wrap" id="services">
-  <h2 class="h" data-e>Services</h2>
-  <p class="sub" data-e>Pick a few. We'll keep the time for you.</p>
-  <div class="seg" role="tablist" id="seg"></div>
-  <div data-max="1" id="panes"></div>
-</section>
-
-<section class="sec">
-  <div class="wrap"><h2 class="h" data-e>Looks we've done</h2></div>
-  <div class="flow" data-flow>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1731514771613-991a02407132?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1730003727902-3643640a3d43?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=800&q=70')"></div>
-  </div>
-</section>
-
-<section class="sec wrap" id="book">
-  <h2 class="h" data-e>Book a time</h2>
+<section class="wrap sec" id="book">
+  <h2 class="h2" data-e>Book your time</h2>
   <form class="book" data-wa="I want to book an appointment." data-with-picks>
-    <div class="picked" data-pick-list data-empty="No service picked yet. You can still book a time."></div>
-    <div><label class="lbl" for="bn">Your name</label><input type="text" id="bn" data-label="Name" required autocomplete="given-name"></div>
-    <div><label class="lbl" for="bd">Date</label><input type="date" id="bd" data-label="Date" data-default="0" required></div>
-    <div><span class="lbl">Time</span><div class="chips-in">
+    <p class="picked" data-pick-list data-empty="Nothing picked yet. You can still book a time."></p>
+    <div><label class="l" for="bn">Your name</label><input type="text" id="bn" data-label="Name" required autocomplete="given-name"></div>
+    <div><label class="l" for="bd">Date</label><input type="date" id="bd" data-label="Date" data-default="0" required></div>
+    <div><span class="l">Time</span><div class="chips-in">
       <label><input type="radio" name="t" value="Morning" data-label="Time" required><span>Morning</span></label>
       <label><input type="radio" name="t" value="Afternoon" data-label="Time"><span>Afternoon</span></label>
       <label><input type="radio" name="t" value="Evening" data-label="Time"><span>Evening</span></label></div></div>
+    <div><span class="l">Where?</span><div class="chips-in">
+      <label><input type="radio" name="w" value="At the parlour" data-label="Where" checked><span>At the parlour</span></label>
+      <label><input type="radio" name="w" value="Home visit" data-label="Where"><span>Home visit</span></label></div></div>
     <button class="btn btn-wa" type="submit">Book on WhatsApp</button>
   </form>
 </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>Visit us</h2>
-  <div class="find">
-    <div class="fc" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></p><button class="btn btn-rose" onclick="directions()">Get directions</button></div>
-    <div class="fc" data-reveal style="--delay:.08s"><h3>Every day</h3><p data-e>10 AM to 8 PM</p><h3 style="margin-top:12px">Phone</h3><p data-k="phone">98XXX XXXXX</p></div>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Our work</h2>
+  <div class="work">
+    <div class="tall" data-photo style="background-image:url('https://images.unsplash.com/photo-1636023730877-233b9237d4ec?auto=format&fit=crop&w=600&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1730003727902-3643640a3d43?auto=format&fit=crop&w=500&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1709477542149-f4e0e21d590b?auto=format&fit=crop&w=500&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1731514771613-991a02407132?auto=format&fit=crop&w=500&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?auto=format&fit=crop&w=500&q=65')"></div>
   </div>
 </section>
 
+<section class="wrap sec">
+  <h2 class="h2" data-e>Visit us</h2>
+  <div class="find">
+    <div class="fc"><span class="k">Address</span><p id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></p><button class="btn btn-p" onclick="directions()">Get directions</button></div>
+    <div class="fc"><span class="k">Every day, 10 AM to 8 PM</span><p data-k="phone">98XXX XXXXX</p><button class="btn btn-p" onclick="callNow()">Call</button></div>
+  </div>
+</section>
 <footer>© <span data-year></span> <span data-k="name">Your Beauty Parlour</span></footer>
 
-<nav class="dock" aria-label="Quick actions">
-  <button class="btn call idle" onclick="callNow()">Call</button>
-  <a class="btn btn-rose idle" href="#book">Book</a>
-  <a class="btn btn-rose cart" href="#book"><span data-pick-count data-one="service" data-many="services">0</span><strong data-pick-total>₹0</strong></a>
-</nav>
+<div class="bar">
+  <a class="btn btn-p idle" href="#plan">Plan my look</a>
+  <a class="btn btn-p go" href="#book"><span data-pick-total>₹0</span><span>Book this</span></a>
+</div>
 
 <script>
-// Services: [tab, [[name, note, price], ...]]
-const SVC = [
-  ['Threading', [['Eyebrows', '', 30], ['Upper lip', '', 20], ['Full face', '', 100]]],
-  ['Waxing', [['Full arms', '', 200], ['Full legs', '', 300], ['Underarms', '', 80]]],
-  ['Facial', [['Cleanup', '30 minutes', 350], ['Fruit facial', '', 500], ['Gold facial', 'Glow for functions', 800]]],
-  ['Hair', [['Haircut', 'Any style', 200], ['Hair spa', 'Deep conditioning', 600], ['Blow dry', '', 250]]],
-  ['Makeup & mehendi', [['Party makeup', 'With hairstyle', 1500], ['Saree draping', '', 200], ['Mehendi, both hands', 'Front side', 300]]]
+// [occasion, [[service, price, ticked?], ...]]
+const PACKS = [
+  ['My wedding', [['Bridal makeup', 8000, 1], ['Bridal hairstyle', 1500, 1], ['Lehenga or saree draping', 500, 1], ['Mehendi, hands and feet', 2500, 1], ['Pre-bridal facial', 1500, 0], ['Trial session', 1000, 0]]],
+  ['Party or function', [['Party makeup', 1500, 1], ['Hairstyle', 600, 1], ['Saree draping', 300, 0], ['Nail paint', 200, 0]]],
+  ['Everyday care', [['Eyebrows', 30, 1], ['Upper lip', 20, 1], ['Cleanup', 350, 0], ['Full arms wax', 200, 0], ['Haircut', 200, 0], ['Hair spa', 600, 0]]]
 ];
-const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-document.getElementById('seg').innerHTML = SVC.map((c, i) => `<button role="tab" type="button" aria-selected="${i === 0}" data-i="${i}">${esc(c[0])}</button>`).join('');
-document.getElementById('panes').innerHTML = SVC.map((c, i) => `<div class="pane${i === 0 ? ' on' : ''}" role="tabpanel">${c[1].map(s => `<div class="svc" data-item><div class="info"><div class="n" data-name data-e>${esc(s[0])}</div>${s[1] ? `<div class="d" data-e>${esc(s[1])}</div>` : ''}</div><span class="p" data-price data-e>₹${s[2].toLocaleString('en-IN')}</span><button type="button" data-add data-on="Added">Add</button></div>`).join('')}</div>`).join('');
-document.getElementById('seg').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  document.querySelectorAll('#seg button').forEach(x => x.setAttribute('aria-selected', x === b));
-  document.querySelectorAll('.pane').forEach((p, i) => p.classList.toggle('on', i === +b.dataset.i));
-});
+const inr = n => '₹' + n.toLocaleString('en-IN');
+document.getElementById('packs').innerHTML = PACKS.map((p, i) => `<div class="pack" data-pack="${i}">${p[1].map(s => `<button type="button" class="it" data-item data-add data-tick="${s[2]}"><span class="box"></span><span class="n" data-name data-e>${s[0]}</span><span class="p" data-price data-e>${inr(s[1])}</span></button>`).join('')}<div class="tot"><span>Total <b data-pack-total>₹0</b></span><a class="btn btn-p" href="#book">Book this</a></div></div>`).join('');
+function packTotals() { document.querySelectorAll('.pack').forEach(p => { let t = 0; p.querySelectorAll('[data-item].on').forEach(it => t += parseInt(it.querySelector('[data-price]').textContent.replace(/\D/g, '')) || 0); p.querySelector('[data-pack-total]').textContent = inr(t); }); }
+document.addEventListener('click', e => { if (e.target.closest('.it')) setTimeout(packTotals); });
+document.querySelectorAll('.oc').forEach(b => b.addEventListener('click', () => {
+  const i = b.dataset.occ;
+  document.querySelectorAll('.oc').forEach(x => x.setAttribute('aria-selected', x === b));
+  // clear other occasions, tick the usual ones for this occasion
+  document.querySelectorAll('.pack').forEach(p => {
+    const mine = p.dataset.pack === i; p.classList.toggle('on', mine);
+    p.querySelectorAll('[data-item]').forEach(it => { const on = it.classList.contains('on'); const want = mine && it.dataset.tick === '1'; if (!mine && on) it.click(); if (mine && want && !on) it.click(); });
+  });
+  setTimeout(packTotals);
+}));
 </script>
-<script src="assets/core.js?v=4"></script>
-<script type="module" src="assets/fx.js?v=4"></script>
+<script src="assets/core.js?v=5"></script>
 </body>
 </html>

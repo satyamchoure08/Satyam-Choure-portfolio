@@ -3,169 +3,166 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#121a33">
+<meta name="theme-color" content="#15171c">
 <title>Your Salon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=4">
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=5">
 <style>
-:root{--navy:#121a33;--navy2:#1b2547;--red:#e23b3f;--blue:#2b5ad6;--bone:#f2ede4;--brass:#cda45e;--focus:#cda45e}
-body{font-family:Figtree,system-ui,sans-serif;background:var(--navy);color:var(--bone);line-height:1.5}
-.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+:root{--bone:#f3efe8;--ink:#15171c;--red:#d7263d;--blue:#1e4fd8;--line:#ddd6c9;--focus:#1e4fd8}
+body{font-family:Archivo,system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.wide{font-stretch:125%;font-variation-settings:"wdth" 125}
 
-.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
-.logo{width:42px;height:42px;border-radius:50%;background:conic-gradient(var(--red) 0 25%,var(--bone) 0 50%,var(--blue) 0 75%,var(--bone) 0);display:grid;place-items:center}
-.logo span{width:30px;height:30px;border-radius:50%;background:var(--navy);display:grid;place-items:center;font-family:Syne,sans-serif;font-weight:800;color:var(--brass)}
-.nav .nm{font-family:Syne,sans-serif;font-weight:700;font-size:18px}
-.status{margin-left:auto;font-size:13px;font-weight:700;padding:7px 12px;border-radius:99px;border:1.5px solid var(--brass);color:var(--brass)}
-.status.is-open{background:var(--brass);color:var(--navy)}
+.top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;gap:10px;padding:16px;color:#fff}
+.mark{width:14px;height:40px;border-radius:7px;background:repeating-linear-gradient(-45deg,var(--red) 0 6px,#fff 6px 12px,var(--blue) 12px 18px,#fff 18px 24px);background-size:100% 34px;animation:pole 1.2s linear infinite}
+@keyframes pole{to{background-position:0 34px}}
+.top .nm{font-weight:800;font-size:19px;font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .st{margin-left:auto;flex:none;font-size:13px;font-weight:700;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.top .st.is-open{background:#fff;color:var(--ink)}
 
-/* hero: pole + art-deco sunburst */
-.hero{position:relative;min-height:max(700px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
-  background:repeating-conic-gradient(from 0deg at 50% 30%,rgba(205,164,94,.07) 0 5deg,transparent 5deg 10deg),radial-gradient(80% 60% at 50% 30%,var(--navy2) 0,var(--navy) 70%)}
-.hero .stage{position:absolute;left:0;right:0;top:0;height:64%;z-index:2}
-.hero-text{position:relative;z-index:3;padding:0 18px 74px;max-width:1100px;margin:0 auto;width:100%}
-.hero h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(54px,15vw,150px);line-height:.9;letter-spacing:-.03em}
-.stripe{height:10px;margin:18px 0;max-width:260px;background:repeating-linear-gradient(-45deg,var(--red) 0 12px,var(--bone) 12px 24px,var(--blue) 24px 36px,var(--bone) 36px 48px);background-size:68px 100%;animation:slide 1.6s linear infinite;border-radius:99px}
-@keyframes slide{to{background-position:68px 0}}
-.hero p{font-size:18px;max-width:28ch;color:#c9cbd6}
-.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 24px;border-radius:16px;font-weight:800;font-size:16px;white-space:nowrap;transition:transform .15s}
+/* hero: barber at work */
+.hero{position:relative;min-height:max(620px,90svh);display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:#222 center 30%/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 30%,rgba(0,0,0,.85) 85%)}
+.hero .in{position:relative;padding:0 16px 28px;max-width:1100px;width:100%;margin:0 auto}
+.hero h1{font-weight:900;font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;font-size:clamp(40px,11vw,104px);line-height:.92;letter-spacing:-.01em}
+.stripe{height:8px;margin:14px 0;width:min(320px,70%);background:repeating-linear-gradient(-45deg,var(--red) 0 10px,#fff 10px 20px,var(--blue) 20px 30px,#fff 30px 40px)}
+.hero p{font-size:18px;max-width:30ch;color:#e6e2da}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 22px;border-radius:4px;font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;transition:transform .15s}
 .btn:active{transform:scale(.96)}
-.btn-brass{background:var(--brass);color:var(--navy)}
-.btn-line{border:1.5px solid rgba(242,237,228,.4)}
-.btn-wa{background:#25d366;color:#05351b}
-.no-3d .stage{display:none}
-@media(min-width:900px){.hero .stage{left:45%;top:0;height:100%}.hero-text{padding-bottom:110px}.hero h1{max-width:8ch}}
+.btn-w{background:#fff;color:var(--ink)}
+.btn-l{border:2px solid rgba(255,255,255,.6)}
+.btn-i{background:var(--ink);color:#fff}
+.btn-wa{background:#25d366;color:#04361b}
 
-.sec{padding-top:84px}
-.h{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(42px,11vw,96px);line-height:.92;letter-spacing:-.03em}
-.sub{margin-top:10px;font-size:17px;color:#c9cbd6;max-width:40ch}
+.sec{padding-top:64px}
+.h2{font-weight:900;font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;font-size:clamp(32px,8.5vw,72px);line-height:.95}
+.sub{font-size:17px;margin-top:8px;color:#5b5a55;max-width:40ch}
 
-/* services menu board */
-.board{margin-top:28px;display:grid;gap:10px}
-@media(min-width:760px){.board{grid-template-columns:1fr 1fr}}
-.svc{display:flex;align-items:center;gap:14px;padding:16px 16px 16px 20px;border-radius:22px;background:var(--navy2);border:1.5px solid transparent;transition:background .25s,border-color .25s,transform .25s}
-.svc .info{flex:1;min-width:0}
-.svc .n{font-weight:800;font-size:17px}
-.svc .d{font-size:13.5px;color:#9fa5bd}
-.svc .p{font-family:Syne,sans-serif;font-weight:800;font-size:24px;white-space:nowrap}
-.svc button{flex:none;min-width:84px;height:44px;border-radius:14px;border:1.5px solid var(--brass);color:var(--brass);font-weight:800;font-size:14px}
-.svc.on{background:#26315c;border-color:var(--brass);transform:translateX(6px)}
-.svc.on button{background:var(--brass);color:var(--navy)}
+/* style catalogue */
+.styles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+@media(min-width:760px){.styles{grid-template-columns:repeat(4,1fr)}}
+.style{position:relative;display:block;width:100%;text-align:left;background:#fff;border-radius:6px;overflow:hidden;border:3px solid transparent;transition:border-color .2s,transform .2s}
+.style .pic{aspect-ratio:4/5;background:#ccc center/cover}
+.style .t{padding:10px 12px 12px}
+.style .n{font-weight:800;font-size:16px;line-height:1.15}
+.style .p{font-weight:700;font-size:15px;color:#5b5a55}
+.style .tick{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:none;place-items:center;font-weight:900}
+.style.on{border-color:var(--ink);transform:translateY(-4px)}
+.style.on .tick{display:grid}
+.addons{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.addon{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;border-radius:99px;border:2px solid var(--line);background:#fff;font-weight:700;font-size:15px}
+.addon .p{color:#5b5a55;font-weight:600}
+.addon.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.addon.on .p{color:#cfcac0}
 
-.flow{--fw:66vw;margin-top:10px}
-.look{aspect-ratio:3/4;border-radius:26px}
+/* time */
+.slot{margin-top:20px;background:var(--ink);color:#fff;border-radius:8px;padding:20px 18px;display:grid;gap:16px}
+.slot .l{display:block;font-weight:700;font-size:14px;margin-bottom:8px;color:#cfcac0}
+.slot input[type=text]{width:100%;height:52px;border:0;border-radius:4px;padding:0 14px;font-size:16px;color:var(--ink)}
+.chips-in span{background:#2a2d35;color:#fff;border-radius:4px}
+.chips-in input:checked+span{background:#fff;color:var(--ink)}
+.times{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.times span{width:100%;justify-content:center}
+.sum{font-size:16px;color:#cfcac0}
+.sum b{color:#fff}
+.slot .btn{width:100%}
 
-/* slot picker */
-.picker{margin-top:28px;background:var(--bone);color:var(--navy);border-radius:32px;padding:26px 20px;display:grid;gap:18px;max-width:640px}
-.picker .lbl{display:block;font-weight:800;font-size:14px;margin-bottom:8px}
-.picker input[type=text]{width:100%;height:54px;border:2px solid #d9d2c4;border-radius:16px;padding:0 16px;font-size:16px;background:#fff;color:var(--navy)}
-.picked{font-weight:700;font-size:15px;color:var(--blue)}
-.chips-in span{background:#e6dfd2;color:var(--navy)}
-.chips-in input:checked+span{background:var(--navy);color:var(--brass)}
-.times-in{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.times-in span{justify-content:center;width:100%;border-radius:14px}
-.picker .btn{width:100%}
-
-.find{display:grid;gap:12px;margin-top:28px}
+.find{display:grid;gap:10px;margin-top:20px;padding-bottom:130px}
 @media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
-.fc{background:var(--navy2);border-radius:26px;padding:22px}
-.fc h3{font-size:13px;font-weight:600;color:#9fa5bd}
-.fc p{font-family:Syne,sans-serif;font-weight:700;font-size:24px;line-height:1.2;margin-top:4px}
-.fc .btn{margin-top:14px}
-footer{padding:50px 18px 130px;text-align:center;font-size:14px;color:#9fa5bd}
-
-.dock{background:rgba(18,26,51,.86);border:1px solid rgba(205,164,94,.25)}
-.dock .btn{min-height:52px}
-.dock .call{background:var(--bone);color:var(--navy)}
-.dock .cart{justify-content:space-between;padding:0 18px}
+.fc{background:#fff;border-radius:6px;padding:20px}
+.fc .k{font-size:14px;color:#5b5a55}
+.fc p{font-weight:800;font-size:22px;line-height:1.2}
+.fc .btn{margin-top:12px}
+footer{text-align:center;font-size:14px;color:#5b5a55;margin-top:-100px;padding-bottom:110px}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;display:flex;gap:8px;transition:transform .4s,opacity .3s}
+body:not(.show-dock):not(.has-picks) .bar{transform:translateY(140%);opacity:0;pointer-events:none}
+.bar .btn{flex:1;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.bar .go{display:none;justify-content:space-between;padding:0 18px}
+body.has-picks .bar .go{display:flex}
+body.has-picks .bar .idle{display:none}
 </style>
 </head>
 <body>
-<header class="nav">
-  <div class="logo"><span data-initial>Y</span></div>
+<div class="top">
+  <span class="mark" aria-hidden="true"></span>
   <div class="nm" data-k="name">Your Salon</div>
-  <div class="status" data-status="9-21" data-off="2">Open now</div>
-</header>
+  <div class="st" data-status="9-21" data-off="2">Open</div>
+</div>
 
-<section class="hero" data-stage>
-  <div class="stage"><canvas class="scene" aria-label="Spinning barber pole. Drag to turn it." data-scene="pole"></canvas></div>
-  <div class="hero-text">
+<header class="hero" data-photo style="background-image:url('https://images.unsplash.com/photo-1635273051368-de31ef6a8cc4?auto=format&fit=crop&w=1400&q=72')">
+  <div class="in">
     <h1 data-k="name">Your Salon</h1>
     <div class="stripe" aria-hidden="true"></div>
-    <p data-e>Sharp cuts, clean fades, proper beard work. Book a time and walk straight in.</p>
+    <p data-e>Pick your style from the photos, choose a time, and skip the waiting bench.</p>
     <div class="cta">
-      <a class="btn btn-brass" href="#services">Pick a service</a>
-      <button class="btn btn-line" onclick="callNow()">Call</button>
+      <a class="btn btn-w" href="#styles">Choose a style</a>
+      <button class="btn btn-l" onclick="callNow()">Call</button>
     </div>
   </div>
-</section>
+</header>
 
-<section class="sec wrap" id="services">
-  <h2 class="h" data-e>Services</h2>
-  <p class="sub" data-e>Tap what you want. Your total adds up below.</p>
-  <div class="board" data-max="1">
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Haircut</div><div class="d" data-e>Any style, with wash</div></div><span class="p" data-price data-e>₹100</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Beard trim</div><div class="d" data-e>Shape and line-up</div></div><span class="p" data-price data-e>₹60</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Haircut + beard</div><div class="d" data-e>The usual combo</div></div><span class="p" data-price data-e>₹150</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Clean shave</div><div class="d" data-e>Hot towel finish</div></div><span class="p" data-price data-e>₹50</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Hair colour</div><div class="d" data-e>Black or brown</div></div><span class="p" data-price data-e>₹250</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Head massage</div><div class="d" data-e>15 minutes, with oil</div></div><span class="p" data-price data-e>₹100</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Facial</div><div class="d" data-e>Cleanup and glow</div></div><span class="p" data-price data-e>₹300</span><button data-add data-on="Added">Add</button></div>
-    <div class="svc" data-item><div class="info"><div class="n" data-name data-e>Kids haircut</div><div class="d" data-e>Under 12</div></div><span class="p" data-price data-e>₹80</span><button data-add data-on="Added">Add</button></div>
+<section class="wrap sec" id="styles">
+  <h2 class="h2" data-e>Show us the cut</h2>
+  <p class="sub" data-e>Tap the one you want. The barber gets the style name with your booking.</p>
+  <div class="styles" data-single data-max="1">
+    <button type="button" class="style" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1578390432942-d323db577792?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><div class="n" data-name data-e>Skin fade</div><div class="p" data-price data-e>₹150</div></div></button>
+    <button type="button" class="style" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1630827020718-3433092696e7?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><div class="n" data-name data-e>Fade with full beard</div><div class="p" data-price data-e>₹200</div></div></button>
+    <button type="button" class="style" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1599834562135-b6fc90e642ca?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><div class="n" data-name data-e>Textured crop</div><div class="p" data-price data-e>₹120</div></div></button>
+    <button type="button" class="style" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1568339434343-2a640a1a9946?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><div class="n" data-name data-e>Hair design line</div><div class="p" data-price data-e>₹180</div></div></button>
+    <button type="button" class="style" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1599011176306-4a96f1516d4d?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><div class="n" data-name data-e>Beard shape only</div><div class="p" data-price data-e>₹60</div></div></button>
+    <button type="button" class="style" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1648221122323-572c13a31663?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><div class="n" data-name data-e>Regular haircut</div><div class="p" data-price data-e>₹100</div></div></button>
+  </div>
+  <h3 style="margin-top:26px;font-weight:800;font-size:18px" data-e>Add on</h3>
+  <div class="addons" data-max="1">
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Clean shave</span><span class="p" data-price data-e>₹50</span></button>
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Head massage</span><span class="p" data-price data-e>₹100</span></button>
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Hair colour</span><span class="p" data-price data-e>₹250</span></button>
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Facial</span><span class="p" data-price data-e>₹300</span></button>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap"><h2 class="h" data-e>Our work</h2></div>
-  <div class="flow" data-flow>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1635273051368-de31ef6a8cc4?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=70')"></div>
-    <div class="look" data-photo style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=70')"></div>
-  </div>
-</section>
-
-<section class="sec wrap" id="book">
-  <h2 class="h" data-e>Book your chair</h2>
-  <form class="picker" data-wa="I want to book a slot." data-with-picks>
-    <div class="picked" data-pick-list data-empty="No service picked yet. You can still book a time."></div>
-    <div><label class="lbl" for="bn">Your name</label><input type="text" id="bn" data-label="Name" required autocomplete="given-name"></div>
-    <div><span class="lbl">Day</span><div class="chips-in">
-      <label><input type="radio" name="d" value="Today" data-label="Day" required><span>Today</span></label>
-      <label><input type="radio" name="d" value="Tomorrow" data-label="Day"><span>Tomorrow</span></label></div></div>
-    <div><span class="lbl">Time</span><div class="chips-in times-in" id="times"></div></div>
+<section class="wrap sec" id="book">
+  <h2 class="h2" data-e>Pick a time</h2>
+  <form class="slot" data-wa="I want to book a chair." data-with-picks>
+    <p class="sum" data-pick-list data-empty="No style picked yet. You can still book a time."></p>
+    <div><label class="l" for="nm">Your name</label><input type="text" id="nm" data-label="Name" required autocomplete="given-name"></div>
+    <div><span class="l">Day</span><div class="chips-in" id="days"></div></div>
+    <div><span class="l">Time</span><div class="chips-in times" id="times"></div></div>
     <button class="btn btn-wa" type="submit">Book on WhatsApp</button>
   </form>
 </section>
 
-<section class="sec wrap">
-  <h2 class="h" data-e>Find us</h2>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Find the chair</h2>
   <div class="find">
-    <div class="fc" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></p><button class="btn btn-brass" onclick="directions()">Get directions</button></div>
-    <div class="fc" data-reveal style="--delay:.08s"><h3>Open</h3><p data-e>9 AM to 9 PM, closed Tuesday</p><h3 style="margin-top:12px">Phone</h3><p data-k="phone">98XXX XXXXX</p></div>
+    <div class="fc"><span class="k">Address</span><p id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></p><button class="btn btn-i" onclick="directions()">Directions</button></div>
+    <div class="fc"><span class="k">9 AM to 9 PM, closed Tuesday</span><p data-k="phone">98XXX XXXXX</p><button class="btn btn-i" onclick="callNow()">Call</button></div>
   </div>
 </section>
-
 <footer>© <span data-year></span> <span data-k="name">Your Salon</span></footer>
 
-<nav class="dock" aria-label="Quick actions">
-  <button class="btn call idle" onclick="callNow()">Call</button>
-  <a class="btn btn-brass idle" href="#book">Book a slot</a>
-  <a class="btn btn-brass cart" href="#book"><span data-pick-count data-one="service" data-many="services">0</span><strong data-pick-total>₹0</strong></a>
-</nav>
+<div class="bar">
+  <a class="btn btn-i idle" href="#styles">Choose a style</a>
+  <a class="btn btn-i go" href="#book"><span data-pick-total>₹0</span><span>Pick a time</span></a>
+  <button class="btn btn-w" style="flex:none;width:60px;padding:0" onclick="callNow()" aria-label="Call"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></button>
+</div>
 
 <script>
-// hourly time slots
-document.getElementById('times').innerHTML = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((h, i) => {
-  const t = ((h + 11) % 12 + 1) + (h < 12 ? ' AM' : ' PM');
-  return `<label><input type="radio" name="t" value="${t}" data-label="Time"${i ? '' : ' required'}><span>${t}</span></label>`;
-}).join('');
+// next 3 open days (Tuesday closed) and hourly slots
+(function () {
+  const names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], out = [];
+  for (let i = 0; out.length < 3 && i < 7; i++) {
+    const d = new Date(); d.setDate(d.getDate() + i); if (d.getDay() === 2) continue;
+    const label = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : names[d.getDay()] + ' ' + d.getDate();
+    out.push(`<label><input type="radio" name="d" value="${label}" data-label="Day"${out.length ? '' : ' required'}><span>${label}</span></label>`);
+  }
+  document.getElementById('days').innerHTML = out.join('');
+  document.getElementById('times').innerHTML = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((h, i) => { const t = ((h + 11) % 12 + 1) + (h < 12 ? ' AM' : ' PM'); return `<label><input type="radio" name="t" value="${t}" data-label="Time"${i ? '' : ' required'}><span>${t}</span></label>`; }).join('');
+})();
 </script>
-<script src="assets/core.js?v=4"></script>
-<script type="module" src="assets/fx.js?v=4"></script>
+<script src="assets/core.js?v=5"></script>
 </body>
 </html>

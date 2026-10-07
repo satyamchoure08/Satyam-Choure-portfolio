@@ -3,229 +3,245 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#d7d6d1">
+<meta name="theme-color" content="#26282b">
 <title>Your Gym</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css?v=4">
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=5">
 <style>
-:root{--concrete:#d7d6d1;--cobalt:#1f48ff;--black:#000;--white:#fff;--focus:#1f48ff}
-body{font-family:Archivo,system-ui,sans-serif;color:var(--black);background:var(--concrete);line-height:1.45}
-.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
-.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.86;letter-spacing:-.01em}
+:root{--chalk:#f2f2ee;--iron:#26282b;--iron2:#36393d;--orange:#ff5a1f;--focus:#ff5a1f}
+body{font-family:Barlow,system-ui,sans-serif;background:var(--chalk);color:var(--iron);line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.cond{font-family:"Barlow Condensed",Impact,sans-serif;text-transform:uppercase}
 
-.nav{position:absolute;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:10px;padding:16px 18px}
-.logo{width:40px;height:40px;background:var(--cobalt);color:#fff;display:grid;place-items:center;font-family:Anton,sans-serif;font-size:24px}
-.nav .nm{font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.01em}
-.status{margin-left:auto;font-size:13px;font-weight:700;padding:7px 12px;background:var(--black);color:#fff}
-.status.is-open{background:var(--cobalt)}
+.top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;gap:10px;padding:16px;color:#fff}
+.logo{width:40px;height:40px;background:var(--orange);display:grid;place-items:center;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:24px;color:var(--iron)}
+.top .nm{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:22px;text-transform:uppercase;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .st{margin-left:auto;flex:none;font-size:13px;font-weight:700;padding:6px 11px;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.top .st.is-open{background:var(--orange);color:var(--iron)}
 
-/* hero: kinetic name rows behind a 3D dumbbell */
-.hero{position:relative;min-height:max(660px,100svh);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(120% 70% at 50% 40%,#e6e5e1 0,var(--concrete) 60%,#c7c6c0 100%)}
-.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.06) 1px,transparent 1px);background-size:4px 4px;pointer-events:none}
-.kin{position:absolute;z-index:1;left:0;right:0;top:50%;transform:translateY(-55%);pointer-events:none}
-.kin .row{white-space:nowrap;font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:clamp(96px,27vw,260px);line-height:.86;transform:translateX(calc(var(--sy,0) * .35px * var(--dir) + var(--o,-20%)))}
-.kin .row span{margin-right:.25em}
-.kin .row.out{color:transparent;-webkit-text-stroke:2px var(--black)}
-.kin .row.blue{color:var(--cobalt)}
-.hero .stage{position:absolute;inset:0;z-index:2}
-.hero-foot{position:relative;z-index:3;padding:0 18px 26px;width:100%;max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;pointer-events:none}
-.hero-foot>*{pointer-events:auto}
-.hero-foot p{font-size:20px;font-weight:700;font-variation-settings:"wdth" 80;max-width:15ch;line-height:1.1}
+/* hero */
+.hero{position:relative;min-height:max(640px,94svh);display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:#111 center 30%/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,22,.55) 0,rgba(20,20,22,.1) 35%,rgba(20,20,22,.88) 82%)}
+.hero .in{position:relative;padding:0 16px 30px;max-width:1100px;width:100%;margin:0 auto}
+.hero h1{font-family:"Barlow Condensed",Impact,sans-serif;font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(68px,20vw,170px);line-height:.84;letter-spacing:-.01em}
+.hero .line{font-size:20px;font-weight:600;margin:12px 0 18px;max-width:24ch}
 .cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 24px;font-weight:800;font-size:16px;white-space:nowrap;transition:transform .15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 24px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:21px;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;transition:transform .15s;clip-path:polygon(0 0,100% 0,100% 72%,94% 100%,0 100%)}
 .btn:active{transform:scale(.96)}
-.btn-blue{background:var(--cobalt);color:#fff}
-.btn-black{background:var(--black);color:#fff}
-.btn-line{border:2.5px solid var(--black);background:transparent}
-.no-3d .stage{display:none}
+.btn-o{background:var(--orange);color:var(--iron)}
+.btn-w{background:#fff;color:var(--iron)}
+.btn-i{background:var(--iron);color:#fff}
 
-.sec{padding-top:84px}
-.h,.sec h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(56px,15vw,130px);line-height:.86}
-.sub{font-size:17px;margin-top:12px;max-width:40ch}
+.sec{padding-top:72px}
+.h2{font-family:"Barlow Condensed",Impact,sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(44px,12vw,92px);line-height:.9}
+.sub{font-size:17px;margin-top:8px;max-width:42ch;color:#55585c}
 
-/* flip plans */
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px}
-.plan{height:340px;perspective:1100px;cursor:pointer}
-.plan-in{position:relative;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.plan.flip .plan-in{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;padding:24px;display:flex;flex-direction:column}
-.front{background:var(--white)}
-.plan:nth-child(2) .front{background:var(--cobalt);color:#fff}
-.plan:nth-child(3) .front{background:var(--black);color:#fff}
-.back{transform:rotateY(180deg);background:var(--black);color:#fff}
-.plan:nth-child(3) .back{background:var(--cobalt)}
-.face .len{font-size:18px;font-weight:800}
-.face .amt{font-family:Anton,Impact,sans-serif;font-size:96px;line-height:.9;margin-top:auto}
-.face .per{font-size:15px;font-weight:600;opacity:.75}
-.face .hint{margin-top:14px;font-size:13px;font-weight:700;opacity:.65}
-.back ul{list-style:none;display:grid;gap:12px;font-size:18px;font-weight:600;margin-top:8px}
-.back li::before{content:"";display:inline-block;width:10px;height:10px;background:var(--cobalt);margin-right:12px}
-.plan:nth-child(3) .back li::before{background:#fff}
-.back .btn{margin-top:auto;background:#fff;color:#000}
-.plan.on .back .btn{background:#25d366;color:#05351b}
-.plan.on .front{outline:5px solid #25d366;outline-offset:-5px}
+/* goals */
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
+.goal{position:relative;height:200px;color:#fff;text-align:left;display:flex;align-items:flex-end;padding:12px;background:#333 center/cover no-repeat;overflow:hidden;transition:transform .3s}
+.goal::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.8));transition:background .3s}
+.goal span{position:relative;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:23px;line-height:.95;text-transform:uppercase}
+.goal[aria-pressed=true]{transform:translateY(-6px);outline:4px solid var(--orange);outline-offset:-4px}
+.goal[aria-pressed=true]::before{background:linear-gradient(180deg,rgba(255,90,31,.15) 30%,rgba(0,0,0,.8))}
+@media(min-width:760px){.goal{height:300px}.goal span{font-size:32px}}
+.result{margin-top:12px;background:var(--iron);color:#fff;padding:20px;display:none}
+.result.show{display:block;animation:drop .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes drop{from{opacity:0;transform:translateY(-10px)}}
+.result small{font-size:14px;color:#b9bbbe}
+.result h3{font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;font-size:34px;line-height:1}
+.result ul{list-style:none;margin:12px 0 16px;display:grid;gap:6px;font-size:17px}
+.result li::before{content:"";display:inline-block;width:10px;height:10px;background:var(--orange);margin-right:10px}
 
-/* timings strip */
-.day{margin-top:30px;background:var(--white);padding:22px 18px}
-.bar{position:relative;height:72px;background:repeating-linear-gradient(90deg,#ececea 0 calc(100%/24 - 2px),transparent calc(100%/24 - 2px) calc(100%/24))}
-.bar i{position:absolute;top:0;bottom:0;background:var(--cobalt)}
-.bar .now{position:absolute;top:-10px;bottom:-10px;width:3px;background:#ff3b30}
-.bar .now::after{content:"Now";position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:#ff3b30}
-.ticks{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:8px;opacity:.6}
-.times{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
-.times div{font-size:15px}
-.times b{display:block;font-family:Anton,sans-serif;font-weight:400;font-size:34px;line-height:1}
+/* BMI */
+.bmi{margin-top:22px;background:#fff;padding:20px}
+.bmi .read{display:flex;align-items:flex-end;gap:14px}
+.bmi .num{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:96px;line-height:.85}
+.bmi .cat{font-size:20px;font-weight:700;padding-bottom:10px}
+.scale{position:relative;height:12px;margin:14px 0 6px;background:linear-gradient(90deg,#6aa9ff 0 17.5%,#3bb273 17.5% 40%,#f2b33d 40% 50%,#e5533d 50%)}
+.scale i{position:absolute;top:-6px;width:4px;height:24px;background:var(--iron);transition:left .3s}
+.ticks{position:relative;height:16px;font-size:12px;color:#77797c}
+.ticks span{position:absolute;transform:translateX(-50%)}
+.ticks span:first-child{transform:none}.ticks span:last-child{transform:translateX(-100%)}
+.sl{margin-top:16px}
+.sl label{display:flex;justify-content:space-between;font-weight:700;font-size:16px}
+.sl input{width:100%;accent-color:var(--orange);height:32px}
+.bmi .tip{margin-top:10px;font-size:16px}
+.bmi .note{font-size:13px;color:#77797c;margin-top:8px}
+.linkbtn{color:var(--orange);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 
-.flow{--fw:70vw;margin-top:12px}
-.shot{height:min(470px,100vw);background-color:#bbb}
+/* plans */
+.plans{margin-top:22px;display:grid;gap:10px}
+@media(min-width:760px){.plans{grid-template-columns:repeat(3,1fr)}}
+.plan{display:flex;align-items:center;gap:14px;background:#fff;padding:18px;border-left:6px solid transparent;cursor:pointer;transition:border-color .2s,background .2s}
+.plan .l{flex:1}
+.plan .n{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;line-height:1}
+.plan .m{font-size:15px;color:#55585c}
+.plan .p{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:40px}
+.plan button{min-width:88px;height:46px;background:var(--iron);color:#fff;font-weight:700}
+.plan.on{border-color:var(--orange);background:#fff7f3}
+.plan.on button{background:var(--orange);color:var(--iron)}
 
-/* trial */
-.trial{margin-top:90px;background:var(--cobalt);color:#fff;padding:70px 0 110px;position:relative;overflow:hidden}
-.trial h2{color:#fff}
-.trial form{margin-top:28px;display:grid;gap:16px;max-width:520px}
-.field label{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
-.field input{width:100%;height:56px;border:0;padding:0 16px;font-size:17px;background:#fff;color:#000}
-.chips-in span{background:rgba(255,255,255,.14);color:#fff;border-radius:0}
-.chips-in input:checked+span{background:#fff;color:var(--cobalt)}
-.trial .btn{background:#000;color:#fff;width:100%}
-.trial .big-o{position:absolute;right:-60px;bottom:-80px;width:320px;height:320px;border:44px solid rgba(255,255,255,.12);border-radius:50%;transform:rotateX(calc(var(--p,0) * 50deg));pointer-events:none}
-
-.find{display:grid;gap:14px;margin-top:28px}
+/* batches + trainer */
+.batches{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}
+.b{background:var(--iron);color:#fff;padding:16px}
+.b span{font-size:14px;color:#b9bbbe}
+.b strong{display:block;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:30px;line-height:1}
+.b.w{grid-column:1 / -1;background:var(--orange);color:var(--iron)}
+.b.w span{color:#5a2410}
+.coach{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin-top:22px;background:#fff;padding:14px}
+.coach .ph{height:150px;background:#ccc center/cover}
+.coach b{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;display:block;line-height:1}
+.floor{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:150px 150px;gap:6px;margin-top:22px}
+.floor div{background:#ccc center/cover}
+.floor div:first-child{grid-row:span 2}
+@media(min-width:760px){.floor{grid-template-rows:240px 240px}}
+.find{display:grid;gap:8px;margin-top:22px;padding-bottom:130px}
 @media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
-.box{background:var(--white);padding:22px}
-.box h3{font-size:14px;font-weight:700;opacity:.6}
-.box p{font-size:22px;font-weight:800;margin-top:4px}
-.box .btn{margin-top:16px}
-footer{padding:50px 18px 130px;text-align:center;font-size:14px;opacity:.7}
+.fc{background:#fff;padding:20px}
+.fc h3{font-size:14px;color:#77797c;font-weight:600}
+.fc p{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:28px;text-transform:uppercase;line-height:1.05}
+.fc .btn{margin-top:12px}
+footer{text-align:center;font-size:14px;color:#77797c;margin-top:-100px;padding-bottom:110px}
 
-.dock{background:rgba(0,0,0,.86)}
-.dock .btn{min-height:52px}
-.dock .call{background:#fff;color:#000}
-.dock .cart{justify-content:space-between;background:#25d366;color:#05351b;padding:0 18px}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;display:flex;gap:8px;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s}
+body:not(.show-dock):not(.has-picks) .bar{transform:translateY(140%);opacity:0;pointer-events:none}
+.bar .btn{flex:1;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.bar .call{flex:none;width:60px;padding:0}
+.bar .join{display:none;justify-content:space-between;padding:0 18px}
+body.has-picks .bar .join{display:flex}
+body.has-picks .bar .trial{display:none}
 </style>
 </head>
 <body>
-<header class="nav">
+<div class="top">
   <div class="logo" data-initial>Y</div>
   <div class="nm" data-k="name">Your Gym</div>
-  <div class="status" data-status="5.5-10,16-22">Open now</div>
+  <div class="st" data-status="5.5-10,16-22">Open</div>
+</div>
+
+<header class="hero" data-photo style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=72')">
+  <div class="in">
+    <h1 data-k="name">Your Gym</h1>
+    <p class="line" data-e>Your first workout here is free. Come see the place, meet the trainer.</p>
+    <div class="cta">
+      <a class="btn btn-o" href="#goal">Start my free trial</a>
+      <button class="btn btn-w" onclick="callNow()">Call</button>
+    </div>
+  </div>
 </header>
 
-<section class="hero" data-stage>
-  <div class="kin" aria-hidden="true">
-    <div class="row out" style="--dir:1;--o:-8%"><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span></div>
-    <div class="row" style="--dir:-1;--o:-34%"><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span></div>
-    <div class="row blue" style="--dir:1;--o:-18%"><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span><span data-k="name">Your Gym</span></div>
+<section class="wrap sec" id="goal">
+  <h2 class="h2" data-e>What do you want?</h2>
+  <p class="sub" data-e>Tap one. We'll tell you the plan and batch that fit.</p>
+  <div class="goals" role="group" aria-label="Your goal">
+    <button class="goal" data-goal="lose" aria-pressed="false" style="background-image:url('https://images.unsplash.com/photo-1536922246289-88c42f957773?auto=format&fit=crop&w=600&q=65')"><span>Lose weight</span></button>
+    <button class="goal" data-goal="muscle" aria-pressed="false" style="background-image:url('https://images.unsplash.com/photo-1674834727149-00812f907676?auto=format&fit=crop&w=600&q=65')"><span>Build muscle</span></button>
+    <button class="goal" data-goal="fit" aria-pressed="false" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=65')"><span>Stay fit</span></button>
   </div>
-  <h1 class="sr" data-k="name">Your Gym</h1>
-  <div class="stage"><canvas class="scene" aria-label="Chrome dumbbell. Drag to spin." data-scene="dumbbell" data-opts='{"color":"#1f48ff"}'></canvas></div>
-  <div class="hero-foot">
-    <p data-e>Real weights. A trainer who watches your form.</p>
-    <div class="cta">
-      <a class="btn btn-blue" href="#trial">Book a free trial</a>
-      <button class="btn btn-line" onclick="callNow()">Call</button>
-    </div>
+  <div class="result" id="result" aria-live="polite">
+    <small>We suggest</small>
+    <h3 id="rTitle"></h3>
+    <ul id="rList"></ul>
+    <button class="btn btn-o" onclick="bookTrial()">Book my free trial</button>
   </div>
 </section>
 
-<section class="sec wrap" id="plans">
-  <h2 data-e>Pick your plan</h2>
-  <p class="sub" data-e>Tap a card to see what's included.</p>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Check your BMI</h2>
+  <p class="sub" data-e>Move the sliders. It takes five seconds.</p>
+  <div class="bmi">
+    <div class="read"><span class="num" id="bmiNum">22.9</span><span class="cat" id="bmiCat">Healthy</span></div>
+    <div class="scale" aria-hidden="true"><i id="bmiMark"></i></div>
+    <div class="ticks"><span style="left:0">15</span><span style="left:17.5%">18.5</span><span style="left:40%">23</span><span style="left:50%">25</span><span style="left:100%">35</span></div>
+    <div class="sl"><label for="ht">Height <span id="htv">170 cm</span></label><input type="range" id="ht" min="140" max="200" value="170"></div>
+    <div class="sl"><label for="wt">Weight <span id="wtv">66 kg</span></label><input type="range" id="wt" min="35" max="150" value="66"></div>
+    <p class="tip" id="bmiTip"></p>
+    <p class="note">BMI is a rough guide for adults, not a medical check.</p>
+  </div>
+</section>
+
+<section class="wrap sec" id="plans">
+  <h2 class="h2" data-e>Fees</h2>
   <div class="plans" data-single data-max="1">
-    <div class="plan" data-item data-reveal>
-      <div class="plan-in">
-        <div class="face front"><span class="len" data-name data-e>1 month</span><span class="amt" data-price data-e>₹800</span><span class="per" data-e>Pay monthly</span><span class="hint">Tap to flip</span></div>
-        <div class="face back"><span class="len" data-e>Includes</span><ul><li data-e>Full gym access</li><li data-e>Trainer guidance</li><li data-e>Locker</li></ul><button class="btn" data-add data-on="Chosen ✓">Choose 1 month</button></div>
-      </div>
-    </div>
-    <div class="plan" data-item data-reveal style="--delay:.1s">
-      <div class="plan-in">
-        <div class="face front"><span class="len" data-name data-e>3 months</span><span class="amt" data-price data-e>₹2,100</span><span class="per" data-e>Save ₹300, most people pick this</span><span class="hint">Tap to flip</span></div>
-        <div class="face back"><span class="len" data-e>Includes</span><ul><li data-e>Everything in 1 month</li><li data-e>Your own workout plan</li><li data-e>Diet tips</li></ul><button class="btn" data-add data-on="Chosen ✓">Choose 3 months</button></div>
-      </div>
-    </div>
-    <div class="plan" data-item data-reveal style="--delay:.2s">
-      <div class="plan-in">
-        <div class="face front"><span class="len" data-name data-e>12 months</span><span class="amt" data-price data-e>₹7,000</span><span class="per" data-e>Save ₹2,600</span><span class="hint">Tap to flip</span></div>
-        <div class="face back"><span class="len" data-e>Includes</span><ul><li data-e>Everything in 3 months</li><li data-e>Monthly body check</li><li data-e>Best price per day</li></ul><button class="btn" data-add data-on="Chosen ✓">Choose 12 months</button></div>
-      </div>
-    </div>
+    <div class="plan" data-item><div class="l"><div class="n" data-name data-e>1 month</div><div class="m" data-e>Full gym, trainer help</div></div><span class="p" data-price data-e>₹800</span><button type="button" data-add data-on="Picked">Pick</button></div>
+    <div class="plan" data-item><div class="l"><div class="n" data-name data-e>3 months</div><div class="m" data-e>₹700 a month, workout plan</div></div><span class="p" data-price data-e>₹2,100</span><button type="button" data-add data-on="Picked">Pick</button></div>
+    <div class="plan" data-item><div class="l"><div class="n" data-name data-e>12 months</div><div class="m" data-e>₹583 a month, diet tips</div></div><span class="p" data-price data-e>₹7,000</span><button type="button" data-add data-on="Picked">Pick</button></div>
   </div>
 </section>
 
-<section class="sec wrap" id="hours">
-  <h2 data-e>When we're open</h2>
-  <div class="day" data-reveal>
-    <div class="bar" id="bar" data-hours="5.5-10,16-22"><span class="now" id="now"></span></div>
-    <div class="ticks"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>12 AM</span></div>
-    <div class="times">
-      <div><b data-e>5:30–10 AM</b><span data-e>Morning batch</span></div>
-      <div><b data-e>4–10 PM</b><span data-e>Evening batch</span></div>
-      <div><b data-e>Sunday</b><span data-e>Morning only</span></div>
-    </div>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Batches</h2>
+  <div class="batches">
+    <div class="b"><span data-e>Morning</span><strong data-e>5:30–10 AM</strong></div>
+    <div class="b"><span data-e>Evening</span><strong data-e>4–10 PM</strong></div>
+    <div class="b w"><span data-e>Ladies batch</span><strong data-e>11 AM–1 PM</strong></div>
+  </div>
+  <div class="coach">
+    <div class="ph" data-photo style="background-image:url('https://images.unsplash.com/photo-1704223523303-a5ed14561b1f?auto=format&fit=crop&w=400&q=65')"></div>
+    <div><span style="font-size:14px;color:#77797c" data-e>Your trainer</span><b data-e>Trainer name</b><p data-e>Checks your form, writes your plan, keeps you coming back.</p></div>
+  </div>
+  <div class="floor">
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1623874514711-0f321325f318?auto=format&fit=crop&w=900&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=500&q=65')"></div>
+    <div data-photo style="background-image:url('https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=500&q=65')"></div>
   </div>
 </section>
 
-<section class="sec" id="inside">
-  <div class="wrap"><h2 data-e>Inside</h2></div>
-  <div class="flow" data-flow>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1623874514711-0f321325f318?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=900&q=70')"></div>
-    <div class="shot" data-photo style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=70')"></div>
-  </div>
-</section>
-
-<section class="trial" id="trial">
-  <span class="big-o" data-depth aria-hidden="true"></span>
-  <div class="wrap">
-    <h2 class="h" data-e>First workout free</h2>
-    <form data-wa="I want to book a free trial workout." data-with-picks>
-      <div class="field"><label for="tn">Your name</label><input id="tn" data-label="Name" required autocomplete="given-name"></div>
-      <div class="field"><label>When can you come?</label>
-        <div class="chips-in">
-          <label><input type="radio" name="when" value="Tomorrow morning" data-label="When" required><span>Tomorrow morning</span></label>
-          <label><input type="radio" name="when" value="Tomorrow evening" data-label="When"><span>Tomorrow evening</span></label>
-          <label><input type="radio" name="when" value="This weekend" data-label="When"><span>This weekend</span></label>
-        </div>
-      </div>
-      <button class="btn" type="submit">Book trial on WhatsApp</button>
-    </form>
-  </div>
-</section>
-
-<section class="sec wrap">
-  <h2 data-e>Find us</h2>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Find us</h2>
   <div class="find">
-    <div class="box" data-reveal><h3>Address</h3><p id="addr"><span data-k="area">Main Road</span>, <span data-e>Your Town</span></p><button class="btn btn-black" onclick="directions()">Get directions</button></div>
-    <div class="box" data-reveal style="--delay:.1s"><h3>Phone</h3><p data-k="phone">98XXX XXXXX</p><button class="btn btn-blue" onclick="callNow()">Call now</button></div>
+    <div class="fc"><h3>Address</h3><p id="addr"><span data-k="area">Main Road</span>, <span data-e>Your Town</span></p><button class="btn btn-i" onclick="directions()">Directions</button></div>
+    <div class="fc"><h3>Phone</h3><p data-k="phone">98XXX XXXXX</p><button class="btn btn-o" onclick="callNow()">Call</button></div>
   </div>
 </section>
-
 <footer>© <span data-year></span> <span data-k="name">Your Gym</span></footer>
 
-<nav class="dock" aria-label="Quick actions">
-  <button class="btn call idle" onclick="callNow()">Call</button>
-  <a class="btn btn-blue idle" href="#trial">Free trial</a>
-  <button class="btn cart" onclick="sendPicks('I want to join this plan:')"><span data-pick-list></span><strong>Join</strong></button>
-</nav>
+<div class="bar">
+  <button class="btn btn-o trial" onclick="bookTrial()">Book free trial</button>
+  <button class="btn btn-o join" onclick="sendPicks('I want to join this plan:')"><span data-pick-list></span><span>Join</span></button>
+  <button class="btn btn-w call" onclick="callNow()" aria-label="Call"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></button>
+</div>
 
-<script src="assets/core.js?v=4"></script>
 <script>
-// flip plan cards
-document.querySelectorAll('.plan').forEach(p => p.addEventListener('click', e => { if (e.target.closest('button') || document.body.classList.contains('editing')) return; p.classList.toggle('flip'); }));
-// draw opening hours on the 24h strip + live "now" marker
-(function () {
-  const bar = document.getElementById('bar'), now = document.getElementById('now');
-  bar.dataset.hours.split(',').forEach(r => { const [a, b] = r.split('-').map(Number); const i = document.createElement('i'); i.style.left = (a / 24 * 100) + '%'; i.style.width = ((b - a) / 24 * 100) + '%'; bar.prepend(i); });
-  const tick = () => { const d = new Date(); now.style.left = ((d.getHours() + d.getMinutes() / 60) / 24 * 100) + '%'; };
-  tick(); setInterval(tick, 60000);
-})();
+const GOALS = {
+  lose: { name: 'Lose weight', title: '3 months, morning batch', list: ['Cardio and circuit training', 'A simple diet chart you can follow at home', 'Weight check every week'] },
+  muscle: { name: 'Build muscle', title: '3 months, evening batch', list: ['Weight training plan made for you', 'Protein and diet tips', 'Trainer checks your form'] },
+  fit: { name: 'Stay fit', title: '1 month, any batch', list: ['Mix of cardio and weights', 'Stretching for back and knees', 'Go at your own pace'] }
+};
+let goal = null;
+function pickGoal(g) {
+  goal = g;
+  document.querySelectorAll('.goal').forEach(b => b.setAttribute('aria-pressed', b.dataset.goal === g));
+  document.getElementById('rTitle').textContent = GOALS[g].title;
+  document.getElementById('rList').innerHTML = GOALS[g].list.map(x => `<li>${x}</li>`).join('');
+  const r = document.getElementById('result'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
+}
+document.querySelectorAll('.goal').forEach(b => b.addEventListener('click', () => pickGoal(b.dataset.goal)));
+function bookTrial() { waSend(`Hi ${bizName()}, I want to book a free trial workout.` + (goal ? `\nMy goal: ${GOALS[goal].name}` : '') + '\nWhen can I come?'); }
+
+// BMI (Asian cut-offs: 18.5 / 23 / 25)
+const ht = document.getElementById('ht'), wt = document.getElementById('wt');
+function bmi() {
+  const h = +ht.value, w = +wt.value, v = w / Math.pow(h / 100, 2);
+  document.getElementById('htv').textContent = h + ' cm';
+  document.getElementById('wtv').textContent = w + ' kg';
+  document.getElementById('bmiNum').textContent = v.toFixed(1);
+  let cat, tip, g;
+  if (v < 18.5) { cat = 'Underweight'; tip = 'You could use more muscle. '; g = 'muscle'; }
+  else if (v < 23) { cat = 'Healthy'; tip = 'Nice. Keep it that way. '; g = 'fit'; }
+  else if (v < 25) { cat = 'A little over'; tip = 'A few months of cardio will help. '; g = 'lose'; }
+  else { cat = 'Overweight'; tip = 'Start slow, we will guide you. '; g = 'lose'; }
+  document.getElementById('bmiCat').textContent = cat;
+  document.getElementById('bmiMark').style.left = Math.max(0, Math.min(100, (v - 15) / 20 * 100)) + '%';
+  document.getElementById('bmiTip').innerHTML = tip + `<a class="linkbtn" href="#goal" data-g="${g}">See the ${GOALS[g].name.toLowerCase()} plan</a>`;
+}
+ht.addEventListener('input', bmi); wt.addEventListener('input', bmi); bmi();
+document.getElementById('bmiTip').addEventListener('click', e => { const a = e.target.closest('[data-g]'); if (a) pickGoal(a.dataset.g); });
+// tapping anywhere on a plan row picks it
+document.querySelectorAll('.plan').forEach(p => p.addEventListener('click', e => { if (!e.target.closest('button')) p.querySelector('button').click(); }));
 </script>
-<script type="module" src="assets/fx.js?v=4"></script>
+<script src="assets/core.js?v=5"></script>
 </body>
 </html>
