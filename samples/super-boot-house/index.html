@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>SUPER BOOT HOUSE — Step Into The Extraordinary</title>
+<meta name="description" content="Super Boot House, Chhindwara. Exclusive boots & footwear. Handcrafted, limited drops, extraordinary design.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF4D00'/%3E%3Ctext x='32' y='45' font-size='34' font-family='Arial Black,Arial' font-weight='900' text-anchor='middle' fill='%23F4EFE6'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <div class="loader-word"><span>SUPER</span><span>BOOT</span><span>HOUSE</span></div>
+    <div class="loader-count"><span id="loadPct">0</span><em>%</em></div>
+    <div class="loader-bar"><i id="loadBar"></i></div>
+  </div>
+</div>
+
+<!-- grain overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- custom cursor -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- scroll progress -->
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" data-cursor>
+    <svg viewBox="0 0 48 48" class="brand-mark" aria-hidden="true">
+      <path d="M8 6h14v16c8 2 12 6 18 8v10H8V6z" fill="currentColor"/>
+      <rect x="8" y="36" width="32" height="6" fill="var(--orange)"/>
+    </svg>
+    <span class="brand-text">SUPER<b>BOOT</b>HOUSE</span>
+  </a>
+  <nav class="links">
+    <a href="#vault" data-cursor>The Vault</a>
+    <a href="#drop" data-cursor>Drop 07</a>
+    <a href="#craft" data-cursor>Craft</a>
+    <a href="#voices" data-cursor>Voices</a>
+    <a href="#find" data-cursor>Visit</a>
+  </nav>
+  <button class="cart" id="cartBtn" data-cursor aria-label="Cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l1.5 13h-15L6 7z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-bgword" aria-hidden="true">BOOTS</div>
+
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-rings" aria-hidden="true">
+      <i class="r1"></i><i class="r2"></i><i class="r3"></i>
+    </div>
+    <div class="hero-boot-wrap">
+      <img src="assets/shoes/hero-red-sneakers.webp" alt="A pair of red leather sneakers with white laces" class="hero-boot" id="heroBoot">
+      <div class="hero-shadow" aria-hidden="true"></div>
+    </div>
+    <span class="sticker s1">EST. 1987</span>
+    <span class="sticker s2">100% LEATHER</span>
+    <span class="sticker s3">CHHINDWARA&nbsp;INDIA</span>
+  </div>
+
+  <div class="hero-copy">
+    <p class="kicker rv on-load">✦ THE HOUSE OF EXTRAORDINARY FOOTWEAR ✦</p>
+    <h1 class="hero-title" aria-label="Super Boot House">
+      <span class="line"><span class="word">SUPER</span></span>
+      <span class="line"><span class="word outline">BOOT</span></span>
+      <span class="line"><span class="word">HOUSE</span></span>
+    </h1>
+    <p class="hero-sub rv">Rare boots. Limited drops. Hand-finished leather that turns sidewalks into runways. Step in — if you dare.</p>
+    <div class="hero-cta rv">
+      <a href="#vault" class="btn btn-solid magnetic" data-cursor><span>Enter the Vault</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#drop" class="btn btn-ghost magnetic" data-cursor><span>Shop Drop 07</span></a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true"><span></span>SCROLL</div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>FREE SHIPPING ACROSS INDIA ✦ HAND-STITCHED IN MADHYA PRADESH ✦ DROP 07 LIVE NOW ✦ 38 YEARS OF CRAFT ✦ LIFETIME RESOLE PROMISE ✦&nbsp;</span>
+    <span>FREE SHIPPING ACROSS INDIA ✦ HAND-STITCHED IN MADHYA PRADESH ✦ DROP 07 LIVE NOW ✦ 38 YEARS OF CRAFT ✦ LIFETIME RESOLE PROMISE ✦&nbsp;</span>
+  </div>
+</div>
+
+<!-- ============ 3D VAULT CAROUSEL ============ -->
+<section class="vault" id="vault">
+  <header class="sec-head">
+    <p class="sec-kicker rv">Chapter 01</p>
+    <h2 class="sec-title rv"><span class="rv-clip">THE</span> <span class="rv-clip outline">VAULT</span></h2>
+    <p class="sec-note rv">Drag the ring. Spin the collection. Six silhouettes, zero compromises.</p>
+  </header>
+
+  <div class="ring-wrap rv" id="ringWrap" tabindex="0" aria-roledescription="carousel" aria-label="The Vault — drag, tap a shoe, or use the arrow keys to spin">
+    <div class="ring-floor" aria-hidden="true"></div>
+    <div class="ring" id="ring">
+      <!-- cards injected by JS -->
+    </div>
+    <button class="ring-btn prev" id="ringPrev" data-cursor aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+    <button class="ring-btn next" id="ringNext" data-cursor aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+
+  <div class="ring-meta" id="ringMeta">
+    <h3 id="metaName">TRAILBLAZER 07</h3>
+    <p id="metaDesc">Wheat nubuck work boot with storm welt &amp; recycled lug sole.</p>
+    <div class="meta-row">
+      <strong id="metaPrice">₹6,499</strong>
+      <button class="btn btn-solid btn-sm magnetic" id="metaAdd" data-cursor><span>Add to Cart</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DROP 07 GRID ============ -->
+<section class="drop" id="drop">
+  <header class="sec-head">
+    <p class="sec-kicker rv">Chapter 02</p>
+    <h2 class="sec-title rv"><span class="rv-clip">DROP</span> <span class="rv-clip outline">07</span></h2>
+    <p class="sec-note rv">Hover to feel the depth. Every card is a little sculpture.</p>
+  </header>
+  <div class="grid" id="grid"><!-- cards injected --></div>
+</section>
+
+<!-- ============ CRAFT ============ -->
+<section class="craft" id="craft">
+  <div class="craft-sticky">
+    <p class="sec-kicker rv">Chapter 03</p>
+    <h2 class="sec-title rv"><span class="rv-clip">BORN</span><br><span class="rv-clip outline">BY HAND</span></h2>
+    <p class="craft-copy rv">Every pair begins as a slab of full-grain hide in our Chhindwara workshop. 214 hands. 96 steps. One obsession: the boot you'll never retire.</p>
+    <ul class="craft-stats">
+      <li class="rv"><strong data-count="38">0</strong><span>years of craft</span></li>
+      <li class="rv"><strong data-count="96">0</strong><span>steps per pair</span></li>
+      <li class="rv"><strong data-count="120000" data-suffix="+">0</strong><span>pairs resoled for life</span></li>
+    </ul>
+  </div>
+  <div class="craft-flow">
+    <figure class="craft-card rv" data-rot="-4">
+      <img src="assets/lifestyle/craft-shelves.jpg" alt="Sneakers lined up on wooden shop shelves" loading="lazy">
+      <figcaption>01 — THE WALL OF LASTS</figcaption>
+    </figure>
+    <figure class="craft-card rv" data-rot="3">
+      <img src="assets/lifestyle/craft-track.jpg" alt="Tying sneaker laces on a running track" loading="lazy">
+      <figcaption>02 — SUNDOWN QUALITY CHECK</figcaption>
+    </figure>
+    <figure class="craft-card rv" data-rot="-2">
+      <img src="assets/lifestyle/craft-walk.jpg" alt="Wearing Super Boot House sneakers on a wooden trail" loading="lazy">
+      <figcaption>03 — BUILT FOR EVERY ROAD</figcaption>
+    </figure>
+    <figure class="craft-card rv" data-rot="4">
+      <img src="assets/lifestyle/craft-jump.jpg" alt="Jumping mid-air in Super Boot House sneakers" loading="lazy">
+      <figcaption>04 — GRAVITY OPTIONAL</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ VOICES ============ -->
+<section class="voices" id="voices">
+  <header class="sec-head">
+    <p class="sec-kicker rv">Chapter 04</p>
+    <h2 class="sec-title rv"><span class="rv-clip">LOUD</span> <span class="rv-clip outline">VOICES</span></h2>
+    <p class="sec-note rv">Sample reviews written for this concept.</p>
+  </header>
+  <!-- NOTE: these quotes are sample placeholders. Swap in real customer reviews before the site goes live. -->
+  <div class="t-marquee">
+    <div class="t-track">
+      <blockquote class="t-card"><p>"I walked into Super Boot House for one pair. I left with three and a new personality."</p><cite>— Aarav Mehta, Mumbai</cite></blockquote>
+      <blockquote class="t-card dark"><p>"Resoled my 2016 pair last month. They look better than the day I bought them."</p><cite>— Devika Rao, Bengaluru</cite></blockquote>
+      <blockquote class="t-card"><p>"The Trailblazer 07 survived a monsoon, a trek and my wedding. Legendary."</p><cite>— Kabir Shah, Chhindwara</cite></blockquote>
+      <blockquote class="t-card dark"><p>"Customer service addressed me as 'Maharaj'. The boots fit like royalty too."</p><cite>— Rohan Iyer, Pune</cite></blockquote>
+      <blockquote class="t-card"><p>"Website? Insane. Boots? Even more insane. My ankles have never felt so aristocratic."</p><cite>— Zoya Khan, Delhi</cite></blockquote>
+      <blockquote class="t-card dark"><p>"Ten out of five. The spinning shoe thing on this site broke my brain (in a good way)."</p><cite>— Sara Thomas, Kochi</cite></blockquote>
+      <blockquote class="t-card" aria-hidden="true"><p>"I walked into Super Boot House for one pair. I left with three and a new personality."</p><cite>— Aarav Mehta, Mumbai</cite></blockquote>
+      <blockquote class="t-card dark" aria-hidden="true"><p>"Resoled my 2016 pair last month. They look better than the day I bought them."</p><cite>— Devika Rao, Bengaluru</cite></blockquote>
+      <blockquote class="t-card" aria-hidden="true"><p>"The Trailblazer 07 survived a monsoon, a trek and my wedding. Legendary."</p><cite>— Kabir Shah, Chhindwara</cite></blockquote>
+      <blockquote class="t-card dark" aria-hidden="true"><p>"Customer service addressed me as 'Maharaj'. The boots fit like royalty too."</p><cite>— Rohan Iyer, Pune</cite></blockquote>
+      <blockquote class="t-card" aria-hidden="true"><p>"Website? Insane. Boots? Even more insane. My ankles have never felt so aristocratic."</p><cite>— Zoya Khan, Delhi</cite></blockquote>
+      <blockquote class="t-card dark" aria-hidden="true"><p>"Ten out of five. The spinning shoe thing on this site broke my brain (in a good way)."</p><cite>— Sara Thomas, Kochi</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT / CTA ============ -->
+<section class="visit" id="visit">
+  <canvas id="ctaCanvas" aria-hidden="true"></canvas>
+  <h2 class="visit-title">
+    <span class="rv-clip"><span>YOUR FEET</span></span>
+    <span class="rv-clip outline"><span>DESERVE</span></span>
+    <span class="rv-clip accent"><span>A LEGEND.</span></span>
+  </h2>
+  <p class="visit-sub rv"><a href="#find" class="visit-addr" data-cursor>Chhindwara Road, Rautha Wada, Chhindwara, Madhya Pradesh</a> — open 10:30 am → 10:30 pm, every day.</p>
+  <div class="visit-cta rv">
+    <a href="#vault" class="btn btn-solid btn-xl magnetic" data-cursor><span>Claim Your Pair</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <form class="visit-form rv" id="joinForm">
+    <label for="email">Get drop alerts before anyone else</label>
+    <div class="form-row">
+      <input type="email" id="email" placeholder="you@legend.in" required>
+      <button class="btn btn-ghost magnetic" type="submit" data-cursor><span>Notify Me</span></button>
+    </div>
+    <p class="form-msg" id="formMsg" hidden>🔥 You're on the list. Drop 08 will find you first.</p>
+  </form>
+</section>
+
+<!-- ============ FIND THE HOUSE (map) ============ -->
+<section class="find" id="find">
+  <header class="sec-head">
+    <p class="sec-kicker rv">Chapter 05</p>
+    <h2 class="sec-title rv"><span class="rv-clip">FIND THE</span> <span class="rv-clip outline">HOUSE</span></h2>
+  </header>
+
+  <div class="find-grid find-grid--solo">
+    <div class="find-info rv">
+      <a class="map-card" href="https://maps.app.goo.gl/3gGuMupwo8hx7sWD8" target="_blank" rel="noopener" data-cursor aria-label="Open Super Boot House in Google Maps">
+        <iframe src="https://maps.google.com/maps?q=New%20Super%20Boot%20House%20Chhindwara&amp;ll=22.056065,78.9381483&amp;z=16&amp;hl=en&amp;output=embed" title="Map showing Super Boot House, Chhindwara" loading="lazy" tabindex="-1" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <span class="map-pill">OPEN IN GOOGLE MAPS ↗</span>
+      </a>
+
+      <dl class="find-facts">
+        <div><dt>Address</dt><dd>Chhindwara Road, Rautha Wada,<br>Chhindwara, Madhya Pradesh 480001</dd></div>
+        <div><dt>Open</dt><dd>Every day · 10:30 am – 10:30 pm</dd></div>
+      </dl>
+
+      <div class="find-cta">
+        <a href="https://maps.app.goo.gl/3gGuMupwo8hx7sWD8" target="_blank" rel="noopener" class="btn btn-solid magnetic" data-cursor><span>Get Directions</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-mark" aria-hidden="true"><span>SUPER BOOT HOUSE</span></div>
+  <div class="footer-row">
+    <p>© 2026 Super Boot House · Chhindwara Rd, Rautha Wada, Chhindwara, M.P. 480001</p>
+    <p class="footer-links">
+      <a href="#top" data-cursor>Top</a><a href="#vault" data-cursor>Vault</a><a href="#drop" data-cursor>Drop 07</a><a href="#craft" data-cursor>Craft</a><a href="#find" data-cursor>Find Us</a>
+    </p>
+    <p>Crafted with leather, love &amp; unreasonable amounts of CSS.</p>
+  </div>
+  <p class="concept-note">Concept website designed by <a href="../../index.html#work">Satyam Choure</a>. Not the official website of Super Boot House.</p>
+</footer>
+
+<a class="concept-badge" href="../../index.html#work">Concept by Satyam Choure ↗</a>
+
+<!-- toast -->
+<div class="toast" id="toast" role="status">Added to cart ✦</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
