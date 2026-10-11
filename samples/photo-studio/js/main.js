@@ -171,7 +171,7 @@
   /* ---------- Configurator: live estimate + WhatsApp / email hand-off --- */
   // [SAMPLE] prices in INR. Edit here; the summary, message and mailto update automatically.
   const TYPES = {
-    portrait: { name: 'Portraits', base: 3500, hour: 1200, incl: '60 min · 20 edited photos', img: 'images/svc-portrait.jpg', alt: 'Studio portrait of a woman in black, side-lit against a dark backdrop' },
+    portrait: { name: 'Portraits', base: 3500, hour: 1200, incl: '60 min · 20 edited photos', img: 'images/svc-portrait.jpg', alt: 'Studio portrait of a woman in a purple silk saree against a red backdrop' },
     family:   { name: 'Family', base: 6500, hour: 1500, incl: '90 min · 30 edited photos', img: 'images/svc-family.jpg', alt: 'Family of four posing together on a cream backdrop (AI-generated stand-in image)' },
     newborn:  { name: 'Newborn', base: 7500, hour: 1500, incl: '2 hrs · 25 edited photos', img: 'images/svc-newborn.jpg', alt: 'Sleeping newborn on a cream knit blanket in soft studio light (AI-generated stand-in image)' },
     product:  { name: 'Product', base: 4000, hour: 800, incl: 'Up to 10 items · 3 angles each', img: 'images/g-product-4.jpg', alt: 'Perfume bottles arranged on driftwood in natural studio light' },
