@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kohinoor-estates.example/sitemap.xml  # [PLACEHOLDER] domain

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<!--
+  ─────────────────────────────────────────────────────────────────────────────
+  AAGAM ACADEMY — demo build. Every [PLACEHOLDER] / [SAMPLE] marker in this
+  project, in one list (also mirrored in README.md):
+
+  [PLACEHOLDER] Brand name "Aagam Academy" — replace with client brand.
+  [PLACEHOLDER] Phone +91 98765 43210 (tel:, WhatsApp wa.me/919876543210).
+  [PLACEHOLDER] Email admissions@aagam.academy.
+  [PLACEHOLDER] Address: 2nd Floor, Shree Bhawan, Zone-II, Maharana Pratap
+                Nagar, Bhopal 462011, Madhya Pradesh.
+  [PLACEHOLDER] Domain https://www.aagam.academy (canonical, OG, sitemap).
+  [PLACEHOLDER] Social URLs (Instagram/Facebook/X/YouTube/LinkedIn/WhatsApp/
+                Threads) — currently point at platform home pages.
+  [PLACEHOLDER] Google Maps embed query (MP Nagar, Bhopal).
+  [PLACEHOLDER] Analytics snippet (commented in <head>).
+  [PLACEHOLDER] Logo mark (inline SVG asterisk) — swap for client logo.
+
+  [SAMPLE] Stats: 12 yrs, 2,400+ alumni, 38 selections (2025), +71% score lift,
+           4.9★ from 212 reviews.
+  [SAMPLE] Rankers: names, ranks, scores and their photos.
+  [SAMPLE] Testimonials (5) and parent quote.
+  [SAMPLE] Fees: base prices, batch multipliers, add-ons, discounts, early-bird.
+  [SAMPLE] Timetable seats-left counts.
+  [SAMPLE] Before/after mock-score panels.
+
+  Stock photos (Pexels) are stand-ins — replace with client photography before
+  launch; drop-in filenames are listed in README.md.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aagam Academy — JEE, NEET &amp; Boards Coaching in Bhopal | Book a Free Demo Class</title>
+  <meta name="description" content="Small-batch JEE, NEET &amp; Boards coaching in MP Nagar, Bhopal. Mentors of 12+ years, weekly mock tests, honest fees. Book a free demo class on WhatsApp today.">
+  <link rel="canonical" href="https://www.aagam.academy/"> <!-- [PLACEHOLDER] domain -->
+  <meta name="theme-color" content="#0b0d0c">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Aagam Academy">
+  <meta property="og:title" content="Aagam Academy — Coaching that behaves like mentorship">
+  <meta property="og:description" content="JEE · NEET · Boards in Bhopal. Batches of ≤24, weekly mocks, 7-day refund. Book a free demo class.">
+  <meta property="og:url" content="https://www.aagam.academy/"> <!-- [PLACEHOLDER] -->
+  <meta property="og:image" content="https://www.aagam.academy/images/hero-classroom.jpg"> <!-- [PLACEHOLDER] -->
+  <meta property="og:locale" content="en_IN">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aagam Academy — JEE, NEET &amp; Boards Coaching in Bhopal">
+  <meta name="twitter:description" content="Small batches. Big outcomes. Book a free demo class on WhatsApp.">
+  <meta name="twitter:image" content="https://www.aagam.academy/images/hero-classroom.jpg"> <!-- [PLACEHOLDER] -->
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0d0c'/%3E%3Cpath d='M32 12v40M15 22l34 20M49 22L15 42' stroke='%23c8f542' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <!-- Fonts: swap + graceful system fallback if CDN unavailable -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Analytics [PLACEHOLDER] — enable only after adding cookie notice copy.
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX',{anonymize_ip:true});</script>
+  -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Aagam Academy",
+    "url": "https://www.aagam.academy/",
+    "logo": "https://www.aagam.academy/images/hero-classroom.jpg",
+    "telephone": "+91 98765 43210",
+    "email": "admissions@aagam.academy",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2nd Floor, Shree Bhawan, Zone-II, Maharana Pratap Nagar",
+      "addressLocality": "Bhopal",
+      "addressRegion": "Madhya Pradesh",
+      "postalCode": "462011",
+      "addressCountry": "IN"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 23.2334, "longitude": 77.4029 },
+    "openingHours": ["Mo-Sa 08:00-20:00", "Su 09:00-13:00"],
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "212" },
+    "sameAs": [
+      "https://instagram.com/",
+      "https://facebook.com/",
+      "https://youtube.com/",
+      "https://x.com/"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── Entry gate (skippable, never blocks; hidden without JS) ── -->
+  <div id="gate" class="gate" hidden>
+    <p class="gate-mark mono" aria-hidden="true">✳</p>
+    <p class="gate-brand mono">AAGAM ACADEMY — BHOPAL</p>
+    <div class="gate-bar" aria-hidden="true"><span id="gate-fill"></span></div>
+    <button class="btn btn-solid" id="gate-enter" type="button">Enter the site</button>
+    <button class="gate-skip mono" id="gate-skip" type="button">skip intro →</button>
+  </div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── Header ── -->
+  <header class="site-head" id="site-head">
+    <div class="head-in">
+      <a class="brand" href="#top" aria-label="Aagam Academy — back to top">
+        <svg class="brand-mark" viewBox="0 0 64 64" width="26" height="26" aria-hidden="true"><path d="M32 8v48M11 20l42 24M53 20L11 44" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg>
+        <span class="brand-name">AAGAM<span class="brand-thin">ACADEMY</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#courses">Courses</a>
+        <a href="#results">Results</a>
+        <a href="#method">Method</a>
+        <a href="#faculty">Faculty</a>
+        <a href="#fees">Fees</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="head-actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle light / dark theme" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" class="ic-moon"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" class="ic-sun"><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <a class="icon-btn" href="tel:+919876543210" aria-label="Call Aagam Academy on +91 98765 43210">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-solid head-cta" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener">Book free demo</a>
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" hidden>
+    <nav class="drawer-nav" aria-label="Mobile">
+      <a href="#courses">Courses</a>
+      <a href="#results">Results</a>
+      <a href="#method">Method</a>
+      <a href="#faculty">Faculty</a>
+      <a href="#fees">Fees</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="drawer-foot">
+      <a class="btn btn-solid" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener">Book free demo on WhatsApp</a>
+      <p class="mono micro">MON–SAT 8:00–20:00 · BHOPAL</p>
+    </div>
+  </div>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <main id="main">
+
+    <!-- ══ HERO ══ -->
+    <section class="hero" id="top" aria-label="Intro">
+      <canvas id="orb" class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <p class="corner corner-tl mono">EST. 2013 — BHOPAL, IN</p>
+      <p class="corner corner-tr mono">23.23°N&nbsp;/&nbsp;77.40°E</p>
+      <p class="corner corner-bl mono">JEE · NEET · BOARDS · FOUNDATION</p>
+      <p class="corner corner-br mono" id="scroll-cue">SCROLL ↓</p>
+
+      <figure class="hero-card hero-card-a" data-parallax="0.06">
+        <img src="images/hero-classroom.jpg" alt="Two students in checked uniforms bent over a notebook at a red desk, deep in study" width="1400" height="788" fetchpriority="high">
+        <figcaption class="mono">FOUNDATION BATCH — 4 PM</figcaption>
+      </figure>
+      <figure class="hero-card hero-card-b" data-parallax="0.12">
+        <img src="images/library-two.jpg" alt="Two students revising together at a library desk, pens in hand" width="1400" height="933" loading="lazy" decoding="async">
+        <figcaption class="mono">DOUBT DESK — OPEN TILL 8</figcaption>
+      </figure>
+
+      <div class="hero-core">
+        <p class="hero-kicker mono">COACHING INSTITUTE · CLASSES VIII–XII · [PLACEHOLDER] BRAND</p>
+        <h1 class="hero-title">Learn what<br>actually <em>sticks.</em></h1>
+        <p class="hero-sub">Small batches, ruthless practice and mentors who stay after class. JEE, NEET &amp; Boards — taught in Bhopal, measured in selections.</p>
+        <div class="hero-cta" id="magnet-zone">
+          <a class="btn btn-solid btn-xl magnet" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.8 9.2c.4 2.6 3 5.2 5.6 5.6l1.2-1.6-2-1.2-1 .6a5.4 5.4 0 0 1-2.2-2.2l.6-1-1.2-2Z" fill="currentColor"/></svg>
+            Book a free demo class
+          </a>
+          <a class="btn btn-ghost btn-xl" href="#courses">Explore courses</a>
+        </div>
+        <ul class="trust-row" role="list">
+          <li><strong>4.9★</strong> 212 Google reviews<sup>*</sup></li>
+          <li><strong>2,400+</strong> alumni since 2013<sup>*</sup></li>
+          <li><strong>7-day</strong> no-questions refund</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══ Marquee ══ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>JEE MAIN + ADVANCED</span><i>✳</i><span>NEET (UG)</span><i>✳</i><span>CBSE / MP BOARD</span><i>✳</i><span>FOUNDATION VIII–X</span><i>✳</i><span>WEEKLY MOCK TESTS</span><i>✳</i><span>BATCHES OF ≤ 24</span><i>✳</i>
+        <span>JEE MAIN + ADVANCED</span><i>✳</i><span>NEET (UG)</span><i>✳</i><span>CBSE / MP BOARD</span><i>✳</i><span>FOUNDATION VIII–X</span><i>✳</i><span>WEEKLY MOCK TESTS</span><i>✳</i><span>BATCHES OF ≤ 24</span><i>✳</i>
+      </div>
+    </div>
+
+    <!-- ══ 01 WHY ══ -->
+    <section class="sec sec-why" id="why" aria-labelledby="why-t">
+      <div class="sec-head">
+        <p class="sec-index mono">01 — WHY AAGAM</p>
+        <p class="sec-note mono">BATCH ≤ 24 · MENTORS 12+ YRS</p>
+      </div>
+      <h2 class="sec-title" id="why-t">Coaching that behaves<br>like <em>mentorship.</em></h2>
+      <div class="why-grid">
+        <div class="why-copy reveal">
+          <p>Most institutes sell hours. We sell outcomes — a diagnostic before admission, a mentor who knows your weak chapters by name, and a test every single week until the exam stops scaring you.</p>
+          <p>No 200-student halls. No recorded-video “faculty”. If a batch crosses 24, we open a second one.</p>
+          <a class="link-arrow" href="#method">See how a week works <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="stats" role="list">
+          <div class="stat reveal" role="listitem"><p class="stat-n mono"><span data-count="12">0</span></p><p class="stat-l">years in Bhopal</p></div>
+          <div class="stat reveal" role="listitem"><p class="stat-n mono"><span data-count="2400">0</span>+</p><p class="stat-l">alumni mentored<sup>*</sup></p></div>
+          <div class="stat reveal" role="listitem"><p class="stat-n mono"><span data-count="38">0</span></p><p class="stat-l">IIT / med-college selections, 2025<sup>*</sup></p></div>
+          <div class="stat reveal" role="listitem"><p class="stat-n mono">+<span data-count="71">0</span>%</p><p class="stat-l">avg. mock-score lift in 2 terms<sup>*</sup></p></div>
+        </div>
+      </div>
+      <p class="fine mono">* DEMO FIGURES [SAMPLE] — VERIFIED NUMBERS GO HERE BEFORE LAUNCH.</p>
+    </section>
+
+    <!-- ══ 02 COURSES ══ -->
+    <section class="sec sec-courses" id="courses" aria-labelledby="courses-t">
+      <div class="sec-head">
+        <p class="sec-index mono">02 — PROGRAMMES</p>
+        <p class="sec-note mono">SIX TRACKS · ONE STANDARD</p>
+      </div>
+      <h2 class="sec-title" id="courses-t">Pick your <em>fight.</em></h2>
+
+      <div class="filter-bar" role="group" aria-label="Filter courses">
+        <button class="chip is-on" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="jee" aria-pressed="false">JEE</button>
+        <button class="chip" data-filter="neet" aria-pressed="false">NEET</button>
+        <button class="chip" data-filter="boards" aria-pressed="false">Boards</button>
+        <button class="chip" data-filter="foundation" aria-pressed="false">Foundation</button>
+      </div>
+
+      <div class="course-grid" id="course-grid"><!-- cards injected --></div>
+
+      <div class="sec-cta">
+        <p>Not sure which track fits? Sit a free diagnostic — 40 minutes, zero pressure.</p>
+        <a class="btn btn-solid" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20please%20schedule%20a%20free%20diagnostic%20test%20for%20my%20ward." target="_blank" rel="noopener">Schedule free diagnostic</a>
+      </div>
+    </section>
+
+    <!-- ══ 03 METHOD ══ -->
+    <section class="sec sec-method" id="method" aria-labelledby="method-t">
+      <div class="sec-head">
+        <p class="sec-index mono">03 — THE METHOD</p>
+        <p class="sec-note mono">A WEEK AT AAGAM</p>
+      </div>
+      <div class="method-wrap">
+        <div class="method-sticky">
+          <h2 class="sec-title" id="method-t">Four moves,<br>every <em>week.</em></h2>
+          <p class="method-num mono" id="method-num" aria-hidden="true">01</p>
+          <div class="method-rail" aria-hidden="true"><span id="method-rail-fill"></span></div>
+        </div>
+        <ol class="method-steps" id="method-steps">
+          <li class="m-step" data-step="1">
+            <h3>Diagnose</h3>
+            <p>Every student starts with a 40-minute diagnostic. We map chapter-level gaps before we sell you anything — the report is yours even if you don't join.</p>
+            <p class="mono micro">DAY 0 · FREE · REPORT INCLUDED</p>
+          </li>
+          <li class="m-step" data-step="2">
+            <h3>Teach</h3>
+            <p>Concept-first lectures in batches of ≤24. Faculty teach from the board, not the projector — and every lecture ends with a 5-minute exit slip.</p>
+            <p class="mono micro">3 LECTURES / WK · EXIT SLIPS DAILY</p>
+          </li>
+          <li class="m-step" data-step="3">
+            <h3>Drill</h3>
+            <p>Daily practice sheets graded on accuracy under a timer. Doubt desk stays open till 8 pm — walk in, no appointment, any subject.</p>
+            <p class="mono micro">DPS DAILY · DOUBT DESK TILL 20:00</p>
+          </li>
+          <li class="m-step" data-step="4">
+            <h3>Review</h3>
+            <p>Sunday mock, Monday analysis. Parents get a two-line WhatsApp summary — what improved, what's next. No surprises at report-card time.</p>
+            <p class="mono micro">WEEKLY MOCK · PARENT SUMMARY MON</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ══ 04 RESULTS ══ -->
+    <section class="sec sec-results" id="results" aria-labelledby="results-t">
+      <div class="sec-head">
+        <p class="sec-index mono">04 — RESULTS</p>
+        <p class="sec-note mono">2025 COHORT [SAMPLE]</p>
+      </div>
+      <h2 class="sec-title" id="results-t">Proof, not <em>promises.</em></h2>
+
+      <div class="rankers" id="rankers"><!-- injected --></div>
+
+      <div class="ba-wrap reveal">
+        <div class="ba-head">
+          <h3>One student, two semesters</h3>
+          <p class="mono micro">AVG. MOCK PERCENTILE — CLASS XII BATCH [SAMPLE]</p>
+        </div>
+        <div class="ba" id="ba" style="--pos:56%">
+          <div class="ba-panel ba-before">
+            <p class="ba-label mono">SEPT — 41<sup>th</sup> percentile</p>
+            <ul class="ba-list">
+              <li><span>Physics</span><strong>38%</strong></li>
+              <li><span>Chemistry</span><strong>44%</strong></li>
+              <li><span>Maths</span><strong>41%</strong></li>
+              <li><span>Mock cadence</span><strong>1 / month</strong></li>
+              <li><span>Doubts cleared</span><strong>“later”</strong></li>
+            </ul>
+          </div>
+          <div class="ba-panel ba-after">
+            <p class="ba-label mono">MARCH — 88<sup>th</sup> percentile</p>
+            <ul class="ba-list">
+              <li><span>Physics</span><strong>86%</strong></li>
+              <li><span>Chemistry</span><strong>91%</strong></li>
+              <li><span>Maths</span><strong>87%</strong></li>
+              <li><span>Mock cadence</span><strong>1 / week</strong></li>
+              <li><span>Doubts cleared</span><strong>same day</strong></li>
+            </ul>
+          </div>
+          <div class="ba-handle" aria-hidden="true"><span></span></div>
+          <input type="range" id="ba-range" min="6" max="94" value="56" aria-label="Compare results before and after two terms at Aagam">
+        </div>
+      </div>
+
+      <div class="sec-cta">
+        <p>Your ward's version of this chart starts with one demo class.</p>
+        <a class="btn btn-solid" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener">Start with a demo class</a>
+      </div>
+    </section>
+
+    <!-- ══ 05 FACULTY ══ -->
+    <section class="sec sec-faculty" id="faculty" aria-labelledby="faculty-t">
+      <div class="sec-head">
+        <p class="sec-index mono">05 — FACULTY</p>
+        <p class="sec-note mono">TEACHERS, NOT PROJECTORS</p>
+      </div>
+      <h2 class="sec-title" id="faculty-t">Mentors who <em>stay.</em></h2>
+      <div class="fac-grid" id="fac-grid"><!-- injected --></div>
+    </section>
+
+    <!-- ══ 06 BATCHES / TIMETABLE ══ -->
+    <section class="sec sec-batches" id="batches" aria-labelledby="batches-t">
+      <div class="sec-head">
+        <p class="sec-index mono">06 — BATCHES THIS WEEK</p>
+        <p class="sec-note mono">SEATS UPDATE DAILY [SAMPLE]</p>
+      </div>
+      <h2 class="sec-title" id="batches-t">Find your <em>hour.</em></h2>
+      <div class="batch-tools">
+        <div class="filter-bar" role="group" aria-label="Filter batches by day">
+          <button class="chip is-on" data-day="all" aria-pressed="true">All days</button>
+          <button class="chip" data-day="mon" aria-pressed="false">Mon</button>
+          <button class="chip" data-day="wed" aria-pressed="false">Wed</button>
+          <button class="chip" data-day="fri" aria-pressed="false">Fri</button>
+          <button class="chip" data-day="sat" aria-pressed="false">Sat</button>
+        </div>
+        <label class="search mono"><span class="sr-only">Search batches</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15 15 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input id="batch-search" type="search" placeholder="SEARCH: JEE, NEET, X…" autocomplete="off">
+        </label>
+      </div>
+      <div class="batch-grid" id="batch-grid"><!-- injected --></div>
+    </section>
+
+    <!-- ══ 07 FEE CALCULATOR ══ -->
+    <section class="sec sec-fees" id="fees" aria-labelledby="fees-t">
+      <div class="sec-head">
+        <p class="sec-index mono">07 — FEE CALCULATOR</p>
+        <p class="sec-note mono">LIVE ESTIMATE [SAMPLE]</p>
+      </div>
+      <h2 class="sec-title" id="fees-t">Know the fee<br>before you <em>ask.</em></h2>
+
+      <div class="calc">
+        <form class="calc-form" id="calc-form" aria-label="Fee estimator">
+          <fieldset>
+            <legend class="mono micro">1 · PROGRAMME</legend>
+            <div class="opt-row" role="radiogroup" aria-label="Programme">
+              <label class="opt"><input type="radio" name="prog" value="foundation" data-base="3500" checked><span>Foundation VIII–X</span></label>
+              <label class="opt"><input type="radio" name="prog" value="boards" data-base="4500"><span>Boards XI–XII</span></label>
+              <label class="opt"><input type="radio" name="prog" value="jee" data-base="6500"><span>JEE 2-yr</span></label>
+              <label class="opt"><input type="radio" name="prog" value="neet" data-base="6500"><span>NEET 2-yr</span></label>
+              <label class="opt"><input type="radio" name="prog" value="crash" data-base="18000" data-flat="1"><span>Crash ’45 (flat)</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="mono micro">2 · BATCH TYPE</legend>
+            <div class="opt-row" role="radiogroup" aria-label="Batch type">
+              <label class="opt"><input type="radio" name="batch" value="regular" data-mult="1" checked><span>Regular · ≤24</span></label>
+              <label class="opt"><input type="radio" name="batch" value="small" data-mult="1.35"><span>Small · ≤12</span></label>
+              <label class="opt"><input type="radio" name="batch" value="solo" data-mult="3"><span>1-on-1</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="mono micro">3 · ADD-ONS &amp; DISCOUNTS</legend>
+            <div class="opt-row col">
+              <label class="opt check"><input type="checkbox" id="add-material" data-fee="2000"><span>Study material pack · ₹2,000/yr</span></label>
+              <label class="opt check"><input type="checkbox" id="add-tests" data-fee="3000"><span>All-India test series · ₹3,000/yr</span></label>
+              <label class="opt check"><input type="checkbox" id="disc-sibling" data-disc="0.10"><span>Sibling already enrolled · −10%</span></label>
+              <label class="opt check"><input type="checkbox" id="disc-early" data-disc-abs="2000"><span>Early bird (before 31 May) · −₹2,000</span></label>
+            </div>
+          </fieldset>
+        </form>
+
+        <aside class="calc-out" aria-live="polite">
+          <p class="mono micro">YOUR ESTIMATE</p>
+          <p class="calc-price" id="calc-price">₹3,500<span id="calc-per">/mo</span></p>
+          <ul class="calc-lines mono" id="calc-lines"></ul>
+          <p class="fine">Estimate only [SAMPLE]. Final fee is printed on the admission sheet — same number, no “extras”.</p>
+          <a class="btn btn-solid" id="calc-wa" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20please%20confirm%20my%20fee%20estimate." target="_blank" rel="noopener">Get exact quote on WhatsApp</a>
+          <a class="btn btn-ghost" href="#contact">Or send an enquiry ↓</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ══ 08 STORIES ══ -->
+    <section class="sec sec-stories" id="stories" aria-labelledby="stories-t">
+      <div class="sec-head">
+        <p class="sec-index mono">08 — STORIES</p>
+        <p class="sec-note mono">WORDS WE DIDN’T WRITE [SAMPLE]</p>
+      </div>
+      <h2 class="sec-title" id="stories-t">Parents talk. <em>We blush.</em></h2>
+
+      <div class="caro" id="caro" role="region" aria-roledescription="carousel" aria-label="Testimonials">
+        <div class="caro-track" id="caro-track"><!-- injected --></div>
+        <div class="caro-ui">
+          <button class="icon-btn" id="caro-prev" type="button" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="caro-dots" id="caro-dots" role="tablist" aria-label="Choose testimonial"></div>
+          <button class="icon-btn" id="caro-next" type="button" aria-label="Next testimonial"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 09 CAMPUS ══ -->
+    <section class="sec sec-gallery" id="campus" aria-labelledby="campus-t">
+      <div class="sec-head">
+        <p class="sec-index mono">09 — CAMPUS</p>
+        <p class="sec-note mono">MP NAGAR, ZONE-II</p>
+      </div>
+      <h2 class="sec-title" id="campus-t">A room built for <em>focus.</em></h2>
+      <div class="gal" id="gal"><!-- injected --></div>
+      <p class="fine mono">STOCK IMAGERY — CLIENT PHOTOGRAPHY REPLACES BEFORE LAUNCH (SEE README).</p>
+    </section>
+
+    <!-- ══ 10 FAQ ══ -->
+    <section class="sec sec-faq" id="faq" aria-labelledby="faq-t">
+      <div class="sec-head">
+        <p class="sec-index mono">10 — FAQ</p>
+        <p class="sec-note mono">ASKED EVERY JUNE</p>
+      </div>
+      <h2 class="sec-title" id="faq-t">Straight <em>answers.</em></h2>
+      <div class="acc" id="acc"><!-- injected --></div>
+    </section>
+
+    <!-- ══ 11 CONTACT ══ -->
+    <section class="sec sec-contact" id="contact" aria-labelledby="contact-t">
+      <div class="sec-head">
+        <p class="sec-index mono">11 — CONTACT</p>
+        <p class="sec-note mono">REPLIES WITHIN 4 WORKING HRS</p>
+      </div>
+      <h2 class="sec-title" id="contact-t">Walk in, or<br>write <em>now.</em></h2>
+
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <address>
+            <p class="mono micro">ADDRESS [PLACEHOLDER]</p>
+            <p>2nd Floor, Shree Bhawan, Zone-II,<br>Maharana Pratap Nagar,<br>Bhopal 462011, Madhya Pradesh</p>
+          </address>
+          <div>
+            <p class="mono micro">HOURS</p>
+            <p>Mon–Sat · 8:00–20:00<br>Sun · 9:00–13:00 (doubt desk)</p>
+          </div>
+          <div>
+            <p class="mono micro">DIRECT</p>
+            <p><a href="tel:+919876543210">+91 98765 43210</a><br>
+            <a href="mailto:admissions@aagam.academy">admissions@aagam.academy</a></p>
+          </div>
+          <div>
+            <p class="mono micro">FOLLOW [PLACEHOLDER]</p>
+            <div class="socials">
+              <a class="icon-btn" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Aagam Academy on Instagram (placeholder)"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg></a>
+              <a class="icon-btn" href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Aagam Academy on Facebook (placeholder)"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M14 8h3V4.5h-3A4.5 4.5 0 0 0 9.5 9v2.5H7V15h2.5v6H13v-6h3l.5-3.5H13V9a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></a>
+              <a class="icon-btn" href="https://x.com/" target="_blank" rel="noopener" aria-label="Aagam Academy on X (placeholder)"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+              <a class="icon-btn" href="https://youtube.com/" target="_blank" rel="noopener" aria-label="Aagam Academy on YouTube (placeholder)"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 9.8v4.4L14.5 12Z" fill="currentColor"/></svg></a>
+              <a class="icon-btn" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="Aagam Academy on LinkedIn (placeholder)"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V17M8 7.6v.2M12 17v-3.8a2.4 2.4 0 0 1 4.8 0V17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+              <a class="icon-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></a>
+              <a class="icon-btn" href="https://threads.net/" target="_blank" rel="noopener" aria-label="Aagam Academy on Threads (placeholder)"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 21c-4 0-7-3-7-9s3-9 7-9c3.4 0 6 2 6.7 5M12 21c3.5 0 6-2 6-5 0-2.5-2-4-4.5-4-1 0-2 .3-2.7.9M12 21c-2 0-3.5-1.3-3.5-3.2 0-2 1.7-3.3 4-3.3 2.8 0 4.5 1.2 4.5 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+            </div>
+          </div>
+          <div class="map-card">
+            <iframe title="Map — Aagam Academy, MP Nagar Zone-II, Bhopal" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Maharana+Pratap+Nagar+Zone+2+Bhopal&output=embed"></iframe>
+            <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=Maharana+Pratap+Nagar+Zone+2+Bhopal" target="_blank" rel="noopener">Open in Google Maps <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <!-- Multi-step enquiry -->
+        <div class="enq reveal" id="enq">
+          <form id="enq-form" novalidate>
+            <div class="enq-prog" aria-hidden="true">
+              <span class="enq-step is-on" data-s="1"></span>
+              <span class="enq-step" data-s="2"></span>
+              <span class="enq-step" data-s="3"></span>
+              <p class="mono micro" id="enq-count">STEP 1 / 3 — STUDENT</p>
+            </div>
+
+            <fieldset class="enq-panel is-on" data-panel="1">
+              <legend class="sr-only">About the student</legend>
+              <label class="fld"><span class="mono micro">STUDENT NAME *</span>
+                <input name="name" id="f-name" type="text" autocomplete="name" required minlength="2" placeholder="e.g. Ananya Sharma">
+                <em class="err" id="e-name"></em>
+              </label>
+              <label class="fld"><span class="mono micro">CURRENT CLASS *</span>
+                <select name="klass" id="f-class" required>
+                  <option value="">Select…</option>
+                  <option>VIII</option><option>IX</option><option>X</option>
+                  <option>XI</option><option>XII</option><option>XII passed (dropper)</option>
+                </select>
+                <em class="err" id="e-class"></em>
+              </label>
+              <div class="fld"><span class="mono micro">TARGET *</span>
+                <div class="opt-row" role="radiogroup" aria-label="Target exam">
+                  <label class="opt"><input type="radio" name="target" value="JEE" checked><span>JEE</span></label>
+                  <label class="opt"><input type="radio" name="target" value="NEET"><span>NEET</span></label>
+                  <label class="opt"><input type="radio" name="target" value="Boards"><span>Boards</span></label>
+                  <label class="opt"><input type="radio" name="target" value="Foundation"><span>Foundation</span></label>
+                </div>
+              </div>
+              <div class="enq-nav"><span></span><button class="btn btn-solid" type="button" data-next="2">Next →</button></div>
+            </fieldset>
+
+            <fieldset class="enq-panel" data-panel="2" hidden>
+              <legend class="sr-only">Preferences</legend>
+              <div class="fld"><span class="mono micro">MODE *</span>
+                <div class="opt-row" role="radiogroup" aria-label="Mode">
+                  <label class="opt"><input type="radio" name="mode" value="Offline" checked><span>Offline</span></label>
+                  <label class="opt"><input type="radio" name="mode" value="Online"><span>Online live</span></label>
+                  <label class="opt"><input type="radio" name="mode" value="Hybrid"><span>Hybrid</span></label>
+                </div>
+              </div>
+              <label class="fld"><span class="mono micro">PREFERRED SLOT *</span>
+                <select name="slot" id="f-slot" required>
+                  <option value="">Select…</option>
+                  <option>Morning · 7:00–9:00</option>
+                  <option>Evening · 17:00–19:00</option>
+                  <option>Weekend · Sat–Sun</option>
+                </select>
+                <em class="err" id="e-slot"></em>
+              </label>
+              <label class="fld"><span class="mono micro">ANYTHING WE SHOULD KNOW?</span>
+                <textarea name="note" rows="3" placeholder="e.g. Weak in Physics numericals, school is DPS"></textarea>
+              </label>
+              <div class="enq-nav"><button class="btn btn-ghost" type="button" data-prev="1">← Back</button><button class="btn btn-solid" type="button" data-next="3">Next →</button></div>
+            </fieldset>
+
+            <fieldset class="enq-panel" data-panel="3" hidden>
+              <legend class="sr-only">Contact details</legend>
+              <label class="fld"><span class="mono micro">PARENT / STUDENT MOBILE *</span>
+                <input name="phone" id="f-phone" type="tel" inputmode="numeric" autocomplete="tel" required pattern="[6-9][0-9]{9}" placeholder="10-digit mobile">
+                <em class="err" id="e-phone"></em>
+              </label>
+              <label class="fld"><span class="mono micro">EMAIL (OPTIONAL)</span>
+                <input name="email" id="f-email" type="email" autocomplete="email" placeholder="you@example.com">
+                <em class="err" id="e-email"></em>
+              </label>
+              <label class="opt check"><input type="checkbox" id="f-consent" required><span>You may call / WhatsApp me about this enquiry. *</span></label>
+              <em class="err" id="e-consent"></em>
+              <div class="enq-nav"><button class="btn btn-ghost" type="button" data-prev="2">← Back</button><button class="btn btn-solid" id="enq-submit" type="submit">Send enquiry</button></div>
+            </fieldset>
+
+            <div class="enq-done" id="enq-done" hidden>
+              <p class="mono micro">ENQUIRY SAVED · REF <span id="enq-ref"></span></p>
+              <h3>Got it. We'll call within 4 working hours.</h3>
+              <p class="fine">Honest note: this demo form stores the enquiry only in this browser — nothing reaches a server. For an instant reply, send the same details on WhatsApp:</p>
+              <a class="btn btn-solid" id="enq-wa" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20here%20is%20my%20enquiry." target="_blank" rel="noopener">Send on WhatsApp instead</a>
+            </div>
+            <p class="fine mono" id="enq-honest">DEMO FORM — SAVED IN YOUR BROWSER ONLY. NOTHING IS UPLOADED.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Final CTA ══ -->
+    <section class="sec sec-final" aria-labelledby="final-t">
+      <h2 class="final-title" id="final-t">One demo class<br>ends the <em>argument.</em></h2>
+      <p class="final-sub">Bring your ward, sit in a live batch, keep the diagnostic report either way.</p>
+      <div class="hero-cta">
+        <a class="btn btn-solid btn-xl" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener">Book the free demo</a>
+        <a class="btn btn-ghost btn-xl" href="tel:+919876543210">or call +91 98765 43210</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-foot">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" aria-label="Aagam Academy — back to top">
+          <svg class="brand-mark" viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><path d="M32 8v48M11 20l42 24M53 20L11 44" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg>
+          <span class="brand-name">AAGAM<span class="brand-thin">ACADEMY</span></span>
+        </a>
+        <p class="fine">Mentors, not monitors.<br>Bhopal · since 2013. [PLACEHOLDER]</p>
+      </div>
+      <nav aria-label="Footer">
+        <p class="mono micro">SITE</p>
+        <a href="#courses">Courses</a>
+        <a href="#results">Results</a>
+        <a href="#fees">Fee calculator</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div>
+        <p class="mono micro">VISIT</p>
+        <p class="fine">Shree Bhawan, Zone-II MP Nagar,<br>Bhopal 462011 [PLACEHOLDER]</p>
+        <p class="fine"><a href="tel:+919876543210">+91 98765 43210</a><br><a href="mailto:admissions@aagam.academy">admissions@aagam.academy</a></p>
+        <a class="btn btn-solid" style="margin-top:12px" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener">Book free demo</a>
+      </div>
+      <div>
+        <p class="mono micro">LEGAL</p>
+        <button class="linklike" id="privacy-open" type="button">Privacy note</button>
+        <a href="404.html">404 page</a>
+        <p class="fine">Fees shown are estimates [SAMPLE].<br>7-day pro-rata refund, always in writing.</p>
+      </div>
+    </div>
+    <div class="foot-base mono micro">
+      <span>© 2026 AAGAM ACADEMY [PLACEHOLDER]</span>
+      <span>SITE BY ARENA · SET IN SPACE GROTESK &amp; FRAUNCES</span>
+      <span>23.23°N / 77.40°E</span>
+    </div>
+  </footer>
+
+  <!-- ── Floating actions ── -->
+  <a class="fab" id="fab" href="https://wa.me/919876543210?text=Hi%20Aagam%20Academy%2C%20I%20want%20to%20book%20a%20free%20demo%20class." target="_blank" rel="noopener" aria-label="Chat on WhatsApp — book a free demo class">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.8 9.2c.4 2.6 3 5.2 5.6 5.6l1.2-1.6-2-1.2-1 .6a5.4 5.4 0 0 1-2.2-2.2l.6-1-1.2-2Z" fill="currentColor"/></svg>
+  </a>
+  <button class="to-top icon-btn" id="to-top" type="button" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 19V5m-7 7 7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <!-- ── Dialogs ── -->
+  <dialog class="dlg" id="dlg-light" aria-label="Image viewer">
+    <figure><img id="light-img" src="images/hero-classroom.jpg" alt="Selected campus photograph"><figcaption class="mono micro" id="light-cap"></figcaption></figure>
+    <div class="dlg-ui">
+      <button class="icon-btn" id="light-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="icon-btn" id="light-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="icon-btn" id="light-close" type="button" aria-label="Close image viewer"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+  </dialog>
+
+  <dialog class="dlg dlg-course" id="dlg-course" aria-label="Course details">
+    <div id="course-body"></div>
+    <button class="icon-btn dlg-x" id="course-close" type="button" aria-label="Close course details"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </dialog>
+
+  <dialog class="dlg dlg-privacy" id="dlg-privacy" aria-label="Privacy note">
+    <h3 class="mono micro">PRIVACY NOTE</h3>
+    <p class="fine">This demo site uses no analytics, no tracking pixels and no third-party cookies. The enquiry form stores data only in your browser (localStorage) and never uploads it. External resources are limited to fonts and the map embed. Replace stock photography and placeholder contacts before launch.</p>
+    <button class="btn btn-ghost" id="privacy-close" type="button">Close</button>
+  </dialog>
+
+  <!-- ── Cookie notice (shown only if analytics is enabled in app.js) ── -->
+  <div class="cookie" id="cookie" hidden role="dialog" aria-label="Cookie notice">
+    <p class="fine">We'd like to use anonymous analytics to improve this site. No ads, no data sale, ever. [PLACEHOLDER]</p>
+    <div><button class="btn btn-solid" id="cookie-yes" type="button">Allow</button><button class="btn btn-ghost" id="cookie-no" type="button">No thanks</button></div>
+  </div>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

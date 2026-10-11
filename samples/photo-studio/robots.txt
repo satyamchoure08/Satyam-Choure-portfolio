@@ -1,0 +1,5 @@
+# Noor Frame Studio [PLACEHOLDER] — robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://www.noorframestudio.in/sitemap.xml

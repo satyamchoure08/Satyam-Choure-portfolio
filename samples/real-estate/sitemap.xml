@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [PLACEHOLDER] replace kohinoor-estates.example with the production domain -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kohinoor-estates.example/index.html</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kohinoor-estates.example/properties.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kohinoor-estates.example/property.html</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kohinoor-estates.example/about.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://kohinoor-estates.example/blog.html</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://kohinoor-estates.example/blog-post.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://kohinoor-estates.example/contact.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+</urlset>

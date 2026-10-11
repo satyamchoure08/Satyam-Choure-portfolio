@@ -354,14 +354,3 @@ h2 .rv-clip,h2 span{display:inline-block}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.2s !important}
   html{scroll-behavior:auto}
 }
-
-/* ---------- portfolio copy: solo map layout + concept label ---------- */
-.find-grid--solo{grid-template-columns:1fr}
-.find-grid--solo .find-info{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);grid-template-rows:auto 1fr;gap:1.6rem 3rem;align-items:start}
-.find-grid--solo .map-card{grid-row:span 2}
-@media (max-width:860px){.find-grid--solo .find-info{grid-template-columns:1fr}.find-grid--solo .map-card{grid-row:auto}}
-.concept-note{margin-top:1.2rem;font-size:.8rem;color:var(--ink-soft)}
-.concept-note a{border-bottom:1.5px solid var(--orange)}
-.concept-badge{position:fixed;left:14px;bottom:14px;z-index:84;font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
-  background:var(--paper);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:.5rem .85rem;box-shadow:3px 3px 0 var(--ink)}
-.concept-badge:hover{background:var(--orange);color:var(--paper)}

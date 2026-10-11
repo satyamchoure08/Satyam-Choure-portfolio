@@ -1,0 +1,3229 @@
+<!DOCTYPE html>
+<!--
+╔════════════════════════════════════════════════════════════════════════════════╗
+║  SHREE KRISHNA SWEETS & BAKERS — WEBSITE LAUNCH CHECKLIST                      ║
+║  Live karne se pehle har [PLACEHOLDER] ko asli value se badlein aur            ║
+║  har [SAMPLE] ko verify / edit karein. File mein "PLACEHOLDER" aur             ║
+║  "SAMPLE" search karein — saare points neeche listed hain.                     ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━ [PLACEHOLDER] — yeh BADALNA zaroori hai ━━━━━━━━
+ 1. Shop name ............ "Shree Krishna Sweets & Bakers" (title, logo, footer, og:site_name)
+ 2. Town / address ....... "Shop No. 12, Sunshine Plaza, Kolar Road, Bhopal – 462042"
+ 3. Phone ................ "+91 98260 45123"  →  tel:+919826045123
+ 4. WhatsApp number ...... "919826045123"  →  https://wa.me/919826045123 (poori file mein har wa.me link)
+ 5. Opening hours ........ "8:00 AM – 10:00 PM (Mon–Sun)"
+ 6. Advance order time ... "24 hours" (cake form + FAQ + builder details step)
+ 7. Delivery area ........ "Bhopal ke andar ~8 km — free above ₹500 [PLACEHOLDER]"
+ 8. FSSAI licence no. .... "[PLACEHOLDER: FSSAI No. 00000000000000]" (Why-us section)
+ 9. Desi ghee claim ...... "100% shuddh desi ghee" — shop se confirm karein
+10. Social links ......... Instagram / Facebook URLs footer mein [PLACEHOLDER]
+11. Google Map ........... contact section ka map box — Maps embed link [PLACEHOLDER]
+12. "Website by ........." footer credit [PLACEHOLDER: aapka naam/studio]
+13. Est. year ............ 2008 (trust bar "18 Years") [PLACEHOLDER]
+14. Logo ................. abhi text logo hai; asli logo image [PLACEHOLDER]
+15. og:image ............. images/og-image.jpg — abhi stock hero photo; brand photo lagayein
+16. Business JSON-LD ..... schema.org block head mein — details check karein
+
+━━━━━━━━ [SAMPLE] — demo content, verify / edit karein ━━━━━━━━
+ A. Hero rating line ......... "⭐ 4.8 · 2,000+ happy families"
+ B. Trust bar numbers ........ 18 Years · 25,000+ Happy Customers · 120+ Sweets & Cakes
+ C. Aaj ke specials .......... items + prices
+ D. Menu ke daam ............. har item ka ₹ price (per kg / per piece)
+ E. Festival & gift boxes .... box sizes + price ranges
+ F. Reviews .................. 3 customer reviews + names + stars
+ G. Cake builder prices ...... script block ke upar PRICE_CONFIG list (ek hi jagah edit karein)
+ H. Photos ................... images/ se stock photos lagi hain — LIVE se pehle
+                              dukaan ki asli photos se badlein (same filenames)
+ I. Cake price estimate ...... "Yeh andaazan daam hai…" disclaimer ke saath
+
+Photos: ab images/ folder se stock photos lagayi gayi hain (sab lazy-loaded hain).
+Yeh stock stand-ins hain — LIVE karne se pehle dukaan ki asli photos se badlein
+(images/ folder mein same filenames drop kar dein).
+Koi bhi image file abhi external nahi hai — page 100% offline chalta hai (sirf Google
+Fonts online hain). Nothing is saved on any server — WhatsApp order page ke through jaate hain.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shree Krishna Sweets &amp; Bakers | Fresh Mithai, Cakes &amp; Bakery in Bhopal</title>
+<meta name="description" content="Bhopal ki apni mithai dukaan — shuddh desi ghee ki fresh mithai, designer birthday cakes, bakery items aur namkeen. WhatsApp pe order karein: 🎂 WhatsApp pe order karein.">
+<meta name="theme-color" content="#8A1C2B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shree Krishna Sweets &amp; Bakers">
+<meta property="og:title" content="Shree Krishna Sweets &amp; Bakers | Fresh Mithai, Cakes &amp; Bakery in Bhopal">
+<meta property="og:description" content="Har khushi ki mithaas — fresh, shuddh desi ghee mein, roz. Mithai, custom cakes, bakery &amp; namkeen. WhatsApp pe order karein!">
+<meta property="og:image" content="images/og-image.jpg"><!-- [PLACEHOLDER] 1200x630 brand photo -->
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Shree Krishna Sweets & Bakers",
+  "image": "images/og-image.jpg",
+  "telephone": "+91-98260-45123",
+  "priceRange": "₹₹",
+  "servesCuisine": ["Mithai", "Bakery", "Cakes"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop No. 12, Sunshine Plaza, Kolar Road",
+    "addressLocality": "Bhopal",
+    "addressRegion": "Madhya Pradesh",
+    "postalCode": "462042",
+    "addressCountry": "IN"
+  },
+  "openingHours": "Mo-Su 08:00-22:00",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "2000" }
+}
+</script>
+<style>
+/* ============================================================
+   COLOURS & DESIGN TOKENS — sab kuch yahin badlein
+   ============================================================ */
+:root{
+  --cream:#FFF7EC;          /* warm cream background */
+  --cream-2:#FBEBD4;        /* deeper cream for section bands */
+  --maroon:#8A1C2B;         /* rich maroon */
+  --maroon-dark:#65121E;
+  --saffron:#E8871E;        /* festive saffron */
+  --saffron-2:#F6B04A;
+  --gold:#C79A3B;
+  --gold-soft:#F3E3BF;
+  --pink:#E56B8C;           /* soft pink for cakes */
+  --pink-soft:#FBDDE6;
+  --wa:#25D366;             /* WhatsApp green */
+  --wa-dark:#128C4A;
+  --ink:#3A2318;
+  --ink-soft:#6E5443;
+  --white:#FFFFFF;
+  --line:#EBD7B8;
+  --shadow:0 12px 30px rgba(122,60,20,.13);
+  --shadow-sm:0 6px 16px rgba(122,60,20,.10);
+  --radius:20px;
+  --radius-sm:12px;
+  --font-head:'Baloo 2', system-ui, sans-serif;
+  --font-body:'Mukta', system-ui, sans-serif;
+  --topbar-h:64px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--font-body);color:var(--ink);
+  background:var(--cream);line-height:1.7;font-size:17px;overflow-x:hidden;
+}
+body::before{ /* subtle rangoli / mandala lines */
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23A85C22' stroke-width='1.3'%3E%3Ccircle cx='130' cy='130' r='26'/%3E%3Ccircle cx='130' cy='130' r='52'/%3E%3Ccircle cx='130' cy='130' r='78'/%3E%3Ccircle cx='130' cy='130' r='104'/%3E%3Cpath d='M130 8v244M8 130h244M44 44l172 172M216 44L44 216'/%3E%3Cpath d='M130 26c22 20 22 40 0 52-22-12-22-32 0-52zm0 208c-22-20-22-40 0-52 22 12 22 32 0 52zM26 130c20-22 40-22 52 0-12 22-32 22-52 0zm208 0c-20 22-40 22-52 0 12-22 32-22 52 0z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:260px 260px;
+}
+.page{position:relative;z-index:1}
+img{max-width:100%;display:block}
+a{color:var(--maroon);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--maroon-dark)}
+button{font-family:inherit}
+h1,h2,h3,h4{font-family:var(--font-head);color:var(--maroon-dark);line-height:1.22;margin:0 0 .45em;font-weight:700}
+h1{font-size:clamp(1.95rem,6.2vw,3.35rem);font-weight:800}
+h2{font-size:clamp(1.55rem,4.6vw,2.35rem)}
+h3{font-size:clamp(1.12rem,3.2vw,1.42rem)}
+p{margin:0 0 1em}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:2px;border-radius:6px}
+.container{width:min(1120px,100% - 2.4rem);margin-inline:auto}
+.section{padding:clamp(2.6rem,7vw,4.6rem) 0;position:relative}
+.section--band{background:var(--cream-2)}
+.section-head{max-width:660px;margin:0 auto clamp(1.6rem,4vw,2.6rem);text-align:center}
+.kicker{
+  display:inline-block;font-family:var(--font-head);font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;font-size:.72rem;color:var(--saffron);
+  background:var(--gold-soft);border:1px solid var(--gold);border-radius:999px;
+  padding:.28em 1em;margin-bottom:.85em;
+}
+.lead{font-size:1.06rem;color:var(--ink-soft)}
+.hi{color:var(--maroon);font-weight:700}
+.hi-s{color:var(--saffron);font-weight:700}
+.center{text-align:center}
+.mt-2{margin-top:1.4rem}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  font-family:var(--font-head);font-weight:700;font-size:1.02rem;line-height:1.2;
+  padding:.85em 1.5em;border-radius:999px;border:2px solid transparent;
+  text-decoration:none;cursor:pointer;min-height:50px;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 10px 22px rgba(37,211,102,.32)}
+.btn-wa:hover{background:var(--wa-dark);color:#fff}
+.btn-call{background:var(--maroon);color:#fff;box-shadow:0 10px 22px rgba(138,28,43,.28)}
+.btn-call:hover{background:var(--maroon-dark);color:#fff}
+.btn-gold{background:linear-gradient(160deg,var(--saffron-2),var(--saffron));color:#fff;box-shadow:0 10px 22px rgba(232,135,30,.3)}
+.btn-gold:hover{color:#fff}
+.btn-ghost{background:transparent;color:var(--maroon);border-color:var(--maroon)}
+.btn-ghost:hover{background:var(--maroon);color:#fff}
+.btn-sm{font-size:.92rem;padding:.6em 1.15em;min-height:44px}
+.btn-block{width:100%}
+.btn .ic{width:1.15em;height:1.15em;flex:none}
+
+/* ============================================================
+   PHOTO PLACEHOLDER BOXES (asli photos aane tak)
+   ============================================================ */
+.photo-box{
+  position:relative;border-radius:var(--radius-sm);overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.55rem;text-align:center;padding:1.1rem;min-height:170px;color:#fff;
+  background:linear-gradient(145deg,var(--g1,#C57B3A),var(--g2,#8A1C2B));
+  box-shadow:var(--shadow-sm);
+}
+.photo-box .ic{width:38px;height:38px;opacity:.9}
+.photo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-box .ph{
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;line-height:1.45;
+  background:rgba(0,0,0,.28);padding:.45em .9em;border-radius:999px;max-width:100%;
+}
+.ph-1{--g1:#E8871E;--g2:#9C2B1E}
+.ph-2{--g1:#D96A8B;--g2:#7B2340}
+.ph-3{--g1:#C79A3B;--g2:#7A4A16}
+.ph-4{--g1:#B06A28;--g2:#5E2C10}
+.ph-5{--g1:#E56B8C;--g2:#8A1C2B}
+.ph-6{--g1:#F6B04A;--g2:#C05A17}
+.ph-7{--g1:#A65C2B;--g2:#4E2208}
+.ph-8{--g1:#E9A25C;--g2:#8A3B1D}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:100;background:rgba(255,247,236,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  min-height:var(--topbar-h);display:flex;align-items:center;gap:.8rem;
+  justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;flex:none}
+.logo-mark{
+  width:44px;height:44px;border-radius:13px;flex:none;
+  background:linear-gradient(150deg,var(--saffron-2),var(--maroon));
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  font-family:var(--font-head);font-weight:800;font-size:1.15rem;
+  box-shadow:var(--shadow-sm);
+}
+.logo-text{font-family:var(--font-head);font-weight:800;font-size:1.06rem;color:var(--maroon-dark);line-height:1.1}
+.logo-text small{display:block;font-family:var(--font-body);font-weight:500;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--saffron)}
+.nav{display:none}
+.nav a{
+  font-family:var(--font-head);font-weight:600;font-size:.98rem;color:var(--ink);
+  text-decoration:none;padding:.45em .7em;border-radius:10px;
+}
+.nav a:hover{background:var(--gold-soft);color:var(--maroon)}
+.topbar .btn-wa{display:none}
+.hamb{
+  display:flex;align-items:center;justify-content:center;gap:.45rem;
+  background:var(--gold-soft);border:1px solid var(--gold);color:var(--maroon-dark);
+  font-family:var(--font-head);font-weight:700;font-size:.95rem;
+  border-radius:999px;min-height:44px;padding:.5em 1em;cursor:pointer;
+}
+.mobile-menu{display:none;padding:.4rem 0 1rem}
+.mobile-menu.open{display:block}
+.mobile-menu a{
+  display:block;padding:.85em 1em;margin:.25rem 0;border-radius:12px;
+  background:var(--white);border:1px solid var(--line);
+  font-family:var(--font-head);font-weight:600;text-decoration:none;color:var(--ink);
+}
+.mobile-menu .btn{margin-top:.6rem}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding:clamp(2.2rem,6vw,4rem) 0 clamp(2.6rem,7vw,4.4rem);overflow:hidden}
+.hero-inner{display:grid;gap:2rem}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;background:var(--pink-soft);
+  color:var(--maroon-dark);border:1px solid var(--pink);border-radius:999px;
+  font-weight:600;font-size:.85rem;padding:.42em 1em;margin-bottom:1.1rem;
+}
+.hero h1 .line-gold{
+  background:linear-gradient(100deg,var(--saffron),var(--maroon));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{font-size:1.12rem;color:var(--ink-soft);max-width:34em;margin-bottom:1.5rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;margin-bottom:1.15rem}
+.rating-line{
+  display:inline-flex;align-items:center;gap:.55rem;font-weight:600;color:var(--ink-soft);
+  background:var(--white);border:1px dashed var(--gold);border-radius:999px;padding:.5em 1.1em;
+}
+.rating-line .stars{color:#E8A11B;letter-spacing:.08em}
+.hero-media{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:.85rem;min-height:320px}
+.hero-media .photo-box{min-height:150px}
+.hero-media .photo-box:first-child{grid-row:1/3;min-height:100%}
+.spark{position:absolute;pointer-events:none;opacity:.5}
+
+/* ============================================================
+   TRUST BAR
+   ============================================================ */
+.trust{background:var(--maroon);color:#fff;padding:clamp(1.8rem,5vw,2.6rem) 0}
+.trust-grid{display:grid;grid-template-columns:1fr;gap:1.4rem;text-align:center}
+.trust-num{
+  font-family:var(--font-head);font-weight:800;font-size:clamp(2.1rem,7vw,3rem);
+  color:var(--saffron-2);line-height:1;
+}
+.trust-num .plus{color:#F7D9A0}
+.trust-label{font-weight:500;letter-spacing:.04em;opacity:.92;margin-top:.3rem}
+.trust-item{position:relative}
+.trust-item + .trust-item::before{
+  content:"";position:absolute;top:-.85rem;left:22%;right:22%;height:1px;
+  background:rgba(255,255,255,.18);
+}
+
+/* ============================================================
+   SPECIALS
+   ============================================================ */
+.specials-grid{display:grid;gap:1.25rem;grid-template-columns:1fr}
+.special-card{
+  background:var(--white);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);position:relative;
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.special-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.special-card .photo-box{border-radius:0;min-height:190px}
+.badge{
+  display:inline-flex;align-items:center;gap:.35em;font-size:.76rem;font-weight:700;
+  padding:.32em .85em;border-radius:999px;letter-spacing:.02em;
+}
+.badge-fresh{position:absolute;top:.9rem;left:.9rem;background:#1E9E5A;color:#fff;box-shadow:0 6px 14px rgba(30,158,90,.35);z-index:2}
+.badge-veg{background:#E4F5E7;color:#1E7A3C;border:1px solid #9FD6AC}
+.badge-ghee{background:#FFF1D6;color:#8A5A12;border:1px solid #E8C27A}
+.badge-eggless{background:#EAF1FF;color:#2B4FA0;border:1px solid #A9BEEA}
+.badge-best{background:var(--pink-soft);color:var(--maroon);border:1px solid var(--pink)}
+.badge-prem{background:var(--gold-soft);color:#7A5210;border:1px solid var(--gold)}
+.special-body{padding:1.15rem 1.25rem 1.35rem}
+.price-tag{
+  font-family:var(--font-head);font-weight:800;font-size:1.22rem;color:var(--maroon);
+}
+.price-tag small{font-weight:600;font-size:.78rem;color:var(--ink-soft)}
+.badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:.55rem 0 .95rem}
+
+/* ============================================================
+   MENU + TABS
+   ============================================================ */
+.menu-tabs-wrap{position:relative;max-width:720px;margin:0 auto 1.9rem}
+.menu-tabs{
+  display:flex;gap:.35rem;overflow-x:auto;padding:.35rem;scrollbar-width:none;
+  background:var(--white);border:1px solid var(--line);border-radius:999px;
+  position:relative;
+}
+.menu-tabs::-webkit-scrollbar{display:none}
+.tab-btn{
+  flex:1 0 auto;min-height:48px;padding:.65em 1.25em;border:0;border-radius:999px;
+  background:transparent;font-family:var(--font-head);font-weight:700;font-size:1.02rem;
+  color:var(--ink-soft);cursor:pointer;transition:color .25s ease;position:relative;z-index:2;
+  white-space:nowrap;
+}
+.tab-btn[aria-selected="true"]{color:#fff}
+.tab-ink{
+  position:absolute;top:.35rem;bottom:.35rem;left:0;width:40px;border-radius:999px;
+  background:linear-gradient(150deg,var(--saffron),var(--maroon));
+  transition:transform .32s cubic-bezier(.4,.1,.2,1), width .32s cubic-bezier(.4,.1,.2,1);
+  z-index:1;
+}
+.menu-panel{display:none}
+.menu-panel.active{display:block;animation:fadeSlide .35s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.menu-grid{display:grid;gap:1.2rem;grid-template-columns:1fr}
+.menu-card{
+  display:grid;grid-template-columns:112px 1fr;gap:.95rem;align-items:stretch;
+  background:var(--white);border-radius:var(--radius);padding:.85rem;
+  box-shadow:var(--shadow-sm);transition:transform .22s ease, box-shadow .22s ease;
+}
+.menu-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.menu-card .photo-box{min-height:112px;width:112px;border-radius:14px;padding:.5rem}
+.menu-card .photo-box .ph{font-size:.62rem;padding:.35em .55em}
+.menu-card .photo-box .ic{width:26px;height:26px}
+.menu-card h3{font-size:1.08rem;margin-bottom:.1em}
+.menu-card .hi-name{font-size:.95rem;color:var(--ink-soft);font-weight:500;margin-bottom:.25em}
+.menu-card .desc{font-size:.92rem;color:var(--ink-soft);margin-bottom:.55em}
+.menu-card-foot{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem .85rem;margin-top:auto}
+.order-mini{
+  display:inline-flex;align-items:center;gap:.4em;background:var(--wa);color:#fff;
+  border:0;border-radius:999px;font-family:var(--font-head);font-weight:700;font-size:.9rem;
+  padding:.55em 1.1em;min-height:44px;cursor:pointer;text-decoration:none;
+  box-shadow:0 6px 14px rgba(37,211,102,.3);transition:transform .18s ease,background .18s ease;
+}
+.order-mini:hover{background:var(--wa-dark);color:#fff;transform:translateY(-2px)}
+</style>
+<style>
+/* ============================================================
+   CUSTOM CAKE FORM
+   ============================================================ */
+.cake-form-wrap{
+  background:var(--white);border-radius:calc(var(--radius) + 6px);
+  box-shadow:var(--shadow);overflow:hidden;
+  display:grid;grid-template-columns:1fr;
+}
+.cake-form-side{padding:clamp(1.4rem,4vw,2.2rem);background:linear-gradient(160deg,#7B2340,#8A1C2B 55%,#B4443B);color:#fff}
+.cake-form-side h2,.cake-form-side h3{color:#fff}
+.cake-form-side .photo-\boxed{min-height:200px;margin-bottom:1.15rem}
+.cake-form-side ul{margin:.6rem 0 1rem;padding-left:1.1rem}
+.cake-form-side li{margin:.35rem 0}
+.cake-form-side .note{
+  background:rgba(255,255,255,.13);border:1px dashed rgba(255,255,255,.45);
+  border-radius:14px;padding:.85rem 1rem;font-size:.94rem;
+}
+.cake-form-body{padding:clamp(1.4rem,4vw,2.2rem)}
+.form-grid{display:grid;gap:1.05rem;grid-template-columns:1fr}
+.field{display:flex;flex-direction:column;gap:.38rem}
+.field label,.field .lbl{font-weight:700;font-size:.95rem;color:var(--maroon-dark)}
+.field .hint{font-size:.82rem;color:var(--ink-soft)}
+input[type="text"],input[type="tel"],input[type="date"],input[type="time"],
+input[type="datetime-local"],select,textarea{
+  font-family:var(--font-body);font-size:1rem;color:var(--ink);
+  background:var(--cream);border:1.5px solid var(--line);border-radius:12px;
+  padding:.75em .9em;min-height:50px;width:100%;
+}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--saffron);outline-offset:1px;border-color:var(--saffron)}
+.pills{display:flex;flex-wrap:wrap;gap:.55rem}
+.pill{position:relative}
+.pill input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.pill span{
+  display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+  padding:.6em 1.15em;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--cream);font-weight:600;cursor:pointer;transition:all .18s ease;
+}
+.pill input:checked + span{
+  background:var(--maroon);border-color:var(--maroon);color:#fff;
+  box-shadow:0 8px 18px rgba(138,28,43,.25);
+}
+.pill input:focus-visible + span{outline:3px solid var(--saffron);outline-offset:2px}
+.form-note{
+  background:#FFF4E1;border:1px solid var(--gold);border-radius:14px;
+  padding:.85rem 1.05rem;font-size:.95rem;color:#6E4A10;
+}
+
+/* ============================================================
+   DESIGN YOUR OWN CAKE — BUILDER
+   ============================================================ */
+.builder{background:linear-gradient(180deg,var(--cream) 0%,#F8E7D4 100%)}
+.builder-shell{
+  background:var(--white);border-radius:calc(var(--radius) + 8px);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.builder-grid{display:grid;grid-template-columns:1fr}
+.cake-stage{
+  padding:1.15rem 1.15rem .6rem;background:
+    radial-gradient(120% 90% at 50% 0%,#FDEEDB 0%,#F6D9B8 100%);
+  border-bottom:1px solid var(--line);
+  position:sticky;top:calc(var(--topbar-h) + 4px);z-index:6;
+}
+.stage-sticky{position:sticky;top:calc(var(--topbar-h) + 6px);z-index:5}
+.cake-stage-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.55rem}
+.cake-stage-head .mini-title{font-family:var(--font-head);font-weight:700;color:var(--maroon-dark);font-size:1.02rem}
+.stage-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.mini-btn{
+  display:inline-flex;align-items:center;gap:.4em;min-height:42px;padding:.45em 1em;
+  border-radius:999px;border:1.5px solid var(--maroon);background:#fff;color:var(--maroon);
+  font-family:var(--font-head);font-weight:700;font-size:.88rem;cursor:pointer;
+  transition:all .18s ease;text-decoration:none;
+}
+.mini-btn:hover{background:var(--maroon);color:#fff}
+.mini-btn.gold{border-color:var(--gold);color:#7A5210;background:#FFF8E8}
+.mini-btn.gold:hover{background:var(--gold);color:#fff}
+.cake-svg-\boxed{
+  position:relative;border-radius:18px;overflow:hidden;
+  background:
+    repeating-linear-gradient(-45deg,rgba(255,255,255,.35) 0 14px,rgba(255,255,255,0) 14px 28px),
+    linear-gradient(180deg,#FFF9F0,#FBE8D2);
+  border:1px solid var(--line);
+}
+.cake-svg-box svg{width:100%;height:auto;display:block}
+.cake-pop{animation:cakePop .38s cubic-bezier(.34,1.45,.64,1)}
+@keyframes cakePop{
+  0%{transform:scale(.965) rotate(-1.4deg)}
+  60%{transform:scale(1.015) rotate(.6deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+.topping-drop{animation:topDrop .42s cubic-bezier(.3,1.3,.6,1) backwards}
+@keyframes topDrop{
+  from{opacity:0;transform:translateY(-16px) scale(.85)}
+  to{opacity:1;transform:none}
+}
+.stage-caption{text-align:center;font-size:.85rem;color:var(--ink-soft);padding:.55rem .4rem .75rem}
+
+.price-\boxed{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem;
+  background:linear-gradient(120deg,#7B2340,#8A1C2B);color:#fff;border-radius:16px;
+  padding:.95rem 1.15rem;margin:.85rem 0 .35rem;
+}
+.price-box .lbl{font-size:.85rem;opacity:.9;letter-spacing:.03em}
+.price-box .amt{font-family:var(--font-head);font-weight:800;font-size:1.75rem;line-height:1}
+.price-box .disc{font-size:.78rem;opacity:.88;flex-basis:100%}
+
+.wizard{padding:clamp(1.15rem,3.5vw,1.9rem)}
+.progress-wrap{margin-bottom:1.15rem}
+.progress-top{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.progress-top .step-label{font-family:var(--font-head);font-weight:700;color:var(--maroon-dark);font-size:1.02rem}
+.progress{height:10px;border-radius:999px;background:#F1E0C6;overflow:hidden}
+.progress .bar{
+  height:100%;border-radius:999px;width:12%;
+  background:linear-gradient(90deg,var(--saffron-2),var(--saffron),var(--maroon));
+  transition:width .35s ease;
+}
+.step-dots{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.75rem}
+.step-dot{
+  min-width:42px;min-height:42px;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--cream);font-family:var(--font-head);font-weight:700;color:var(--ink-soft);
+  cursor:pointer;transition:all .18s ease;padding:0 .55em;font-size:.92rem;
+}
+.step-dot.done{background:#F4E3C4;border-color:var(--gold);color:#7A5210}
+.step-dot.now{background:var(--maroon);border-color:var(--maroon);color:#fff;box-shadow:0 8px 16px rgba(138,28,43,.28)}
+.step{display:none}
+.step.active{display:block;animation:fadeSlide .32s ease}
+.step h3{margin-bottom:.25em}
+.step .step-sub{color:var(--ink-soft);margin-bottom:1.1rem;font-size:.98rem}
+.opt-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+.opt-card{
+  position:relative;background:var(--cream);border:2px solid var(--line);border-radius:16px;
+  min-height:88px;padding:.85rem .95rem;cursor:pointer;transition:all .18s ease;
+  display:flex;flex-direction:column;justify-content:center;gap:.22rem;text-align:left;
+  font-family:var(--font-body);
+}
+.opt-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+.opt-card.active{border-color:var(--maroon);background:#fff;box-shadow:0 10px 22px rgba(138,28,43,.16)}
+.opt-card.active::after{
+  content:"✓";position:absolute;top:.55rem;right:.65rem;width:24px;height:24px;
+  border-radius:50%;background:var(--maroon);color:#fff;font-size:.8rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.opt-card .t{font-family:var(--font-head);font-weight:700;font-size:1.02rem;color:var(--maroon-dark)}
+.opt-card .s{font-size:.82rem;color:var(--ink-soft);line-height:1.4}
+.opt-card .shape-ic{width:46px;height:46px;color:var(--maroon)}
+.opt-card .flavour-dot{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.8);box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.opt-card.locked{opacity:.45;cursor:not-allowed}
+.opt-card.locked:hover{transform:none;box-shadow:none}
+.swatches{display:flex;flex-wrap:wrap;gap:.65rem}
+.swatch{
+  width:52px;height:52px;border-radius:50%;border:3px solid transparent;cursor:pointer;
+  transition:transform .16s ease, border-color .16s ease;box-shadow:0 5px 12px rgba(0,0,0,.16);
+}
+.swatch:hover{transform:scale(1.08)}
+.swatch.active{border-color:var(--maroon-dark);transform:scale(1.12)}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{
+  display:inline-flex;align-items:center;gap:.45em;min-height:48px;padding:.55em 1.05em;
+  border-radius:999px;border:1.5px solid var(--line);background:var(--cream);
+  font-weight:600;font-size:.93rem;cursor:pointer;transition:all .18s ease;color:var(--ink);
+}
+.chip:hover{border-color:var(--saffron)}
+.chip.active{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.chip .tag{font-size:.72rem;opacity:.85;font-weight:700}
+.toggle-row{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:.85rem;background:var(--cream);border:1.5px solid var(--line);
+  border-radius:16px;padding:1rem 1.1rem;
+}
+.switch{position:relative;display:inline-flex;align-items:center;gap:.75rem;cursor:pointer;min-height:48px}
+.switch input{position:absolute;opacity:0;inset:0}
+.switch .track{
+  width:62px;height:34px;border-radius:999px;background:#D9C4A5;position:relative;
+  transition:background .2s ease;flex:none;
+}
+.switch .track::after{
+  content:"";position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;
+  background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.25);transition:transform .2s ease;
+}
+.switch input:checked + .track{background:var(--wa)}
+.switch input:checked + .track::after{transform:translateX(28px)}
+.switch input:focus-visible + .track{outline:3px solid var(--saffron);outline-offset:2px}
+.switch .txt{font-weight:700;color:var(--maroon-dark)}
+.char-count{font-size:.82rem;color:var(--ink-soft);text-align:right}
+.char-count.over{color:#B3261E;font-weight:700}
+.wizard-nav{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;margin-top:1.55rem;padding-top:1.25rem;border-top:1px dashed var(--line)}
+.wizard-nav .btn{flex:1 1 140px}
+.summary-card{
+  background:var(--cream);border:1.5px solid var(--gold);border-radius:18px;
+  padding:1.15rem 1.25rem;margin-bottom:1.15rem;
+}
+.summary-card h4{margin:0 0 .65rem;font-size:1.08rem}
+.summary-card ul{list-style:none;margin:0;padding:0}
+.summary-card li{display:flex;gap:.65rem;padding:.32rem 0;font-size:.96rem;border-bottom:1px dashed #E8D2AE}
+.summary-card li:last-child{border-bottom:0}
+.summary-card li .k{font-weight:700;color:var(--maroon-dark);min-width:108px}
+.summary-card li .v{color:var(--ink)}
+.ref-preview{
+  display:none;align-items:center;gap:.75rem;background:var(--cream);
+  border:1.5px dashed var(--line);border-radius:14px;padding:.75rem .9rem;margin-top:.75rem;
+}
+.ref-preview.show{display:flex}
+.ref-preview img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+.send-tip{
+  display:none;background:#E7F7EE;border:1.5px solid var(--wa);color:#0E5C33;
+  border-radius:14px;padding:.95rem 1.1rem;margin-top:1rem;font-size:.95rem;
+}
+.send-tip.show{display:block}
+
+/* ============================================================
+   FESTIVAL BOXES / PARTY / WHY US / GALLERY
+   ============================================================ */
+.fest-grid{display:grid;gap:1.25rem;grid-template-columns:1fr}
+.fest-card{
+  background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.fest-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.fest-card .photo-box{min-height:165px;border-radius:0}
+.fest-body{padding:1.2rem 1.3rem 1.35rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.fest-body .range{font-family:var(--font-head);font-weight:800;font-size:1.12rem;color:var(--maroon)}
+.size-list{list-style:none;margin:.25rem 0 .65rem;padding:0;font-size:.93rem;color:var(--ink-soft)}
+.size-list li{padding:.22rem 0;display:flex;justify-content:space-between;gap:.75rem;border-bottom:1px dashed var(--line)}
+.size-list li:last-child{border-bottom:0}
+.party-band{
+  background:linear-gradient(135deg,var(--maroon-dark),var(--maroon) 45%,#B4443B);
+  color:#fff;border-radius:calc(var(--radius) + 6px);padding:clamp(1.6rem,5vw,2.8rem);
+}
+.party-band h2{color:#fff}
+.party-inner{display:grid;gap:1.6rem;align-items:center}
+.party-band .photo-\boxed{min-height:210px}
+.party-points{display:grid;gap:.65rem;margin:1rem 0 1.35rem}
+.party-point{display:flex;gap:.75rem;align-items:flex-start;font-size:1.02rem}
+.party-point .ic{width:26px;height:26px;flex:none;color:var(--saffron-2);margin-top:.15rem}
+.why-grid{display:grid;gap:1.15rem;grid-template-columns:1fr}
+.why-card{
+  background:var(--white);border-radius:var(--radius);padding:1.45rem 1.35rem;
+  box-shadow:var(--shadow-sm);text-align:center;
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.why-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.why-ic{
+  width:66px;height:66px;margin:0 auto .95rem;border-radius:20px;
+  background:linear-gradient(150deg,var(--gold-soft),#F7D9A0);
+  display:flex;align-items:center;justify-content:center;color:var(--maroon);
+}
+.why-ic .ic{width:34px;height:34px}
+.why-card h3{font-size:1.12rem;margin-bottom:.35em}
+.why-card p{font-size:.95rem;color:var(--ink-soft);margin:0}
+.gallery-grid{display:grid;gap:.95rem;grid-template-columns:repeat(2,1fr)}
+.gallery-item{position:relative;border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .22s ease}
+.gallery-item:hover{transform:translateY(-5px) scale(1.015)}
+.gallery-item .photo-\boxed{min-height:150px;height:100%}
+.gallery-item.tall .photo-\boxed{min-height:310px}
+
+/* ============================================================
+   REVIEWS / FAQ
+   ============================================================ */
+.reviews-grid{display:grid;gap:1.25rem;grid-template-columns:1fr}
+.review-card{
+  background:var(--white);border-radius:var(--radius);padding:1.45rem 1.4rem;
+  box-shadow:var(--shadow-sm);position:relative;
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.review-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.review-card::before{
+  content:"“";position:absolute;top:.25rem;left:1.05rem;font-family:var(--font-head);
+  font-size:4.2rem;color:var(--gold-soft);line-height:1;
+}
+.review-card .stars{color:#E8A11B;letter-spacing:.12em;font-size:1.05rem;margin-bottom:.55rem}
+.review-card p{position:relative;font-size:1.01rem;color:var(--ink);margin-bottom:1rem}
+.reviewer{display:flex;align-items:center;gap:.85rem}
+.avatar{
+  width:50px;height:50px;border-radius:50%;flex:none;color:#fff;font-family:var(--font-head);
+  font-weight:800;font-size:1.15rem;display:flex;align-items:center;justify-content:center;
+}
+.reviewer .nm{font-family:var(--font-head);font-weight:700;color:var(--maroon-dark);line-height:1.2}
+.reviewer .loc{font-size:.85rem;color:var(--ink-soft)}
+.sample-tag{
+  position:absolute;top:1rem;right:1rem;font-size:.68rem;font-weight:700;letter-spacing:.08em;
+  background:var(--gold-soft);color:#7A5210;border:1px solid var(--gold);
+  padding:.22em .7em;border-radius:999px;text-transform:uppercase;
+}
+.faq-list{max-width:780px;margin:0 auto;display:grid;gap:.85rem}
+details.faq{
+  background:var(--white);border-radius:16px;border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);overflow:hidden;
+}
+details.faq summary{
+  list-style:none;cursor:pointer;padding:1.15rem 3.1rem 1.15rem 1.35rem;position:relative;
+  font-family:var(--font-head);font-weight:700;font-size:1.05rem;color:var(--maroon-dark);
+  min-height:56px;display:flex;align-items:center;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{
+  content:"+";position:absolute;right:1.15rem;top:50%;transform:translateY(-50%);
+  width:32px;height:32px;border-radius:50%;background:var(--gold-soft);color:var(--maroon);
+  display:flex;align-items:center;justify-content:center;font-size:1.35rem;transition:transform .25s ease;
+}
+details.faq[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details.faq .faq-body{padding:0 1.35rem 1.25rem;color:var(--ink-soft)}
+
+/* ============================================================
+   CONTACT / FOOTER / FAB
+   ============================================================ */
+.contact-grid{display:grid;gap:1.35rem;grid-template-columns:1fr}
+.contact-card{
+  background:var(--white);border-radius:var(--radius);padding:1.55rem 1.45rem;
+  box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:1.05rem;
+}
+.contact-row{display:flex;gap:.95rem;align-items:flex-start}
+.contact-row .ic{width:26px;height:26px;flex:none;color:var(--saffron);margin-top:.28rem}
+.contact-row .t{font-weight:700;color:var(--maroon-dark);font-size:.92rem;letter-spacing:.03em;text-transform:uppercase}
+.contact-row .v{color:var(--ink);font-size:1.02rem}
+.contact-row a{font-weight:700}
+.map-\boxed{
+  min-height:330px;height:100%;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);position:relative;
+  background:
+    linear-gradient(rgba(138,28,43,.07),rgba(138,28,43,.07)),
+    repeating-linear-gradient(0deg,#EFE2CB 0 26px,#E8D6B6 26px 28px),
+    repeating-linear-gradient(90deg,#EFE2CB 0 26px,#E8D6B6 26px 28px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.65rem;text-align:center;padding:1.5rem;
+}
+.map-pin{
+  width:66px;height:66px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);
+  background:var(--maroon);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 26px rgba(138,28,43,.35);
+}
+.map-pin .ic{width:30px;height:30px;color:#fff;transform:rotate(45deg)}
+.map-box .ph{background:rgba(255,255,255,.82);color:var(--maroon-dark);font-weight:600;border-radius:12px;padding:.6em 1em}
+
+.footer{background:var(--maroon-dark);color:#F6E7D4;padding:clamp(2.4rem,6vw,3.4rem) 0 1.6rem}
+.footer-grid{display:grid;gap:1.9rem;grid-template-columns:1fr}
+.footer h3{color:#fff;font-size:1.12rem}
+.footer a{color:#F3DDB8}
+.footer a:hover{color:#fff}
+.footer .logo-text{color:#fff}
+.footer .logo-text small{color:var(--saffron-2)}
+.footer .about{font-size:.97rem;color:#E8D2B4;max-width:34em}
+.footer-links{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.footer-links a{text-decoration:none;font-weight:500}
+.footer-links a:hover{text-decoration:underline}
+.social{display:flex;gap:.75rem;flex-wrap:wrap}
+.social a{
+  width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;transition:all .18s ease;
+}
+.social a:hover{background:var(--saffron);transform:translateY(-3px)}
+.social .ic{width:24px;height:24px}
+.footer-bottom{
+  margin-top:2.2rem;padding-top:1.35rem;border-top:1px solid rgba(255,255,255,.16);
+  display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;
+  font-size:.9rem;color:#D9BFA2;
+}
+.fab{
+  position:fixed;right:16px;bottom:16px;z-index:120;
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--wa);color:#fff;font-family:var(--font-head);font-weight:700;
+  font-size:1.02rem;padding:.9em 1.25em;border-radius:999px;text-decoration:none;
+  box-shadow:0 14px 30px rgba(20,120,60,.42);min-height:56px;
+  animation:fabPulse 2.6s ease-in-out infinite;
+}
+.fab:hover{background:var(--wa-dark);color:#fff}
+.fab .ic{width:26px;height:26px;flex:none}
+@keyframes fabPulse{
+  0%,100%{transform:scale(1);box-shadow:0 14px 30px rgba(20,120,60,.42)}
+  50%{transform:scale(1.055);box-shadow:0 16px 38px rgba(20,120,60,.55)}
+}
+.fab-label{display:none}
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease, transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+/* ============================================================
+   RESPONSIVE — tablet 768px
+   ============================================================ */
+@media (min-width:600px){
+  .specials-grid{grid-template-columns:repeat(2,1fr)}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .form-grid.two{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:repeat(3,1fr)}
+  .trust-item + .trust-item::before{
+    top:20%;bottom:20%;left:-.85rem;right:auto;width:1px;height:auto;
+    background:rgba(255,255,255,.18);
+  }
+  .fab-label{display:inline}
+}
+@media (min-width:768px){
+  body{font-size:18px}
+  .nav{display:flex;align-items:center;gap:.15rem;flex-wrap:wrap}
+  .hamb{display:none}
+  .mobile-menu{display:none !important}
+  .topbar .btn-wa{display:inline-flex}
+  .hero-inner{grid-template-columns:1.08fr .92fr;align-items:center}
+  .hero-media{min-height:400px}
+  .specials-grid{grid-template-columns:repeat(3,1fr)}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .fest-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .reviews-grid{grid-template-columns:repeat(3,1fr)}
+  .party-inner{grid-template-columns:1.1fr .9fr}
+  .contact-grid{grid-template-columns:1.1fr .9fr}
+  .gallery-grid{grid-template-columns:repeat(4,1fr)}
+  .cake-form-wrap{grid-template-columns:.85fr 1.15fr}
+  .footer-grid{grid-template-columns:1.4fr 1fr 1fr 1.1fr}
+}
+@media (min-width:1080px){
+  .menu-grid{grid-template-columns:repeat(3,1fr)}
+  .fest-grid{grid-template-columns:repeat(3,1fr)}
+  .why-grid{grid-template-columns:repeat(4,1fr)}
+  .builder-grid{grid-template-columns:.92fr 1.08fr;align-items:stretch}
+  .cake-stage{border-bottom:0;border-right:1px solid var(--line);padding:1.5rem 1.5rem 1rem;position:static}
+  .stage-sticky{top:calc(var(--topbar-h) + 14px)}
+  .specials-grid{grid-template-columns:repeat(4,1fr)}
+}
+/* phone: preview compact taki options dikhein */
+@media (max-width:767px){
+  .cake-svg-box{max-width:320px;margin-inline:auto}
+  .stage-caption{font-size:.78rem;padding:.45rem .3rem .55rem}
+  .price-\boxed{margin:.55rem 0 .25rem;padding:.75rem .95rem}
+  .price-box .amt{font-size:1.5rem}
+  .cake-stage-head .mini-title{font-size:.95rem}
+}
+
+/* ============================================================
+   REDUCE MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="logo" href="#top" aria-label="Shree Krishna Sweets & Bakers — home">
+      <span class="logo-mark" aria-hidden="true">SK</span>
+      <span class="logo-text">Shree Krishna<small>Sweets &amp; Bakers</small></span>
+    </a>
+    <nav class="nav" aria-label="Main menu">
+      <a href="#specials">Aaj ka Special</a>
+      <a href="#menu">Menu</a>
+      <a href="#cake-form">Custom Cake</a>
+      <a href="#cake-builder">Design Cake</a>
+      <a href="#gifts">Gift Boxes</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-wa btn-sm" href="https://wa.me/919826045123?text=Namaste!%20%F0%9F%99%8F%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20aur%20details%20bhejein." target="_blank" rel="noopener" aria-label="WhatsApp pe order karein — new window">
+      <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22zm5.7-7.4c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6s0-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4a3.7 3.7 0 0 0-1.2 2.8 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5 18.3 18.3 0 0 0 1.8.7 4.4 4.4 0 0 0 2 .2 3.3 3.3 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg>
+      WhatsApp pe order
+    </a>
+    <button class="hamb" id="hambBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menu kholein">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      Menu
+    </button>
+  </div>
+  <div class="container">
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#specials">Aaj ka Special</a>
+      <a href="#menu">Menu</a>
+      <a href="#cake-form">Custom Cake Order</a>
+      <a href="#cake-builder">Design Your Own Cake</a>
+      <a href="#gifts">Festival &amp; Gift Boxes</a>
+      <a href="#party">Party &amp; Wedding</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-wa btn-block" href="https://wa.me/919826045123?text=Namaste!%20%F0%9F%99%8F%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20aur%20details%20bhejein." target="_blank" rel="noopener">🎂 WhatsApp pe order karein</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy reveal">
+      <span class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.2-6.3-4.5-6.3 4.5L8 13.6 2 9.2h7.6z"/></svg>
+        Bhopal ki apni mithai dukaan · Since 2008 <small>[PLACEHOLDER]</small>
+      </span>
+      <h1>Har khushi ki <span class="line-gold">mithaas</span> — fresh, shuddh desi ghee mein, roz.</h1>
+      <p class="hero-sub">Shaadi ho ya birthday, ghar ki pooja ho ya office party — fresh mithai, designer cakes aur garma-garam bakery seedha hamare kitchen se aapke ghar. Ek WhatsApp message kaafi hai!</p>
+      <div class="hero-cta">
+        <a class="btn btn-wa" href="https://wa.me/919826045123?text=Namaste!%20%F0%9F%99%8F%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20aur%20details%20bhejein." target="_blank" rel="noopener">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22zm5.7-7.4c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6s0-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4a3.7 3.7 0 0 0-1.2 2.8 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5 18.3 18.3 0 0 0 1.8.7 4.4 4.4 0 0 0 2 .2 3.3 3.3 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg>
+          🎂 WhatsApp pe order karein
+        </a>
+        <a class="btn btn-call" href="tel:+919826045123" aria-label="Call karein +91 98260 45123">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          Call: 98260 45123
+        </a>
+      </div>
+      <p class="rating-line">
+        <span class="stars" aria-hidden="true">⭐⭐⭐⭐⭐</span>
+        <span><strong>4.8</strong> · 2,000+ happy families</span>
+        <small>[SAMPLE]</small>
+      </p>
+    </div>
+    <div class="hero-media reveal d2" aria-label="Shop photos">
+      <div class="photo-box ph-1"><img src="images/hero-platter.jpg" alt="Assorted Indian mithai platter with kaju katli, ladoos and snacks" loading="lazy"></div>
+      <div class="photo-box ph-5"><img src="images/hero-cake.jpg" alt="Pink birthday cake with lit candles and sprinkles" loading="lazy"></div>
+      <div class="photo-box ph-4"><img src="images/hero-bakery.jpg" alt="Fresh breads and bakery items on shelves" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST BAR ================= -->
+<section class="trust" aria-label="Hamare numbers">
+  <div class="container trust-grid">
+    <div class="trust-item reveal">
+      <div class="trust-num"><span class="count" data-target="18">0</span><span class="plus">+</span></div>
+      <div class="trust-label">Saal se Bhopal ke saath <small>[SAMPLE]</small></div>
+    </div>
+    <div class="trust-item reveal d1">
+      <div class="trust-num"><span class="count" data-target="25000">0</span><span class="plus">+</span></div>
+      <div class="trust-label">Khush customers <small>[SAMPLE]</small></div>
+    </div>
+    <div class="trust-item reveal d2">
+      <div class="trust-num"><span class="count" data-target="120">0</span><span class="plus">+</span></div>
+      <div class="trust-label">Mithai &amp; cake varieties <small>[SAMPLE]</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TODAY'S SPECIALS ================= -->
+<section class="section" id="specials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Roz subah banta hai</span>
+      <h2>Aaj ke Fresh Specials</h2>
+      <p class="lead">Yeh sab aaj hi banaya gaya hai — jab tak stock hai! Turant WhatsApp karein aur garam-garam ghar le jaayein.</p>
+    </div>
+    <div class="specials-grid">
+      <article class="special-card reveal">
+        <div class="photo-box ph-3"><img src="images/rasmalai.jpg" alt="Rasmalai in saffron milk topped with pistachios" loading="lazy"><span class="badge badge-fresh">🟢 Fresh today</span></div>
+        <div class="special-body">
+          <h3>Fresh Rasmalai / ताज़ा रसमलाई</h3>
+          <p class="price-tag">₹550 <small>/ kg · ₹35 / piece [SAMPLE]</small></p>
+          <div class="badge-row">
+            <span class="badge badge-veg">🟢 Veg</span>
+            <span class="badge badge-ghee">Desi Ghee</span>
+            <span class="badge badge-best">Bestseller</span>
+          </div>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Fresh%20Rasmalai%20(Rasmalai%20/%20%E0%A4%B0%E0%A4%B8%E0%A4%AE%E0%A4%B2%E0%A4%BE%E0%A4%88)%20%E2%82%B9550/kg.%20Please%20availability%20confirm%20karein." target="_blank" rel="noopener">Order this →</a>
+        </div>
+      </article>
+      <article class="special-card reveal d1">
+        <div class="photo-box ph-6"><img src="images/samosa.jpg" alt="Hot samosas and kachoris with chutneys" loading="lazy"><span class="badge badge-fresh">🟢 Fresh today</span></div>
+        <div class="special-body">
+          <h3>Hot Samosa &amp; Kachori / समोसा-कचौरी</h3>
+          <p class="price-tag">₹15–20 <small>/ piece [SAMPLE]</small></p>
+          <div class="badge-row">
+            <span class="badge badge-veg">🟢 Veg</span>
+            <span class="badge badge-eggless">Eggless</span>
+          </div>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Hot%20Samosa%20%26%20Kachori%20(15-20/piece).%20Please%20availability%20confirm%20karein." target="_blank" rel="noopener">Order this →</a>
+        </div>
+      </article>
+      <article class="special-card reveal d2">
+        <div class="photo-box ph-2"><img src="images/chocolate-cake.jpg" alt="Chocolate truffle cake with a cut slice" loading="lazy"><span class="badge badge-fresh">🟢 Fresh today</span></div>
+        <div class="special-body">
+          <h3>Chocolate Truffle Cake / चॉकलेट ट्रफल केक</h3>
+          <p class="price-tag">₹750 <small>/ kg [SAMPLE]</small></p>
+          <div class="badge-row">
+            <span class="badge badge-veg">🟢 Veg</span>
+            <span class="badge badge-eggless">Eggless option</span>
+            <span class="badge badge-best">Bestseller</span>
+          </div>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Chocolate%20Truffle%20Cake%20%E2%82%B9750/kg.%20Please%20availability%20confirm%20karein." target="_blank" rel="noopener">Order this →</a>
+        </div>
+      </article>
+      <article class="special-card reveal d3">
+        <div class="photo-box ph-4"><img src="images/motichoor-ladoo.jpg" alt="Motichoor ladoos in a bowl" loading="lazy"><span class="badge badge-fresh">🟢 Fresh today</span></div>
+        <div class="special-body">
+          <h3>Motichoor Ladoo / मोतीचूर लड्डू</h3>
+          <p class="price-tag">₹450 <small>/ kg [SAMPLE]</small></p>
+          <div class="badge-row">
+            <span class="badge badge-veg">🟢 Veg</span>
+            <span class="badge badge-ghee">Desi Ghee</span>
+          </div>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Motichoor%20Ladoo%20(Motichoor%20Ladoo%20/%20%E0%A4%AE%E0%A5%8B%E0%A4%A4%E0%A5%80%E0%A4%9A%E0%A5%82%E0%A4%B0%20%E0%A4%B2%E0%A4%A1%E0%A5%8D%E0%A4%A1%E0%A5%82)%20%E2%82%B9450/kg.%20Please%20availability%20confirm%20karein." target="_blank" rel="noopener">Order this →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENU ================= -->
+<section class="section section--band" id="menu">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Poora menu</span>
+      <h2>Mithai · Cakes · Bakery · Namkeen</h2>
+      <p class="lead">Har cheez <span class="hi">fresh</span> banti hai, asli cheezon se — na koi shortcut, na koi compromise. Item par tap karein, WhatsApp khul jaayega.</p>
+    </div>
+
+    <div class="menu-tabs-wrap reveal">
+      <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+        <span class="tab-ink" id="tabInk" aria-hidden="true"></span>
+        <button class="tab-btn" role="tab" id="tab-mithai" aria-controls="panel-mithai" aria-selected="true">🍬 Mithai</button>
+        <button class="tab-btn" role="tab" id="tab-cakes" aria-controls="panel-cakes" aria-selected="false">🎂 Cakes</button>
+        <button class="tab-btn" role="tab" id="tab-bakery" aria-controls="panel-bakery" aria-selected="false">🥖 Bakery</button>
+        <button class="tab-btn" role="tab" id="tab-namkeen" aria-controls="panel-namkeen" aria-selected="false">🥨 Namkeen</button>
+      </div>
+    </div>
+
+    <!-- MITHAI -->
+    <div class="menu-panel active" id="panel-mithai" role="tabpanel" aria-labelledby="tab-mithai">
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="photo-box ph-3"><img src="images/kaju-katli.jpg" alt="Kaju katli diamond barfi with cashews" loading="lazy"></div>
+          <div>
+            <h3>Kaju Katli</h3>
+            <div class="hi-name">काजू कतली</div>
+            <p class="desc">Peele kaju, halki chandi ka warq — tyohaar wali asli mithaas.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹900 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-ghee">Desi Ghee</span><span class="badge badge-best">Bestseller</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Kaju%20Katli%20/%20%E0%A4%95%E0%A4%BE%E0%A4%9C%E0%A5%82%20%E0%A4%95%E0%A4%A4%E0%A4%B2%E0%A5%80%20%E2%82%B9900/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-4"><img src="images/motichoor-ladoo.jpg" alt="Motichoor ladoo Indian sweet" loading="lazy"></div>
+          <div>
+            <h3>Motichoor Ladoo</h3>
+            <div class="hi-name">मोतीचूर लड्डू</div>
+            <p class="desc">Chhote-chhote boonde, elaichi ki khushboo, ghee ka swaad.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹450 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-ghee">Desi Ghee</span><span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Motichoor%20Ladoo%20/%20%E0%A4%AE%E0%A5%8B%E0%A4%A4%E0%A5%80%E0%A4%9A%E0%A5%82%E0%A4%B0%20%E0%A4%B2%E0%A4%A1%E0%A5%8D%E0%A4%A1%E0%A5%82%20%E2%82%B9450/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-1"><img src="images/gulab-jamun.jpg" alt="Gulab jamun in a silver bowl with rose petals" loading="lazy"></div>
+          <div>
+            <h3>Gulab Jamun</h3>
+            <div class="hi-name">गुलाब जामुन</div>
+            <p class="desc">Naram, ras-daar — garam serve karein, mehmaan bol uthein!</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹400 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-best">Bestseller</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Gulab%20Jamun%20/%20%E0%A4%97%E0%A5%81%E0%A4%B2%E0%A4%BE%E0%A4%AC%20%E0%A4%9C%E0%A4%BE%E0%A4%AE%E0%A5%81%E0%A4%A8%20%E2%82%B9400/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-6"><img src="images/soan-papdi.jpg" alt="Soan papdi squares with pistachios" loading="lazy"></div>
+          <div>
+            <h3>Soan Papdi</h3>
+            <div class="hi-name">सोन पापड़ी</div>
+            <p class="desc">Haath ki bani, jhaali-daar — muh mein ghul jaane wali.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹350 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Soan%20Papdi%20/%20%E0%A4%B8%E0%A5%8B%E0%A4%A8%20%E0%A4%AA%E0%A4%BE%E0%A4%AA%E0%A4%A1%E0%A4%BC%E0%A5%80%20%E2%82%B9350/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-2"><img src="images/rasmalai.jpg" alt="Rasmalai with pistachio garnish" loading="lazy"></div>
+          <div>
+            <h3>Rasmalai</h3>
+            <div class="hi-name">रसमलाई</div>
+            <p class="desc">Kesar-pista wala thanda doodh — garmi mein bhi swaad.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹550 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-best">Bestseller</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Rasmalai%20/%20%E0%A4%B0%E0%A4%B8%E0%A4%AE%E0%A4%B2%E0%A4%BE%E0%A4%88%20%E2%82%B9550/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-4"><img src="images/besan-ladoo.jpg" alt="Besan ladoos stacked on a plate with cashews" loading="lazy"></div>
+          <div>
+            <h3>Besan Ladoo</h3>
+            <div class="hi-name">बेसन लड्डू</div>
+            <p class="desc">Bhune chane ka besan, ghee aur kaju — pooja ka pasandeeda.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹480 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-ghee">Desi Ghee</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Besan%20Ladoo%20/%20%E0%A4%AC%E0%A5%87%E0%A4%B8%E0%A4%A8%20%E0%A4%B2%E0%A4%A1%E0%A5%8D%E0%A4%A1%E0%A5%82%20%E2%82%B9480/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-3"><img src="images/milk-cake.jpg" alt="Milk cake kalakand pieces with pistachios" loading="lazy"></div>
+          <div>
+            <h3>Milk Cake</h3>
+            <div class="hi-name">मिल्क केक</div>
+            <p class="desc">Dheere pakka hua, beech mein thoda gooey — Alwar style.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹500 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Milk%20Cake%20/%20%E0%A4%AE%E0%A4%BF%E0%A4%B2%E0%A5%8D%E0%A4%95%20%E0%A4%95%E0%A5%87%E0%A4%95%20%E2%82%B9500/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-1"><img src="images/kesar-peda.jpg" alt="Kesar peda saffron sweets on a tray" loading="lazy"></div>
+          <div>
+            <h3>Kesar Peda</h3>
+            <div class="hi-name">केसर पेड़ा</div>
+            <p class="desc">Mathura style peda, upar kesar ki lakeer — gift karne ke liye best.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹520 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-ghee">Desi Ghee</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Kesar%20Peda%20/%20%E0%A4%95%E0%A5%87%E0%A4%B8%E0%A4%B0%20%E0%A4%AA%E0%A5%87%E0%A4%A1%E0%A4%BC%E0%A4%BE%20%E2%82%B9520/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- CAKES -->
+    <div class="menu-panel" id="panel-cakes" role="tabpanel" aria-labelledby="tab-cakes" hidden>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="photo-box ph-2"><img src="images/chocolate-cake.jpg" alt="Whole chocolate truffle cake with chocolate drip" loading="lazy"></div>
+          <div>
+            <h3>Chocolate Truffle</h3>
+            <div class="hi-name">चॉकलेट ट्रफल</div>
+            <p class="desc">Dark chocolate ganache, andar se soft sponge — chocolate lovers ka dil.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹750 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-eggless">Eggless option</span><span class="badge badge-best">Bestseller</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Chocolate%20Truffle%20Cake%20/%20%E0%A4%9A%E0%A5%89%E0%A4%95%E0%A4%B2%E0%A5%87%E0%A4%9F%20%E0%A4%9F%E0%A5%8D%E0%A4%B0%E0%A4%AB%E0%A4%B2%20%E2%82%B9750/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-6"><img src="images/vanilla-cake.jpg" alt="Vanilla cream cake with birthday candles" loading="lazy"></div>
+          <div>
+            <h3>Vanilla Fresh Cream</h3>
+            <div class="hi-name">वैनिला फ्रेश क्रीम</div>
+            <p class="desc">Classic vanilla — bachchon ki party ka all-time favourite.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹600 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-eggless">Eggless option</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Vanilla%20Fresh%20Cream%20Cake%20%E2%82%B9600/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-3"><img src="images/butterscotch-cake.jpg" alt="Butterscotch crunch cake with caramel drip" loading="lazy"></div>
+          <div>
+            <h3>Butterscotch Crunch</h3>
+            <div class="hi-name">बटरस्कॉच क्रंच</div>
+            <p class="desc">Caramel ki mithaas aur crunchy praline — har bite mein.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹650 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-eggless">Eggless option</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Butterscotch%20Crunch%20Cake%20%E2%82%B9650/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-5"><img src="images/black-forest-cake.jpg" alt="Black forest cake with cherries and chocolate" loading="lazy"></div>
+          <div>
+            <h3>Black Forest</h3>
+            <div class="hi-name">ब्लैक फॉरेस्ट</div>
+            <p class="desc">Chocolate, cherry aur whipped cream — timeless combination.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹700 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Black%20Forest%20Cake%20/%20%E0%A4%AC%E0%A5%8D%E0%A4%B2%E0%A5%88%E0%A4%95%20%E0%A4%AB%E0%A5%89%E0%A4%B0%E0%A5%87%E0%A4%B8%E0%A5%8D%E0%A4%9F%20%E2%82%B9700/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-2"><img src="images/red-velvet-cake.jpg" alt="Red velvet cake with cream cheese frosting" loading="lazy"></div>
+          <div>
+            <h3>Red Velvet</h3>
+            <div class="hi-name">रेड वेलवेट</div>
+            <p class="desc">Romantic red sponge, cream cheese frosting — anniversaries ke liye.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹850 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-prem">Premium</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Red%20Velvet%20Cake%20/%20%E0%A4%B0%E0%A5%87%E0%A4%A1%20%E0%A4%B5%E0%A5%87%E0%A4%B2%E0%A4%B5%E0%A5%87%E0%A4%9F%20%E2%82%B9850/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-6"><img src="images/pineapple-cake.jpg" alt="Pineapple cream layer cake" loading="lazy"></div>
+          <div>
+            <h3>Pineapple Cream</h3>
+            <div class="hi-name">पाइनएप्पल क्रीम</div>
+            <p class="desc">Fresh pineapple chunks, halki si misti — light aur tasty.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹600 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-eggless">Eggless option</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Pineapple%20Cream%20Cake%20%E2%82%B9600/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-3"><img src="images/rasmalai-cake.jpg" alt="Rasmalai fusion cake slice with pistachios" loading="lazy"></div>
+          <div>
+            <h3>Rasmalai Fusion</h3>
+            <div class="hi-name">रसमलाई फ्यूजन केक</div>
+            <p class="desc">Mithai aur cake ka milaap — kesar, pista, rasmalai chunks ke saath.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹900 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-prem">Indian fusion</span><span class="badge badge-eggless">Eggless</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Rasmalai%20Fusion%20Cake%20/%20%E0%A4%B0%E0%A4%B8%E0%A4%AE%E0%A4%B2%E0%A4%BE%E0%A4%88%20%E0%A4%AB%E0%A5%8D%E0%A4%AF%E0%A5%82%E0%A4%9C%E0%A4%A8%20%E2%82%B9900/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- BAKERY -->
+    <div class="menu-panel" id="panel-bakery" role="tabpanel" aria-labelledby="tab-bakery" hidden>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="photo-box ph-4"><img src="images/bread.jpg" alt="Fresh baked bread loaf sliced on a board" loading="lazy"></div>
+          <div>
+            <h3>Fresh Bread Loaf</h3>
+            <div class="hi-name">ताज़ी ब्रेड</div>
+            <p class="desc">Subah ki pehli baking — soft, eggless, roz fresh.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹40 <small>/ loaf [SAMPLE]</small></span>
+              <span class="badge badge-eggless">Eggless</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Fresh%20Bread%20Loaf%20%E2%82%B940.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-3"><img src="images/cookies.jpg" alt="Atta ghee cookies stacked" loading="lazy"></div>
+          <div>
+            <h3>Atta Cookies</h3>
+            <div class="hi-name">आटा कुकीज़</div>
+            <p class="desc">Ghee mein bani, kam meethi — chai ke saath perfect.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹320 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-ghee">Desi Ghee</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Atta%20Cookies%20%E2%82%B9320/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-7"><img src="images/rusk.jpg" alt="Suji rusk slices with tea" loading="lazy"></div>
+          <div>
+            <h3>Suji Rusk</h3>
+            <div class="hi-name">सूजी रस्क</div>
+            <p class="desc">Kurkura, elaichi wala — chai dubao aur khao.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹150 <small>/ pack [SAMPLE]</small></span>
+              <span class="badge badge-eggless">Eggless</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Suji%20Rusk%20%E2%82%B9150/pack.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-1"><img src="images/veg-puff.jpg" alt="Golden veg puff pastries" loading="lazy"></div>
+          <div>
+            <h3>Veg Puff</h3>
+            <div class="hi-name">वेज पफ</div>
+            <p class="desc">Kurkuri parat, aloo-matar filling — shaam ki perfect snack.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹25 <small>/ piece [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Veg%20Puff%20%E2%82%B925/piece.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-6"><img src="images/khari.jpg" alt="Namkeen khari biscuits with tea" loading="lazy"></div>
+          <div>
+            <h3>Namkeen Khari</h3>
+            <div class="hi-name">नमकीन खारी</div>
+            <p class="desc">Buttery, flaky layers — chai ke saath Bhopal ka favourite.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹280 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Namkeen%20Khari%20%E2%82%B9280/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-5"><img src="images/cream-roll.jpg" alt="Cream rolls filled with fresh cream" loading="lazy"></div>
+          <div>
+            <h3>Cream Roll</h3>
+            <div class="hi-name">क्रीम रोल</div>
+            <p class="desc">Kurki pastry, andar soft cream — bachchon ka all-time love.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹40 <small>/ piece [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Cream%20Roll%20%E2%82%B940/piece.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- NAMKEEN -->
+    <div class="menu-panel" id="panel-namkeen" role="tabpanel" aria-labelledby="tab-namkeen" hidden>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="photo-box ph-7"><img src="images/bhujia.jpg" alt="Bhujia sev namkeen in a bowl" loading="lazy"></div>
+          <div>
+            <h3>Ratlami Bhujia</h3>
+            <div class="hi-name">रतलामी भुजिया</div>
+            <p class="desc">Teekhi, kurkuri — khana ho ya chai, dono ke saath jamti hai.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹300 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Ratlami%20Bhujia%20/%20%E0%A4%B0%E0%A4%A4%E0%A4%B2%E0%A4%BE%E0%A4%AE%E0%A5%80%20%E0%A4%AD%E0%A5%81%E0%A4%9C%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E2%82%B9300/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-6"><img src="images/aloo-lachha.jpg" alt="Aloo lachha crisps on a plate" loading="lazy"></div>
+          <div>
+            <h3>Aloo Lachha</h3>
+            <div class="hi-name">आलू लच्छा</div>
+            <p class="desc">Patle aloo ke lachhe, chatpata masala — movie night ready.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹320 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Aloo%20Lachha%20/%20%E0%A4%86%E0%A4%B2%E0%A5%82%20%E0%A4%B2%E0%A4%9A%E0%A5%8D%E0%A4%9B%E0%A4%BE%20%E2%82%B9320/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-1"><img src="images/samosa.jpg" alt="Hot samosas with green and tamarind chutney" loading="lazy"></div>
+          <div>
+            <h3>Special Samosa</h3>
+            <div class="hi-name">स्पेशल समोसा</div>
+            <p class="desc">Aloo-matar stuffing, double-layer parat — 4 baje ke baad garma-garam.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹15 <small>/ piece [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Special%20Samosa%20/%20%E0%A4%B8%E0%A4%AE%E0%A5%8B%E0%A4%B8%E0%A4%BE%20%E2%82%B915/piece.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-4"><img src="images/kachori.jpg" alt="Pyaz kachori fried snack with chutney" loading="lazy"></div>
+          <div>
+            <h3>Pyaz Kachori</h3>
+            <div class="hi-name">प्याज़ कचौरी</div>
+            <p class="desc">Crunchy bahar, chatpata pyaz andar — Rajasthani andaaz mein.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹20 <small>/ piece [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Pyaz%20Kachori%20/%20%E0%A4%95%E0%A4%9A%E0%A5%8C%E0%A4%B0%E0%A5%80%20%E2%82%B920/piece.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-3"><img src="images/sev.jpg" alt="Fine nylon sev namkeen" loading="lazy"></div>
+          <div>
+            <h3>Nylon Sev</h3>
+            <div class="hi-name">नायलॉन सेव</div>
+            <p class="desc">Barik sev — poha, chaat, sabzi, har jagah kaam aaye.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹280 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Nylon%20Sev%20%E2%82%B9280/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="photo-box ph-7"><img src="images/mixture.jpg" alt="Special mixture namkeen in a bowl" loading="lazy"></div>
+          <div>
+            <h3>Special Mixture</h3>
+            <div class="hi-name">स्पेशल मिक्सचर</div>
+            <p class="desc">Sev, moongphali, kaju aur curry patta — sab kuch ek mein.</p>
+            <div class="menu-card-foot">
+              <span class="price-tag">₹290 <small>/ kg [SAMPLE]</small></span>
+              <span class="badge badge-veg">🟢 Veg</span>
+              <a class="order-mini" href="https://wa.me/919826045123?text=Order%20karna%20hai:%20Special%20Mixture%20/%20%E0%A4%AE%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B8%E0%A4%9A%E0%A4%B0%20%E2%82%B9290/kg.%20Please%20confirm%20karein." target="_blank" rel="noopener">Order</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- MID-PAGE CTA -->
+    <div class="center mt-2 reveal">
+      <a class="btn btn-wa" href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20menu%20se%20order%20karna%20hai.%20Item%20bata%20deta%20hoon." target="_blank" rel="noopener">🎂 WhatsApp pe order karein</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CUSTOM CAKE ORDER FORM ================= -->
+<section class="section" id="cake-form">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Custom cakes</span>
+      <h2>Apna Custom Cake Order Karein</h2>
+      <p class="lead">Form bharein — aapka WhatsApp khulega poora detail ke saath. Kuch bhi server par save nahi hota, sab seedha hamare WhatsApp par jaata hai.</p>
+    </div>
+
+    <div class="cake-form-wrap reveal">
+      <aside class="cake-form-side">
+        <div class="photo-box ph-5"><img src="images/custom-cake.jpg" alt="Custom pink birthday cake with candles" loading="lazy"></div>
+        <h3>Kyun hamara custom cake?</h3>
+        <ul>
+          <li>🎂 Har flavour, har size — aapke hisaab se</li>
+          <li>🥚 Eggless available (thoda extra)</li>
+          <li>✍️ Cake par aapka message, free</li>
+          <li>📸 Photo/theme cake bhi banta hai</li>
+          <li>🚚 Pickup ya home delivery</li>
+        </ul>
+        <p class="note">⏰ <strong>Order at least 24 hours in advance.</strong> <small>[PLACEHOLDER]</small><br>Wedding / bulk orders ke liye 3–4 din pehle batayein.</p>
+      </aside>
+
+      <form class="cake-form-body" id="quickCakeForm" novalidate>
+        <div class="form-grid two">
+          <div class="field">
+            <label for="qFlavour">Flavour / स्वाद</label>
+            <select id="qFlavour" name="flavour">
+              <option>Chocolate Truffle</option>
+              <option>Vanilla</option>
+              <option>Butterscotch</option>
+              <option>Black Forest</option>
+              <option>Pineapple</option>
+              <option>Red Velvet</option>
+              <option>Strawberry</option>
+              <option>Mango (seasonal)</option>
+              <option>Rasmalai Fusion</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="lbl">Weight / वज़न</span>
+            <div class="pills" role="radiogroup" aria-label="Cake weight">
+              <label class="pill"><input type="radio" name="qWeight" value="0.5 kg"><span>0.5 kg</span></label>
+              <label class="pill"><input type="radio" name="qWeight" value="1 kg" checked><span>1 kg</span></label>
+              <label class="pill"><input type="radio" name="qWeight" value="2 kg"><span>2 kg</span></label>
+              <label class="pill"><input type="radio" name="qWeight" value="2 kg se zyada"><span>2 kg+</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <span class="lbl">Egg ya Eggless?</span>
+            <div class="pills" role="radiogroup" aria-label="Egg or eggless">
+              <label class="pill"><input type="radio" name="qEgg" value="Eggless" checked><span>🥚❌ Eggless</span></label>
+              <label class="pill"><input type="radio" name="qEgg" value="Egg wala"><span>🥚 Egg wala</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="qWhen">Kab chahiye? (date + time)</label>
+            <input type="datetime-local" id="qWhen" name="when" required>
+          </div>
+          <div class="field">
+            <label for="qMsg">Cake par message (30 letters)</label>
+            <input type="text" id="qMsg" name="message" maxlength="30" placeholder="Happy Birthday Aarav!">
+          </div>
+          <div class="field">
+            <label for="qTheme">Photo / theme idea</label>
+            <input type="text" id="qTheme" name="theme" placeholder="Jaise: Doraemon theme, red & gold">
+          </div>
+          <div class="field">
+            <label for="qName">Aapka naam</label>
+            <input type="text" id="qName" name="name" placeholder="Naam likhein" required>
+          </div>
+          <div class="field">
+            <label for="qPhone">Phone number</label>
+            <input type="tel" id="qPhone" name="phone" placeholder="98XXXXXXXX" required>
+          </div>
+        </div>
+
+        <div class="field mt-2">
+          <span class="lbl">Pickup ya Delivery?</span>
+          <div class="pills" role="radiogroup" aria-label="Pickup or delivery">
+            <label class="pill"><input type="radio" name="qFulfil" value="Dukaan se pickup" checked><span>🏪 Pickup</span></label>
+            <label class="pill"><input type="radio" name="qFulfil" value="Home delivery"><span>🛵 Home delivery</span></label>
+          </div>
+        </div>
+        <div class="field mt-2">
+          <label for="qAddress">Delivery area / address (agar delivery)</label>
+          <textarea id="qAddress" name="address" placeholder="Area, landmark, full address…"></textarea>
+        </div>
+        <div class="field mt-2">
+          <label for="qNotes">Special notes (optional)</label>
+          <textarea id="qNotes" name="notes" placeholder="Koi bhi extra cheez — sugar-free, less sweet, candle chahiye…"></textarea>
+        </div>
+
+        <p class="form-note mt-2">⏰ Kam se kam <strong>24 hours</strong> <small>[PLACEHOLDER]</small> pehle order karein. Form submit karte hi WhatsApp khulega — wahan <strong>Send</strong> dabate hi order bhej diya jaayega.</p>
+
+        <div class="mt-2">
+          <button class="btn btn-wa btn-block" type="submit">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg>
+            🎂 WhatsApp pe order karein
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESIGN YOUR OWN CAKE (BUILDER) ================= -->
+<section class="section builder" id="cake-builder">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Interactive cake studio</span>
+      <h2>🎂 Design Your Own Cake</h2>
+      <p class="lead">Apna cake khud design karein — shape, colour, topping sab choose karein aur <span class="hi">live preview</span> turant badalta jaayega. Pasand aaye toh seedha WhatsApp pe design bhej dein!</p>
+    </div>
+
+    <div class="builder-shell reveal">
+      <div class="builder-grid">
+
+        <!-- LIVE CAKE PREVIEW -->
+        <div class="cake-stage">
+          <div class="stage-sticky">
+            <div class="cake-stage-head">
+              <span class="mini-title">Live cake preview</span>
+              <div class="stage-actions">
+                <button type="button" class="mini-btn gold" id="surpriseBtn">🎲 Surprise me</button>
+                <button type="button" class="mini-btn" id="startOverBtn">↺ Start over</button>
+              </div>
+            </div>
+            <div class="cake-svg-box" id="cakeSvgBox">
+              <!-- SVG yahan JS se banta hai -->
+            </div>
+            <p class="stage-caption">Cut slice aapko andar ki layers dikhata hai · Yeh ek andaazan design hai, asli cake thoda alag dikhega</p>
+            <div class="price-box" aria-live="polite">
+              <div>
+                <div class="lbl">Estimated price / अनुमानित दाम</div>
+                <div class="amt" id="priceAmt">₹0</div>
+              </div>
+              <button type="button" class="mini-btn gold" id="priceBreakBtn" aria-expanded="false" aria-controls="priceBreak">Breakup dekhein</button>
+              <div class="disc">“Yeh andaazan daam hai. Final daam dukaan confirm karegi.”</div>
+            </div>
+            <div id="priceBreak" class="summary-card" hidden style="margin-top:.85rem">
+              <h4>Price breakup</h4>
+              <ul id="priceBreakList"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- WIZARD -->
+        <div class="wizard">
+          <div class="progress-wrap">
+            <div class="progress-top">
+              <span class="step-label" id="stepLabel">Step 1 of 8</span>
+              <span class="hint" id="stepName">Shape</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" id="progressBar">
+              <div class="bar" id="progressFill"></div>
+            </div>
+            <div class="step-dots" id="stepDots">
+              <button type="button" class="step-dot now" data-step="1" aria-label="Step 1: Shape">1</button>
+              <button type="button" class="step-dot" data-step="2" aria-label="Step 2: Size">2</button>
+              <button type="button" class="step-dot" data-step="3" aria-label="Step 3: Flavour">3</button>
+              <button type="button" class="step-dot" data-step="4" aria-label="Step 4: Cream & Colour">4</button>
+              <button type="button" class="step-dot" data-step="5" aria-label="Step 5: Toppings">5</button>
+              <button type="button" class="step-dot" data-step="6" aria-label="Step 6: Message">6</button>
+              <button type="button" class="step-dot" data-step="7" aria-label="Step 7: Details">7</button>
+              <button type="button" class="step-dot" data-step="8" aria-label="Step 8: Send">8</button>
+            </div>
+          </div>
+
+          <!-- STEP 1 · SHAPE -->
+          <div class="step active" id="step-1" data-name="Shape">
+            <h3>Cake ki shape?</h3>
+            <p class="step-sub">Tap karke choose karein — preview turant badal jaayega.</p>
+            <div class="opt-grid" id="shapeGrid">
+              <button type="button" class="opt-card active" data-shape="round">
+                <svg class="shape-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><ellipse cx="24" cy="26" rx="16" ry="10"/><ellipse cx="24" cy="22" rx="16" ry="10" fill="rgba(232,135,30,.25)"/><ellipse cx="24" cy="22" rx="16" ry="10"/></svg>
+                <span class="t">Round</span><span class="s">Sabse classic</span>
+              </button>
+              <button type="button" class="opt-card" data-shape="square">
+                <svg class="shape-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="10" y="16" width="28" height="18" rx="3"/><rect x="10" y="12" width="28" height="18" rx="3" fill="rgba(232,135,30,.25)"/></svg>
+                <span class="t">Square</span><span class="s">Modern look</span>
+              </button>
+              <button type="button" class="opt-card" data-shape="heart">
+                <svg class="shape-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M24 36S8 26 8 17a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 9-16 19-16 19z" fill="rgba(232,135,30,.25)"/></svg>
+                <span class="t">Heart</span><span class="s">Pyar bhara</span>
+              </button>
+            </div>
+
+            <h3 class="mt-2">Popular designs — ek click mein!</h3>
+            <p class="step-sub">Pasandeeda design choose karein, phir apne hisaab se badlein.</p>
+            <div class="chips" id="presetChips">
+              <button type="button" class="chip" data-preset="choco-birthday">🍫 Chocolate Truffle Birthday</button>
+              <button type="button" class="chip" data-preset="pink-princess">🎀 Pink Princess</button>
+              <button type="button" class="chip" data-preset="kids-cartoon">🎈 Kids' Cartoon Theme</button>
+              <button type="button" class="chip" data-preset="red-romance">❤️ Red Romance (Anniversary)</button>
+              <button type="button" class="chip" data-preset="gold-wedding">✨ Gold Wedding Tier</button>
+              <button type="button" class="chip" data-preset="rasmalai-fusion">🌿 Rasmalai Fusion</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 · SIZE -->
+          <div class="step" id="step-2" data-name="Size">
+            <h3>Kitna bada cake?</h3>
+            <p class="step-sub">Kitne log khayenge — us hisaab se size choose karein.</p>
+            <div class="opt-grid" id="sizeGrid">
+              <button type="button" class="opt-card" data-size="0.5"><span class="t">0.5 kg</span><span class="s">Serves ~4–6 log</span></button>
+              <button type="button" class="opt-card active" data-size="1"><span class="t">1 kg</span><span class="s">Serves ~8–10 log</span></button>
+              <button type="button" class="opt-card" data-size="1.5"><span class="t">1.5 kg</span><span class="s">Serves ~12–15 log</span></button>
+              <button type="button" class="opt-card" data-size="2"><span class="t">2 kg</span><span class="s">Serves ~16–20 log</span></button>
+              <button type="button" class="opt-card" data-size="3"><span class="t">3 kg+</span><span class="s">Serves ~25–30 log</span></button>
+            </div>
+
+            <div class="toggle-row mt-2">
+              <div>
+                <strong>Eggless cake chahiye?</strong>
+                <div class="hint">Eggless thoda mehnga padta hai (+₹50/kg [SAMPLE])</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="egglessToggle" checked>
+                <span class="track" aria-hidden="true"></span>
+                <span class="txt" id="egglessText">Eggless: ON</span>
+              </label>
+            </div>
+
+            <h3 class="mt-2">Tiers (layers)</h3>
+            <p class="step-sub">2 kg+ par 2 tiers unlock, 3 kg+ par 3 tiers unlock hote hain.</p>
+            <div class="opt-grid" id="tierGrid">
+              <button type="button" class="opt-card active" data-tier="1"><span class="t">1 Tier</span><span class="s">Classic single layer</span></button>
+              <button type="button" class="opt-card locked" data-tier="2"><span class="t">2 Tiers</span><span class="s">2 kg+ par unlock</span></button>
+              <button type="button" class="opt-card locked" data-tier="3"><span class="t">3 Tiers</span><span class="s">3 kg+ par unlock</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 3 · FLAVOUR -->
+          <div class="step" id="step-3" data-name="Flavour">
+            <h3>Flavour choose karein</h3>
+            <p class="step-sub">Sponge ka colour bhi isi ke saath set ho jaayega (cut slice mein dikhega).</p>
+            <div class="opt-grid" id="flavourGrid">
+              <button type="button" class="opt-card active" data-flavour="chocolate"><span class="flavour-dot" style="background:#6B4226"></span><span class="t">Chocolate</span><span class="s">₹750/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="vanilla"><span class="flavour-dot" style="background:#F5DFA8"></span><span class="t">Vanilla</span><span class="s">₹600/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="butterscotch"><span class="flavour-dot" style="background:#E3A857"></span><span class="t">Butterscotch</span><span class="s">₹650/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="blackforest"><span class="flavour-dot" style="background:#5A3428"></span><span class="t">Black Forest</span><span class="s">₹700/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="pineapple"><span class="flavour-dot" style="background:#F2D06B"></span><span class="t">Pineapple</span><span class="s">₹600/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="redvelvet"><span class="flavour-dot" style="background:#B33A4B"></span><span class="t">Red Velvet</span><span class="s">₹850/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="strawberry"><span class="flavour-dot" style="background:#E8879B"></span><span class="t">Strawberry</span><span class="s">₹650/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="mango"><span class="flavour-dot" style="background:#F2A93B"></span><span class="t">Mango</span><span class="s">Seasonal · ₹700/kg</span></button>
+              <button type="button" class="opt-card" data-flavour="rasmalai"><span class="flavour-dot" style="background:#F0E4A0"></span><span class="t">Rasmalai</span><span class="s">Indian fusion · ₹900/kg</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 4 · CREAM & COLOUR -->
+          <div class="step" id="step-4" data-name="Cream & Colour">
+            <h3>Cream / icing type</h3>
+            <p class="step-sub">Fondant premium hai — smooth finish aur zyada design options.</p>
+            <div class="opt-grid" id="creamGrid">
+              <button type="button" class="opt-card active" data-cream="whipped"><span class="t">Whipped Cream</span><span class="s">Light &amp; fluffy · included</span></button>
+              <button type="button" class="opt-card" data-cream="ganache"><span class="t">Chocolate Ganache</span><span class="s">Rich · +₹120/kg</span></button>
+              <button type="button" class="opt-card" data-cream="fondant"><span class="t">Fondant</span><span class="s">Premium finish · +₹280/kg</span></button>
+            </div>
+            <h3 class="mt-2">Cream ka colour</h3>
+            <p class="step-sub">Tap karke colour badlein — cake live update hota hai.</p>
+            <div class="swatches" id="colourSwatches" role="radiogroup" aria-label="Cream colour">
+              <button type="button" class="swatch active" data-colour="#FFFDF7" style="background:#FFFDF7" aria-label="Cream white"></button>
+              <button type="button" class="swatch" data-colour="#F8BBD0" style="background:#F8BBD0" aria-label="Soft pink"></button>
+              <button type="button" class="swatch" data-colour="#E56B8C" style="background:#E56B8C" aria-label="Rose"></button>
+              <button type="button" class="swatch" data-colour="#C62828" style="background:#C62828" aria-label="Red"></button>
+              <button type="button" class="swatch" data-colour="#5B8DEF" style="background:#5B8DEF" aria-label="Sky blue"></button>
+              <button type="button" class="swatch" data-colour="#8E6BC8" style="background:#8E6BC8" aria-label="Purple"></button>
+              <button type="button" class="swatch" data-colour="#2BA89B" style="background:#2BA89B" aria-label="Teal"></button>
+              <button type="button" class="swatch" data-colour="#F4C542" style="background:#F4C542" aria-label="Yellow"></button>
+              <button type="button" class="swatch" data-colour="#F08A24" style="background:#F08A24" aria-label="Orange"></button>
+              <button type="button" class="swatch" data-colour="#6B4226" style="background:#6B4226" aria-label="Chocolate brown"></button>
+            </div>
+          </div>
+
+          <!-- STEP 5 · TOPPINGS -->
+          <div class="step" id="step-5" data-name="Toppings">
+            <h3>Toppings — jitne chahein utne!</h3>
+            <p class="step-sub">Ek se zyada choose kar sakte hain. Premium wale thoda extra.</p>
+            <div class="chips" id="toppingChips">
+              <button type="button" class="chip" data-topping="sprinkles">🎉 Sprinkles <span class="tag">free</span></button>
+              <button type="button" class="chip" data-topping="cherries">🍒 Cherries <span class="tag">+₹40</span></button>
+              <button type="button" class="chip" data-topping="drip">🍫 Chocolate drip <span class="tag">+₹80</span></button>
+              <button type="button" class="chip" data-topping="fruits">🍓 Fresh fruits <span class="tag">+₹90</span></button>
+              <button type="button" class="chip" data-topping="kitkat">📏 Kit Kat border <span class="tag">+₹120</span></button>
+              <button type="button" class="chip" data-topping="gems">🔴 Gems <span class="tag">+₹50</span></button>
+              <button type="button" class="chip" data-topping="chocballs">🟤 Chocolate balls <span class="tag">+₹70</span></button>
+              <button type="button" class="chip" data-topping="goldleaf">✨ Gold leaf <span class="tag">+₹250</span></button>
+              <button type="button" class="chip" data-topping="flowers">🌸 Edible flowers <span class="tag">+₹150</span></button>
+              <button type="button" class="chip" data-topping="candles">🕯️ Number candles <span class="tag">+₹30</span></button>
+              <button type="button" class="chip" data-topping="topper">🎈 Happy Birthday topper <span class="tag">+₹60</span></button>
+              <button type="button" class="chip" data-topping="photo">📸 Photo print <span class="tag">premium +₹200</span></button>
+            </div>
+          </div>
+
+          <!-- STEP 6 · MESSAGE -->
+          <div class="step" id="step-6" data-name="Message">
+            <h3>Cake par kya likhein?</h3>
+            <p class="step-sub">Maximum 30 characters. Occasion choose karein, hum message suggest kar denge!</p>
+            <div class="field">
+              <label for="cakeMsg">Message on cake</label>
+              <input type="text" id="cakeMsg" maxlength="30" placeholder="Happy Birthday Aarav!" autocomplete="off">
+              <div class="char-count" id="charCount">0 / 30</div>
+            </div>
+            <div class="field">
+              <span class="lbl">Occasion</span>
+              <div class="pills" role="radiogroup" aria-label="Occasion">
+                <label class="pill"><input type="radio" name="occasion" value="birthday" checked><span>🎂 Birthday</span></label>
+                <label class="pill"><input type="radio" name="occasion" value="anniversary"><span>❤️ Anniversary</span></label>
+                <label class="pill"><input type="radio" name="occasion" value="wedding"><span>💍 Wedding</span></label>
+                <label class="pill"><input type="radio" name="occasion" value="baby"><span>🍼 Baby shower</span></label>
+                <label class="pill"><input type="radio" name="occasion" value="other"><span>🎁 Other</span></label>
+              </div>
+            </div>
+            <div class="field">
+              <span class="lbl">Writing style</span>
+              <div class="pills" role="radiogroup" aria-label="Writing style">
+                <label class="pill"><input type="radio" name="msgStyle" value="classic" checked><span>Classic</span></label>
+                <label class="pill"><input type="radio" name="msgStyle" value="playful"><span>Playful</span></label>
+                <label class="pill"><input type="radio" name="msgStyle" value="bold"><span>Bold Caps</span></label>
+              </div>
+            </div>
+            <div class="field">
+              <span class="lbl">Text colour</span>
+              <div class="swatches" id="textSwatches" role="radiogroup" aria-label="Message text colour">
+                <button type="button" class="swatch active" data-textcolour="#8A1C2B" style="background:#8A1C2B" aria-label="Maroon"></button>
+                <button type="button" class="swatch" data-textcolour="#C62828" style="background:#C62828" aria-label="Red"></button>
+                <button type="button" class="swatch" data-textcolour="#FFFFFF" style="background:#FFFFFF;border:2px solid #ccc" aria-label="White"></button>
+                <button type="button" class="swatch" data-textcolour="#1B4F9C" style="background:#1B4F9C" aria-label="Blue"></button>
+                <button type="button" class="swatch" data-textcolour="#2E7D32" style="background:#2E7D32" aria-label="Green"></button>
+                <button type="button" class="swatch" data-textcolour="#F4C542" style="background:#F4C542" aria-label="Gold"></button>
+              </div>
+            </div>
+            <button type="button" class="mini-btn gold mt-2" id="suggestMsgBtn">💡 Suggestion lagayein</button>
+          </div>
+
+          <!-- STEP 7 · DETAILS -->
+          <div class="step" id="step-7" data-name="Details">
+            <h3>Aapki details</h3>
+            <p class="step-sub">Yeh details sirf WhatsApp message mein jaati hain — kahin save nahi hoti.</p>
+            <div class="form-grid two">
+              <div class="field">
+                <label for="custName">Naam</label>
+                <input type="text" id="custName" placeholder="Aapka naam" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="custPhone">Phone</label>
+                <input type="tel" id="custPhone" placeholder="98XXXXXXXX" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="needWhen">Kab chahiye? (date + time)</label>
+                <input type="datetime-local" id="needWhen">
+                <div class="hint">Kam se kam 24 hours baad ka time chunein. <small>[PLACEHOLDER]</small></div>
+              </div>
+              <div class="field">
+                <span class="lbl">Pickup ya Delivery</span>
+                <div class="pills" role="radiogroup" aria-label="Pickup or delivery">
+                  <label class="pill"><input type="radio" name="fulfil" value="pickup" checked><span>🏪 Pickup</span></label>
+                  <label class="pill"><input type="radio" name="fulfil" value="delivery"><span>🛵 Delivery</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="field mt-2">
+              <label for="custAddress">Delivery area / address</label>
+              <textarea id="custAddress" placeholder="Area, landmark, full address…"></textarea>
+            </div>
+            <div class="field mt-2">
+              <span class="lbl">Reference photo (optional)</span>
+              <div class="hint">Design idea ke liye apne phone ki photo chunein. Yeh sirf aapke phone par dikhegi — kahin upload nahi hoti.</div>
+              <input type="file" id="refPhoto" accept="image/*">
+              <div class="ref-preview" id="refPreview">
+                <img id="refThumb" alt="Reference photo preview">
+                <div>
+                  <strong id="refName">photo.jpg</strong>
+                  <div class="hint">Ise WhatsApp chat mein bhej dein — hum design samajh jaayenge.</div>
+                </div>
+              </div>
+            </div>
+            <div class="field mt-2">
+              <label for="custNotes">Special notes</label>
+              <textarea id="custNotes" placeholder="Koi bhi extra cheez — kam meetha, sugar-free, candle…"></textarea>
+            </div>
+          </div>
+
+          <!-- STEP 8 · SEND -->
+          <div class="step" id="step-8" data-name="Send">
+            <h3>Check karein aur bhej dein! 🎉</h3>
+            <p class="step-sub">Neeche aapka poora cake design hai. Theek lage toh WhatsApp button dabayein.</p>
+            <div class="summary-card" id="summaryCard">
+              <h4>Aapka cake design</h4>
+              <ul id="summaryList"></ul>
+            </div>
+            <button type="button" class="btn btn-wa btn-block" id="sendDesignBtn">
+              <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg>
+              🎂 Design WhatsApp pe bhejein
+            </button>
+            <button type="button" class="btn btn-gold btn-block mt-2" id="downloadDesignBtn">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>
+              📥 Download cake design (PNG)
+            </button>
+            <div class="send-tip" id="sendTip">
+              💡 <strong>Tip:</strong> Ab download ki hui cake photo (aur reference photo) WhatsApp chat mein bhej dijiye — design picture perfect samajh aayega!
+            </div>
+            <p class="form-note mt-2">“Yeh andaazan daam hai. Final daam dukaan confirm karegi.” Order at least <strong>24 hours</strong> <small>[PLACEHOLDER]</small> in advance.</p>
+          </div>
+
+          <!-- NAV -->
+          <div class="wizard-nav">
+            <button type="button" class="btn btn-ghost" id="prevBtn" disabled>← Back</button>
+            <button type="button" class="btn btn-gold" id="nextBtn">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FESTIVAL & GIFT BOXES ================= -->
+<section class="section section--band" id="gifts">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Tyohaar &amp; gifting</span>
+      <h2>Festival &amp; Gift Boxes</h2>
+      <p class="lead">Diwali ho ya Rakhi, shaadi ka shagun ho ya office gifting — hamare ready boxes mein mithaas bhar dein. Bulk order ke liye WhatsApp karein!</p>
+    </div>
+    <div class="fest-grid">
+      <article class="fest-card reveal">
+        <div class="photo-box ph-1"><img src="images/diwali-box.jpg" alt="Diwali gift boxes with sweets and diyas" loading="lazy"></div>
+        <div class="fest-body">
+          <h3>Diwali Special Box</h3>
+          <div class="range">₹499 – ₹1,849 [SAMPLE]</div>
+          <ul class="size-list">
+            <li><span>500 g (4 variety)</span><strong>₹499</strong></li>
+            <li><span>1 kg (6 variety)</span><strong>₹949</strong></li>
+            <li><span>2 kg (8 variety + dry fruit)</span><strong>₹1,849</strong></li>
+          </ul>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Namaste!%20Diwali%20Gift%20Box%20order%20karna%20hai.%20Please%20options%20bhejein." target="_blank" rel="noopener">Bulk order ke liye WhatsApp karein</a>
+        </div>
+      </article>
+      <article class="fest-card reveal d1">
+        <div class="photo-box ph-5"><img src="images/rakhi.jpg" alt="Rakhi gift combo with sweets and thali" loading="lazy"></div>
+        <div class="fest-body">
+          <h3>Raksha Bandhan Combo</h3>
+          <div class="range">₹399 – ₹999 [SAMPLE]</div>
+          <ul class="size-list">
+            <li><span>Mithai 250 g + rakhi</span><strong>₹399</strong></li>
+            <li><span>Mithai 500 g + rakhi + dry fruit</span><strong>₹649</strong></li>
+            <li><span>Family pack (1 kg + 3 rakhis)</span><strong>₹999</strong></li>
+          </ul>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Namaste!%20Raksha%20Bandhan%20Combo%20order%20karna%20hai.%20Please%20options%20bhejein." target="_blank" rel="noopener">Bulk order ke liye WhatsApp karein</a>
+        </div>
+      </article>
+      <article class="fest-card reveal d2">
+        <div class="photo-box ph-6"><img src="images/gujiya.jpg" alt="Fried gujiya sweets for Holi" loading="lazy"></div>
+        <div class="fest-body">
+          <h3>Holi Gujiya Box</h3>
+          <div class="range">₹349 – ₹899 [SAMPLE]</div>
+          <ul class="size-list">
+            <li><span>Gujiya 500 g + namkeen</span><strong>₹349</strong></li>
+            <li><span>Gujiya 1 kg + thandai mix</span><strong>₹599</strong></li>
+            <li><span>Family hamper (2 kg mix)</span><strong>₹899</strong></li>
+          </ul>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Namaste!%20Holi%20Gujiya%20Box%20order%20karna%20hai.%20Please%20options%20bhejein." target="_blank" rel="noopener">Bulk order ke liye WhatsApp karein</a>
+        </div>
+      </article>
+      <article class="fest-card reveal">
+        <div class="photo-box ph-3"><img src="images/shagun-box.jpg" alt="Wedding shagun gift boxes in gold brocade" loading="lazy"></div>
+        <div class="fest-body">
+          <h3>Shaadi Shagun Box</h3>
+          <div class="range">₹599 – ₹2,999 [SAMPLE]</div>
+          <ul class="size-list">
+            <li><span>Classic (Kaju Katli 500 g)</span><strong>₹599</strong></li>
+            <li><span>Deluxe (mixed mithai 1 kg)</span><strong>₹1,199</strong></li>
+            <li><span>Royal (dry fruit mithai 2 kg)</span><strong>₹2,999</strong></li>
+          </ul>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Namaste!%20Shaadi%20Shagun%20Box%20order%20karna%20hai.%20Please%20options%20bhejein." target="_blank" rel="noopener">Bulk order ke liye WhatsApp karein</a>
+        </div>
+      </article>
+      <article class="fest-card reveal d1">
+        <div class="photo-box ph-4"><img src="images/corporate-gift.jpg" alt="Corporate gift hamper box with assorted sweets and dry fruits" loading="lazy"></div>
+        <div class="fest-body">
+          <h3>Corporate Gifting</h3>
+          <div class="range">₹299 / box se shuru · 50+ boxes [SAMPLE]</div>
+          <ul class="size-list">
+            <li><span>Custom logo card + mithai box</span><strong>₹299+</strong></li>
+            <li><span>Premium dry fruit &amp; mithai combo</span><strong>₹799+</strong></li>
+            <li><span>Customised packaging</span><strong>On request</strong></li>
+          </ul>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Namaste!%20Corporate%20Gifting%20ke%20liye%20baat%20karni%20hai.%2050%2B%20boxes%20chahiye." target="_blank" rel="noopener">Bulk order ke liye WhatsApp karein</a>
+        </div>
+      </article>
+      <article class="fest-card reveal d2">
+        <div class="photo-box ph-2"><img src="images/dryfruit-box.jpg" alt="Premium dry fruit gift box" loading="lazy"></div>
+        <div class="fest-body">
+          <h3>Dry Fruit Premium Box</h3>
+          <div class="range">₹899 – ₹3,499 [SAMPLE]</div>
+          <ul class="size-list">
+            <li><span>500 g dry fruit mithai</span><strong>₹899</strong></li>
+            <li><span>1 kg dry fruit mithai</span><strong>₹1,749</strong></li>
+            <li><span>2 kg + imported dry fruits</span><strong>₹3,499</strong></li>
+          </ul>
+          <a class="order-mini" href="https://wa.me/919826045123?text=Namaste!%20Dry%20Fruit%20Premium%20Box%20order%20karna%20hai.%20Please%20options%20bhejein." target="_blank" rel="noopener">Bulk order ke liye WhatsApp karein</a>
+        </div>
+      </article>
+    </div>
+    <div class="center mt-2 reveal">
+      <a class="btn btn-wa" href="https://wa.me/919826045123?text=Namaste!%20Bulk%20%26%20festival%20gift%20box%20order%20ke%20liye%20baat%20karni%20hai." target="_blank" rel="noopener">🎁 Bulk order ke liye WhatsApp karein</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARTY & WEDDING ================= -->
+<section class="section" id="party">
+  <div class="container">
+    <div class="party-band reveal">
+      <div class="party-inner">
+        <div>
+          <span class="kicker" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#FFE3B8">Party &amp; wedding</span>
+          <h2>Shaadi, party, pooja — bulk mithai aur catering!</h2>
+          <p>100 log ho ya 1000 — har event ke liye fresh mithai counters, return gifts aur custom cakes. Menu, quantity aur budget WhatsApp par discuss karein; hum poora plan bana denge.</p>
+          <div class="party-points">
+            <div class="party-point">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Bulk sweets — 10 kg se 500 kg tak, fresh bana kar</span>
+            </div>
+            <div class="party-point">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Live counters: chaat, tandoori snacks, dessert counter</span>
+            </div>
+            <div class="party-point">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Customised return-gift boxes with naam &amp; shukriya card</span>
+            </div>
+          </div>
+          <a class="btn btn-wa" href="https://wa.me/919826045123?text=Namaste!%20Party%20%2F%20wedding%20ke%20liye%20bulk%20order%20discuss%20karna%20hai.%20Please%20call%20%2F%20WhatsApp%20karein." target="_blank" rel="noopener">🎉 Party/wedding ka quote lein</a>
+        </div>
+        <div class="photo-box ph-3"><img src="images/party-counter.jpg" alt="Wedding mithai counter with assorted sweets in bowls" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY US ================= -->
+<section class="section section--band" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Bharosa</span>
+      <h2>Log Hamare Paas Kyun Aate Hain?</h2>
+      <p class="lead">Kyunki hum wahi dete hain jo ghar par banaya jaaye — shuddh, fresh aur dil se.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-ic">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3c2.5 3 5 5.2 5 8.5A5 5 0 0 1 7 11.5C7 8.2 9.5 6 12 3z"/><path d="M12 21v-3"/></svg>
+        </div>
+        <h3>100% Shuddh Desi Ghee</h3>
+        <p>Mithai sirf asli desi ghee mein banti hai — khushboo aur swaad dono asli. <small>[PLACEHOLDER: confirm karein]</small></p>
+      </div>
+      <div class="why-card reveal d1">
+        <div class="why-ic">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/><path d="M5 3L2 6M19 3l3 3"/></svg>
+        </div>
+        <h3>Roz Fresh Banta Hai</h3>
+        <p>Na kal ki mithai, na stored stock — jo bikta hai, woh roz subah banta hai.</p>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="why-ic">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Hygienic Kitchen</h3>
+        <p>Har counter saaf, har halwai gloved — FSSAI licensed kitchen. <small>[PLACEHOLDER: FSSAI No. 00000000000000]</small></p>
+      </div>
+      <div class="why-card reveal d3">
+        <div class="why-ic">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+        </div>
+        <h3>Home Delivery</h3>
+        <p>Bhopal ke andar delivery — ₹500+ order par free. <small>[PLACEHOLDER: delivery area confirm karein]</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Hamari dukaan</span>
+      <h2>Gallery</h2>
+      <p class="lead">Dukaan ka nazara, counter ki mithai aur hamare designer cakes — sab kuch ek jagah.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall reveal">
+        <div class="photo-box ph-1"><img src="images/shop-front.jpg" alt="Indian sweet shop interior with display" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal d1">
+        <div class="photo-box ph-3"><img src="images/mithai-counter.jpg" alt="Mithai display counter with fresh sweets" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal d2">
+        <div class="photo-box ph-5"><img src="images/hero-cake.jpg" alt="Pink birthday cake with lit candles and sprinkles" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal d3">
+        <div class="photo-box ph-4"><img src="images/bakery-rack.jpg" alt="Bakery display with breads and pastries" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal">
+        <div class="photo-box ph-6"><img src="images/dryfruit-box.jpg" alt="Dry fruit platter in a gift box" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal d1">
+        <div class="photo-box ph-2"><img src="images/wedding-cake.jpg" alt="Three tier white wedding cake" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal d2">
+        <div class="photo-box ph-7"><img src="images/namkeen-counter.jpg" alt="Namkeen and sweets display counter" loading="lazy"></div>
+      </div>
+      <div class="gallery-item reveal d3">
+        <div class="photo-box ph-8"><img src="images/gift-packing.jpg" alt="Festive gift packing with mithai boxes" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="section section--band" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Customers ki zubaani</span>
+      <h2>Log Kya Kehte Hain</h2>
+      <p class="lead">4.8 ⭐ average rating · 2,000+ happy families <small>[SAMPLE]</small></p>
+    </div>
+    <div class="reviews-grid">
+      <article class="review-card reveal">
+        <span class="sample-tag">Sample</span>
+        <div class="stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <p>Meri maa ki 60th birthday ke liye 3 kg Rasmalai fusion cake mangwaya tha — mehmaano ne poocha kahan se liya! Delivery time par aayi aur cake bilkul photo jaisa tha. Ab har occasion par yahin se.</p>
+        <div class="reviewer">
+          <div class="avatar" style="background:#8A1C2B" aria-hidden="true">P</div>
+          <div>
+            <div class="nm">Priya Sharma</div>
+            <div class="loc">Kolar Road, Bhopal</div>
+          </div>
+        </div>
+      </article>
+      <article class="review-card reveal d1">
+        <span class="sample-tag">Sample</span>
+        <div class="stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <p>Office Diwali ke liye 40 gift boxes order kiye the — packing classy thi, mithai fresh, aur rate bhi reasonable. WhatsApp par sab settle ho gaya, ek baar bhi dukaan nahi jaana pada. Highly recommended!</p>
+        <div class="reviewer">
+          <div class="avatar" style="background:#E8871E" aria-hidden="true">R</div>
+          <div>
+            <div class="nm">Rahul Verma</div>
+            <div class="loc">MP Nagar, Bhopal</div>
+          </div>
+        </div>
+      </article>
+      <article class="review-card reveal d2">
+        <span class="sample-tag">Sample</span>
+        <div class="stars" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <p>Bachche ki pehli birthday ke liye eggless cartoon cake order kiya. Design itna cute tha ki katne ka mann nahi tha! Staff ne message bhi likhwa diya tha. Kaju Katli bhi bilkul ghar jaisi thi.</p>
+        <div class="reviewer">
+          <div class="avatar" style="background:#E56B8C" aria-hidden="true">A</div>
+          <div>
+            <div class="nm">Anita Deshmukh</div>
+            <div class="loc">Arera Colony, Bhopal</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Sawaal-jawaab</span>
+      <h2>Aksar Poochhe Jaane Wale Sawaal</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq">
+        <summary>Eggless cakes aur mithai milte hain?</summary>
+        <div class="faq-body">Haan bilkul! Hamari zyada-tar mithai pehle se eggless hai, aur har cake flavour eggless option mein available hai (thoda extra charge lagta hai — ₹50/kg [SAMPLE]). Order ke waqt “Eggless” zaroor likhein, hum dhyan rakhenge.</div>
+      </details>
+      <details class="faq">
+        <summary>Kitne ghante/din pehle order karna padta hai?</summary>
+        <div class="faq-body">Normal mithai aur bakery ke liye same-day order chalega. Custom cakes ke liye kam se kam 24 hours <small>[PLACEHOLDER]</small> pehle order karein. Wedding, party aur bulk orders ke liye 3–4 din ka time dijiye taaki sab fresh aur perfect bane.</div>
+      </details>
+      <details class="faq">
+        <summary>Kahan-kahan delivery hoti hai?</summary>
+        <div class="faq-body">Bhopal ke andar ~8 km tak home delivery available hai — Kolar Road, MP Nagar, Arera Colony, Bairagarh, Shahpura aur aas-paas ke areas. ₹500+ order par delivery free hai. <small>[PLACEHOLDER: delivery area &amp; charges confirm karein]</small> Pickup bhi kar sakte hain — dukaan ka address neeche hai.</div>
+      </details>
+      <details class="faq">
+        <summary>Payment kaise karein?</summary>
+        <div class="faq-body">Cash, UPI (PhonePe / Google Pay / Paytm), aur debit/credit cards — sab chalta hai. Bulk orders ke liye advance payment leni padti hai (50% booking amount). WhatsApp par payment link/details bhej di jaayegi.</div>
+      </details>
+      <details class="faq">
+        <summary>Mithai kitne din fresh rehti hai?</summary>
+        <div class="faq-body">Fresh mithai (Rasmalai, Gulab Jamun, milk-based) 2–3 din tak refrigerator mein best rehti hai. Dry mithai (Kaju Katli, Soan Papdi, ladoo) 7–10 din chalti hai — airtight dabbe mein rakhein. Har box par best-before likha hota hai.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section section--band" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Aaiye, miliye</span>
+      <h2>Dukaan ka Pata &amp; Samay</h2>
+      <p class="lead">Phone kijiye, WhatsApp kijiye ya seedha dukaan aa jaiye — chai aur mithai taiyaar hai!</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <div class="t">Address</div>
+            <div class="v">Shop No. 12, Sunshine Plaza, Kolar Road,<br>Bhopal, Madhya Pradesh – 462042 <small>[PLACEHOLDER]</small></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div>
+            <div class="t">Opening Hours</div>
+            <div class="v">8:00 AM – 10:00 PM · Monday to Sunday <small>[PLACEHOLDER]</small></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          <div>
+            <div class="t">Phone (tap-to-call)</div>
+            <div class="v"><a href="tel:+919826045123">+91 98260 45123</a> <small>[PLACEHOLDER]</small></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg>
+          <div>
+            <div class="t">WhatsApp Orders</div>
+            <div class="v"><a href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20bhejein." target="_blank" rel="noopener">wa.me/919826045123</a> <small>[PLACEHOLDER]</small></div>
+          </div>
+        </div>
+        <a class="btn btn-wa btn-block" href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20bhejein." target="_blank" rel="noopener">🎂 WhatsApp pe order karein</a>
+      </div>
+      <div class="map-box reveal d1" role="img" aria-label="Map placeholder: shop location on Google Maps">
+        <div class="map-pin" aria-hidden="true">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="ph">Map: Google Maps embed yahan lagega — Kolar Road, Bhopal <small>[PLACEHOLDER: Maps link]</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="#top" aria-label="Shree Krishna Sweets & Bakers">
+          <span class="logo-mark" aria-hidden="true">SK</span>
+          <span class="logo-text">Shree Krishna<small>Sweets &amp; Bakers</small></span>
+        </a>
+        <p class="about mt-2">Bhopal ki apni mithai dukaan — 2008 se <small>[PLACEHOLDER]</small> har khushi mein mithaas baant rahe hain. Shuddh desi ghee, roz ki freshness, aur dil se service.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram (link badlein)" title="Instagram [PLACEHOLDER]">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook (link badlein)" title="Facebook [PLACEHOLDER]">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h2.5l.5-3h-3V3.5c0-.9.3-1.5 1.6-1.5H17V-.4A21 21 0 0 0 14.6 0C12 0 10.2 1.6 10.2 4.6V5H7v3h3.2v9H14z" transform="translate(1 4)"/></svg>
+          </a>
+          <a href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20order%20karna%20hai." target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#specials">Aaj ke Specials</a></li>
+          <li><a href="#menu">Poora Menu</a></li>
+          <li><a href="#cake-form">Custom Cake Order</a></li>
+          <li><a href="#cake-builder">Design Your Own Cake</a></li>
+          <li><a href="#gifts">Festival Gift Boxes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Madad</h3>
+        <ul class="footer-links">
+          <li><a href="#party">Party &amp; Wedding Orders</a></li>
+          <li><a href="#reviews">Customer Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact &amp; Location</a></li>
+          <li><a href="tel:+919826045123">📞 +91 98260 45123</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Order Karein</h3>
+        <p class="about">WhatsApp par order sabse aasaan hai — 9 AM se 9 PM tak reply milti hai.</p>
+        <a class="btn btn-wa btn-block" href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20bhejein." target="_blank" rel="noopener">🎂 WhatsApp pe order karein</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Shree Krishna Sweets &amp; Bakers · Bhopal</span>
+      <span>Website by <strong>[PLACEHOLDER]</strong> · Sab prices [SAMPLE] hain</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /.page -->
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a class="fab" href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20bhejein." target="_blank" rel="noopener" aria-label="WhatsApp pe order karein — floating button">
+  <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22zm5.7-7.4c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6s0-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4a3.7 3.7 0 0 0-1.2 2.8 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5 18.3 18.3 0 0 0 1.8.7 4.4 4.4 0 0 0 2 .2 3.3 3.3 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg>
+  <span class="fab-label">WhatsApp pe order karein</span>
+</a>
+
+<script>
+/* ============================================================
+   ★★★ PRICE LIST — SAB DAAM YAHIN BADLEIN ★★★  [SAMPLE PRICES]
+   Shop owner: neeche ke numbers edit karein — poora website aur
+   cake builder ka estimate yahin se chalta hai. Currency: ₹ per kg.
+   ============================================================ */
+var PRICES = {
+  basePerKg: {            /* flavour ke hisaab se ₹ per kg */
+    chocolate: 750, vanilla: 600, butterscotch: 650, blackforest: 700,
+    pineapple: 600, redvelvet: 850, strawberry: 650, mango: 700, rasmalai: 900
+  },
+  egglessPerKg: 50,       /* eggless extra ₹ per kg */
+  creamPerKg: {           /* cream/icing extra ₹ per kg */
+    whipped: 0, ganache: 120, fondant: 280
+  },
+  perExtraTier: 250,      /* har extra tier ka charge (flat) */
+  toppings: {             /* topping extras (flat ₹) */
+    sprinkles: 0, cherries: 40, drip: 80, fruits: 90, kitkat: 120, gems: 50,
+    chocballs: 70, goldleaf: 250, flowers: 150, candles: 30, topper: 60, photo: 200
+  }
+};
+
+var WA_NUMBER = '919826045123';           /* [PLACEHOLDER] WhatsApp number */
+var WA_BASE = 'https://wa.me/' + WA_NUMBER + '?text=';
+
+/* ---------- helpers ---------- */
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', function (e) {
+  reduceMotion = e.matches;
+});
+function $(id) { return document.getElementById(id); }
+function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+function waLink(text) { return WA_BASE + encodeURIComponent(text); }
+function openWA(text) { window.open(waLink(text), '_blank', 'noopener'); }
+function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+(function () {
+  var hamb = $('hambBtn'), menu = $('mobileMenu');
+  if (!hamb) return;
+  hamb.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    hamb.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  $$('a', menu).forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('open');
+      hamb.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
+/* ============================================================
+   MENU TABS (slide indicator + panels)
+   ============================================================ */
+(function () {
+  var tabs = $$('.tab-btn');
+  var ink = $('tabInk');
+  if (!tabs.length || !ink) return;
+
+  function moveInk(btn) {
+    ink.style.width = btn.offsetWidth + 'px';
+    ink.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+  }
+  function activate(btn) {
+    tabs.forEach(function (t) {
+      var on = t === btn;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      var panel = $(t.getAttribute('aria-controls'));
+      if (panel) {
+        panel.classList.toggle('active', on);
+        if (on) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); }
+      }
+    });
+    moveInk(btn);
+  }
+  tabs.forEach(function (btn, i) {
+    btn.addEventListener('click', function () { activate(btn); });
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        next.focus(); activate(next);
+      }
+    });
+  });
+  window.addEventListener('resize', function () {
+    var active = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
+    if (active) moveInk(active);
+  });
+  /* fonts load hone ke baad ink adjust */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      var active = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
+      if (active) moveInk(active);
+    });
+  }
+  setTimeout(function () { activate(tabs[0]); }, 50);
+})();
+
+/* ============================================================
+   REVEAL ON SCROLL + COUNT-UP NUMBERS
+   ============================================================ */
+(function () {
+  var reveals = $$('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+    $$('.count').forEach(function (el) { el.textContent = (+el.dataset.target).toLocaleString('en-IN'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(function (el) { io.observe(el); });
+
+  function animateCount(el) {
+    var target = +el.dataset.target;
+    if (reduceMotion) { el.textContent = target.toLocaleString('en-IN'); return; }
+    var t0 = performance.now(), dur = 1500;
+    function tick(t) {
+      var p = Math.min(1, (t - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * e).toLocaleString('en-IN');
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var cio = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { animateCount(en.target); cio.unobserve(en.target); }
+    });
+  }, { threshold: 0.4 });
+  $$('.count').forEach(function (el) { cio.observe(el); });
+})();
+
+/* footer year */
+(function () {
+  var y = $('year');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+
+/* ============================================================
+   QUICK CUSTOM CAKE FORM → WhatsApp (kuch bhi save nahi hota)
+   ============================================================ */
+(function () {
+  var form = $('quickCakeForm');
+  if (!form) return;
+  function minDT() {
+    var d = new Date(Date.now() + 24 * 3600 * 1000);
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    return d.toISOString().slice(0, 16);
+  }
+  var whenEl = $('qWhen');
+  if (whenEl) whenEl.min = minDT();
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = $('qName').value.trim();
+    var phone = $('qPhone').value.trim();
+    if (!name || !phone) {
+      alert('Kripya naam aur phone number bharein — taaki hum confirm kar sakein.');
+      (!name ? $('qName') : $('qPhone')).focus();
+      return;
+    }
+    function val(n) { var el = form.querySelector('[name="' + n + '"]:checked'); return el ? el.value : ''; }
+    var lines = [
+      '🎂 *Custom Cake Order — Shree Krishna Sweets & Bakers*',
+      '━━━━━━━━━━━━━━━',
+      '🍰 Flavour: ' + $('qFlavour').value,
+      '⚖️ Weight: ' + val('qWeight'),
+      '🥚 Type: ' + val('qEgg'),
+      '📅 Kab chahiye: ' + ($('qWhen').value || '—'),
+      '✍️ Cake message: "' + ($('qMsg').value.trim() || '—') + '"',
+      '🎨 Photo/theme idea: ' + ($('qTheme').value.trim() || '—'),
+      '🏠 Pickup / Delivery: ' + val('qFulfil'),
+      '📍 Address: ' + ($('qAddress').value.trim() || '—'),
+      '📝 Notes: ' + ($('qNotes').value.trim() || '—'),
+      '👤 Naam: ' + name,
+      '📞 Phone: ' + phone,
+      '━━━━━━━━━━━━━━━',
+      'Order at least 24 hours in advance. 🙏'
+    ];
+    openWA(lines.join('\n'));
+  });
+})();
+</script>
+
+<script>
+/* ============================================================
+   DESIGN YOUR OWN CAKE — live SVG builder
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var FLAVOURS = {
+    chocolate:   { name: 'Chocolate',      sponge: '#6B4226', alt: '#8A5A34' },
+    vanilla:     { name: 'Vanilla',        sponge: '#F5DFA8', alt: '#E4C878' },
+    butterscotch:{ name: 'Butterscotch',   sponge: '#E3A857', alt: '#C98A3C' },
+    blackforest: { name: 'Black Forest',   sponge: '#5A3428', alt: '#7A4A34' },
+    pineapple:   { name: 'Pineapple',      sponge: '#F2D06B', alt: '#DCB94F' },
+    redvelvet:   { name: 'Red Velvet',     sponge: '#B33A4B', alt: '#8E2C3A' },
+    strawberry:  { name: 'Strawberry',     sponge: '#E8879B', alt: '#CE6A80' },
+    mango:       { name: 'Mango (seasonal)', sponge: '#F2A93B', alt: '#D68F26' },
+    rasmalai:    { name: 'Rasmalai Fusion', sponge: '#F0E4A0', alt: '#D9C97E' }
+  };
+  var COLOURS = {
+    '#FFFDF7': 'Cream white', '#F8BBD0': 'Soft pink', '#E56B8C': 'Rose',
+    '#C62828': 'Red', '#5B8DEF': 'Sky blue', '#8E6BC8': 'Purple',
+    '#2BA89B': 'Teal', '#F4C542': 'Yellow', '#F08A24': 'Orange', '#6B4226': 'Chocolate brown'
+  };
+  var CREAMS = { whipped: 'Whipped cream', ganache: 'Chocolate ganache', fondant: 'Fondant (premium)' };
+  var TOPPING_NAMES = {
+    sprinkles: 'Sprinkles', cherries: 'Cherries', drip: 'Chocolate drip', fruits: 'Fresh fruits',
+    kitkat: 'Kit Kat border', gems: 'Gems', chocballs: 'Chocolate balls', goldleaf: 'Gold leaf',
+    flowers: 'Edible flowers', candles: 'Number candles', topper: 'Happy Birthday topper', photo: 'Photo print'
+  };
+  var OCCASIONS = {
+    birthday: 'Birthday', anniversary: 'Anniversary', wedding: 'Wedding',
+    baby: 'Baby shower', other: 'Other'
+  };
+  var SIZES = {
+    0.5: '0.5 kg (serves ~4–6)', 1: '1 kg (serves ~8–10)', 1.5: '1.5 kg (serves ~12–15)',
+    2: '2 kg (serves ~16–20)', 3: '3 kg+ (serves ~25–30)'
+  };
+  var SHAPES = { round: 'Round', square: 'Square', heart: 'Heart' };
+  var MSG_STYLES = { classic: 'Classic', playful: 'Playful', bold: 'Bold Caps' };
+
+  var STORAGE_KEY = 'sks_cake_design_v1';
+
+  var state = {
+    step: 1,
+    shape: 'round',
+    size: 1,
+    tiers: 1,
+    flavour: 'chocolate',
+    eggless: true,
+    cream: 'whipped',
+    colour: '#FFFDF7',
+    toppings: [],
+    message: '',
+    msgStyle: 'classic',
+    msgColor: '#8A1C2B',
+    occasion: 'birthday',
+    name: '', phone: '', when: '', fulfil: 'pickup', address: '', notes: ''
+  };
+
+  /* ---------- colour utils ---------- */
+  function shade(hex, amt) {
+    var col = String(hex).replace('#', '');
+    if (col.length === 3) col = col[0] + col[0] + col[1] + col[1] + col[2] + col[2];
+    var r = parseInt(col.substr(0, 2), 16), g = parseInt(col.substr(2, 2), 16), b = parseInt(col.substr(4, 2), 16);
+    if (amt >= 0) { r += (255 - r) * amt; g += (255 - g) * amt; b += (255 - b) * amt; }
+    else { r *= (1 + amt); g *= (1 + amt); b *= (1 + amt); }
+    return 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ')';
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function heartPath(cx, cy, w) {
+    var s = w / 44;
+    return 'M ' + cx + ',' + (cy + 20 * s) +
+      ' C ' + (cx - 22 * s) + ',' + (cy + 4 * s) + ' ' + (cx - 18 * s) + ',' + (cy - 16 * s) + ' ' + (cx - 8 * s) + ',' + (cy - 16 * s) +
+      ' C ' + (cx - 3 * s) + ',' + (cy - 16 * s) + ' ' + cx + ',' + (cy - 11 * s) + ' ' + cx + ',' + (cy - 8 * s) +
+      ' C ' + cx + ',' + (cy - 11 * s) + ' ' + (cx + 3 * s) + ',' + (cy - 16 * s) + ' ' + (cx + 8 * s) + ',' + (cy - 16 * s) +
+      ' C ' + (cx + 18 * s) + ',' + (cy - 16 * s) + ' ' + (cx + 22 * s) + ',' + (cy + 4 * s) + ' ' + cx + ',' + (cy + 20 * s) + ' Z';
+  }
+  function makeRand(seed) {
+    var s = seed % 2147483647; if (s <= 0) s += 2147483646;
+    return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+  }
+
+  /* ============================================================
+     SVG CAKE RENDER
+     ============================================================ */
+  var WIDTHS = {
+    round:  [236, 186, 138],
+    square: [226, 178, 134],
+    heart:  [232, 184, 140]
+  };
+
+  function renderCake(animate) {
+    var box = document.getElementById('cakeSvgBox');
+    if (!box) return;
+    var n = Math.min(Math.max(state.tiers, 1), 3);
+    var W = 420, H = 340, cx = 205, baseY = 292, tierH = 76;
+    var widths = WIDTHS[state.shape];
+    var cream = state.colour;
+    var creamDark = shade(cream, -0.22);
+    var creamLight = shade(cream, 0.28);
+    var sponge = FLAVOURS[state.flavour].sponge;
+    var spongeAlt = FLAVOURS[state.flavour].alt;
+    var rand = makeRand(4242);
+    var parts = [];
+
+    parts.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Cake design preview">');
+    parts.push('<defs>' +
+      '<radialGradient id="plateG" cx="50%" cy="50%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#E8D2AE"/></radialGradient>' +
+      '<linearGradient id="photoG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8EC5FC"/><stop offset="55%" stop-color="#E0F2FE"/><stop offset="56%" stop-color="#7CB342"/><stop offset="100%" stop-color="#4E8C2F"/></linearGradient>' +
+      '<clipPath id="sliceClip"><path d="M332,292 L402,292 L367,232 Z"/></clipPath>' +
+      '</defs>');
+
+    /* ground shadow + plate */
+    parts.push('<ellipse cx="' + cx + '" cy="' + (baseY + 8) + '" rx="168" ry="16" fill="rgba(122,60,20,.13)"/>');
+    parts.push('<ellipse cx="' + cx + '" cy="' + (baseY + 2) + '" rx="152" ry="13" fill="url(#plateG)" stroke="#D9BC8C" stroke-width="1.5"/>');
+
+    /* ---- tiers (bottom → top) ---- */
+    for (var i = 0; i < n; i++) {
+      var w = widths[i];
+      var half = w / 2;
+      var yBot = baseY - i * tierH;
+      var yTop = yBot - tierH + 4;
+      var g = [];
+      g.push('<g class="' + (animate ? 'topping-drop' : '') + '" style="animation-delay:' + (i * 0.06) + 's">');
+
+      if (state.shape === 'heart') {
+        /* heart tier: heart-shaped top + rounded body */
+        g.push('<rect x="' + (cx - half * 0.82) + '" y="' + (yTop + 14) + '" width="' + (w * 0.82) + '" height="' + (yBot - yTop - 14) + '" rx="12" fill="' + cream + '" stroke="' + creamDark + '" stroke-width="2"/>');
+        g.push('<path d="' + heartPath(cx, yTop + 12, w) + '" fill="' + creamLight + '" stroke="' + creamDark + '" stroke-width="2.2"/>');
+      } else {
+        var rx = state.shape === 'square' ? 9 : 14;
+        g.push('<rect x="' + (cx - half) + '" y="' + yTop + '" width="' + w + '" height="' + (yBot - yTop) + '" rx="' + rx + '" fill="' + cream + '" stroke="' + creamDark + '" stroke-width="2"/>');
+        if (state.shape === 'square') {
+          g.push('<rect x="' + (cx - half) + '" y="' + (yTop - 11) + '" width="' + w + '" height="19" rx="7" fill="' + creamLight + '" stroke="' + creamDark + '" stroke-width="2"/>');
+        } else {
+          g.push('<ellipse cx="' + cx + '" cy="' + yTop + '" rx="' + half + '" ry="15" fill="' + creamLight + '" stroke="' + creamDark + '" stroke-width="2"/>');
+        }
+      }
+      /* side sheen */
+      g.push('<rect x="' + (cx - half + 8) + '" y="' + (yTop + 16) + '" width="14" height="' + (yBot - yTop - 30) + '" rx="7" fill="rgba(255,255,255,.35)"/>');
+
+      /* chocolate drip on this tier */
+      if (state.toppings.indexOf('drip') >= 0) {
+        var edgeY = yTop + (state.shape === 'square' ? 8 : 12);
+        var x0 = cx - half + 10, x1 = cx + half - 10, steps = 7, dx = (x1 - x0) / steps;
+        var dpath = 'M' + x0 + ',' + edgeY;
+        for (var k = 1; k <= steps; k++) {
+          var depth = 10 + rand() * 16;
+          dpath += ' Q' + (x0 + dx * (k - 0.5)) + ',' + (edgeY + depth) + ' ' + (x0 + dx * k) + ',' + edgeY;
+        }
+        dpath += ' L' + x1 + ',' + (edgeY - 10) + ' L' + x0 + ',' + (edgeY - 10) + ' Z';
+        g.push('<path d="' + dpath + '" fill="#5A3428" opacity=".92"/>');
+      }
+
+      /* Kit Kat border on bottom tier */
+      if (i === 0 && state.toppings.indexOf('kitkat') >= 0) {
+        for (var kx = 0; kx < 6; kx++) {
+          var bx = cx - half + 12 + kx * (w - 24) / 5.2;
+          g.push('<rect x="' + (bx - 6) + '" y="' + (yTop + 22) + '" width="12" height="' + (yBot - yTop - 42) + '" rx="3" fill="#6B4226" stroke="#4A2C1A" stroke-width="1.2"/>');
+          g.push('<rect x="' + (bx - 6) + '" y="' + (yTop + 22) + '" width="12" height="7" rx="3" fill="#8A5A34"/>');
+        }
+      }
+      /* gold leaf patches on bottom tier */
+      if (i === 0 && state.toppings.indexOf('goldleaf') >= 0) {
+        g.push('<path d="M' + (cx - half * 0.62) + ',' + (yTop + 34) + ' l16,-8 12,10 -10,12 -18,-4 z" fill="#E8C56B" stroke="#C79A3B" stroke-width="1"/>');
+        g.push('<path d="M' + (cx + half * 0.35) + ',' + (yTop + 52) + ' l14,-7 11,9 -9,11 -16,-3 z" fill="#E8C56B" stroke="#C79A3B" stroke-width="1"/>');
+      }
+      g.push('</g>');
+      parts.push(g.join(''));
+    }
+
+    /* ---- message on front of top tier ---- */
+    var topW = widths[n - 1];
+    var topY = baseY - n * tierH + 4;
+    if (state.message) {
+      var msg = state.msgStyle === 'bold' ? state.message.toUpperCase() : state.message;
+      var fs = Math.min(19, Math.max(10, (topW * 0.9) / (Math.max(msg.length, 1) * 0.58)));
+      var font = state.msgStyle === 'classic' ? "Georgia,'Times New Roman',serif"
+        : state.msgStyle === 'playful' ? "'Baloo 2','Comic Sans MS',cursive"
+          : "Arial,Helvetica,sans-serif";
+      parts.push('<text x="' + cx + '" y="' + (topY + 42) + '" text-anchor="middle" font-family="' + font + '" font-size="' + fs + '" font-style="' + (state.msgStyle === 'classic' ? 'italic' : 'normal') + '" font-weight="' + (state.msgStyle === 'bold' ? '800' : '600') + '" fill="' + state.msgColor + '" stroke="' + shade(state.msgColor, 0.45) + '" stroke-width="0.6" paint-order="stroke">' + esc(msg) + '</text>');
+    }
+
+    /* ---- toppings on top face ---- */
+    var tg = [];
+    tg.push('<g class="' + (animate ? 'topping-drop' : '') + '">');
+    var ty = state.shape === 'square' ? topY - 11 : topY;
+    var halfT = topW / 2;
+
+    if (state.toppings.indexOf('sprinkles') >= 0) {
+      for (var sIdx = 0; sIdx < 26; sIdx++) {
+        var sx = cx - halfT * 0.75 + rand() * halfT * 1.5;
+        var sy = ty - 12 + rand() * 22;
+        var col = ['#E53935', '#FDD835', '#1E88E5', '#43A047', '#FB8C00', '#8E24AA'][sIdx % 6];
+        tg.push('<rect x="' + sx + '" y="' + sy + '" width="7" height="2.6" rx="1.3" fill="' + col + '" transform="rotate(' + Math.round(rand() * 90 - 45) + ' ' + sx + ' ' + sy + ')"/>');
+      }
+    }
+    if (state.toppings.indexOf('gems') >= 0) {
+      for (var gIdx = 0; gIdx < 9; gIdx++) {
+        var gx = cx - halfT * 0.7 + rand() * halfT * 1.4;
+        var gy = ty - 8 + rand() * 16;
+        tg.push('<circle cx="' + gx + '" cy="' + gy + '" r="5.2" fill="' + ['#E53935', '#FDD835', '#1E88E5', '#43A047', '#FB8C00', '#8E24AA'][gIdx % 6] + '" stroke="rgba(0,0,0,.18)"/>');
+      }
+    }
+    if (state.toppings.indexOf('chocballs') >= 0) {
+      for (var cIdx = 0; cIdx < 5; cIdx++) {
+        tg.push('<circle cx="' + (cx - halfT * 0.55 + cIdx * halfT * 0.28) + '" cy="' + (ty + 2 - (cIdx % 2) * 8) + '" r="7.5" fill="#5A3428" stroke="#3E2216"/>');
+        tg.push('<circle cx="' + (cx - halfT * 0.55 + cIdx * halfT * 0.28 - 2) + '" cy="' + (ty - 1 - (cIdx % 2) * 8) + '" r="2.2" fill="rgba(255,255,255,.45)"/>');
+      }
+    }
+    if (state.toppings.indexOf('cherries') >= 0) {
+      [[-0.32, -6], [0, -10], [0.32, -4]].forEach(function (p) {
+        var chx = cx + halfT * p[0], chy = ty + p[1];
+        tg.push('<circle cx="' + chx + '" cy="' + chy + '" r="8" fill="#D32F2F" stroke="#9E1B1B" stroke-width="1.2"/>');
+        tg.push('<circle cx="' + (chx - 2.5) + '" cy="' + (chy - 2.5) + '" r="2.4" fill="rgba(255,255,255,.5)"/>');
+        tg.push('<path d="M' + chx + ',' + (chy - 8) + ' q4,-10 10,-12" fill="none" stroke="#2E7D32" stroke-width="2"/>');
+      });
+    }
+    if (state.toppings.indexOf('fruits') >= 0) {
+      var fruits = [[-0.38, 2, '#E53935'], [-0.16, -8, '#FB8C00'], [0.06, 2, '#E53935'], [0.28, -7, '#7CB342'], [0.48, 3, '#FB8C00']];
+      fruits.forEach(function (f) {
+        tg.push('<circle cx="' + (cx + halfT * f[0]) + '" cy="' + (ty + f[1]) + '" r="8.5" fill="' + f[2] + '" stroke="rgba(0,0,0,.22)"/>');
+      });
+    }
+    if (state.toppings.indexOf('flowers') >= 0) {
+      [[-0.34, -2], [0.3, -6]].forEach(function (p) {
+        var fx = cx + halfT * p[0], fy = ty + p[1];
+        for (var pet = 0; pet < 5; pet++) {
+          var ang = pet * 72 * Math.PI / 180;
+          tg.push('<ellipse cx="' + (fx + Math.cos(ang) * 8) + '" cy="' + (fy + Math.sin(ang) * 8) + '" rx="6.5" ry="4.5" fill="#F8BBD0" stroke="#E56B8C" transform="rotate(' + (pet * 72) + ' ' + fx + ' ' + fy + ')"/>');
+        }
+        tg.push('<circle cx="' + fx + '" cy="' + fy + '" r="4.5" fill="#F4C542" stroke="#C79A3B"/>');
+      });
+    }
+    if (state.toppings.indexOf('candles') >= 0) {
+      [[-0.18, '#E53935'], [0.18, '#1E88E5']].forEach(function (c) {
+        var cx2 = cx + halfT * c[0], cy2 = ty - 2;
+        tg.push('<rect x="' + (cx2 - 3.2) + '" y="' + (cy2 - 30) + '" width="6.4" height="30" rx="3" fill="' + c[1] + '"/>');
+        tg.push('<rect x="' + (cx2 - 3.2) + '" y="' + (cy2 - 30) + '" width="6.4" height="30" rx="3" fill="url(#photoG)" opacity=".25"/>');
+        tg.push('<path d="M' + cx2 + ',' + (cy2 - 32) + ' q-5,-7 0,-13 q5,6 0,13 z" fill="#F6B04A" stroke="#E8871E"/>');
+      });
+    }
+    if (state.toppings.indexOf('topper') >= 0) {
+      var label = state.occasion === 'anniversary' ? 'Happy Anniversary'
+        : state.occasion === 'wedding' ? 'Just Married'
+          : state.occasion === 'baby' ? 'Welcome Baby' : 'Happy Birthday';
+      tg.push('<rect x="' + (cx - 2) + '" y="' + (ty - 34) + '" width="3.4" height="34" fill="#B08968"/>');
+      tg.push('<rect x="' + (cx + 46) + '" y="' + (ty - 34) + '" width="3.4" height="34" fill="#B08968"/>');
+      tg.push('<rect x="' + (cx - 58) + '" y="' + (ty - 52) + '" width="116" height="24" rx="12" fill="#C62828" stroke="#8E1C1C" stroke-width="1.5"/>');
+      tg.push('<text x="' + cx + '" y="' + (ty - 35) + '" text-anchor="middle" font-family="Arial,sans-serif" font-size="11.5" font-weight="700" fill="#FFFFFF">' + label + '</text>');
+    }
+    if (state.toppings.indexOf('photo') >= 0) {
+      tg.push('<circle cx="' + (cx - halfT * 0.28) + '" cy="' + (ty - 2) + '" r="17" fill="url(#photoG)" stroke="#FFFFFF" stroke-width="2.5"/>');
+      tg.push('<rect x="' + (cx - halfT * 0.28 - 7) + '" y="' + (ty - 8) + '" width="14" height="9" rx="2" fill="rgba(255,255,255,.85)"/>');
+    }
+    tg.push('</g>');
+    parts.push(tg.join(''));
+
+    /* ---- cut slice with layers ---- */
+    var sliceParts = [];
+    sliceParts.push('<g class="' + (animate ? 'topping-drop' : '') + '">');
+    sliceParts.push('<ellipse cx="367" cy="296" rx="42" ry="8" fill="rgba(122,60,20,.13)"/>');
+    sliceParts.push('<path d="M332,292 L402,292 L367,232 Z" fill="' + sponge + '" stroke="' + shade(sponge, -0.3) + '" stroke-width="1.5"/>');
+    sliceParts.push('<g clip-path="url(#sliceClip)">');
+    sliceParts.push('<rect x="328" y="248" width="80" height="7" fill="' + cream + '"/>');
+    sliceParts.push('<rect x="328" y="268" width="80" height="7" fill="' + cream + '"/>');
+    sliceParts.push('<rect x="328" y="232" width="80" height="5" fill="' + spongeAlt + '"/>');
+    sliceParts.push('<rect x="328" y="242" width="80" height="7" fill="' + sponge + '"/>');
+    sliceParts.push('<rect x="328" y="254" width="80" height="14" fill="' + spongeAlt + '"/>');
+    sliceParts.push('<rect x="328" y="274" width="80" height="18" fill="' + spongeAlt + '"/>');
+    sliceParts.push('</g>');
+    sliceParts.push('<path d="M332,292 L402,292 L367,232 Z" fill="none" stroke="' + shade(sponge, -0.35) + '" stroke-width="1.5"/>');
+    sliceParts.push('<text x="367" y="315" text-anchor="middle" font-family="Arial,sans-serif" font-size="10.5" fill="#6E5443">cut view</text>');
+    sliceParts.push('</g>');
+    parts.push(sliceParts.join(''));
+
+    parts.push('</svg>');
+    box.innerHTML = parts.join('');
+    if (animate && !reduceMotion) {
+      var svg = box.querySelector('svg');
+      if (svg) {
+        svg.classList.remove('cake-pop');
+        void svg.getBoundingClientRect();
+        svg.classList.add('cake-pop');
+      }
+    }
+  }
+
+  /* ============================================================
+     PRICE ESTIMATE
+     ============================================================ */
+  function estimate() {
+    var kg = state.size === 3 ? 3 : state.size;
+    var lines = [];
+    var base = PRICES.basePerKg[state.flavour] * kg;
+    lines.push({ label: FLAVOURS[state.flavour].name + ' base (' + kg + ' kg)', amt: base });
+    if (state.eggless) {
+      lines.push({ label: 'Eggless (' + kg + ' kg × ₹' + PRICES.egglessPerKg + ')', amt: PRICES.egglessPerKg * kg });
+    }
+    var creamAmt = (PRICES.creamPerKg[state.cream] || 0) * kg;
+    if (creamAmt > 0) lines.push({ label: CREAMS[state.cream], amt: creamAmt });
+    if (state.tiers > 1) {
+      lines.push({ label: 'Extra tier × ' + (state.tiers - 1), amt: (state.tiers - 1) * PRICES.perExtraTier });
+    }
+    var topAmt = 0;
+    state.toppings.forEach(function (t) {
+      var a = PRICES.toppings[t] || 0;
+      topAmt += a;
+      if (a > 0) lines.push({ label: TOPPING_NAMES[t], amt: a });
+    });
+    var total = lines.reduce(function (s, l) { return s + l.amt; }, 0);
+    return { lines: lines, total: total };
+  }
+
+  function updatePriceUI() {
+    var est = estimate();
+    var amtEl = document.getElementById('priceAmt');
+    if (amtEl) amtEl.textContent = rupee(est.total);
+    var list = document.getElementById('priceBreakList');
+    if (list) {
+      list.innerHTML = est.lines.map(function (l) {
+        return '<li><span class="k">' + esc(l.label) + '</span><span class="v">' + rupee(l.amt) + '</span></li>';
+      }).join('') + '<li><span class="k">Total (estimate)</span><span class="v"><strong>' + rupee(est.total) + '</strong></span></li>';
+    }
+    var sAmt = document.getElementById('summaryPrice');
+    if (sAmt) sAmt.textContent = rupee(est.total);
+  }
+
+  /* ============================================================
+     SUMMARY CARD
+     ============================================================ */
+  function updateSummary() {
+    var list = document.getElementById('summaryList');
+    if (!list) return;
+    var est = estimate();
+    var tops = state.toppings.length
+      ? state.toppings.map(function (t) { return TOPPING_NAMES[t]; }).join(', ')
+      : 'Koi nahi';
+    var rows = [
+      ['Shape', SHAPES[state.shape]],
+      ['Size', SIZES[state.size]],
+      ['Tiers', state.tiers + (state.tiers > 1 ? ' tiers' : ' tier')],
+      ['Flavour', FLAVOURS[state.flavour].name],
+      ['Type', state.eggless ? 'Eggless' : 'Egg wala'],
+      ['Cream', CREAMS[state.cream]],
+      ['Colour', COLOURS[state.colour] || state.colour],
+      ['Toppings', tops],
+      ['Message', (state.message ? '"' + state.message + '" (' + MSG_STYLES[state.msgStyle] + ')' : '—')],
+      ['Occasion', OCCASIONS[state.occasion]],
+      ['Needed', state.when ? state.when.replace('T', ' ') : '—'],
+      ['Pickup/Delivery', state.fulfil === 'delivery' ? 'Home delivery' : 'Dukaan se pickup'],
+      ['Name / Phone', (state.name || '—') + ' · ' + (state.phone || '—')],
+      ['Address', state.address || '—'],
+      ['Notes', state.notes || '—']
+    ];
+    list.innerHTML = rows.map(function (r) {
+      return '<li><span class="k">' + esc(r[0]) + '</span><span class="v">' + esc(r[1]) + '</span></li>';
+    }).join('') +
+      '<li><span class="k">Estimated price</span><span class="v"><strong id="summaryPrice">' + rupee(est.total) + '</strong></span></li>';
+  }
+
+  /* ============================================================
+     LOCAL STORAGE (same phone par design yaad rakhein)
+     ============================================================ */
+  function saveLocal() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* private mode etc. */ }
+  }
+  function loadLocal() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var saved = JSON.parse(raw);
+      Object.keys(state).forEach(function (k) {
+        if (saved[k] !== undefined && k !== 'toppings') state[k] = saved[k];
+      });
+      if (Array.isArray(saved.toppings)) state.toppings = saved.toppings;
+    } catch (e) { /* corrupt data ignore */ }
+  }
+
+  function applyStateToUI() {
+    /* shape */
+    $$('#shapeGrid .opt-card').forEach(function (b) { b.classList.toggle('active', b.dataset.shape === state.shape); });
+    /* size */
+    $$('#sizeGrid .opt-card').forEach(function (b) { b.classList.toggle('active', parseFloat(b.dataset.size) === state.size); });
+    /* tiers + locks */
+    refreshTierLocks();
+    $$('#tierGrid .opt-card').forEach(function (b) { b.classList.toggle('active', parseInt(b.dataset.tier, 10) === state.tiers); });
+    /* flavour / cream */
+    $$('#flavourGrid .opt-card').forEach(function (b) { b.classList.toggle('active', b.dataset.flavour === state.flavour); });
+    $$('#creamGrid .opt-card').forEach(function (b) { b.classList.toggle('active', b.dataset.cream === state.cream); });
+    /* swatches */
+    $$('#colourSwatches .swatch').forEach(function (b) { b.classList.toggle('active', b.dataset.colour === state.colour); });
+    $$('#textSwatches .swatch').forEach(function (b) { b.classList.toggle('active', b.dataset.textcolour === state.msgColor); });
+    /* toppings */
+    $$('#toppingChips .chip').forEach(function (b) {
+      b.classList.toggle('active', state.toppings.indexOf(b.dataset.topping) >= 0);
+    });
+    /* toggles & inputs */
+    var egg = document.getElementById('egglessToggle');
+    if (egg) { egg.checked = state.eggless; }
+    var et = document.getElementById('egglessText');
+    if (et) et.textContent = 'Eggless: ' + (state.eggless ? 'ON' : 'OFF');
+    var cm = document.getElementById('cakeMsg');
+    if (cm) cm.value = state.message;
+    var cc = document.getElementById('charCount');
+    if (cc) cc.textContent = state.message.length + ' / 30';
+    setRadio('occasion', state.occasion);
+    setRadio('msgStyle', state.msgStyle);
+    setRadio('fulfil', state.fulfil);
+    setVal('custName', state.name);
+    setVal('custPhone', state.phone);
+    setVal('needWhen', state.when);
+    setVal('custAddress', state.address);
+    setVal('custNotes', state.notes);
+    goToStep(state.step || 1, true);
+  }
+  function setRadio(name, val) {
+    var el = document.querySelector('input[name="' + name + '"][value="' + val + '"]');
+    if (el) el.checked = true;
+  }
+  function setVal(id, v) {
+    var el = document.getElementById(id);
+    if (el && v) el.value = v;
+  }
+
+  /* ============================================================
+     WIZARD
+     ============================================================ */
+  var STEP_NAMES = ['Shape', 'Size', 'Flavour', 'Cream & Colour', 'Toppings', 'Message', 'Details', 'Send'];
+  var TOTAL_STEPS = 8;
+
+  function goToStep(n, quiet) {
+    n = Math.min(Math.max(1, n), TOTAL_STEPS);
+    state.step = n;
+    for (var i = 1; i <= TOTAL_STEPS; i++) {
+      var el = document.getElementById('step-' + i);
+      if (el) el.classList.toggle('active', i === n);
+    }
+    var label = document.getElementById('stepLabel');
+    if (label) label.textContent = 'Step ' + n + ' of ' + TOTAL_STEPS;
+    var sn = document.getElementById('stepName');
+    if (sn) sn.textContent = STEP_NAMES[n - 1];
+    var bar = document.getElementById('progressBar');
+    if (bar) bar.setAttribute('aria-valuenow', String(n));
+    var fill = document.getElementById('progressFill');
+    if (fill) fill.style.width = (n / TOTAL_STEPS * 100) + '%';
+    $$('#stepDots .step-dot').forEach(function (d) {
+      var s = parseInt(d.dataset.step, 10);
+      d.classList.toggle('now', s === n);
+      d.classList.toggle('done', s < n);
+    });
+    var prev = document.getElementById('prevBtn');
+    var next = document.getElementById('nextBtn');
+    if (prev) prev.disabled = n === 1;
+    if (next) next.textContent = n === TOTAL_STEPS ? '✓ Sab theek hai' : 'Next →';
+    if (n === TOTAL_STEPS) updateSummary();
+    if (!quiet) saveLocal();
+  }
+
+  function refreshTierLocks() {
+    var maxTiers = state.size >= 3 ? 3 : state.size >= 2 ? 2 : 1;
+    if (state.tiers > maxTiers) state.tiers = maxTiers;
+    $$('#tierGrid .opt-card').forEach(function (b) {
+      var t = parseInt(b.dataset.tier, 10);
+      var locked = t > maxTiers;
+      b.classList.toggle('locked', locked);
+      var sub = b.querySelector('.s');
+      if (sub) {
+        sub.textContent = locked
+          ? (t === 2 ? '2 kg+ par unlock' : '3 kg+ par unlock')
+          : (t === 1 ? 'Classic single layer' : t === 2 ? 'Grand double layer' : 'Showstopper triple layer');
+      }
+    });
+  }
+
+  function commit(animate) {
+    refreshTierLocks();
+    renderCake(animate !== false);
+    updatePriceUI();
+    updateSummary();
+    saveLocal();
+  }
+
+  /* ============================================================
+     OPTION WIRING
+     ============================================================ */
+  function bindCards(sel, key, transform) {
+    $$(sel + ' .opt-card').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.classList.contains('locked')) return;
+        var val = transform ? transform(b.dataset[key]) : b.dataset[key];
+        if (key === 'size') {
+          state.size = parseFloat(val);
+          refreshTierLocks();
+          $$(sel + ' .opt-card').forEach(function (x) { x.classList.toggle('active', x === b); });
+          $$('#tierGrid .opt-card').forEach(function (x) {
+            x.classList.toggle('active', parseInt(x.dataset.tier, 10) === state.tiers);
+          });
+          commit(true);
+          return;
+        }
+        if (key === 'tier') { state.tiers = parseInt(val, 10); }
+        else if (key === 'shape') { state.shape = val; }
+        else if (key === 'flavour') { state.flavour = val; }
+        else if (key === 'cream') { state.cream = val; }
+        $$(sel + ' .opt-card').forEach(function (x) { x.classList.toggle('active', x === b); });
+        commit(true);
+      });
+    });
+  }
+  bindCards('#shapeGrid', 'shape');
+  bindCards('#sizeGrid', 'size');
+  bindCards('#tierGrid', 'tier');
+  bindCards('#flavourGrid', 'flavour');
+  bindCards('#creamGrid', 'cream');
+
+  $$('#colourSwatches .swatch').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.colour = b.dataset.colour;
+      $$('#colourSwatches .swatch').forEach(function (x) { x.classList.toggle('active', x === b); });
+      commit(true);
+    });
+  });
+  $$('#textSwatches .swatch').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.msgColor = b.dataset.textcolour;
+      $$('#textSwatches .swatch').forEach(function (x) { x.classList.toggle('active', x === b); });
+      commit(true);
+    });
+  });
+  $$('#toppingChips .chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.dataset.topping;
+      var idx = state.toppings.indexOf(t);
+      if (idx >= 0) state.toppings.splice(idx, 1); else state.toppings.push(t);
+      b.classList.toggle('active', idx < 0);
+      commit(true);
+    });
+  });
+
+  var eggToggle = document.getElementById('egglessToggle');
+  if (eggToggle) {
+    eggToggle.addEventListener('change', function () {
+      state.eggless = eggToggle.checked;
+      var t = document.getElementById('egglessText');
+      if (t) t.textContent = 'Eggless: ' + (state.eggless ? 'ON' : 'OFF');
+      commit(true);
+    });
+  }
+
+  var msgInput = document.getElementById('cakeMsg');
+  if (msgInput) {
+    msgInput.addEventListener('input', function () {
+      state.message = msgInput.value.slice(0, 30);
+      var cc = document.getElementById('charCount');
+      if (cc) {
+        cc.textContent = msgInput.value.length + ' / 30';
+        cc.classList.toggle('over', msgInput.value.length >= 30);
+      }
+      renderCake(false);
+      updateSummary();
+      saveLocal();
+    });
+  }
+  $$('input[name="occasion"]').forEach(function (r) {
+    r.addEventListener('change', function () { state.occasion = r.value; renderCake(true); saveLocal(); });
+  });
+  $$('input[name="msgStyle"]').forEach(function (r) {
+    r.addEventListener('change', function () { state.msgStyle = r.value; renderCake(true); saveLocal(); });
+  });
+  $$('input[name="fulfil"]').forEach(function (r) {
+    r.addEventListener('change', function () { state.fulfil = r.value; saveLocal(); });
+  });
+  [['custName', 'name'], ['custPhone', 'phone'], ['needWhen', 'when'], ['custAddress', 'address'], ['custNotes', 'notes']].forEach(function (pair) {
+    var el = document.getElementById(pair[0]);
+    if (el) el.addEventListener('input', function () { state[pair[1]] = el.value; saveLocal(); });
+  });
+
+  /* datetime minimum = 24 hours from now */
+  (function () {
+    var d = new Date(Date.now() + 24 * 3600 * 1000);
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    var min = d.toISOString().slice(0, 16);
+    var w = document.getElementById('needWhen');
+    if (w) w.min = min;
+  })();
+
+  /* message suggestion */
+  var suggBtn = document.getElementById('suggestMsgBtn');
+  if (suggBtn) {
+    suggBtn.addEventListener('click', function () {
+      var map = {
+        birthday: 'Happy Birthday ___', anniversary: 'Happy Anniversary',
+        wedding: 'Happy Wedding', baby: 'Welcome Baby', other: 'Best Wishes!'
+      };
+      var m = map[state.occasion] || 'Best Wishes!';
+      state.message = m.slice(0, 30);
+      if (msgInput) msgInput.value = state.message;
+      var cc = document.getElementById('charCount');
+      if (cc) cc.textContent = state.message.length + ' / 30';
+      renderCake(true); saveLocal();
+    });
+  }
+
+  /* reference photo — sirf phone par preview */
+  var refInput = document.getElementById('refPhoto');
+  if (refInput) {
+    refInput.addEventListener('change', function () {
+      var f = refInput.files && refInput.files[0];
+      var box = document.getElementById('refPreview');
+      if (!f || !box) return;
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        document.getElementById('refThumb').src = ev.target.result;
+        document.getElementById('refName').textContent = f.name;
+        box.classList.add('show');
+      };
+      reader.readAsDataURL(f);
+    });
+  }
+
+  /* nav buttons */
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  if (prevBtn) prevBtn.addEventListener('click', function () { goToStep(state.step - 1); });
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function () {
+      if (state.step === TOTAL_STEPS) {
+        updateSummary();
+        document.getElementById('summaryCard').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      } else {
+        goToStep(state.step + 1);
+      }
+    });
+  }
+  $$('#stepDots .step-dot').forEach(function (d) {
+    d.addEventListener('click', function () { goToStep(parseInt(d.dataset.step, 10)); });
+  });
+
+  /* price breakup toggle */
+  var pbBtn = document.getElementById('priceBreakBtn');
+  if (pbBtn) {
+    pbBtn.addEventListener('click', function () {
+      var pb = document.getElementById('priceBreak');
+      var open = pb.hasAttribute('hidden');
+      if (open) { pb.removeAttribute('hidden'); } else { pb.setAttribute('hidden', ''); }
+      pbBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* ============================================================
+     PRESETS + SURPRISE + START OVER
+     ============================================================ */
+  var PRESETS = {
+    'choco-birthday': {
+      shape: 'round', size: 1, tiers: 1, flavour: 'chocolate', eggless: true,
+      cream: 'ganache', colour: '#6B4226', toppings: ['cherries', 'drip', 'candles'],
+      message: 'Happy Birthday!', msgStyle: 'playful', msgColor: '#FFFFFF', occasion: 'birthday'
+    },
+    'pink-princess': {
+      shape: 'round', size: 1.5, tiers: 1, flavour: 'vanilla', eggless: true,
+      cream: 'whipped', colour: '#F8BBD0', toppings: ['sprinkles', 'flowers', 'topper'],
+      message: 'Princess Ki Party', msgStyle: 'playful', msgColor: '#8A1C2B', occasion: 'birthday'
+    },
+    'kids-cartoon': {
+      shape: 'round', size: 2, tiers: 2, flavour: 'butterscotch', eggless: true,
+      cream: 'whipped', colour: '#5B8DEF', toppings: ['gems', 'sprinkles', 'topper'],
+      message: 'Happy Birthday!', msgStyle: 'bold', msgColor: '#FFFFFF', occasion: 'birthday'
+    },
+    'red-romance': {
+      shape: 'heart', size: 1, tiers: 1, flavour: 'redvelvet', eggless: true,
+      cream: 'fondant', colour: '#C62828', toppings: ['flowers', 'goldleaf', 'cherries'],
+      message: 'Happy Anniversary', msgStyle: 'classic', msgColor: '#FFFFFF', occasion: 'anniversary'
+    },
+    'gold-wedding': {
+      shape: 'round', size: 3, tiers: 3, flavour: 'vanilla', eggless: true,
+      cream: 'fondant', colour: '#F4C542', toppings: ['goldleaf', 'flowers', 'photo'],
+      message: 'Happy Wedding', msgStyle: 'classic', msgColor: '#8A1C2B', occasion: 'wedding'
+    },
+    'rasmalai-fusion': {
+      shape: 'square', size: 1.5, tiers: 1, flavour: 'rasmalai', eggless: true,
+      cream: 'whipped', colour: '#FFFDF7', toppings: ['fruits', 'goldleaf', 'flowers'],
+      message: 'Shubhkamnayein', msgStyle: 'classic', msgColor: '#2E7D32', occasion: 'other'
+    }
+  };
+  function applyDesign(d) {
+    Object.keys(d).forEach(function (k) {
+      if (k === 'toppings') state.toppings = d.toppings.slice();
+      else state[k] = d[k];
+    });
+    applyStateToUI();
+    commit(true);
+    updateSummary();
+  }
+  $$('#presetChips .chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var p = PRESETS[b.dataset.preset];
+      if (p) {
+        applyDesign(p);
+        goToStep(3);
+      }
+    });
+  });
+
+  var surpriseBtn = document.getElementById('surpriseBtn');
+  if (surpriseBtn) {
+    surpriseBtn.addEventListener('click', function () {
+      function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+      var shape = pick(['round', 'round', 'square', 'heart']);
+      var size = pick([0.5, 1, 1, 1.5, 2, 3]);
+      var maxT = size >= 3 ? 3 : size >= 2 ? 2 : 1;
+      var msgs = ['Happy Birthday!', 'Happy Anniversary', 'Shubhkamnayein', 'Best Wishes!', 'You Are Loved'];
+      applyDesign({
+        shape: shape,
+        size: size,
+        tiers: pick([1, 1, 2, 3].filter(function (t) { return t <= maxT; })),
+        flavour: pick(Object.keys(FLAVOURS)),
+        eggless: Math.random() > 0.25,
+        cream: pick(['whipped', 'ganache', 'fondant']),
+        colour: pick(Object.keys(COLOURS)),
+        toppings: pick([['sprinkles', 'cherries'], ['drip', 'chocballs'], ['gems', 'topper'], ['flowers', 'goldleaf'], ['fruits', 'sprinkles'], ['candles', 'topper']]),
+        message: pick(msgs),
+        msgStyle: pick(['classic', 'playful', 'bold']),
+        msgColor: pick(['#8A1C2B', '#FFFFFF', '#C62828', '#1B4F9C']),
+        occasion: pick(['birthday', 'anniversary', 'other'])
+      });
+    });
+  }
+
+  var startOverBtn = document.getElementById('startOverBtn');
+  if (startOverBtn) {
+    startOverBtn.addEventListener('click', function () {
+      if (!confirm('Design reset karein? Aapki current choices hat jaayengi.')) return;
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) { }
+      state.toppings = [];
+      applyDesign({
+        shape: 'round', size: 1, tiers: 1, flavour: 'chocolate', eggless: true,
+        cream: 'whipped', colour: '#FFFDF7', toppings: [], message: '',
+        msgStyle: 'classic', msgColor: '#8A1C2B', occasion: 'birthday',
+        name: '', phone: '', when: '', fulfil: 'pickup', address: '', notes: ''
+      });
+      goToStep(1);
+    });
+  }
+
+  /* ============================================================
+     SEND DESIGN ON WHATSAPP
+     ============================================================ */
+  var sendBtn = document.getElementById('sendDesignBtn');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', function () {
+      if (state.when) {
+        var chosen = new Date(state.when);
+        if (!isNaN(chosen) && chosen.getTime() < Date.now() + 24 * 3600 * 1000) {
+          alert('Order at least 24 hours in advance. Kripya date/time thoda aage ka chunein. [PLACEHOLDER]');
+          return;
+        }
+      }
+      var est = estimate();
+      var tops = state.toppings.length
+        ? state.toppings.map(function (t) { return TOPPING_NAMES[t]; }).join(', ')
+        : 'Koi nahi';
+      var lines = [
+        '🎂 *Cake Design — Shree Krishna Sweets & Bakers*',
+        '━━━━━━━━━━━━━━━',
+        '🔵 Shape: ' + SHAPES[state.shape],
+        '⚖️ Size: ' + SIZES[state.size],
+        '🏗️ Tiers: ' + state.tiers,
+        '🍰 Flavour: ' + FLAVOURS[state.flavour].name,
+        state.eggless ? '🥚 Eggless: Haan' : '🥚 Eggless: Nahi (egg wala)',
+        '🍦 Cream: ' + CREAMS[state.cream],
+        '🎨 Colour: ' + (COLOURS[state.colour] || state.colour),
+        '✨ Toppings: ' + tops,
+        '✍️ Cake message: "' + (state.message || '—') + '" (' + MSG_STYLES[state.msgStyle] + ')',
+        '🎉 Occasion: ' + OCCASIONS[state.occasion],
+        '📅 Kab chahiye: ' + (state.when ? state.when.replace('T', ' ') : '—'),
+        '🏠 Pickup / Delivery: ' + (state.fulfil === 'delivery' ? 'Home delivery — ' + (state.address || 'address bata dena') : 'Dukaan se pickup'),
+        '📝 Notes: ' + (state.notes || '—'),
+        '👤 Naam: ' + (state.name || '—'),
+        '📞 Phone: ' + (state.phone || '—'),
+        '━━━━━━━━━━━━━━━',
+        '💰 *Estimated price: ' + rupee(est.total) + '*',
+        '(Yeh andaazan daam hai. Final daam dukaan confirm karegi.)',
+        '📸 Main cake design ki photo agle message mein bhej raha/rahi hoon.'
+      ];
+      openWA(lines.join('\n'));
+      var tip = document.getElementById('sendTip');
+      if (tip) tip.classList.add('show');
+    });
+  }
+
+  /* ============================================================
+     DOWNLOAD CAKE DESIGN AS PNG
+     ============================================================ */
+  var dlBtn = document.getElementById('downloadDesignBtn');
+  if (dlBtn) {
+    dlBtn.addEventListener('click', function () {
+      var svg = document.querySelector('#cakeSvgBox svg');
+      if (!svg) return;
+      var clone = svg.cloneNode(true);
+      clone.setAttribute('width', '840');
+      clone.setAttribute('height', '680');
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      var data = new XMLSerializer().serializeToString(clone);
+      var blob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var img = new Image();
+      img.onload = function () {
+        var c = document.createElement('canvas');
+        c.width = 840; c.height = 680;
+        var ctx = c.getContext('2d');
+        ctx.fillStyle = '#FFF9F0';
+        ctx.fillRect(0, 0, 840, 680);
+        ctx.drawImage(img, 0, 0, 840, 680);
+        URL.revokeObjectURL(url);
+        try {
+          var a = document.createElement('a');
+          a.href = c.toDataURL('image/png');
+          a.download = 'cake-design.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          var tip = document.getElementById('sendTip');
+          if (tip) tip.classList.add('show');
+        } catch (e) {
+          alert('Download nahi ho paaya. Screenshot le lein — WhatsApp par bhejne ke liye kaafi hai!');
+        }
+      };
+      img.onerror = function () {
+        URL.revokeObjectURL(url);
+        alert('Download nahi ho paaya. Screenshot le lein — WhatsApp par bhejne ke liye kaafi hai!');
+      };
+      img.src = url;
+    });
+  }
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  loadLocal();
+  applyStateToUI();
+  commit(false);
+  updateSummary();
+  updatePriceUI();
+})();
+
+</script>
+</body>
+</html>

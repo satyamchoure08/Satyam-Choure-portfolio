@@ -1,0 +1,1222 @@
+<!--
+=====================================================================
+FORGE & FORM STUDIO — single-page website (Bhopal, Madhya Pradesh, IN)
+Built as a hand-crafted HTML/CSS/JS file. No frameworks, no CDN scripts.
+
+[PLACEHOLDER] LIST — replace before launch:
+- Business name "Forge & Form Studio" (invented)
+- Full street address, Bhopal 462XXX (invented)
+- Phone +91 98000 00000 (tel: and wa.me number: 919800000000)
+- Email hello@forgeandform.example (mailto:)
+- Opening hours (invented)
+- Social links: Instagram, Facebook, X, YouTube, LinkedIn, TikTok,
+  Pinterest, WhatsApp, Threads (all href = https://…/PLACEHOLDER)
+- Google Maps link (search URL, replace with your Business Profile link)
+- Analytics snippet (commented out in <head>)
+- Founder name, coach names and bios
+- Logo mark (text wordmark used as stand-in)
+- Programme details, trial offer, refund policy wording (have a lawyer check)
+- Images: hero.jpg, programs-strength.jpg, facility.jpg are stock stand-ins
+
+[SAMPLE] LIST — demo data, not real:
+- All prices (₹2,499 / month, ₹21,999 / year, ₹999 trial)
+- Member count (1,200+), rating (4.9 / 5 from 340 reviews), class counts
+- All testimonials and reviewer names
+- Stats on the About section (coach count, years, transformation count)
+- Class timetable
+
+NOTE: Nothing is stored on any server. Forms open WhatsApp or your mail
+app with the message pre-typed; the site itself keeps no personal data.
+=====================================================================
+-->
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gym in Bhopal | Strength Coaching at Forge &amp; Form Studio</title>
+<meta name="description" content="Strength training, HIIT and personal coaching in Bhopal. Book your free trial session on WhatsApp today — first class is on us.">
+<link rel="canonical" href="https://www.forgeandform.example/">
+<meta name="theme-color" content="#0a0a0b">
+
+<!-- Analytics (disabled). If you add one, also update the cookie notice.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+-->
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gym in Bhopal | Forge &amp; Form Studio">
+<meta property="og:description" content="Strength coaching that feels like a film set. Book your free trial on WhatsApp.">
+<meta property="og:url" content="https://www.forgeandform.example/">
+<meta property="og:image" content="https://www.forgeandform.example/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gym in Bhopal | Forge &amp; Form Studio">
+<meta name="twitter:description" content="Strength coaching in Bhopal. Book your free trial on WhatsApp.">
+<meta name="twitter:image" content="https://www.forgeandform.example/images/hero.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthClub",
+  "name": "Forge & Form Studio",
+  "description": "Strength training, HIIT and personal coaching studio in Bhopal.",
+  "url": "https://www.forgeandform.example/",
+  "telephone": "+91-98000-00000",
+  "email": "hello@forgeandform.example",
+  "image": "https://www.forgeandform.example/images/hero.jpg",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[PLACEHOLDER] 12 Arera Hills Road",
+    "addressLocality": "Bhopal",
+    "addressRegion": "Madhya Pradesh",
+    "postalCode": "462016",
+    "addressCountry": "IN"
+  },
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "05:30", "closes": "22:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "07:00", "closes": "19:00"}
+  ],
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "340", "description": "[SAMPLE] rating"}
+}
+</script>
+
+<style>
+/* ========== DESIGN TOKENS ========== */
+:root{
+  --ink:#0a0a0b;          /* canvas */
+  --ink-2:#141416;        /* raised surface */
+  --ink-3:#1f1f23;        /* borders / chips */
+  --paper:#f4f2ee;        /* primary text */
+  --mute:#9b9aa3;         /* secondary text (contrast ≥ 4.5:1 on ink) */
+  --accent:#c6ff3d;       /* the ONE accent: signal lime */
+  --accent-ink:#0a0a0b;
+  --danger:#ff7a7a;
+  --font-sans:"Inter","Helvetica Neue",Arial,system-ui,sans-serif;
+  --font-serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --fs-macro:clamp(3.4rem,12.5vw,11rem);
+  --fs-h2:clamp(2.2rem,6vw,5rem);
+  --fs-body:1.0625rem;
+  --fs-micro:.7rem;
+  --track-macro:-.045em;
+  --sp-1:.5rem; --sp-2:1rem; --sp-3:1.5rem; --sp-4:2.5rem; --sp-5:4rem; --sp-6:7rem;
+  --radius-pill:999px; --radius-card:20px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --dur-fast:200ms; --dur:420ms; --dur-slow:700ms;
+  --max:1280px; --gutter:clamp(1.25rem,4vw,3rem);
+  --header-h:64px;
+}
+
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 12px)}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--font-sans);font-size:var(--fs-body);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{margin:0;font-weight:700;line-height:.92}
+p{margin:0 0 var(--sp-2)}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:.75rem 1rem;border-radius:var(--radius-pill);z-index:200}
+.skip:focus{left:12px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.serif-i{font-family:var(--font-serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--accent)}
+.grain::after{content:"";position:fixed;inset:-50%;pointer-events:none;opacity:.05;z-index:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* micro labels (corners & edges) */
+.micro{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.idx{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:.75rem;margin-bottom:var(--sp-3)}
+.idx::after{content:"";flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--ink-3) 0 4px,transparent 4px 8px)}
+
+/* buttons & chips */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:.9rem 1.5rem;border-radius:var(--radius-pill);border:1px solid transparent;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;cursor:pointer;transition:transform var(--dur-fast) var(--ease),box-shadow var(--dur) var(--ease),background var(--dur-fast);white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px -10px rgba(198,255,61,.55)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn[disabled]{opacity:.6;cursor:progress;transform:none;box-shadow:none}
+.btn-ghost{background:transparent;color:var(--paper);border-color:var(--ink-3)}
+.btn-ghost:hover{border-color:var(--accent);box-shadow:none;color:var(--accent)}
+.btn svg{width:18px;height:18px;flex:none}
+.chip{display:inline-flex;align-items:center;min-height:36px;padding:.4rem .9rem;border:1px solid var(--ink-3);border-radius:var(--radius-pill);font-size:.85rem;background:transparent;color:var(--paper);cursor:pointer;transition:all var(--dur-fast) var(--ease)}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.icon-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--ink-3);background:var(--ink-2);display:inline-grid;place-items:center;color:var(--paper);text-decoration:none;cursor:pointer;transition:all var(--dur-fast) var(--ease)}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.icon-btn svg{width:20px;height:20px}
+
+/* ========== HEADER ========== */
+.header{position:sticky;top:0;z-index:50;height:var(--header-h);display:flex;align-items:center;background:rgba(10,10,11,.72);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color var(--dur) var(--ease)}
+.header.scrolled{border-bottom-color:var(--ink-3)}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2);width:100%}
+.logo{font-weight:800;letter-spacing:-.03em;text-decoration:none;font-size:1.05rem;display:flex;align-items:center;gap:.5rem}
+.logo-mark{width:26px;height:26px;border-radius:8px;background:var(--accent);display:inline-grid;place-items:center;color:var(--accent-ink);font-size:.8rem;font-weight:900}
+.nav{display:none;gap:1.6rem}
+.nav a{text-decoration:none;font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:.5rem 0;position:relative}
+.nav a:hover,.nav a[aria-current="true"]{color:var(--paper)}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform var(--dur) var(--ease)}
+.nav a:hover::after,.nav a[aria-current="true"]::after{transform:scaleX(1)}
+.header-cta{display:none;min-height:44px;padding:.6rem 1.1rem}
+.menu-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--ink-3);background:var(--ink-2);display:grid;place-items:center;cursor:pointer}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--paper);position:relative;transition:background var(--dur-fast)}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--paper);transition:transform var(--dur) var(--ease)}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.drawer{position:fixed;inset:var(--header-h) 0 0 0;background:var(--ink);z-index:49;padding:var(--sp-3) var(--gutter);display:flex;flex-direction:column;gap:var(--sp-2);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur)}
+.drawer.open{opacity:1;transform:none;visibility:visible}
+.drawer a.link{font-size:2rem;font-weight:700;text-decoration:none;letter-spacing:-.03em;padding:.4rem 0;border-bottom:1px solid var(--ink-3);min-height:56px;display:flex;align-items:center}
+.drawer .btn{margin-top:auto;width:100%}
+@media (min-width:900px){
+  .nav{display:flex}
+  .header-cta{display:inline-flex}
+  .menu-btn{display:none}
+  .drawer{display:none}
+}
+
+/* ========== HERO ========== */
+.hero{position:relative;padding:clamp(2rem,6vw,5rem) 0 var(--sp-5);overflow:hidden}
+.hero-grid{display:grid;gap:var(--sp-4);align-items:center}
+.hero-title{font-size:var(--fs-macro);letter-spacing:var(--track-macro);font-weight:800;text-transform:none}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:inline-block;transform:translateY(105%);animation:rise 900ms var(--ease) forwards}
+.hero-title .line:nth-child(2) span{animation-delay:120ms}
+.hero-title .line:nth-child(3) span{animation-delay:240ms}
+@keyframes rise{to{transform:none}}
+.hero-title .serif-i{font-size:1.02em;letter-spacing:-.04em}
+.hero-sub{margin-top:var(--sp-3);max-width:34ch;color:var(--mute);font-size:1.1rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3);align-items:center}
+.trust{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:var(--sp-3)}
+.trust .chip{cursor:default;color:var(--mute);font-family:var(--font-mono);font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:.1em}
+.trust .chip:hover{border-color:var(--ink-3);color:var(--mute)}
+.hero-corner{position:absolute;font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.hero-corner.tl{top:calc(var(--header-h) + 12px);left:var(--gutter)}
+.hero-corner.tr{top:calc(var(--header-h) + 12px);right:var(--gutter);display:none}
+.hero-corner.bl{bottom:20px;left:var(--gutter)}
+.hero-corner.br{bottom:20px;right:var(--gutter);display:none}
+
+/* CSS-3D tilt card (the showpiece) */
+.stage{perspective:1200px;position:relative}
+.tilt{position:relative;transform-style:preserve-3d;transition:transform .5s var(--ease);border-radius:var(--radius-card);aspect-ratio:4/5;max-width:520px;margin-inline:auto;will-change:transform}
+.tilt-face{position:absolute;inset:0;border-radius:inherit;overflow:hidden;background:var(--ink-2);box-shadow:0 60px 120px -40px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06)}
+.tilt-face img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.tilt-glare{position:absolute;inset:0;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.22),transparent 45%);mix-blend-mode:overlay;pointer-events:none}
+.tilt-badge{position:absolute;transform:translateZ(60px);right:-14px;bottom:28px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius-pill);padding:.75rem 1.1rem;font-weight:800;font-size:.9rem;box-shadow:0 20px 40px -12px rgba(198,255,61,.5)}
+.tilt-badge small{display:block;font-family:var(--font-mono);font-weight:500;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}
+
+/* marquee */
+.marquee{border-block:1px solid var(--ink-3);overflow:hidden;white-space:nowrap;padding:1rem 0;background:var(--ink-2)}
+.marquee-track{display:inline-flex;gap:2.5rem;animation:slide 28s linear infinite;padding-left:2.5rem}
+.marquee-track span{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.4rem,3vw,2.2rem);color:var(--paper)}
+.marquee-track b{color:var(--accent);font-weight:400}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ========== SECTIONS ========== */
+section{position:relative;padding:var(--sp-6) 0}
+.h2{font-size:var(--fs-h2);letter-spacing:-.04em;font-weight:800;max-width:14ch}
+.lead{color:var(--mute);max-width:48ch;margin-top:var(--sp-2);font-size:1.1rem}
+
+/* about + stats */
+.about-grid{display:grid;gap:var(--sp-4)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);margin-top:var(--sp-4)}
+.stat{border-top:1px solid var(--ink-3);padding-top:var(--sp-2)}
+.stat .num{font-size:clamp(2.6rem,7vw,4.5rem);font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .num small{font-size:.5em;color:var(--accent)}
+.stat p{color:var(--mute);font-size:.9rem;margin:.5rem 0 0}
+.sample-note{font-family:var(--font-mono);font-size:.65rem;color:var(--mute);letter-spacing:.08em;margin-top:var(--sp-2)}
+.about-img{border-radius:var(--radius-card);overflow:hidden;aspect-ratio:4/3;position:relative}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-img .micro{position:absolute;left:14px;bottom:12px;background:rgba(10,10,11,.7);padding:.35rem .6rem;border-radius:var(--radius-pill);color:var(--paper)}
+
+/* programmes — horizontal scroller on mobile, grid on desktop */
+.programs-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:var(--sp-2);margin-bottom:var(--sp-4)}
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.cards{display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:var(--sp-2);overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 var(--sp-2);scrollbar-width:none;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter)}
+.cards::-webkit-scrollbar{display:none}
+.card{scroll-snap-align:start;background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius-card);overflow:hidden;display:flex;flex-direction:column;transition:transform var(--dur) var(--ease),border-color var(--dur-fast)}
+.card:hover{transform:translateY(-6px);border-color:#2b2b31}
+.card-img{aspect-ratio:4/3;overflow:hidden;position:relative;background:var(--ink-3)}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform 800ms var(--ease)}
+.card:hover .card-img img{transform:scale(1.06)}
+.card-body{padding:var(--sp-3);display:flex;flex-direction:column;gap:.75rem;flex:1}
+.card h3{font-size:1.5rem;letter-spacing:-.02em}
+.card p{color:var(--mute);margin:0;font-size:.95rem}
+.card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:var(--sp-1)}
+.price{font-weight:800;font-size:1.25rem}
+.price small{font-size:.75rem;color:var(--mute);font-weight:500}
+.quick{min-height:44px;padding:.5rem 1rem;border-radius:var(--radius-pill);border:1px solid var(--ink-3);background:transparent;cursor:pointer;font-weight:600}
+.quick:hover{border-color:var(--accent);color:var(--accent)}
+.card[hidden]{display:none}
+@media (min-width:900px){
+  .cards{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;overflow:visible;margin-inline:0;padding-inline:0}
+}
+
+/* dialog quick view */
+dialog{border:1px solid var(--ink-3);border-radius:var(--radius-card);background:var(--ink-2);color:var(--paper);padding:0;width:min(92vw,560px);max-height:88vh}
+dialog::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop var(--dur) var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.dlg-body{padding:var(--sp-3);display:grid;gap:var(--sp-2)}
+.dlg-body img{border-radius:14px;aspect-ratio:16/9;object-fit:cover;width:100%}
+.dlg-close{position:absolute;top:12px;right:12px}
+
+/* pricing */
+.pricing-top{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;justify-content:space-between;margin-bottom:var(--sp-4)}
+.toggle{display:inline-flex;background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius-pill);padding:4px;position:relative}
+.toggle button{min-height:44px;padding:.4rem 1.1rem;border-radius:var(--radius-pill);border:0;background:transparent;cursor:pointer;color:var(--mute);font-weight:600}
+.toggle button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+.save{font-family:var(--font-mono);font-size:var(--fs-micro);color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.plans{display:grid;gap:var(--sp-2)}
+.plan{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius-card);padding:var(--sp-3);display:flex;flex-direction:column;gap:var(--sp-2)}
+.plan.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 30px 80px -30px rgba(198,255,61,.35)}
+.plan h3{font-size:1.6rem}
+.plan .amount{font-size:3rem;font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem;color:var(--mute);font-size:.95rem}
+.plan li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:.6rem;vertical-align:middle}
+.plan .btn{margin-top:auto}
+@media (min-width:900px){.plans{grid-template-columns:repeat(3,1fr)}}
+
+/* timeline / schedule */
+.timeline{display:grid;gap:0;counter-reset:t;border-left:1px solid var(--ink-3);margin-top:var(--sp-3)}
+.tl-item{position:relative;padding:0 0 var(--sp-3) var(--sp-3)}
+.tl-item::before{content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--ink);border:2px solid var(--accent)}
+.tl-item .micro{color:var(--accent)}
+.tl-item h3{font-size:1.4rem;margin:.35rem 0 .25rem;letter-spacing:-.02em}
+.tl-item p{color:var(--mute);margin:0;font-size:.95rem}
+@media (min-width:900px){
+  .about-grid{grid-template-columns:1fr 1fr;align-items:center}
+  .hero-grid{grid-template-columns:1.05fr .95fr}
+}
+
+/* testimonials carousel */
+.quote-wrap{position:relative;min-height:260px;margin-top:var(--sp-3)}
+.quote{position:absolute;inset:0;opacity:0;transform:translateY(12px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);pointer-events:none}
+.quote.active{opacity:1;transform:none;pointer-events:auto;position:relative}
+.quote blockquote{margin:0;font-family:var(--font-serif);font-style:italic;font-size:clamp(1.6rem,4vw,2.8rem);line-height:1.2;letter-spacing:-.02em;max-width:26ch}
+.quote cite{display:block;font-style:normal;margin-top:var(--sp-2);color:var(--mute);font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase}
+.carousel-ctrl{display:flex;gap:var(--sp-1);margin-top:var(--sp-3);align-items:center;flex-wrap:wrap}
+.dots{display:flex;gap:8px;margin-inline:var(--sp-1)}
+.dots button{width:44px;height:44px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center}
+.dots button::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-3);transition:all var(--dur) var(--ease)}
+.dots button[aria-selected="true"]::before{background:var(--accent);width:28px;border-radius:var(--radius-pill)}
+
+/* FAQ */
+.faq{margin-top:var(--sp-3);border-top:1px solid var(--ink-3)}
+.faq details{border-bottom:1px solid var(--ink-3)}
+.faq summary{list-style:none;cursor:pointer;min-height:56px;display:flex;justify-content:space-between;align-items:center;gap:var(--sp-2);font-weight:600;font-size:1.15rem;padding:1rem 0}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--font-mono);font-size:1.4rem;color:var(--accent);transition:transform var(--dur) var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .ans{color:var(--mute);padding:0 0 1.2rem;max-width:62ch}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-1);margin-top:var(--sp-3)}
+.gallery button{padding:0;border:0;background:var(--ink-2);border-radius:14px;overflow:hidden;cursor:zoom-in;aspect-ratio:3/4;position:relative}
+.gallery button:nth-child(2){margin-top:var(--sp-4)}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform 800ms var(--ease)}
+.gallery button:hover img{transform:scale(1.05)}
+.lightbox{padding:0;background:transparent;border:0;width:100vw;height:100vh;max-width:none;max-height:none;display:grid;place-items:center}
+.lightbox::backdrop{background:rgba(0,0,0,.92)}
+.lightbox img{max-width:min(94vw,1100px);max-height:86vh;border-radius:14px}
+.lightbox .dlg-close{position:fixed}
+@media (min-width:900px){.gallery{grid-template-columns:repeat(3,1fr)}.gallery button:nth-child(2){margin-top:var(--sp-4)}}
+
+/* booking form */
+.book-grid{display:grid;gap:var(--sp-4)}
+.form{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:var(--radius-card);padding:var(--sp-3);display:grid;gap:var(--sp-2)}
+.steps{display:flex;gap:.5rem;align-items:center}
+.steps .s{flex:1;height:4px;border-radius:4px;background:var(--ink-3);transition:background var(--dur) var(--ease)}
+.steps .s.on{background:var(--accent)}
+.step-label{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.fieldset{border:0;margin:0;padding:0;display:grid;gap:var(--sp-2)}
+.fieldset[hidden]{display:none}
+legend{font-weight:700;font-size:1.2rem;margin-bottom:.5rem;padding:0}
+label.f{display:grid;gap:.4rem;font-weight:600;font-size:.92rem}
+input.i,select.i,textarea.i{width:100%;min-height:52px;padding:.8rem 1rem;border-radius:14px;border:1px solid var(--ink-3);background:var(--ink);color:var(--paper);font-size:1rem}
+textarea.i{min-height:110px;resize:vertical}
+input.i:focus,select.i:focus,textarea.i:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(198,255,61,.2)}
+input.i[aria-invalid="true"]{border-color:var(--danger)}
+.err{color:var(--danger);font-size:.85rem;min-height:1.2em;font-weight:500}
+.hint{color:var(--mute);font-size:.82rem}
+.radio-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.radio-row input{position:absolute;opacity:0;pointer-events:none}
+.radio-row label{min-height:44px;display:inline-flex;align-items:center;padding:.5rem 1rem;border:1px solid var(--ink-3);border-radius:var(--radius-pill);cursor:pointer;font-weight:600;font-size:.92rem}
+.radio-row input:checked+label{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.radio-row input:focus-visible+label{outline:2px solid var(--accent);outline-offset:3px}
+.form-nav{display:flex;justify-content:space-between;gap:var(--sp-1);flex-wrap:wrap}
+.status{border-radius:14px;padding:var(--sp-2);font-size:.95rem;display:none}
+.status.show{display:block}
+.status.ok{background:rgba(198,255,61,.1);border:1px solid var(--accent)}
+.status.bad{background:rgba(255,122,122,.08);border:1px solid var(--danger)}
+.status.wait{background:var(--ink);border:1px dashed var(--mute)}
+.spinner{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spin 800ms linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{color:var(--mute);text-align:center;padding:var(--sp-3);border:1px dashed var(--ink-3);border-radius:14px}
+.summary{background:var(--ink);border-radius:14px;padding:var(--sp-2);border:1px solid var(--ink-3);font-size:.95rem}
+.summary dt{color:var(--mute);font-size:.8rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;margin-top:.6rem}
+.summary dd{margin:.1rem 0 0}
+.honeypot{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.book-side{display:grid;gap:var(--sp-3);align-content:start}
+.book-side .card-img{aspect-ratio:16/10;border-radius:var(--radius-card);overflow:hidden}
+.book-side img{width:100%;height:100%;object-fit:cover}
+@media (min-width:900px){.book-grid{grid-template-columns:.9fr 1.1fr;align-items:start}}
+
+/* contact / social */
+.contact-grid{display:grid;gap:var(--sp-4)}
+.info{display:grid;gap:var(--sp-3)}
+.info .block{border-top:1px solid var(--ink-3);padding-top:var(--sp-2)}
+.info .block p,.info .block a{margin:.25rem 0 0;font-size:1.25rem;font-weight:600;text-decoration:none}
+.info .block a:hover{color:var(--accent)}
+.socials{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:var(--sp-1)}
+.socials a{width:52px;height:52px}
+.map{border-radius:var(--radius-card);overflow:hidden;position:relative;aspect-ratio:4/3;background:var(--ink-2);border:1px solid var(--ink-3);display:grid;place-items:center;text-align:center;padding:var(--sp-3)}
+.map svg.bg{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.map .pin{position:relative;display:grid;gap:.75rem;justify-items:center}
+.map .pin::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(198,255,61,.6);animation:ping 2.2s var(--ease) infinite}
+@keyframes ping{70%{box-shadow:0 0 0 22px rgba(198,255,61,0)}100%{box-shadow:0 0 0 0 rgba(198,255,61,0)}}
+@media (min-width:900px){.contact-grid{grid-template-columns:1fr 1fr;align-items:start}}
+
+/* final CTA */
+.final{text-align:center;padding:var(--sp-6) 0;border-top:1px solid var(--ink-3)}
+.final h2{font-size:var(--fs-macro);letter-spacing:var(--track-macro);font-weight:800;margin-inline:auto}
+.final .btn{margin-top:var(--sp-3);font-size:1.1rem;min-height:60px;padding:1rem 2rem}
+
+/* footer */
+footer{padding:var(--sp-4) 0 var(--sp-3);border-top:1px solid var(--ink-3);background:var(--ink-2)}
+.foot-grid{display:grid;gap:var(--sp-3)}
+.foot-grid nav{display:flex;flex-wrap:wrap;gap:1rem 1.5rem}
+.foot-grid nav a{text-decoration:none;color:var(--mute);font-size:.95rem;min-height:44px;display:inline-flex;align-items:center}
+.foot-grid nav a:hover{color:var(--paper)}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:var(--sp-2);justify-content:space-between;margin-top:var(--sp-4);padding-top:var(--sp-2);border-top:1px dashed var(--ink-3)}
+.foot-bottom a{color:var(--mute)}
+.credit{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.big-foot{font-size:clamp(3.2rem,15vw,14rem);letter-spacing:-.06em;font-weight:800;line-height:.85;color:var(--ink-3);user-select:none;margin-top:var(--sp-4);white-space:nowrap;overflow:hidden}
+
+/* floating action + back to top */
+.fab{position:fixed;right:16px;bottom:16px;z-index:45;min-height:56px;padding:.8rem 1.2rem;border-radius:var(--radius-pill);background:var(--accent);color:var(--accent-ink);font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 14px 40px -10px rgba(198,255,61,.6);transform:translateY(140%);transition:transform var(--dur) var(--ease)}
+.fab.show{transform:none;animation:pulse 2.6s var(--ease) infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(198,255,61,.55),0 14px 40px -10px rgba(198,255,61,.6)}60%{box-shadow:0 0 0 16px rgba(198,255,61,0),0 14px 40px -10px rgba(198,255,61,.6)}}
+.fab svg{width:22px;height:22px}
+.totop{position:fixed;left:16px;bottom:16px;z-index:44;opacity:0;visibility:hidden;transition:opacity var(--dur) var(--ease),visibility var(--dur)}
+.totop.show{opacity:1;visibility:visible}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:left;transform:scaleX(0);z-index:60}
+
+/* cookie notice + toast */
+.cookie{position:fixed;left:12px;right:12px;bottom:12px;z-index:70;background:var(--paper);color:var(--ink);border-radius:18px;padding:var(--sp-2);display:none;gap:var(--sp-2);flex-wrap:wrap;align-items:center;justify-content:space-between;box-shadow:0 20px 60px -10px rgba(0,0,0,.6)}
+.cookie.show{display:flex}
+.cookie p{margin:0;font-size:.9rem;max-width:60ch}
+.cookie .btn{min-height:44px;padding:.6rem 1.1rem;background:var(--ink);color:var(--paper)}
+.cookie .btn-ghost{background:transparent;color:var(--ink);border-color:#c8c6c0}
+.toast-wrap{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:80;display:grid;gap:8px;width:max-content;max-width:92vw;pointer-events:none}
+.toast{background:var(--paper);color:var(--ink);padding:.75rem 1.1rem;border-radius:var(--radius-pill);font-weight:600;font-size:.92rem;box-shadow:0 14px 40px -12px rgba(0,0,0,.6);animation:toastIn var(--dur) var(--ease)}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(24px);transition:opacity 700ms var(--ease),transform 700ms var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:90ms}.rv-d2{transition-delay:180ms}
+
+/* ========== DESKTOP ENHANCEMENTS ========== */
+@media (min-width:900px){
+  .hero-corner.tr,.hero-corner.br{display:block}
+  .hero-title{font-size:clamp(5rem,11vw,11rem)}
+  .tilt{max-width:460px}
+  .stats{max-width:520px}
+  .final h2{font-size:clamp(4rem,11vw,10rem)}
+}
+@media (hover:hover) and (pointer:fine){
+  .cursor{position:fixed;left:0;top:0;width:44px;height:44px;border-radius:50%;border:1px solid var(--accent);pointer-events:none;z-index:90;transform:translate(-50%,-50%);transition:width var(--dur) var(--ease),height var(--dur) var(--ease),opacity var(--dur);opacity:0;mix-blend-mode:difference}
+  .cursor.on{opacity:1}
+  .cursor.big{width:80px;height:80px;background:rgba(198,255,61,.08)}
+}
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .marquee-track{animation:none}
+  .tilt{transform:none!important}
+  .rv{opacity:1;transform:none}
+  .hero-title .line span{transform:none}
+  .fab.show{animation:none}
+  .map .pin::before{animation:none}
+  .cursor{display:none!important}
+}
+@media (max-width:899px){ .tilt{transform:none} }
+.noscript-note{padding:var(--sp-2);background:var(--ink-2);border:1px solid var(--ink-3);border-radius:14px;margin:var(--sp-2) 0}
+</style>
+</head>
+<body class="grain">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<!-- ========== HEADER ========== -->
+<header class="header" id="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Forge and Form Studio, back to top">
+      <span class="logo-mark" aria-hidden="true">F</span>Forge&nbsp;&amp;&nbsp;Form
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#programs">Programmes</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#stories">Stories</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn header-cta" href="https://wa.me/919800000000?text=Hi%20Forge%20%26%20Form%2C%20I%27d%20like%20to%20book%20my%20free%20trial%20session." target="_blank" rel="noopener">Book free trial</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <nav aria-label="Mobile">
+    <a class="link" href="#programs">Programmes</a>
+    <a class="link" href="#pricing">Pricing</a>
+    <a class="link" href="#schedule">Schedule</a>
+    <a class="link" href="#stories">Stories</a>
+    <a class="link" href="#faq">FAQ</a>
+    <a class="link" href="#contact">Contact</a>
+  </nav>
+  <a class="btn" href="https://wa.me/919800000000?text=Hi%20Forge%20%26%20Form%2C%20I%27d%20like%20to%20book%20my%20free%20trial%20session." target="_blank" rel="noopener">Book free trial on WhatsApp</a>
+</div>
+
+<main id="main">
+
+<!-- ========== HERO ========== -->
+<section class="hero" aria-labelledby="hero-title" style="padding-top:clamp(2rem,6vw,5rem);padding-bottom:var(--sp-5)">
+  <span class="hero-corner tl">Forge &amp; Form — Strength Studio</span>
+  <span class="hero-corner tr">Est. 2019 · Bhopal, MP</span>
+  <span class="hero-corner bl">Scroll ↓</span>
+  <span class="hero-corner br">23.2599° N · 77.4126° E</span>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="idx" style="margin-top:2rem">01 — Strength studio, Bhopal</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="line"><span>Train until</span></span>
+        <span class="line"><span><span class="serif-i">strong</span> feels</span></span>
+        <span class="line"><span>normal.</span></span>
+      </h1>
+      <p class="hero-sub">Small coached classes, real barbells and a plan that adapts to you. Your first session is free — no card, no pressure.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://wa.me/919800000000?text=Hi%20Forge%20%26%20Form%2C%20I%27d%20like%20to%20book%20my%20free%20trial%20session." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4 5.3 5.3 0 0 0 3.2.7 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c0-.1-.2-.2-.4-.3z"/></svg>
+          Book free trial
+        </a>
+        <a class="btn btn-ghost" href="#pricing">See plans</a>
+      </div>
+      <div class="trust" aria-label="Trust signals">
+        <span class="chip">★ 4.9 · 340 reviews [SAMPLE]</span>
+        <span class="chip">1,200+ members [SAMPLE]</span>
+        <span class="chip">Cancel anytime</span>
+      </div>
+    </div>
+
+    <div class="stage" aria-hidden="false">
+      <div class="tilt" id="tilt">
+        <div class="tilt-face">
+          <img src="images/hero.jpg" width="1200" height="801" alt="A woman in a red sports bra holds a loaded barbell across her shoulders in a dim gym, light streaming through a window behind her." fetchpriority="high">
+          <div class="tilt-glare" id="glare"></div>
+        </div>
+        <div class="tilt-badge"><small>Free trial</small>First class ₹0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Barbell strength <b>✳</b> Olympic lifting <b>✳</b> Mobility lab <b>✳</b> Small batch HIIT <b>✳</b> Personal coaching <b>✳</b> Barbell strength <b>✳</b> Olympic lifting <b>✳</b> Mobility lab <b>✳</b> Small batch HIIT <b>✳</b> Personal coaching <b>✳</b></span>
+  </div>
+</div>
+
+<!-- ========== ABOUT ========== -->
+<section aria-labelledby="about-title">
+  <div class="wrap about-grid">
+    <div class="rv">
+      <p class="idx">02 — The studio</p>
+      <h2 class="h2" id="about-title">Coaching you can <span class="serif-i">feel</span> in week one.</h2>
+      <p class="lead">We keep classes at 12 people or fewer, so every rep gets a coach’s eye. Forge &amp; Form was built in Bhopal for people who want to get stronger without the noise of a crowded floor.</p>
+      <div class="stats">
+        <div class="stat"><div class="num" data-count="1200">0</div><p>Members trained [SAMPLE]</p></div>
+        <div class="stat"><div class="num" data-count="18">0</div><p>Certified coaches [SAMPLE]</p></div>
+        <div class="stat"><div class="num" data-count="6">0</div><p>Years on the floor [SAMPLE]</p></div>
+        <div class="stat"><div class="num" data-count="92" data-suffix="%">0</div><p>Members who stay past 3 months [SAMPLE]</p></div>
+      </div>
+      <p class="sample-note">[SAMPLE] — demo figures for layout only. Replace with your real numbers.</p>
+    </div>
+    <figure class="about-img rv rv-d1" style="margin:0">
+      <img src="images/facility.jpg" width="390" height="280" loading="lazy" alt="The empty training floor at Forge and Form, with racks, benches and a green turf strip under low dark ceilings.">
+      <figcaption class="micro">Main floor · 6:00 AM</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========== PROGRAMMES ========== -->
+<section id="programs" aria-labelledby="programs-title">
+  <div class="wrap">
+    <p class="idx rv">03 — Programmes</p>
+    <div class="programs-head rv">
+      <h2 class="h2" id="programs-title">Pick your <span class="serif-i">kind</span> of hard.</h2>
+      <div class="filters" role="group" aria-label="Filter programmes">
+        <button class="chip" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" aria-pressed="false" data-filter="strength">Strength</button>
+        <button class="chip" aria-pressed="false" data-filter="conditioning">Conditioning</button>
+        <button class="chip" aria-pressed="false" data-filter="recovery">Recovery</button>
+      </div>
+    </div>
+    <p class="micro" id="filterCount" aria-live="polite" style="margin-bottom:var(--sp-2)">Showing 3 of 3</p>
+
+    <div class="cards" id="cards">
+      <article class="card rv" data-cat="strength">
+        <div class="card-img"><img src="images/programs-strength.jpg" width="800" height="534" loading="lazy" alt="Athlete with hands on a barbell in a dark gym, sweat visible, mid-lift in dramatic side light."></div>
+        <div class="card-body">
+          <span class="micro">Strength · 60 min</span>
+          <h3>Barbell Foundations</h3>
+          <p>Squat, hinge, press and pull with coached technique. Built for first-timers and returners.</p>
+          <div class="card-foot">
+            <span class="price">₹2,499<small> /mo [SAMPLE]</small></span>
+            <button class="quick" data-quick="0">Quick view</button>
+          </div>
+        </div>
+      </article>
+      <article class="card rv rv-d1" data-cat="conditioning">
+        <div class="card-img"><img src="images/hero.jpg" width="1200" height="801" loading="lazy" alt="Close-up of a barbell and gym floor under strong backlight, showing the energy of a high-intensity session." style="object-position:30% 40%"></div>
+        <div class="card-body">
+          <span class="micro">Conditioning · 45 min</span>
+          <h3>Engine Room HIIT</h3>
+          <p>Short intervals, real rest, and rowers, sleds and kettlebells. Sweat-heavy, never chaotic.</p>
+          <div class="card-foot">
+            <span class="price">₹1,999<small> /mo [SAMPLE]</small></span>
+            <button class="quick" data-quick="1">Quick view</button>
+          </div>
+        </div>
+      </article>
+      <article class="card rv rv-d2" data-cat="recovery">
+        <div class="card-img"><img src="images/facility.jpg" width="390" height="280" loading="lazy" alt="Quiet mobility corner with a turf strip and benches for stretching and warm-up work."></div>
+        <div class="card-body">
+          <span class="micro">Recovery · 40 min</span>
+          <h3>Mobility Lab</h3>
+          <p>Guided stretching, breath work and foam rolling. Your rest days, done properly.</p>
+          <div class="card-foot">
+            <span class="price">₹1,299<small> /mo [SAMPLE]</small></span>
+            <button class="quick" data-quick="2">Quick view</button>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="empty" id="noResults" hidden>No programmes in this category yet. <button class="chip" data-filter="all" style="margin-left:.5rem">Show all</button></p>
+  </div>
+</section>
+
+<!-- quick view dialog -->
+<dialog id="quickDlg" aria-labelledby="qdTitle">
+  <div class="dlg-body" id="qdBody"></div>
+  <button class="icon-btn dlg-close" data-close aria-label="Close quick view">✕</button>
+</dialog>
+
+<!-- ========== PRICING ========== -->
+<section id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <p class="idx rv">04 — Membership</p>
+    <div class="pricing-top rv">
+      <h2 class="h2" id="pricing-title">Simple plans. <span class="serif-i">Honest</span> terms.</h2>
+      <div>
+        <div class="toggle" role="group" aria-label="Billing period">
+          <button aria-pressed="true" data-billing="monthly">Monthly</button>
+          <button aria-pressed="false" data-billing="yearly">Yearly</button>
+        </div>
+        <p class="save" style="margin-top:.5rem">Yearly saves 27% [SAMPLE]</p>
+      </div>
+    </div>
+    <div class="plans">
+      <article class="plan rv">
+        <span class="micro">Starter</span>
+        <h3>Foundation</h3>
+        <div class="amount" data-price-m="2499" data-price-y="21999" aria-live="polite">₹2,499</div>
+        <p class="micro" data-per>per month · billed monthly [SAMPLE]</p>
+        <ul>
+          <li>8 coached classes / month</li>
+          <li>Form check on day one</li>
+          <li>Locker and showers</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Hi%2C%20I%27m%20interested%20in%20the%20Foundation%20plan." target="_blank" rel="noopener">Start on WhatsApp</a>
+      </article>
+      <article class="plan featured rv rv-d1">
+        <span class="micro" style="color:var(--accent)">Most chosen</span>
+        <h3>Forge</h3>
+        <div class="amount" data-price-m="3999" data-price-y="34999" aria-live="polite">₹3,999</div>
+        <p class="micro" data-per>per month · billed monthly [SAMPLE]</p>
+        <ul>
+          <li>Unlimited classes</li>
+          <li>Monthly programme review</li>
+          <li>Mobility Lab included</li>
+          <li>Guest pass × 2 / month</li>
+        </ul>
+        <a class="btn" href="https://wa.me/919800000000?text=Hi%2C%20I%27d%20like%20the%20Forge%20plan." target="_blank" rel="noopener">Join Forge</a>
+      </article>
+      <article class="plan rv rv-d2">
+        <span class="micro">Private</span>
+        <h3>1:1 Coaching</h3>
+        <div class="amount" data-price-m="7999" data-price-y="74999" aria-live="polite">₹7,999</div>
+        <p class="micro" data-per>per month · 4 sessions [SAMPLE]</p>
+        <ul>
+          <li>4 private sessions / month</li>
+          <li>Custom nutrition check-in</li>
+          <li>WhatsApp support</li>
+        </ul>
+        <a class="btn btn-ghost" href="mailto:hello@forgeandform.example?subject=1%3A1%20coaching%20enquiry&amp;body=Hi%20Forge%20%26%20Form%2C%20I%27d%20like%20to%20know%20more%20about%201%3A1%20coaching." rel="noopener">Email us</a>
+      </article>
+    </div>
+    <p class="hint rv" style="margin-top:var(--sp-3)">Refunds: full refund of your first month if you cancel within 7 days of joining [PLACEHOLDER — confirm policy]. Prices in INR, GST included [PLACEHOLDER].</p>
+  </div>
+</section>
+
+<!-- ========== SCHEDULE / TIMELINE ========== -->
+<section id="schedule" aria-labelledby="sched-title">
+  <div class="wrap book-grid" style="gap:var(--sp-4)">
+    <div class="rv">
+      <p class="idx">05 — How it works</p>
+      <h2 class="h2" id="sched-title">Four steps to your <span class="serif-i">first</span> rep.</h2>
+      <ol class="timeline" style="list-style:none;padding-left:0;margin-left:0">
+        <li class="tl-item"><span class="micro">Step 01</span><h3>Book a free trial</h3><p>Message us on WhatsApp. Pick a time that works.</p></li>
+        <li class="tl-item"><span class="micro">Step 02</span><h3>Movement check</h3><p>20 minutes with a coach to see how you move.</p></li>
+        <li class="tl-item"><span class="micro">Step 03</span><h3>Your first class</h3><p>A coached session, sized to your level.</p></li>
+        <li class="tl-item"><span class="micro">Step 04</span><h3>Your plan</h3><p>A simple monthly plan, reviewed every four weeks.</p></li>
+      </ol>
+    </div>
+    <div class="rv rv-d1">
+      <p class="idx">Timetable [SAMPLE]</p>
+      <div class="form" style="padding:var(--sp-2)">
+        <table style="width:100%;border-collapse:collapse;font-size:.95rem">
+          <caption class="sr">Weekly class timetable (sample)</caption>
+          <thead><tr style="text-align:left;color:var(--mute);font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase"><th scope="col" style="padding:.6rem 0">Time</th><th scope="col">Mon–Fri</th><th scope="col">Sat</th></tr></thead>
+          <tbody>
+            <tr style="border-top:1px solid var(--ink-3)"><th scope="row" style="text-align:left;padding:.8rem 0;font-weight:600">06:00</th><td>Barbell Foundations</td><td>Engine Room HIIT</td></tr>
+            <tr style="border-top:1px solid var(--ink-3)"><th scope="row" style="text-align:left;padding:.8rem 0;font-weight:600">07:30</th><td>Mobility Lab</td><td>Barbell Foundations</td></tr>
+            <tr style="border-top:1px solid var(--ink-3)"><th scope="row" style="text-align:left;padding:.8rem 0;font-weight:600">18:30</th><td>Engine Room HIIT</td><td>Mobility Lab</td></tr>
+            <tr style="border-top:1px solid var(--ink-3)"><th scope="row" style="text-align:left;padding:.8rem 0;font-weight:600">20:00</th><td>Barbell Foundations</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section id="stories" aria-labelledby="stories-title">
+  <div class="wrap">
+    <p class="idx rv">06 — Stories [SAMPLE]</p>
+    <h2 class="h2 rv" id="stories-title">Real words. <span class="serif-i">Sample</span> names.</h2>
+    <div class="quote-wrap" aria-live="polite" id="quotes">
+      <figure class="quote active" style="margin:0">
+        <blockquote>“I came in dreading the first squat. Six months later I deadlift more than my husband.”</blockquote>
+        <cite>Priya S. · Member since 2024 [SAMPLE]</cite>
+      </figure>
+      <figure class="quote" style="margin:0">
+        <blockquote>“The coaches actually watch your form. Nobody here is just counting reps.”</blockquote>
+        <cite>Rahul M. · Forge plan [SAMPLE]</cite>
+      </figure>
+      <figure class="quote" style="margin:0">
+        <blockquote>“Lost 9 kg and gained a routine I still keep when I travel for work.”</blockquote>
+        <cite>Anjali K. · Engine Room HIIT [SAMPLE]</cite>
+      </figure>
+    </div>
+    <div class="carousel-ctrl">
+      <button class="icon-btn" id="prevQ" aria-label="Previous testimonial">←</button>
+      <div class="dots" role="tablist" aria-label="Choose testimonial">
+        <button role="tab" aria-selected="true" aria-label="Testimonial 1" data-q="0"></button>
+        <button role="tab" aria-selected="false" aria-label="Testimonial 2" data-q="1"></button>
+        <button role="tab" aria-selected="false" aria-label="Testimonial 3" data-q="2"></button>
+      </div>
+      <button class="icon-btn" id="nextQ" aria-label="Next testimonial">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GALLERY ========== -->
+<section aria-labelledby="gal-title">
+  <div class="wrap">
+    <p class="idx rv">07 — The floor</p>
+    <h2 class="h2 rv" id="gal-title">Built for <span class="serif-i">heavy</span> days.</h2>
+    <div class="gallery rv">
+      <button data-lb="images/hero.jpg" aria-label="Open photo: barbell lifter"><img src="images/hero.jpg" width="1200" height="801" loading="lazy" alt="Barbell lifter in soft backlight"></button>
+      <button data-lb="images/facility.jpg" aria-label="Open photo: main training floor"><img src="images/facility.jpg" width="390" height="280" loading="lazy" alt="Main training floor with racks and benches"></button>
+      <button data-lb="images/programs-strength.jpg" aria-label="Open photo: athlete with barbell"><img src="images/programs-strength.jpg" width="800" height="534" loading="lazy" alt="Athlete mid-lift under dramatic side light"></button>
+    </div>
+    <dialog class="lightbox" id="lb" aria-label="Photo viewer">
+      <img id="lbImg" src="" alt="">
+      <button class="icon-btn dlg-close" data-close aria-label="Close photo">✕</button>
+    </dialog>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq" aria-labelledby="faq-title">
+  <div class="wrap" style="max-width:880px">
+    <p class="idx rv">08 — Questions</p>
+    <h2 class="h2 rv" id="faq-title">Quick <span class="serif-i">answers</span>.</h2>
+    <div class="faq rv">
+      <details name="faq" open><summary>Do I need experience to start?</summary><div class="ans">No. Barbell Foundations is built for beginners. Your first coached session is a movement check, not a test.</div></details>
+      <details name="faq"><summary>Can I cancel anytime?</summary><div class="ans">Yes. Monthly plans cancel with 30 days’ notice. Full refund of your first month if you cancel within 7 days of joining [PLACEHOLDER — confirm policy].</div></details>
+      <details name="faq"><summary>Is the free trial really free?</summary><div class="ans">Yes. One coached class and a movement check, no card needed. We’ll never auto-charge you.</div></details>
+      <details name="faq"><summary>Where exactly are you?</summary><div class="ans">Arera Hills area, Bhopal. Parking is available on site [PLACEHOLDER — confirm].</div></details>
+      <details name="faq"><summary>Do you store my details?</summary><div class="ans">This website stores nothing on a server. Booking and contact forms open WhatsApp or your email app with your message pre-filled, so you send it directly to us.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BOOKING FORM ========== -->
+<section id="book" aria-labelledby="book-title">
+  <div class="wrap book-grid">
+    <div class="book-side rv">
+      <p class="idx">09 — Book</p>
+      <h2 class="h2" id="book-title">Claim your <span class="serif-i">free</span> class.</h2>
+      <p class="lead">Three quick steps. We open WhatsApp with your details pre-typed. Nothing is saved on our website.</p>
+      <div class="card-img"><img src="images/programs-strength.jpg" width="800" height="534" loading="lazy" alt="Athlete focused on a lift in a dim gym"></div>
+    </div>
+
+    <form class="form rv rv-d1" id="bookForm" novalidate aria-labelledby="book-title" action="https://wa.me/919800000000" method="get" target="_blank">
+      <div class="steps" aria-hidden="true"><span class="s on" data-s="1"></span><span class="s" data-s="2"></span><span class="s" data-s="3"></span></div>
+      <p class="step-label" id="stepLabel" aria-live="polite">Step 1 of 3 — About you</p>
+
+      <!-- step 1 -->
+      <fieldset class="fieldset" data-step="1">
+        <legend>Who’s coming?</legend>
+        <label class="f" for="name">Full name
+          <input class="i" id="name" name="name" autocomplete="name" required aria-describedby="nameErr" maxlength="60" placeholder="e.g. Aditi Sharma">
+          <span class="err" id="nameErr" role="alert"></span>
+        </label>
+        <label class="f" for="phone">WhatsApp number
+          <input class="i" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="phoneErr phoneHint" placeholder="98XXXXXXXX">
+          <span class="hint" id="phoneHint">10-digit Indian mobile. We’ll message this number.</span>
+          <span class="err" id="phoneErr" role="alert"></span>
+        </label>
+      </fieldset>
+
+      <!-- step 2 -->
+      <fieldset class="fieldset" data-step="2" hidden>
+        <legend>What are you after?</legend>
+        <div class="radio-row" role="radiogroup" aria-label="Programme">
+          <input type="radio" id="p1" name="programme" value="Barbell Foundations" checked><label for="p1">Barbell Foundations</label>
+          <input type="radio" id="p2" name="programme" value="Engine Room HIIT"><label for="p2">Engine Room HIIT</label>
+          <input type="radio" id="p3" name="programme" value="Mobility Lab"><label for="p3">Mobility Lab</label>
+        </div>
+        <label class="f" for="goal">Your goal in one line (optional)
+          <textarea class="i" id="goal" name="goal" maxlength="240" placeholder="e.g. Build strength for trekking season"></textarea>
+          <span class="hint" id="goalCount">0 / 240</span>
+        </label>
+      </fieldset>
+
+      <!-- step 3 -->
+      <fieldset class="fieldset" data-step="3" hidden>
+        <legend>Pick a slot</legend>
+        <label class="f" for="slot">Preferred time
+          <select class="i" id="slot" name="slot" required aria-describedby="slotErr">
+            <option value="">Choose a time</option>
+            <option>Weekday morning · 06:00</option>
+            <option>Weekday morning · 07:30</option>
+            <option>Weekday evening · 18:30</option>
+            <option>Weekday evening · 20:00</option>
+            <option>Saturday · 07:00</option>
+          </select>
+          <span class="err" id="slotErr" role="alert"></span>
+        </label>
+        <dl class="summary" id="summary" aria-label="Booking summary"></dl>
+      </fieldset>
+
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+
+      <div class="form-nav">
+        <button type="button" class="btn btn-ghost" id="backBtn" hidden>← Back</button>
+        <button type="button" class="btn" id="nextBtn">Next →</button>
+        <button type="submit" class="btn" id="submitBtn" hidden>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+          Send on WhatsApp
+        </button>
+      </div>
+      <p class="hint" style="margin:0">Your details are not stored by this website. The message goes straight to our WhatsApp.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="final" aria-labelledby="final-title">
+  <div class="wrap">
+    <p class="idx" style="justify-content:center">10 — Your move</p>
+    <h2 id="final-title">Start <span class="serif-i">today</span>.</h2>
+    <p class="lead" style="margin-inline:auto">Your first class is free. The only thing you need is a message.</p>
+    <a class="btn" href="https://wa.me/919800000000?text=Hi%20Forge%20%26%20Form%2C%20I%27d%20like%20to%20book%20my%20free%20trial%20session." target="_blank" rel="noopener">Book free trial on WhatsApp</a>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="rv">
+      <p class="idx">11 — Contact</p>
+      <h2 class="h2" id="contact-title">Come <span class="serif-i">find</span> us.</h2>
+      <div class="info" style="margin-top:var(--sp-3)">
+        <div class="block"><span class="micro">Address</span><p>12 Arera Hills Road [PLACEHOLDER], Bhopal, Madhya Pradesh 462016</p></div>
+        <div class="block"><span class="micro">Hours</span><p>Mon–Fri 05:30–22:00 · Sat–Sun 07:00–19:00 [PLACEHOLDER]</p></div>
+        <div class="block"><span class="micro">Phone</span><a href="tel:+919800000000">+91 98000 00000 [PLACEHOLDER]</a></div>
+        <div class="block"><span class="micro">Email</span><a href="mailto:hello@forgeandform.example">hello@forgeandform.example [PLACEHOLDER]</a></div>
+        <div class="block"><span class="micro">Follow</span>
+          <div class="socials">
+            <a class="icon-btn" href="https://www.instagram.com/PLACEHOLDER" target="_blank" rel="noopener" aria-label="Instagram (placeholder link)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+            <a class="icon-btn" href="https://www.facebook.com/PLACEHOLDER" target="_blank" rel="noopener" aria-label="Facebook (placeholder link)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8V6.5c0-.8.4-1.2 1.2-1.2H17V2h-2.6C11.9 2 11 3.6 11 5.6V8H9v3.3h2V22h3V11.3h2.4L17 8z"/></svg></a>
+            <a class="icon-btn" href="https://x.com/PLACEHOLDER" target="_blank" rel="noopener" aria-label="X, formerly Twitter (placeholder link)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h3.2l-7 8 8.2 12h-6.4l-5-7.2L4.6 22H1.4l7.5-8.6L1 2h6.6l4.5 6.6zm-1.1 18h1.8L7.2 3.9H5.3z"/></svg></a>
+            <a class="icon-btn" href="https://www.youtube.com/@PLACEHOLDER" target="_blank" rel="noopener" aria-label="YouTube (placeholder link)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.8.5-4.8.5-4.8s0-3-.5-4.8zM9.7 15.1V8.9L15.5 12z"/></svg></a>
+            <a class="icon-btn" href="https://www.linkedin.com/company/PLACEHOLDER" target="_blank" rel="noopener" aria-label="LinkedIn (placeholder link)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3.5A2 2 0 1 1 4 7.5a2 2 0 0 1 0-4zM2.5 9h3V21h-3zM9 9h2.9v1.6h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V21h-3v-6.5c0-1.5 0-3.5-2.2-3.5s-2.5 1.7-2.5 3.4V21H9z"/></svg></a>
+            <a class="icon-btn" href="https://www.tiktok.com/@PLACEHOLDER" target="_blank" rel="noopener" aria-label="TikTok (placeholder link)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.2v13.3a2.6 2.6 0 1 1-2.6-2.6c.2 0 .5 0 .7.1V9.4a5.8 5.8 0 1 0 5.1 5.8V8.9a7.4 7.4 0 0 0 4.3 1.4V7.1A4.3 4.3 0 0 1 16.6 2z"/></svg></a>
+            <a class="icon-btn" href="https://www.pinterest.com/PLACEHOLDER" target="_blank" rel="noopener" aria-label="Pinterest (placeholder link)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.5 1.8-2.5.9 0 1.3.6 1.3 1.4 0 .9-.5 2.2-.8 3.4-.2 1 .5 1.9 1.5 1.9 1.8 0 3.2-1.9 3.2-4.7 0-2.5-1.8-4.2-4.3-4.2-2.9 0-4.6 2.2-4.6 4.4 0 .9.3 1.8.8 2.3l.1.2-.3 1.2c0 .2-.2.2-.4.1-1.3-.6-2-2.4-2-3.9 0-3.2 2.3-6.1 6.7-6.1 3.5 0 6.2 2.5 6.2 5.8 0 3.5-2.2 6.3-5.2 6.3-1 0-2-.5-2.3-1.1l-.6 2.4c-.2.9-.9 2-1.3 2.7A10 10 0 1 0 12 2z"/></svg></a>
+            <a class="icon-btn" href="https://wa.me/919800000000" target="_blank" rel="noopener" aria-label="WhatsApp (placeholder number)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+            <a class="icon-btn" href="https://www.threads.net/@PLACEHOLDER" target="_blank" rel="noopener" aria-label="Threads (placeholder link)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M16.5 11.2c-.6-2.9-2.4-4.4-5.1-4.4-3.4 0-5.4 2.2-5.4 5.6 0 3.5 2.1 5.7 5.5 5.7 2.9 0 4.6-1.5 4.6-3.6 0-2.2-1.7-3.1-4.2-2.9-1.1.1-2 .5-2.4 1.3M16.5 11.2c.5 1.2.7 2.5.3 3.9"/></svg></a>
+          </div>
+          <p class="micro" style="margin-top:.5rem">Social links are placeholders — replace each with your real profile URL.</p>
+        </div>
+      </div>
+    </div>
+    <div class="rv rv-d1">
+      <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Arera+Hills+Bhopal+gym" target="_blank" rel="noopener" aria-label="Open location in Google Maps (placeholder location)" style="text-decoration:none;color:inherit">
+        <svg class="bg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#2a2a30" stroke-width="2" fill="none"><path d="M0 120 H400 M0 210 H400 M90 0 V300 M250 0 V300"/><path d="M0 40 C120 80 200 0 400 60" stroke="#1f1f23" stroke-width="10"/></g></svg>
+        <div class="pin"><span class="micro" style="color:var(--paper)">Forge &amp; Form · Arera Hills</span><span class="btn btn-ghost" style="min-height:44px">Open in Maps ↗</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <nav aria-label="Footer">
+        <a href="#programs">Programmes</a><a href="#pricing">Pricing</a><a href="#schedule">Schedule</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="#book">Book</a>
+      </nav>
+      <p class="micro">Site by [PLACEHOLDER studio] · © 2026 Forge &amp; Form Studio · Bhopal, IN</p>
+    </div>
+    <div class="foot-bottom">
+      <span class="credit">Privacy: no tracking cookies · no analytics [PLACEHOLDER]</span>
+      <span class="credit"><a href="#top">Back to top ↑</a></span>
+    </div>
+    <p class="big-foot" aria-hidden="true">FORGE&amp;FORM</p>
+  </div>
+</footer>
+
+<!-- floating action + back to top -->
+<a class="fab" id="fab" href="https://wa.me/919800000000?text=Hi%20Forge%20%26%20Form%2C%20I%27d%20like%20to%20book%20my%20free%20trial%20session." target="_blank" rel="noopener" aria-label="Book free trial on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+  Book free trial
+</a>
+<button class="icon-btn totop" id="toTop" aria-label="Back to top">↑</button>
+
+<div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+<div class="cookie" id="cookie" role="region" aria-label="Cookie and privacy notice">
+  <p>We use no tracking or analytics cookies. We only remember that you’ve seen this notice, in your browser. <a href="#faq">Read FAQ</a>.</p>
+  <div style="display:flex;gap:8px">
+    <button class="btn" id="cookieOk">Got it</button>
+  </div>
+</div>
+
+<noscript><p class="noscript-note">JavaScript is off: the menu, filters, and carousels are simplified, but every booking link and contact detail still works.</p></noscript>
+
+<script>
+(function(){
+  "use strict";
+  var d=document, w=window;
+  var reduce = w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = w.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var $ = function(s,c){return (c||d).querySelector(s)};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
+
+  /* ---------- toast ---------- */
+  function toast(msg){
+    var t=d.createElement('div'); t.className='toast'; t.textContent=msg;
+    $('#toasts').appendChild(t);
+    setTimeout(function(){ t.remove(); }, 3200);
+  }
+
+  /* ---------- header scrolled + progress + fab + totop ---------- */
+  var header=$('.header'), fab=$('#fab'), toTop=$('#toTop'), prog=$('#progress');
+  var ticking=false;
+  function onScroll(){
+    var y=w.scrollY, h=d.documentElement.scrollHeight-w.innerHeight;
+    header.classList.toggle('scrolled', y>8);
+    prog.style.transform='scaleX('+(h>0?y/h:0)+')';
+    var past=y>w.innerHeight*0.9;
+    fab.classList.toggle('show', past);
+    toTop.classList.toggle('show', y>w.innerHeight*1.5);
+    ticking=false;
+  }
+  w.addEventListener('scroll', function(){ if(!ticking){ticking=true; w.requestAnimationFrame(onScroll);} },{passive:true});
+  onScroll();
+
+  /* ---------- mobile drawer ---------- */
+  var menuBtn=$('#menuBtn'), drawer=$('#drawer');
+  function setMenu(open){
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open?'Close menu':'Open menu');
+    drawer.classList.toggle('open', open);
+    drawer.setAttribute('aria-hidden', !open);
+    d.body.style.overflow = open?'hidden':'';
+    if(open){ $('a',drawer).focus(); }
+  }
+  menuBtn.addEventListener('click', function(){ setMenu(menuBtn.getAttribute('aria-expanded')!=='true'); });
+  $$('#drawer a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  d.addEventListener('keydown', function(e){ if(e.key==='Escape' && drawer.classList.contains('open')){ setMenu(false); menuBtn.focus(); } });
+
+  /* ---------- active nav link ---------- */
+  if('IntersectionObserver' in w){
+    var navLinks=$$('.nav a');
+    var secIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          navLinks.forEach(function(a){ a.setAttribute('aria-current', a.getAttribute('href')==='#'+en.target.id ? 'true':'false'); });
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    $$('section[id]').forEach(function(s){ secIO.observe(s); });
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var rvEls=$$('.rv');
+  if(reduce || !('IntersectionObserver' in w)){ rvEls.forEach(function(e){e.classList.add('in');}); }
+  else {
+    var rvIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); rvIO.unobserve(en.target); } });
+    },{threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    rvEls.forEach(function(e){ rvIO.observe(e); });
+  }
+
+  /* ---------- count-up stats ---------- */
+  var counted=false;
+  function countUp(){
+    $$('[data-count]').forEach(function(el){
+      var target=+el.getAttribute('data-count'), suf=el.getAttribute('data-suffix')||'', dur=1400, t0=null;
+      if(reduce){ el.textContent=target.toLocaleString('en-IN')+suf; return; }
+      function step(ts){
+        if(!t0) t0=ts;
+        var p=Math.min((ts-t0)/dur,1), e=1-Math.pow(1-p,3);
+        el.textContent=Math.round(target*e).toLocaleString('en-IN')+(p===1?suf:'');
+        if(p<1) w.requestAnimationFrame(step);
+      }
+      w.requestAnimationFrame(step);
+    });
+  }
+  var statsEl=$('.stats');
+  if(statsEl && 'IntersectionObserver' in w){
+    var sIO=new IntersectionObserver(function(en){ if(en[0].isIntersecting && !counted){counted=true; countUp(); sIO.disconnect();} },{threshold:.4});
+    sIO.observe(statsEl);
+  } else { countUp(); }
+
+  /* ---------- hero tilt (desktop, pointer) ---------- */
+  var tilt=$('#tilt'), glare=$('#glare');
+  if(tilt && finePointer && !reduce && w.innerWidth>=900){
+    var raf=null, tx=0, ty=0;
+    tilt.parentElement.addEventListener('pointermove', function(e){
+      var r=tilt.getBoundingClientRect();
+      var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+      tx=(0.5-py)*14; ty=(px-0.5)*-18;
+      glare.style.setProperty('--gx', (px*100)+'%'); glare.style.setProperty('--gy', (py*100)+'%');
+      if(!raf) raf=w.requestAnimationFrame(function(){ tilt.style.transform='rotateX('+tx+'deg) rotateY('+ty+'deg)'; raf=null; });
+    });
+    tilt.parentElement.addEventListener('pointerleave', function(){ tilt.style.transform=''; });
+  }
+
+  /* ---------- custom cursor (desktop) ---------- */
+  var cur=$('#cursor');
+  if(finePointer && !reduce && cur){
+    w.addEventListener('pointermove', function(e){ cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; cur.classList.add('on'); }, {passive:true});
+    $$('a, button').forEach(function(el){
+      el.addEventListener('pointerenter', function(){ cur.classList.add('big'); });
+      el.addEventListener('pointerleave', function(){ cur.classList.remove('big'); });
+    });
+  }
+
+  /* ---------- magnetic CTA (desktop) ---------- */
+  if(finePointer && !reduce){
+    $$('.hero .btn').forEach(function(b){
+      b.addEventListener('pointermove', function(e){
+        var r=b.getBoundingClientRect();
+        b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)';
+      });
+      b.addEventListener('pointerleave', function(){ b.style.transform=''; });
+    });
+  }
+
+  /* ---------- programme filter ---------- */
+  var cards=$$('#cards .card'), filterBtns=$$('.filters [data-filter]'), noRes=$('#noResults');
+  function applyFilter(f){
+    var shown=0;
+    cards.forEach(function(c){
+      var ok = f==='all' || c.getAttribute('data-cat')===f;
+      c.hidden=!ok; if(ok) shown++;
+    });
+    filterBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-filter')===f); });
+    $('#filterCount').textContent='Showing '+shown+' of '+cards.length;
+    noRes.hidden = shown>0;
+  }
+  filterBtns.forEach(function(b){ b.addEventListener('click', function(){ applyFilter(b.getAttribute('data-filter')); }); });
+  $$('#noResults [data-filter]').forEach(function(b){ b.addEventListener('click', function(){ applyFilter('all'); }); });
+  applyFilter('all');
+
+  /* ---------- quick view dialog ---------- */
+  var programmes=[
+    {t:'Barbell Foundations',img:'images/programs-strength.jpg',d:'Squat, hinge, press and pull. Four coached sessions a week, small groups of up to 12. Ideal for beginners and returners.',p:'₹2,499 / month [SAMPLE]'},
+    {t:'Engine Room HIIT',img:'images/hero.jpg',d:'45-minute intervals with rowers, sleds and kettlebells. Scaled for every level, with real rest built in.',p:'₹1,999 / month [SAMPLE]'},
+    {t:'Mobility Lab',img:'images/facility.jpg',d:'40 minutes of guided stretching, breathwork and foam rolling. The perfect partner to heavy training days.',p:'₹1,299 / month [SAMPLE]'}
+  ];
+  var qd=$('#quickDlg');
+  $$('.quick').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var p=programmes[+btn.getAttribute('data-quick')];
+      var msg=encodeURIComponent('Hi Forge & Form, I\'d like to try '+p.t+'.');
+      $('#qdBody').innerHTML='';
+      var img=d.createElement('img'); img.src=p.img; img.alt=p.t+' session photo'; img.width=800; img.height=450;
+      var h=d.createElement('h2'); h.id='qdTitle'; h.textContent=p.t; h.style.margin='0'; h.style.fontSize='1.8rem';
+      var pr=d.createElement('p'); pr.textContent=p.d; pr.style.color='var(--mute)'; pr.style.margin='0';
+      var pp=d.createElement('p'); pp.textContent=p.p; pp.style.fontWeight='800'; pp.style.margin='0';
+      var a=d.createElement('a'); a.className='btn'; a.target='_blank'; a.rel='noopener'; a.href='https://wa.me/919800000000?text='+msg; a.textContent='Try it on WhatsApp';
+      $('#qdBody').append(img,h,pr,pp,a);
+      qd.showModal(); $('[data-close]',qd).focus();
+    });
+  });
+
+  /* ---------- pricing toggle ---------- */
+  var billBtns=$$('[data-billing]');
+  billBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var yearly=b.getAttribute('data-billing')==='yearly';
+      billBtns.forEach(function(x){ x.setAttribute('aria-pressed', x===b); });
+      $$('[data-price-m]').forEach(function(el){
+        var v=+el.getAttribute(yearly?'data-price-y':'data-price-m');
+        el.textContent='₹'+v.toLocaleString('en-IN');
+      });
+      $$('[data-per]').forEach(function(el){
+        el.textContent=yearly?'per year · billed annually [SAMPLE]':'per month · billed monthly [SAMPLE]';
+      });
+    });
+  });
+
+  /* ---------- testimonials carousel ---------- */
+  var quotes=$$('.quote'), dots=$$('.dots [data-q]'), qi=0, qTimer=null;
+  function showQ(i){
+    qi=(i+quotes.length)%quotes.length;
+    quotes.forEach(function(q,k){ q.classList.toggle('active', k===qi); });
+    dots.forEach(function(dt,k){ dt.setAttribute('aria-selected', k===qi); });
+  }
+  function autoQ(){ clearInterval(qTimer); if(!reduce) qTimer=setInterval(function(){ showQ(qi+1); }, 6500); }
+  $('#prevQ').addEventListener('click', function(){ showQ(qi-1); autoQ(); });
+  $('#nextQ').addEventListener('click', function(){ showQ(qi+1); autoQ(); });
+  dots.forEach(function(dt){ dt.addEventListener('click', function(){ showQ(+dt.getAttribute('data-q')); autoQ(); }); });
+  autoQ();
+
+  /* ---------- lightbox ---------- */
+  var lb=$('#lb'), lbImg=$('#lbImg');
+  $$('[data-lb]').forEach(function(b){
+    b.addEventListener('click', function(){
+      lbImg.src=b.getAttribute('data-lb'); lbImg.alt=b.getAttribute('aria-label').replace('Open photo: ','');
+      lb.showModal();
+    });
+  });
+  $$('[data-close]').forEach(function(b){ b.addEventListener('click', function(){ b.closest('dialog').close(); }); });
+  $$('dialog').forEach(function(dg){ dg.addEventListener('click', function(e){ if(e.target===dg) dg.close(); }); });
+
+  /* ---------- booking form: multi-step + validation + states ---------- */
+  var form=$('#bookForm'), steps=$$('[data-step]'), cur_s=1, nextBtn=$('#nextBtn'), backBtn=$('#backBtn'), subBtn=$('#submitBtn'), status=$('#status');
+  var labels=['About you','Programme & goal','Pick a slot'];
+  var nameI=$('#name'), phoneI=$('#phone'), slotI=$('#slot'), goal=$('#goal');
+  function setErr(input, msg){
+    var err=$('#'+input.id+'Err');
+    input.setAttribute('aria-invalid', msg?'true':'false');
+    if(err) err.textContent=msg||'';
+    return !msg;
+  }
+  function validName(){ var v=nameI.value.trim(); return setErr(nameI, v.length<2?'Please enter your full name (2+ letters).':''); }
+  function validPhone(){
+    var v=phoneI.value.replace(/[\s-]/g,'').replace(/^\+?91/,'');
+    var msg = !v ? 'We need a WhatsApp number to confirm your slot.' : (!/^[6-9]\d{9}$/.test(v) ? 'Enter a valid 10-digit Indian mobile number.' : '');
+    return setErr(phoneI, msg);
+  }
+  function validSlot(){ return setErr(slotI, slotI.value?'':'Choose a time slot.'); }
+  nameI.addEventListener('blur', validName);
+  phoneI.addEventListener('blur', validPhone);
+  slotI.addEventListener('change', validSlot);
+  goal.addEventListener('input', function(){ $('#goalCount').textContent=goal.value.length+' / 240'; });
+
+  function summary(){
+    var prog=form.querySelector('input[name=programme]:checked');
+    var rows=[['Name',nameI.value.trim()||'—'],['WhatsApp',phoneI.value.trim()||'—'],['Programme',prog?prog.value:'—'],['Slot',slotI.value||'—']];
+    var dl=$('#summary'); dl.innerHTML='';
+    rows.forEach(function(r){ var dt=d.createElement('dt'); dt.textContent=r[0]; var dd=d.createElement('dd'); dd.textContent=r[1]; dl.append(dt,dd); });
+  }
+  function show(n){
+    cur_s=n;
+    steps.forEach(function(s){ s.hidden = (+s.getAttribute('data-step')!==n); });
+    $$('.steps .s').forEach(function(s){ s.classList.toggle('on', +s.getAttribute('data-s')<=n); });
+    $('#stepLabel').textContent='Step '+n+' of 3 — '+labels[n-1];
+    backBtn.hidden = n===1;
+    nextBtn.hidden = n===3;
+    subBtn.hidden = n!==3;
+    if(n===3) summary();
+    var first=$('[data-step="'+n+'"] input, [data-step="'+n+'"] select, [data-step="'+n+'"] textarea');
+    if(first) first.focus({preventScroll:true});
+  }
+  nextBtn.addEventListener('click', function(){
+    var ok=true;
+    if(cur_s===1){ ok = validName() & validPhone(); if(!ok){ var f=$('[aria-invalid="true"]'); if(f) f.focus(); return; } }
+    if(cur_s===2){ ok=true; }
+    if(ok) show(cur_s+1);
+  });
+  backBtn.addEventListener('click', function(){ show(cur_s-1); });
+
+  function setStatus(kind, html){
+    status.className='status show '+kind;
+    status.innerHTML=html;
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!(validName() & validPhone() & validSlot())){
+      setStatus('bad','Some details need a quick fix. Check the highlighted fields.');
+      show(!validName()||!validPhone() ? 1 : 3);
+      return;
+    }
+    if(!nameI.value.trim()){ setStatus('bad','Your name is empty. Please add it to continue.'); return; }
+    subBtn.disabled=true;
+    setStatus('wait','<span class="spinner" aria-hidden="true"></span> Opening WhatsApp with your message…');
+    var prog=form.querySelector('input[name=programme]:checked');
+    var text='Hi Forge & Form! Booking request for my free trial.\nName: '+nameI.value.trim()+'\nProgramme: '+(prog?prog.value:'Not chosen')+'\nPreferred slot: '+slotI.value+(goal.value.trim()?'\nGoal: '+goal.value.trim():'');
+    var url='https://wa.me/919800000000?text='+encodeURIComponent(text);
+    var win=w.open(url,'_blank','noopener');
+    setTimeout(function(){
+      subBtn.disabled=false;
+      if(!win){ setStatus('bad','Your browser blocked the pop-up. <a href="'+url+'" target="_blank" rel="noopener">Open WhatsApp manually</a>.'); }
+      else { setStatus('ok','Message ready in WhatsApp — just press send. We reply within a few hours, usually the same day.'); toast('WhatsApp opened with your booking'); }
+    }, 600);
+  });
+
+  /* ---------- copy protection-free: keyboard-friendly escape from dialogs ---------- */
+  /* ---------- cookie notice (local flag only, no tracking) ---------- */
+  var cookie=$('#cookie');
+  try{ if(!w.localStorage.getItem('ff-notice')) cookie.classList.add('show'); }catch(err){ cookie.classList.add('show'); }
+  $('#cookieOk').addEventListener('click', function(){
+    try{ w.localStorage.setItem('ff-notice','1'); }catch(err){}
+    cookie.classList.remove('show');
+  });
+
+  /* ---------- cursor/parallax disabled for reduced motion ---------- */
+  if(!reduce && finePointer){
+    var pl=$('.hero .stage');
+    w.addEventListener('scroll', function(){ if(pl && w.scrollY<w.innerHeight){ pl.style.transform='translateY('+(w.scrollY*-.08)+'px)'; } },{passive:true});
+  }
+})();
+</script>
+</body>
+</html>
