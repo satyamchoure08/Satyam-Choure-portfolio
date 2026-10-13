@@ -11,43 +11,49 @@
   const year = $("#year");
   if (year) year.textContent = new Date().getFullYear();
 
-  /* Theme ------------------------------------------------------------------ */
-  // The initial theme is set by an inline script in <head> to avoid a flash.
-  const themeButton = $("[data-theme-toggle]");
-  const themeMeta = $('meta[name="theme-color"]');
-  const themeColors = { dark: "#0B0B0C", light: "#F6F3EC" };
-
-  const applyTheme = (theme) => {
-    root.dataset.theme = theme;
-    if (themeMeta) themeMeta.setAttribute("content", themeColors[theme]);
-    if (themeButton) {
-      themeButton.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-    }
+  /* Intro screen ----------------------------------------------------------- */
+  // The name shows on black, then the screen lifts away and the hero animates in.
+  const loader = $("[data-loader]");
+  const finishIntro = () => {
+    if (!root.classList.contains("is-loading")) return;
+    if (loader) loader.classList.add("is-done");
+    root.classList.remove("is-loading");
+    if (loader) setTimeout(() => loader.remove(), 1200);
   };
-
-  const savedTheme = () => {
-    try {
-      const value = localStorage.getItem("theme");
-      return value === "light" || value === "dark" ? value : null;
-    } catch {
-      return null;
-    }
-  };
-
-  applyTheme(root.dataset.theme === "light" ? "light" : "dark");
-
-  if (themeButton) {
-    themeButton.addEventListener("click", () => {
-      const next = root.dataset.theme === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try { localStorage.setItem("theme", next); } catch { /* storage unavailable */ }
+  if (loader && !prefersReducedMotion) {
+    const minimum = new Promise((resolve) => setTimeout(resolve, 1700));
+    const loaded = new Promise((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", resolve, { once: true });
     });
+    Promise.all([minimum, loaded]).then(finishIntro);
+    setTimeout(finishIntro, 4000);
+  } else {
+    finishIntro();
   }
 
-  // Follow the OS setting until the visitor picks a theme themselves.
-  matchMedia("(prefers-color-scheme: light)").addEventListener("change", (event) => {
-    if (!savedTheme()) applyTheme(event.matches ? "light" : "dark");
-  });
+  /* Custom cursor ---------------------------------------------------------- */
+  const cursor = $("[data-cursor]");
+  if (cursor && canHover && !prefersReducedMotion) {
+    root.classList.add("has-cursor");
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, raf = 0;
+    const loop = () => {
+      cx += (x - cx) * 0.22;
+      cy += (y - cy) * 0.22;
+      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+    window.addEventListener("pointermove", (event) => {
+      x = event.clientX;
+      y = event.clientY;
+      cursor.classList.add("is-on");
+      if (!raf) loop();
+    }, { passive: true });
+    document.addEventListener("pointerleave", () => cursor.classList.remove("is-on"));
+    document.addEventListener("pointerover", (event) => {
+      cursor.classList.toggle("is-big", !!event.target.closest("a, button, [data-spotlight]"));
+    });
+  }
 
   /* Mobile menu ------------------------------------------------------------ */
   const menuButton = $("[data-menu-toggle]");

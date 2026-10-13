@@ -6,8 +6,8 @@
   <title>Satyam Choure — Web Developer</title>
   <meta name="description" content="Satyam Choure is a web developer who learns by building: clean, useful and interactive websites today, products that solve real problems next.">
   <meta name="author" content="Satyam Choure">
-  <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0B0B0C">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
 
   <link rel="canonical" href="https://satyamchoure08.github.io/Satyam-Choure-portfolio/">
 
@@ -30,25 +30,12 @@
   <meta name="twitter:image:alt" content="Satyam Choure, web developer. I turn ideas into clean, useful websites.">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Sets the theme before first paint so there is no flash. -->
-  <script>
-    (function () {
-      var root = document.documentElement, theme;
-      root.classList.add("js");
-      try { theme = localStorage.getItem("theme"); } catch (e) {}
-      if (theme !== "light" && theme !== "dark") {
-        theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-      }
-      root.dataset.theme = theme;
-      var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", theme === "light" ? "#F6F3EC" : "#0B0B0C");
-    })();
-  </script>
+  <!-- Marks the page as script-enabled and shows the intro screen before first paint. -->
+  <script>document.documentElement.classList.add("js", "is-loading");</script>
 
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 
   <script type="application/ld+json">
     {
@@ -66,6 +53,11 @@
   </script>
 </head>
 <body>
+  <div class="loader" data-loader aria-hidden="true">
+    <span class="loader__name"><span style="--n:0">S</span><span style="--n:1">a</span><span style="--n:2">t</span><span style="--n:3">y</span><span style="--n:4">a</span><span style="--n:5">m</span><span style="--n:6">&nbsp;</span><span style="--n:7">C</span><span style="--n:8">h</span><span style="--n:9">o</span><span style="--n:10">u</span><span style="--n:11">r</span><span style="--n:12">e</span></span>
+    <span class="loader__bar"></span>
+  </div>
+  <div class="cursor" data-cursor aria-hidden="true"></div>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -95,10 +87,6 @@
       </nav>
 
       <div class="site-header__actions">
-        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
-          <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
-          <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
-        </button>
         <a class="btn btn--primary btn--sm header-cta" href="#contact">Let&rsquo;s talk</a>
         <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
           <span class="menu-toggle__bar"></span>
