@@ -83,9 +83,9 @@
         ui.style.setProperty("--c", list[i].color);
         if (first) return;
         gsap.killTweensOf([sd, sc, st]);
-        gsap.from(sd, { yPercent: 110 * dir, duration: 0.8, ease: "power4.out" });
-        gsap.from(sc, { yPercent: 70 * dir, opacity: 0, duration: 0.6, ease: "power3.out" });
-        gsap.from(st, { scale: 0.6, opacity: 0, duration: 0.6, ease: "back.out(2)", delay: 0.2 });
+        gsap.fromTo(sd, { yPercent: 110 * dir }, { yPercent: 0, duration: 0.8, ease: "power4.out" });
+        gsap.fromTo(sc, { yPercent: 70 * dir, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: "power3.out" });
+        gsap.fromTo(st, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2)", delay: 0.2 });
       };
       show(0);
       World.on("skill", show);
@@ -196,11 +196,79 @@
         new MutationObserver(move).observe(list, { attributes: true, subtree: true, attributeFilter: ["aria-current"] });
       }
 
+      // A thin light sweeps across under the header each time you arrive in a new chapter,
+      // and the chapter's small label decodes itself from random letters
+      const sweep = document.createElement("div");
+      sweep.className = "sweep";
+      sweep.setAttribute("aria-hidden", "true");
+      document.body.appendChild(sweep);
+      const GL2 = "abcdefghijklmnopqrstuvwxyz";
+      const decode = (el) => {
+        const node = [...el.childNodes].reverse().find((n) => n.nodeType === 3 && n.textContent.trim());
+        if (!node) return;
+        if (el._decode) { clearInterval(el._decode.t); node.textContent = el._decode.word; }
+        const word = node.textContent;
+        let f = 0;
+        const st = (el._decode = { word, t: setInterval(() => {
+          f++;
+          node.textContent = [...word].map((c, i) => (c === " " || i < f / 1.4 ? c : GL2[(Math.random() * 26) | 0])).join("");
+          if (f / 1.4 >= word.length) { clearInterval(st.t); node.textContent = word; el._decode = null; }
+        }, 32) });
+      };
+      Stage.onChapter.push((cur, prev) => {
+        if (prev === undefined) return;
+        const d = cur > prev ? 1 : -1;
+        gsap.killTweensOf(sweep);
+        gsap.timeline()
+          .set(sweep, { opacity: 1, scaleX: 0, transformOrigin: d > 0 ? "0% 50%" : "100% 50%" })
+          .to(sweep, { scaleX: 1, duration: 0.55, ease: "power3.inOut" })
+          .set(sweep, { transformOrigin: d > 0 ? "100% 50%" : "0% 50%" })
+          .to(sweep, { scaleX: 0, duration: 0.55, ease: "power3.inOut" })
+          .set(sweep, { opacity: 0 });
+        const eb = cur > 0 ? $(".eyebrow", Stage.sections[cur]) : null;
+        if (eb) decode(eb);
+      });
+
+      // Hovering a main button sends a surge through the stars
+      $$(".hero__cta .btn, .contact__actions .btn, .header-cta, .w3d__open").forEach((b) => {
+        b.addEventListener("pointerenter", () => { World.surge = Math.max(World.surge, 0.55); World.pulse = Math.max(World.pulse, 0.5); });
+      });
+
       // The "Simple view" switch hides itself on phones once you leave the hero
       const sw = $(".hud__motion");
       if (sw && Stage.narrow) Stage.ticks.push(() => { sw.style.opacity = Stage.o[0].toFixed(2); sw.style.pointerEvents = Stage.o[0] > 0.5 ? "auto" : "none"; });
 
       if (touch) return;
+
+      // A soft light follows the pointer
+      const glow = document.createElement("div");
+      glow.className = "cglow";
+      glow.setAttribute("aria-hidden", "true");
+      document.body.appendChild(glow);
+      let gx = innerWidth / 2, gy = innerHeight / 2, gtx = gx, gty = gy, seen = false;
+      window.addEventListener("pointermove", (e) => {
+        gtx = e.clientX; gty = e.clientY;
+        if (!seen) { seen = true; gx = gtx; gy = gty; glow.style.opacity = 1; }
+      }, { passive: true });
+      document.addEventListener("pointerleave", () => { glow.style.opacity = 0; seen = false; });
+      Stage.ticks.push((ctx) => {
+        const a = Math.min(1, ctx.dt * 6);
+        gx += (gtx - gx) * a; gy += (gty - gy) * a;
+        glow.style.transform = `translate3d(${gx.toFixed(1)}px,${gy.toFixed(1)}px,0) translate(-50%,-50%)`;
+      });
+
+      // Glass panels light up under the pointer
+      $$(".path li, .contact__panel").forEach((el) => {
+        el.classList.add("spot");
+        el.addEventListener("pointermove", (e) => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty("--sx", (e.clientX - r.left).toFixed(0) + "px");
+          el.style.setProperty("--sy", (e.clientY - r.top).toFixed(0) + "px");
+          el.style.setProperty("--lit", 1);
+        });
+        el.addEventListener("pointerleave", () => el.style.setProperty("--lit", 0));
+      });
+
       // Buttons lean toward the pointer
       $$(".btn--lg, .header-cta, .w3d__nav, .contact__actions .btn").forEach((btn) => {
         const mx = gsap.quickTo(btn, "x", { duration: 0.5, ease: "power3" });

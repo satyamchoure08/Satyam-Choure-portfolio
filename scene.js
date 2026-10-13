@@ -34,6 +34,8 @@
     P0: 0.035,
     P1: 0.925,
     boost: 0,
+    surge: 0,
+    lite: false,
     chapters: [],
     v: 0,
     p: [0, 0, 0, 0, 0],
@@ -100,7 +102,7 @@
 
   let renderer, scene, camera, stars, streaks, raycaster;
   const ndc = new T.Vector2(-5, -5);
-  let last = 0, smoothY = 0, prevCamZ = 8, fpsT = 0, fpsN = 0;
+  let last = 0, smoothY = 0, prevCamZ = 8, fpsT = 0, fpsN = 0, slowN = 0, roll = 0, mouseOn = 0;
   const tints = [[0.6, 0.72, 1], [0.45, 0.85, 1], [0.76, 0.6, 1], [1, 0.58, 0.9], [0.6, 0.68, 1]];
 
   /* Stars and warp streaks --------------------------------------------------- */
@@ -128,10 +130,11 @@
     g.setAttribute("aSeed", new T.BufferAttribute(seed, 1));
     stars = new T.Points(g, new T.ShaderMaterial({
       transparent: true, depthWrite: false, blending: T.AdditiveBlending,
-      uniforms: { uTime: { value: 0 }, uPixel: { value: ctx.dpr }, uTint: { value: new T.Color(1, 1, 1) }, uPulse: { value: 0 } },
+      uniforms: { uTime: { value: 0 }, uPixel: { value: ctx.dpr }, uTint: { value: new T.Color(1, 1, 1) }, uPulse: { value: 0 }, uMouse: { value: new T.Vector2(0, 0) }, uAspect: { value: 1 }, uMouseOn: { value: 0 } },
       vertexShader: `
         attribute vec3 aColor; attribute float aSize; attribute float aSeed;
         uniform float uTime; uniform float uPixel; uniform vec3 uTint; uniform float uPulse;
+        uniform vec2 uMouse; uniform float uAspect; uniform float uMouseOn;
         varying vec3 vColor; varying float vAlpha;
         void main(){
           vec3 p = position;
@@ -139,12 +142,18 @@
           p.y += cos(uTime * 0.17 + aSeed * 31.0) * 0.45;
           vec4 mv = modelViewMatrix * vec4(p, 1.0);
           float dist = -mv.z;
-          gl_PointSize = clamp(aSize * uPixel * (48.0 / max(dist, 0.5)) * (1.0 + uPulse * 1.8), 0.0, 26.0);
+          vec4 clip = projectionMatrix * mv;
+          // stars near the pointer are pushed away and flare up
+          vec2 dv = clip.xy / max(clip.w, 0.001) - uMouse;
+          vec2 da = vec2(dv.x * uAspect, dv.y);
+          float k = exp(-dot(da, da) * 22.0) * uMouseOn;
+          clip.xy += (dv / (length(dv) + 0.0001)) * k * 0.09 * clip.w;
+          gl_PointSize = clamp(aSize * uPixel * (48.0 / max(dist, 0.5)) * (1.0 + uPulse * 1.8 + k * 2.4), 0.0, 30.0);
           float fade = smoothstep(105.0, 22.0, dist) * smoothstep(0.4, 4.0, dist);
           float tw = 0.62 + 0.38 * sin(uTime * 1.4 + aSeed * 60.0);
-          vAlpha = fade * tw * (1.0 + uPulse * 0.9);
+          vAlpha = fade * tw * (1.0 + uPulse * 0.9 + k * 1.6);
           vColor = mix(aColor, uTint, 0.38);
-          gl_Position = projectionMatrix * mv;
+          gl_Position = clip;
         }`,
       fragmentShader: `
         varying vec3 vColor; varying float vAlpha;
@@ -155,6 +164,7 @@
         }`
     }));
     stars.frustumCulled = false;
+    stars.userData.count = count;
     scene.add(stars);
 
     const sPos = new Float32Array(streakCount * 6);
@@ -196,6 +206,7 @@
     }));
     streaks.frustumCulled = false;
     streaks.visible = false;
+    streaks.userData.count = streakCount * 2;
     scene.add(streaks);
   }
 
@@ -278,6 +289,12 @@
     World.modules.forEach((m) => m.resize && m.resize(ctx));
   }
   World.resize = resize;
+  // Slow graphics: fewer stars, no clouds or extra particles
+  World.setLite = (on) => {
+    World.lite = !!on;
+    if (stars) stars.geometry.setDrawRange(0, on ? Math.floor(stars.userData.count * 0.5) : stars.userData.count);
+    if (streaks) streaks.geometry.setDrawRange(0, on ? Math.floor(streaks.userData.count * 0.5) & ~1 : streaks.userData.count);
+  };
   World.setDpr = (v) => {
     ctx.dpr = v;
     renderer.setPixelRatio(v);
@@ -303,6 +320,11 @@
         fpsT = 0; fpsN = 0;
         if (avg > 1 / 36 && ctx.dpr > 0.55) World.setDpr(Math.max(0.55, ctx.dpr * 0.85));
         else if (avg < 1 / 54 && ctx.dpr < ctx.dprMax) World.setDpr(Math.min(ctx.dprMax, ctx.dpr * 1.12));
+        // Still slow at the lowest resolution: first drop the extras, then hand over to the simple page
+        if (ctx.t > 8 && ctx.dpr <= 0.6 && !document.hidden) {
+          if (avg > (World.lite ? 1 / 14 : 1 / 24)) slowN++; else slowN = Math.max(0, slowN - 1);
+          if (slowN >= 3) { slowN = 0; if (!World.lite) World.setLite(true); else World.emit("slow"); }
+        } else slowN = Math.max(0, slowN - 1);
       }
     }
     ctx.t += dt; ctx.dt = dt;
@@ -310,6 +332,8 @@
     m.sx = damp(m.sx, m.x, 4, dt);
     m.sy = damp(m.sy, m.y, 4, dt);
     World.pulse = damp(World.pulse, 0, 3, dt);
+    World.surge = damp(World.surge, 0, 2.2, dt);
+    mouseOn = damp(mouseOn, ndc.x > -2 && !ctx.mobile ? 1 : 0, 4, dt);
 
     const y = window.scrollY;
     smoothY = Math.abs(y - smoothY) < 0.2 ? y : damp(smoothY, y, 9, dt);
@@ -320,11 +344,14 @@
     const z = base + (1 - World.intro) * 18;
     const vel = (base - prevCamZ) / Math.max(dt, 0.001);
     prevCamZ = base;
-    const warpTarget = Math.max(clamp(Math.abs(vel) / 70, 0, 1), (1 - World.intro) * 1.1, World.boost || 0);
+    const warpTarget = Math.max(clamp(Math.abs(vel) / 70, 0, 1), (1 - World.intro) * 1.1, World.boost || 0, World.surge);
     ctx.warp = damp(ctx.warp, warpTarget, 6, dt);
     ctx.camZ = z;
     camera.position.set(m.sx * 0.5, m.sy * 0.3, z);
     camera.lookAt(m.sx * 0.25, m.sy * 0.12 + ctx.layout.lookY, z - 10);
+    // banks toward the pointer and shudders a little at warp speed
+    roll = damp(roll, -m.sx * 0.04 + Math.sin(ctx.t * 9) * 0.006 * ctx.warp, 3, dt);
+    camera.rotateZ(roll);
 
     // Star colour drifts from chapter to chapter
     const i0 = Math.min(4, Math.floor(v)), i1 = Math.min(4, i0 + 1), f = smooth(0.5, 1, v - i0);
@@ -333,6 +360,9 @@
     streaks.material.uniforms.uTint.value.copy(tint);
     stars.material.uniforms.uTime.value = ctx.t;
     stars.material.uniforms.uPulse.value = World.pulse;
+    stars.material.uniforms.uMouse.value.set(m.sx, m.sy);
+    stars.material.uniforms.uAspect.value = ctx.aspect;
+    stars.material.uniforms.uMouseOn.value = mouseOn;
     streaks.material.uniforms.uWarp.value = ctx.warp;
     streaks.visible = ctx.warp > 0.03;
     World.emit("tick", ctx);
@@ -535,6 +565,7 @@
      Module: work. Your projects on a ring of cards you scroll through.
      ========================================================================== */
   const wrapD = (d, n) => ((d + n / 2) % n + n) % n - n / 2;
+  const hash = (i) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
   World.register({
     name: "work",
@@ -554,11 +585,12 @@
           depthWrite: false,
           uniforms: {
             uMap: { value: null }, uLoaded: { value: 0 }, uOpacity: { value: 0 }, uActive: { value: 0 },
-            uHover: { value: 0 }, uTime: { value: 0 }, uMouse: { value: new T.Vector2(0.5, 0.5) }, uPar: { value: 0 }
+            uHover: { value: 0 }, uTime: { value: 0 }, uMouse: { value: new T.Vector2(0.5, 0.5) }, uPar: { value: 0 },
+            uSplit: { value: 0 }, uRip: { value: 1.2 }, uRipPos: { value: new T.Vector2(0.5, 0.5) }
           },
           vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
           fragmentShader: `
-            varying vec2 vUv; uniform sampler2D uMap; uniform float uLoaded, uOpacity, uActive, uHover, uTime, uPar; uniform vec2 uMouse;
+            varying vec2 vUv; uniform sampler2D uMap; uniform float uLoaded, uOpacity, uActive, uHover, uTime, uPar, uSplit, uRip; uniform vec2 uMouse, uRipPos;
             ${SDF}
             void main(){
               vec2 uv = vUv;
@@ -566,10 +598,16 @@
               float ripple = sin(d * 30.0 - uTime * 5.0) * exp(-d * 5.5) * 0.013 * uHover;
               uv += normalize(uv - uMouse + vec2(0.0001)) * ripple;
               uv = (uv - 0.5) * 0.94 + 0.5 + vec2(0.0, uPar * 0.035);
-              vec3 tex = texture2D(uMap, uv).rgb;
-              vec3 col = mix(vec3(0.07, 0.07, 0.1), tex, uLoaded);
+              // colour channels pull apart while the ring spins fast
+              vec3 tex = vec3(texture2D(uMap, uv + vec2(uSplit, 0.0)).r, texture2D(uMap, uv).g, texture2D(uMap, uv - vec2(uSplit, 0.0)).b);
+              // the picture wipes in from the left once it has loaded
+              float wipe = smoothstep(vUv.x - 0.25, vUv.x, uLoaded * 1.25);
+              vec3 col = mix(vec3(0.07, 0.07, 0.1), tex, wipe);
               col *= mix(0.42, 1.0, uActive) + uHover * 0.08;
               col += vec3(0.25, 0.32, 0.8) * exp(-pow(d * 2.6, 2.0)) * 0.12 * uHover;
+              // click ripple
+              float rd = distance(vUv, uRipPos);
+              col += vec3(0.55, 0.7, 1.0) * exp(-pow((rd - uRip * 0.9) * 16.0, 2.0)) * clamp(1.0 - uRip, 0.0, 1.0) * 0.55;
               vec2 p = (vUv - 0.5) * vec2(1.6, 1.0);
               float sd = sdBox(p, vec2(0.8, 0.5), 0.07);
               float a = 1.0 - smoothstep(-0.004, 0.004, sd);
@@ -646,7 +684,11 @@
       const arr = ctx.arr[1];
       const p = ctx.p[1];
       const target = clamp((p - World.P0) / (World.P1 - World.P0), 0, 1) * (n - 1);
+      const before = this.idx;
       this.idx = damp(this.idx, target, 5.5, ctx.dt);
+      this.vel = damp(this.vel || 0, Math.abs(this.idx - before) / Math.max(ctx.dt, 0.001), 10, ctx.dt);
+      // on arrival the cards start scattered and fly together into the ring
+      const scat = 1 - smooth(0, 1, arr);
       const act = clamp(Math.round(this.idx), 0, n - 1);
       if (act !== this.active) { this.active = act; World.emit("project", act); }
 
@@ -662,8 +704,9 @@
         const a = d * step;
         const e = 1 - smooth(0, 1.35, ad);
         const rad = R - e * R * 0.18;
-        mesh.position.set(Math.sin(a) * rad, Math.sin(i * 1.3 + t * 0.7) * 0.09 + e * m.sy * 0.15, -Math.cos(a) * rad);
-        mesh.rotation.set(-m.sy * 0.14 * e, -a + m.sx * 0.2 * e, 0);
+        const h1 = hash(i), h2 = hash(i + 41), h3 = hash(i + 97);
+        mesh.position.set(Math.sin(a) * rad + (h1 - 0.5) * 16 * scat, Math.sin(i * 1.3 + t * 0.7) * 0.09 + e * m.sy * 0.15 + (h2 - 0.5) * 10 * scat, -Math.cos(a) * rad + (h3 - 0.5) * 12 * scat);
+        mesh.rotation.set(-m.sy * 0.14 * e + (h2 - 0.5) * 1.8 * scat, -a + m.sx * 0.2 * e, (h1 - 0.5) * 2.6 * scat);
         const isHover = hov && hov.index === i;
         mesh.scale.setScalar(1 + e * 0.38 + (isHover ? 0.04 : 0));
         u.uTime.value = t;
@@ -672,6 +715,8 @@
         u.uLoaded.value = damp(u.uLoaded.value, this.loaded[i] ? 1 : 0, 4, ctx.dt);
         u.uHover.value = damp(u.uHover.value, isHover ? 1 : 0, 8, ctx.dt);
         u.uPar.value = clamp(d * 0.6, -1, 1);
+        u.uSplit.value = clamp(this.vel * 0.0016, 0, 0.028);
+        u.uRip.value = Math.min(1.2, u.uRip.value + ctx.dt * 1.4);
         if (isHover && hov.uv) u.uMouse.value.copy(hov.uv);
       }
       this.railMat.opacity = w * 0.3;
@@ -699,6 +744,11 @@
       }
       return null;
     },
-    click(ctx, hit) { World.emit(hit.active ? "open" : "goto", hit.index); }
+    click(ctx, hit) {
+      const u = this.cards[hit.index].material.uniforms;
+      u.uRip.value = 0;
+      if (hit.uv) u.uRipPos.value.copy(hit.uv);
+      World.emit(hit.active ? "open" : "goto", hit.index);
+    }
   });
 })();

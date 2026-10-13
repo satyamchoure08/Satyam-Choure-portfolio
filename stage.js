@@ -23,6 +23,7 @@
     chapters: [],
     inits: [],      // chapter setup functions registered by stage2.js
     ticks: [],      // per-frame DOM updaters
+    onChapter: [],  // called with (current, previous) when the chapter in view changes
     vh: innerHeight,
     vw: innerWidth,
     narrow: false,
@@ -194,7 +195,7 @@
     const p = ctx.p, y = window.scrollY;
     const o = [
       1 - smooth(0.42, 0.7, p[0]),
-      smooth(0, 0.025, p[1]) * (1 - smooth(0.9, 0.95, p[1])),
+      smooth(0, 0.025, p[1]) * (1 - smooth(0.932, 0.968, p[1])),
       smooth(0, 0.03, p[2]) * (1 - smooth(0.72, 0.78, p[2])),
       smooth(0, 0.03, p[3]) * (1 - smooth(0.72, 0.78, p[3])),
       smooth(0, 0.04, p[4])
@@ -210,7 +211,9 @@
       if (v > o[cur]) cur = i;
     });
     if (Stage.cur !== cur) {
+      const prev = Stage.cur;
       Stage.cur = cur;
+      Stage.onChapter.forEach((fn) => fn(cur, prev));
       Stage.dots.forEach((d, i) => d.classList.toggle("is-on", i === cur));
       $$(".nav__list a").forEach((a) => {
         const on = a.getAttribute("href") === ["#top", "#work", "#about", "#skills", "#contact"][cur] && cur > 0;
@@ -256,6 +259,11 @@
     });
     Stage.inits.forEach((f) => f.build && f.build());
     World.on("tick", onTick);
+    // graphics too slow even in lite mode: hand over to the simple page
+    World.on("slow", () => {
+      try { sessionStorage.setItem("no3d", "1"); sessionStorage.setItem("slow3d", "1"); } catch (e) { /* ignore */ }
+      location.reload();
+    });
     links();
     window.addEventListener("resize", resize);
     window.addEventListener("click", (e) => {

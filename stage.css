@@ -44,7 +44,7 @@ html.engine3d { font-size: clamp(11.5px, 2vh, 20px); --container: 75rem; }
   visibility: hidden;
 }
 .engine3d main > section.is-live { visibility: visible; }
-.engine3d main > section.is-active :is(a, button, .w3d__info, .s3d__info, .contact__panel, .w3d__rail, .s3d__dots) { pointer-events: auto; }
+.engine3d main > section.is-active :is(a, button, .w3d__info, .s3d__info, .contact__panel, .w3d__rail, .s3d__dots, .path li) { pointer-events: auto; }
 .engine3d .scroll-space { position: relative; width: 1px; pointer-events: none; }
 .engine3d .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
 .engine3d .section { padding-block: 0; }

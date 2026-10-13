@@ -93,8 +93,23 @@
       gsap.set([pill, lead, chip].concat(btns, facts), { opacity: 0, y: 26 });
       if (mq) gsap.set(mq, { opacity: 0, yPercent: 60 });
 
+      // a ring of text turning beside the portrait
+      const portraitBox = $(".portrait", hero);
+      let badge = null, badgeRing = null;
+      if (portraitBox) {
+        badge = document.createElement("div");
+        badge.className = "badge";
+        badge.setAttribute("aria-hidden", "true");
+        badge.innerHTML = '<svg class="badge__ring" viewBox="0 0 100 100"><defs><path id="badgeRing" d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>' +
+          '<text><textPath href="#badgeRing" textLength="248" lengthAdjust="spacing">OPEN TO PROJECTS \u2022 WEB DEVELOPER \u2022 </textPath></text></svg>' +
+          '<svg class="badge__core" viewBox="0 0 100 100"><circle class="badge__dot" cx="50" cy="50" r="17"/><path class="badge__arrow" d="M44.5 55.5 55.5 44.5M47 44.5h8.5V53"/></svg>';
+        portraitBox.appendChild(badge);
+        badgeRing = badge.firstElementChild;
+        gsap.set(badge, { opacity: 0, scale: 0.4 });
+      }
+
       const play = () => {
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({ onComplete: () => { Stage.kinetic = true; hero.classList.add("is-kinetic"); } });
         tl.to(World, { intro: 1, duration: 3.2, ease: "expo.out" }, 0)
           .to(pill, { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, 0.25)
           .to(chars, { yPercent: 0, rotateX: 0, opacity: 1, duration: 1.4, ease: "power4.out", stagger: 0.032 }, 0.4)
@@ -103,6 +118,7 @@
           .to(facts, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.1 }, 1.45)
           .to(chip, { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, 1.9)
           .to(mq, { opacity: 1, yPercent: 0, duration: 1.4, ease: "power3.out" }, 1.3);
+        if (badge) tl.to(badge, { opacity: 1, scale: 1, duration: 1.3, ease: "back.out(1.6)" }, 1.9);
       };
       if (root.classList.contains("is-loading")) window.addEventListener("intro:done", play, { once: true });
       else play();
@@ -110,17 +126,62 @@
 
       // marquee: drifts on its own and surges with the warp
       const track = $(".marquee__track", hero);
-      let x = 0;
+      let x = 0, dir = 1, dirT = 1, lastY = window.scrollY, spin = 0;
       if (track) track.innerHTML += track.innerHTML;
       const copy = $(".hero__copy", hero), fig = $(".portrait", hero), hint = Stage.hint;
+
+      // letters of the headline lean away from the pointer
+      const titleEl = $(".hero__title", hero);
+      const ptr = { x: -9999, y: -9999, on: false };
+      window.addEventListener("pointermove", (e) => { if (e.pointerType === "touch") return; ptr.x = e.clientX; ptr.y = e.clientY; ptr.on = true; }, { passive: true });
+      document.addEventListener("pointerleave", () => { ptr.on = false; });
+      const kin = chars.map((c) => ({ c, x: 0, y: 0, r: 0, s: 1 }));
+      let kinBusy = false;
+      const kinetic = (dt) => {
+        const tr = titleEl.getBoundingClientRect();
+        const near = ptr.on && ptr.x > tr.left - 200 && ptr.x < tr.right + 200 && ptr.y > tr.top - 200 && ptr.y < tr.bottom + 200;
+        if (!near && !kinBusy) return;
+        const rects = kin.map((k) => k.c.getBoundingClientRect());
+        const a = Math.min(1, dt * 10);
+        let busy = false;
+        kin.forEach((k, i) => {
+          const r = rects[i];
+          let tx = 0, ty = 0, tr2 = 0, ts = 1;
+          if (near) {
+            const dx = r.left + r.width / 2 - k.x - ptr.x, dy = r.top + r.height / 2 - k.y - ptr.y, d = Math.hypot(dx, dy) + 0.001;
+            const f = Math.exp(-(d * d) / (2 * 120 * 120));
+            tx = (dx / d) * f * 26; ty = (dy / d) * f * 22; tr2 = (dx / d) * f * 16; ts = 1 + f * 0.22;
+          }
+          k.x += (tx - k.x) * a; k.y += (ty - k.y) * a; k.r += (tr2 - k.r) * a; k.s += (ts - k.s) * a;
+          if (Math.abs(k.x) + Math.abs(k.y) > 0.05 || Math.abs(k.s - 1) > 0.002) busy = true;
+        });
+        kin.forEach((k) => {
+          k.c.style.translate = `${k.x.toFixed(2)}px ${k.y.toFixed(2)}px`;
+          k.c.style.rotate = `${k.r.toFixed(2)}deg`;
+          k.c.style.scale = k.s.toFixed(3);
+        });
+        kinBusy = busy;
+      };
+
       Stage.ticks.push((ctx, p) => {
         const p0 = p[0];
+        // the marquee drifts, surges with the warp, and runs backwards when you scroll up
+        const yy = window.scrollY, sv = (yy - lastY) / Math.max(ctx.dt, 0.001);
+        lastY = yy;
+        if (Math.abs(sv) > 40) dirT = sv > 0 ? 1 : -1;
+        dir += (dirT - dir) * Math.min(1, ctx.dt * 5);
         if (track) {
           const half = track.scrollWidth / 2;
-          x -= (50 + ctx.warp * 1400) * ctx.dt;
+          x -= dir * (50 + ctx.warp * 1400) * ctx.dt;
           if (-x >= half) x += half;
+          if (x > 0) x -= half;
           track.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
         }
+        if (badge && Stage.o[0] > 0.01) {
+          spin += (26 + ctx.warp * 520) * ctx.dt * dir;
+          badgeRing.style.rotate = spin.toFixed(1) + "deg";
+        }
+        if (Stage.kinetic && !Stage.touch && Stage.o[0] > 0.4) kinetic(ctx.dt);
         if (Stage.o[0] < 0.005) return;
         copy.style.transform = `translate3d(0,${(-p0 * 110).toFixed(1)}px,0) scale(${(1 + p0 * 0.07).toFixed(4)})`;
         copy.style.opacity = (1 - smooth(0.03, 0.36, p0)).toFixed(3);
@@ -184,12 +245,14 @@
         }
         rail.forEach((b, k) => { b.classList.toggle("is-on", k === i); b.classList.toggle("is-near", Math.abs(k - i) === 1); });
         if (first || instant) return;
+        // Every tween names its end values. (A plain "from" tween would take whatever half-way value a
+        // cut-short animation left behind as its end, and fast project changes would leave text faded.)
         gsap.killTweensOf([el.kind, el.text, el.tags.children, el.open, el.count, $$(".wi", el.title)]);
-        gsap.from($$(".wi", el.title), { yPercent: 115 * dir, rotate: 4 * dir, duration: 0.9, ease: "power4.out", stagger: 0.06 });
-        gsap.from([el.kind, el.text], { y: 22 * dir, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.07 });
-        gsap.from(el.tags.children, { y: 14, opacity: 0, scale: 0.9, duration: 0.6, ease: "back.out(1.8)", stagger: 0.05, delay: 0.1 });
-        gsap.from(el.open, { y: 18, opacity: 0, duration: 0.7, ease: "power3.out", delay: 0.15 });
-        gsap.from(el.count, { yPercent: 70 * dir, opacity: 0, duration: 0.6, ease: "power3.out" });
+        gsap.fromTo($$(".wi", el.title), { yPercent: 115 * dir, rotate: 4 * dir }, { yPercent: 0, rotate: 0, duration: 0.9, ease: "power4.out", stagger: 0.06 });
+        gsap.fromTo([el.kind, el.text], { y: 22 * dir, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.07 });
+        gsap.fromTo(el.tags.children, { y: 14, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)", stagger: 0.05, delay: 0.1 });
+        gsap.fromTo(el.open, { y: 18, opacity: 0 }, { y: 0, opacity: it.soon ? 0.5 : 1, duration: 0.7, ease: "power3.out", delay: 0.15 });
+        gsap.fromTo(el.count, { yPercent: 70 * dir, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: "power3.out" });
       };
       const tint = (i) => {
         const c = World.projectColors[i];

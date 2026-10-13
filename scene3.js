@@ -52,7 +52,7 @@
       this.clouds.forEach((c, i) => {
         const dist = cz - c.position.z;
         const vis = smooth(10, 24, dist) * (1 - smooth(46, 70, dist));
-        c.visible = vis > 0.01;
+        c.visible = vis > 0.01 && !World.lite;
         if (!c.visible) return;
         c.material.uniforms.uTime.value = ctx.t;
         c.material.uniforms.uOpacity.value = vis * 0.5;
@@ -150,6 +150,7 @@
       });
       this.dustMat.uniforms.uTime.value = t;
       this.dustMat.uniforms.uOpacity.value = w;
+      this.dust.visible = !World.lite;
       this.coreMat.uniforms.uTime.value = t;
       this.coreMat.uniforms.uOpacity.value = w;
       this.core.rotation.set(t * 0.4, t * 0.6, 0);

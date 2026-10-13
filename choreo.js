@@ -31,7 +31,7 @@
   };
 
   if (mode === "on") {
-    const v = "?v=3";
+    const v = "?v=4";
     Promise.all([
       "assets/vendor/three.min.js?v=160",
       "scene.js" + v, "scene2.js" + v, "scene3.js" + v,
@@ -69,14 +69,15 @@
   if (mode === "reduced" || mode === "off") {
     const bar = document.createElement("div");
     bar.className = "motion-banner";
-    bar.innerHTML = (mode === "reduced"
-      ? "<span>Motion is turned down on your device.</span><button type=\"button\" data-play>Play the 3D version</button>"
-      : "<span>You are viewing the simple page.</span><button type=\"button\" data-play>Play the 3D version</button>") +
+    let slow = false;
+    try { slow = sessionStorage.getItem("slow3d") === "1"; } catch (e) { /* ignore */ }
+    const note = mode === "reduced" ? "Motion is turned down on your device." : slow ? "Switched to the lighter page so scrolling stays smooth." : "You are viewing the simple page.";
+    bar.innerHTML = "<span>" + note + "</span><button type=\"button\" data-play>Play the 3D version</button>" +
       "<button type=\"button\" class=\"motion-banner__x\" data-x aria-label=\"Dismiss\">&times;</button>";
     bar.querySelector("[data-x]").addEventListener("click", () => { bar.remove(); try { sessionStorage.setItem("banner", "0"); } catch (e) { /* ignore */ } });
     bar.querySelector("[data-play]").addEventListener("click", () => {
       store("motion", "on");
-      try { sessionStorage.removeItem("no3d"); } catch (e) { /* ignore */ }
+      try { sessionStorage.removeItem("no3d"); sessionStorage.removeItem("slow3d"); } catch (e) { /* ignore */ }
       // ?no3d in the address would keep forcing the simple page, so drop it
       const u = new URL(location.href);
       if (u.searchParams.has("no3d")) { u.searchParams.delete("no3d"); location.replace(u.toString()); }

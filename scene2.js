@@ -78,6 +78,29 @@
       this.shell.frustumCulled = false;
       g.add(this.shell);
 
+      // a band of text turning around the core
+      try { await document.fonts.load("600 80px Geist"); } catch (e) { /* fall through */ }
+      const lab = document.createElement("canvas");
+      lab.width = 2048; lab.height = 128;
+      const lg = lab.getContext("2d");
+      lg.fillStyle = "#fff"; lg.textBaseline = "middle";
+      lg.font = "600 62px Geist, system-ui, sans-serif";
+      const phrase = "SATYAM CHOURE  \u2022  WEB DEVELOPER  \u2022  HTML  \u2022  CSS  \u2022  JAVASCRIPT  \u2022  THREE.JS  \u2022  ";
+      const unit = lg.measureText(phrase).width, reps = Math.max(1, Math.round(2048 / unit));
+      lg.font = "600 " + Math.round(62 * (2048 / (unit * reps))) + "px Geist, system-ui, sans-serif";
+      for (let k = 0; k < reps; k++) lg.fillText(phrase, (k * 2048) / reps, 66);
+      const labTex = new T.CanvasTexture(lab);
+      labTex.anisotropy = 4;
+      this.bandFront = new T.MeshBasicMaterial({ map: labTex, transparent: true, opacity: 0, depthWrite: false, side: T.FrontSide });
+      this.bandBack = new T.MeshBasicMaterial({ map: labTex, transparent: true, opacity: 0, depthWrite: false, side: T.BackSide });
+      const bandGeo = new T.CylinderGeometry(3.55, 3.55, 0.4, 128, 1, true);
+      this.bandTilt = new T.Group();
+      this.bandTilt.rotation.set(0.42, 0, 0.22);
+      this.band = new T.Group();
+      this.band.add(new T.Mesh(bandGeo, this.bandFront), new T.Mesh(bandGeo, this.bandBack));
+      this.bandTilt.add(this.band);
+      g.add(this.bandTilt);
+
       // small solids drifting on the outside
       this.bits = [];
       const geos = [new T.OctahedronGeometry(0.2), new T.TetrahedronGeometry(0.24), new T.BoxGeometry(0.26, 0.26, 0.26)];
@@ -121,6 +144,11 @@
       this.ringMat.opacity = w * 0.55;
       this.planetMat.opacity = w;
       this.bitMat.opacity = w * 0.7;
+      this.bandFront.opacity = w * 0.95;
+      this.bandBack.opacity = w * 0.4;
+      this.band.rotation.y = -t * 0.35 - p * 6;
+      this.bandTilt.rotation.z = 0.22 + Math.sin(t * 0.3) * 0.06;
+      this.shell.visible = !World.lite;
       this.shellMat.uniforms.uOpacity.value = w * 0.9;
       this.shellMat.uniforms.uTime.value = t;
       this.shellMat.uniforms.uR.value = 4.9 + Math.sin(p * Math.PI * 2) * 0.5 + World.pulse * 0.6;
@@ -203,11 +231,12 @@
           transparent: true, depthWrite: false, side: T.DoubleSide,
           uniforms: {
             uMap: { value: pillTexture(s) }, uOpacity: { value: 0 }, uActive: { value: 0 }, uHover: { value: 0 },
-            uTime: { value: 0 }, uMouse: { value: new T.Vector2(0.5, 0.5) }, uColor: { value: col }
+            uTime: { value: 0 }, uMouse: { value: new T.Vector2(0.5, 0.5) }, uColor: { value: col },
+            uRip: { value: 1.2 }, uRipPos: { value: new T.Vector2(0.5, 0.5) }
           },
           vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
           fragmentShader: `
-            varying vec2 vUv; uniform sampler2D uMap; uniform float uOpacity, uActive, uHover, uTime; uniform vec2 uMouse; uniform vec3 uColor;
+            varying vec2 vUv; uniform sampler2D uMap; uniform float uOpacity, uActive, uHover, uTime, uRip; uniform vec2 uMouse, uRipPos; uniform vec3 uColor;
             void main(){
               vec4 tex = texture2D(uMap, vUv);
               vec3 col = tex.rgb;
@@ -215,6 +244,9 @@
               float band = exp(-pow((diag - (-0.3 + fract(uTime * 0.22) * 1.9)) * 7.0, 2.0));
               col += (0.35 + uColor * 0.5) * band * 0.45 * uActive;
               col += uColor * exp(-pow(distance(vUv, uMouse) * 2.8, 2.0)) * 0.28 * uHover;
+              // click ripple
+              float rd = distance(vUv * vec2(2.56, 1.0), uRipPos * vec2(2.56, 1.0));
+              col += (0.4 + uColor * 0.6) * exp(-pow((rd - uRip * 1.7) * 7.0, 2.0)) * clamp(1.0 - uRip, 0.0, 1.0) * 0.6 * tex.a;
               col *= mix(0.5, 1.0, uActive);
               if (!gl_FrontFacing) col = mix(vec3(0.05), uColor, 0.22) * (0.55 + 0.45 * uActive);
               gl_FragColor = vec4(col, tex.a * uOpacity);
@@ -307,8 +339,10 @@
         u.uActive.value = e;
         u.uOpacity.value = w * lerp(0.55, 1, e);
         u.uHover.value = damp(u.uHover.value, isHover ? 1 : 0, 8, ctx.dt);
+        u.uRip.value = Math.min(1.2, u.uRip.value + ctx.dt * 1.3);
         if (isHover && hov.uv) u.uMouse.value.copy(hov.uv);
       }
+      this.sparks.visible = !World.lite;
       // glow follows the colour of whichever pill is nearest the front
       const gi = clamp(Math.round(this.idx), 0, n - 1);
       this.glowMat.uniforms.uColor.value.lerp(this.colors[gi], 1 - Math.exp(-6 * ctx.dt));
@@ -328,6 +362,9 @@
       return null;
     },
     click(ctx, hit) {
+      const cu = this.pills[hit.index].material.uniforms;
+      cu.uRip.value = 0;
+      if (hit.uv) cu.uRipPos.value.copy(hit.uv);
       this.spinT[hit.index] += Math.PI * 2;
       World.boost = 0.7;
       setTimeout(() => { World.boost = 0; }, 260);
