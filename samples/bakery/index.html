@@ -798,6 +798,32 @@ details.faq .faq-body{padding:0 1.35rem 1.25rem;color:var(--ink-soft)}
 /* ============================================================
    REDUCE MOTION
    ============================================================ */
+/* ---------- Soft motion effects (switched off when the visitor asks for less motion) ---------- */
+.scroll-bar{position:fixed;left:0;top:0;height:3px;width:100%;z-index:200;pointer-events:none;
+  background:linear-gradient(90deg,var(--saffron),var(--gold),var(--maroon));transform:scaleX(0);transform-origin:0 50%}
+@media (prefers-reduced-motion: no-preference){
+  /* photos wipe in from the left when their card appears */
+  .reveal .photo-box img{clip-path:inset(0 100% 0 0);transition:clip-path .95s cubic-bezier(.65,0,.2,1) .15s}
+  .reveal.in .photo-box img{clip-path:inset(0 0 0 0)}
+  /* gentle zoom on hover */
+  .special-card .photo-box img,.fest-card .photo-box img,.gallery-item .photo-box img{transition:clip-path .95s cubic-bezier(.65,0,.2,1) .15s, scale .6s ease}
+  .special-card:hover .photo-box img,.fest-card:hover .photo-box img,.gallery-item:hover .photo-box img{scale:1.06}
+  .hero-media .photo-box img{scale:1.12}
+  /* hero photos float slowly */
+  .hero-media .photo-box{animation:floatY 7s ease-in-out infinite}
+  .hero-media .photo-box:nth-child(2){animation-delay:-2.3s}
+  .hero-media .photo-box:nth-child(3){animation-delay:-4.6s}
+  @keyframes floatY{0%,100%{translate:0 0}50%{translate:0 -8px}}
+  /* shine sweeps across main buttons on hover */
+  .btn-wa,.btn-call,.btn-gold{position:relative;overflow:hidden}
+  .btn-wa::after,.btn-call::after,.btn-gold::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);pointer-events:none}
+  .btn-wa:hover::after,.btn-call:hover::after,.btn-gold:hover::after{left:130%;transition:left .7s ease}
+  /* a small line draws under each section title */
+  .section-head h2::after{content:"";display:block;height:3px;width:0;margin:.4em auto 0;border-radius:3px;
+    background:linear-gradient(90deg,var(--saffron),var(--gold));transition:width .8s cubic-bezier(.2,.7,.2,1) .35s}
+  .section-head.in h2::after{width:64px}
+}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{
     animation-duration:.01ms !important;animation-iteration-count:1 !important;
@@ -2322,6 +2348,47 @@ function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
     });
   }, { threshold: 0.4 });
   $$('.count').forEach(function (el) { cio.observe(el); });
+})();
+
+/* ============================================================
+   SOFT MOTION: scroll bar, hero drift, photos follow the pointer a little
+   ============================================================ */
+(function () {
+  var bar = document.createElement('div');
+  bar.className = 'scroll-bar';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  var heroPhotos = $$('.hero-media .photo-box img');
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ')';
+    if (!reduceMotion && window.scrollY < window.innerHeight * 1.2) {
+      heroPhotos.forEach(function (img, i) {
+        img.style.translate = '0 ' + Math.min(12, window.scrollY * (0.02 + i * 0.01)).toFixed(1) + 'px';
+      });
+    }
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+
+  // photos in cards slide a few pixels toward the pointer
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.special-card, .fest-card, .gallery-item').forEach(function (card) {
+      var img = card.querySelector('.photo-box img');
+      if (!img) return;
+      card.addEventListener('pointermove', function (e) {
+        if (reduceMotion) return;
+        var r = card.getBoundingClientRect();
+        img.style.translate = (((e.clientX - r.left) / r.width - 0.5) * -10).toFixed(1) + 'px ' + (((e.clientY - r.top) / r.height - 0.5) * -8).toFixed(1) + 'px';
+      });
+      card.addEventListener('pointerleave', function () { img.style.translate = ''; });
+    });
+  }
 })();
 
 /* footer year */
