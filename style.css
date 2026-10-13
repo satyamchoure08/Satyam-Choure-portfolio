@@ -1028,3 +1028,75 @@ em {
   .site-footer__inner { flex-direction: column; align-items: flex-start; }
   .chip { right: 8px; bottom: 28px; }
 }
+
+/* 13. Scroll animation layer (motion.js adds .gsap-on) ---------------------- */
+.marquee { overflow: hidden; padding-block: clamp(18px, 3vw, 36px); border-block: 1px solid var(--line); }
+.marquee__track { display: flex; align-items: center; width: max-content; white-space: nowrap; will-change: transform; }
+.marquee__track span {
+  padding-inline: clamp(18px, 2.4vw, 36px);
+  font-size: clamp(2.6rem, 8vw, 7rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.04em;
+}
+.marquee__track span:nth-of-type(even) { color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / .5); }
+.marquee__track i { flex-shrink: 0; width: clamp(14px, 2vw, 26px); height: clamp(14px, 2vw, 26px); border-radius: 50%; background: var(--g-blue); }
+
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.wi { display: inline-block; will-change: transform; }
+.wi.is-grad { background: var(--g-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+em:has(.w) { background: none; }
+
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 1050;
+  width: 100%; height: 3px;
+  background: var(--g-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* GSAP drives these, so the older CSS transitions and hiding must step aside. */
+.gsap-on { scroll-behavior: auto; }
+.gsap-on .reveal,
+.gsap-on .reveal.is-in { opacity: 1; translate: none; transition: none; }
+.gsap-on .card,
+.gsap-on .card.reveal { transition: border-color .3s, box-shadow .4s; }
+.gsap-on .card:not(.card--soon):hover { transform: none; }
+.gsap-on .skill { transition: border-color .3s, box-shadow .45s; }
+.gsap-on .skill:hover { transform: none; }
+.gsap-on .btn--lg, .gsap-on .header-cta { transition: background-color .2s, border-color .2s, box-shadow .25s; }
+.gsap-on .btn--lg:hover, .gsap-on .btn--lg:active { transform: none; }
+.gsap-on .cover--shot picture { transition: none; }
+.gsap-on .card:hover .cover > * { transform: none; }
+
+/* Sliding white pill in the menu */
+.nav__pill { display: none; }
+@media (min-width: 900px) {
+  .gsap-on .nav__list { position: relative; }
+  .gsap-on .nav__list a { position: relative; z-index: 1; }
+  .gsap-on .nav__list a[aria-current="true"] { background: transparent; color: #000; }
+  .gsap-on .nav__pill {
+    display: block;
+    position: absolute;
+    top: 5px; bottom: 5px; left: 0;
+    z-index: 0;
+    width: 0;
+    border-radius: 999px;
+    background: #fff;
+    pointer-events: none;
+  }
+}
+
+/* Cursor label shown over project cards */
+.cursor__label { opacity: 0; font-size: .9rem; font-weight: 600; color: #000; transition: opacity .2s; }
+.has-cursor .cursor.is-label {
+  display: grid;
+  place-items: center;
+  width: 92px; height: 92px;
+  margin: -46px 0 0 -46px;
+  mix-blend-mode: normal;
+}
+.has-cursor .cursor.is-label .cursor__label { opacity: 1; }

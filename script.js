@@ -18,6 +18,7 @@
     if (!root.classList.contains("is-loading")) return;
     if (loader) loader.classList.add("is-done");
     root.classList.remove("is-loading");
+    window.dispatchEvent(new Event("intro:done"));
     if (loader) setTimeout(() => loader.remove(), 1200);
   };
   if (loader && !prefersReducedMotion) {
@@ -50,8 +51,12 @@
       if (!raf) loop();
     }, { passive: true });
     document.addEventListener("pointerleave", () => cursor.classList.remove("is-on"));
+    const label = $(".cursor__label", cursor);
     document.addEventListener("pointerover", (event) => {
-      cursor.classList.toggle("is-big", !!event.target.closest("a, button, [data-spotlight]"));
+      const card = event.target.closest(".card:not(.card--soon)");
+      cursor.classList.toggle("is-label", !!card);
+      if (label && card) label.textContent = "Open";
+      cursor.classList.toggle("is-big", !card && !!event.target.closest("a, button"));
     });
   }
 

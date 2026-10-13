@@ -35,7 +35,7 @@
   <!-- Marks the page as script-enabled and shows the intro screen before first paint. -->
   <script>document.documentElement.classList.add("js", "is-loading");</script>
 
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 
   <script type="application/ld+json">
     {
@@ -57,7 +57,7 @@
     <span class="loader__name"><span style="--n:0">S</span><span style="--n:1">a</span><span style="--n:2">t</span><span style="--n:3">y</span><span style="--n:4">a</span><span style="--n:5">m</span><span style="--n:6">&nbsp;</span><span style="--n:7">C</span><span style="--n:8">h</span><span style="--n:9">o</span><span style="--n:10">u</span><span style="--n:11">r</span><span style="--n:12">e</span></span>
     <span class="loader__bar"></span>
   </div>
-  <div class="cursor" data-cursor aria-hidden="true"></div>
+  <div class="cursor" data-cursor aria-hidden="true"><span class="cursor__label"></span></div>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -141,6 +141,10 @@
         </figure>
       </div>
     </section>
+
+
+    <!-- ───────────── Marquee ───────────── -->
+    <div class="marquee" aria-hidden="true"><div class="marquee__track"><span>Web developer</span><i></i><span>HTML</span><i></i><span>CSS</span><i></i><span>JavaScript</span><i></i><span>Clean websites</span><i></i><span>Full-stack next</span><i></i></div></div>
 
     <!-- ───────────── Work ───────────── -->
     <section class="section" id="work" aria-labelledby="work-title">
@@ -554,6 +558,9 @@
 
   <button class="to-top" id="topBtn" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 
-  <script src="script.js" defer></script>
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="script.js?v=4" defer></script>
+  <script src="motion.js?v=1" defer></script>
 </body>
 </html>
