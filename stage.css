@@ -1,0 +1,312 @@
+/* ==========================================================================
+   3D version, part 1: layout of the chapters, hero, project panel, page chrome.
+   Everything here is scoped to html.engine3d, so the simple page is untouched.
+   ========================================================================== */
+
+#gl { display: none; }
+.engine3d #gl {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.engine3d { scroll-behavior: auto; }
+
+/* One scale for the whole stage: type, buttons and panels grow and shrink with the window
+   height, the same way the 3D scene does, so nothing collides on short screens. */
+html.engine3d { font-size: clamp(11.5px, 2vh, 20px); --container: 75rem; }
+@media (max-width: 899px), (max-aspect-ratio: 21/20) {
+  html.engine3d { font-size: clamp(12px, min(4.1vw, 1.92vh), 17px); }
+}
+.engine3d body { background: #000; }
+
+/* The page is one fixed stage; the scroll bar only measures how far you have travelled */
+.engine3d main {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.engine3d main > section {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+.engine3d main > section.is-live { visibility: visible; }
+.engine3d main > section.is-active :is(a, button, .w3d__info, .s3d__info, .contact__panel, .w3d__rail, .s3d__dots) { pointer-events: auto; }
+.engine3d .scroll-space { position: relative; width: 1px; pointer-events: none; }
+.engine3d .reveal { opacity: 1 !important; translate: none !important; transition: none !important; }
+.engine3d .section { padding-block: 0; }
+
+.engine3d .site-header { position: fixed; top: 0; left: 0; right: 0; }
+.engine3d .btn { transition: background-color .2s, border-color .2s, box-shadow .25s; }
+.engine3d .btn:hover, .engine3d .btn:active { transform: none; }
+.engine3d .btn svg { transition: transform .25s var(--ease); }
+
+/* Sliding pill in the menu (set up by stage3.js) */
+@media (min-width: 900px) {
+  .engine3d .nav__list { position: relative; }
+  .engine3d .nav__list a { position: relative; z-index: 1; }
+  .engine3d .nav__list a[aria-current="true"] { background: transparent; color: #000; }
+  .engine3d .nav__pill {
+    display: block;
+    position: absolute;
+    top: 5px; bottom: 5px; left: 0;
+    z-index: 0;
+    width: 0;
+    border-radius: 999px;
+    background: #fff;
+    pointer-events: none;
+  }
+}
+
+/* Text that gets split for animation */
+.engine3d .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.engine3d .wi { display: inline-block; will-change: transform; }
+.engine3d .wi.is-grad { background: var(--g-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.engine3d .wd { display: inline-block; white-space: nowrap; }
+.engine3d .ch { display: inline-block; will-change: transform; }
+.engine3d .ch.is-grad { background: var(--g-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.engine3d em:has(.ch), .engine3d em:has(.w) { background: none; }
+.engine3d .fw { display: inline-block; }
+
+/* Giant outlined word behind each chapter */
+.bgword {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: -1;
+  font-size: clamp(9rem, 26vw, 28rem);
+  font-weight: 700;
+  letter-spacing: -.06em;
+  line-height: .8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / .08);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.engine3d .bgword { display: block; }
+
+/* Text leans with scroll speed (stage3.js sets --sk) */
+.engine3d :is(.hero__title, .section__title, .about__lead, .contact__title, .w3d__title, .s3d__desc) {
+  transform: skewY(calc(var(--sk, 0) * 1deg));
+  transform-origin: 0 60%;
+}
+
+/* ---- Hero ---------------------------------------------------------------- */
+.engine3d .hero { height: 100%; padding: var(--header-h) 0 clamp(96px, 15vh, 150px); overflow: visible; }
+.engine3d .hero__grid { margin-block: auto; }
+/* Windows 900-1000px wide keep the two-column hero (the base page stacks it at 1000px) */
+@media (min-width: 900px) and (min-aspect-ratio: 21/20) {
+  .engine3d .hero__grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+  .engine3d .portrait { justify-self: end; width: min(100%, 25rem, 56vh); margin-top: 0; }
+  .engine3d .chip { left: -28px; right: auto; }
+}
+.engine3d .portrait { width: min(100%, 25rem, 56vh); }
+.engine3d .hero__title { font-size: clamp(2.5rem, min(6vw, 8.8vh), 5.6rem); margin-top: clamp(14px, 2.4vh, 30px); }
+.engine3d .hero__lead { margin-top: clamp(14px, 2.4vh, 26px); }
+.engine3d .hero__cta { margin-top: clamp(16px, 3vh, 32px); }
+.engine3d .facts { margin-top: clamp(18px, 3.4vh, 44px); padding-top: clamp(12px, 2vh, 20px); }
+.engine3d .hero__glow, .engine3d .hero::after, .engine3d .portrait::before { display: none; }
+.engine3d .portrait__frame { opacity: 0; box-shadow: none; background: transparent; }
+.engine3d .portrait__frame::after { display: none; }
+.engine3d .hero__title .line { perspective: 700px; }
+.engine3d .marquee {
+  position: absolute;
+  left: 0; right: 0; bottom: 2.75rem;
+  z-index: 1;
+  padding-block: clamp(4px, 1vw, 12px);
+  border: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.engine3d .marquee__track span { font-size: clamp(1.5rem, 3.4vw, 3.2rem); }
+.engine3d .chip { z-index: 2; }
+
+/* ---- Work: project panel next to the ring --------------------------------- */
+.engine3d #work { justify-content: flex-start; }
+.engine3d #work > .container { position: absolute; top: calc(var(--header-h) + 12px); left: 0; right: 0; }
+.engine3d #work .section__head { margin: 0; max-width: 27rem; }
+.engine3d #work .section__title { font-size: clamp(1.7rem, 2.7vw, 2.5rem); margin-top: .2em; }
+.engine3d #work .section__intro { margin-top: .6rem; max-width: 38ch; font-size: .95rem; }
+.engine3d #work .work-group,
+.engine3d #work .cards {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: 0; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+@media (max-height: 620px) { .engine3d #work .section__intro { display: none; } }
+
+.w3d {
+  --acc: 76 125 255;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))) clamp(36px, 8vh, 90px);
+  pointer-events: none;
+}
+.w3d__glow {
+  position: absolute;
+  left: -12vw; bottom: -22vh;
+  width: 62vw; height: 62vw;
+  background: radial-gradient(closest-side, rgb(var(--acc) / .26), transparent);
+  filter: blur(24px);
+}
+.w3d__info { position: relative; width: min(29.4rem, 40vw); will-change: transform; }
+.w3d__group { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem; font-size: .86rem; font-weight: 500; color: var(--text-2); }
+.w3d__group small { font-size: .74rem; color: var(--text-3); letter-spacing: .08em; }
+.w3d__count { display: flex; align-items: baseline; gap: .55rem; margin: .5rem 0 .2rem; color: var(--text-3); font-size: 1rem; }
+.w3d__num { display: inline-block; overflow: hidden; line-height: 1; padding-bottom: .08em; }
+.w3d__num b { display: block; font-size: clamp(3.6rem, 6.4vw, 6rem); font-weight: 600; letter-spacing: -.06em; line-height: .9; color: #fff; }
+.w3d__count i { width: 2.4rem; height: 1px; background: var(--line-2); transform: translateY(-.5em); }
+.w3d__title { font-size: clamp(1.9rem, 3.4vw, 3.2rem); font-weight: 600; line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
+.w3d__kind { margin-top: .7rem; font-size: .95rem; font-weight: 500; color: rgb(var(--acc)); filter: brightness(1.5); }
+.w3d__text { margin-top: .7rem; max-width: 44ch; color: var(--text-2); text-wrap: pretty; }
+.w3d__tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1.05rem; }
+.w3d__tags li { padding: .32em .8em; border: 1px solid var(--line-2); border-radius: 999px; font-size: .76rem; color: var(--text-2); background: rgb(0 0 0 / .25); }
+.w3d__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+.w3d__open.is-off { opacity: .5; cursor: default; }
+.w3d__nav {
+  display: grid;
+  place-items: center;
+  width: 3.4rem; height: 3.4rem;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: rgb(24 24 28 / .6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.w3d__nav:hover { background: #fff; color: #000; border-color: #fff; }
+.w3d__nav svg { width: 1.25rem; height: 1.25rem; }
+
+.w3d__rail {
+  position: absolute;
+  right: clamp(46px, 5vw, 72px);
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  translate: 0 -50%;
+}
+.w3d__rail button { display: flex; justify-content: flex-end; align-items: center; width: 40px; height: 14px; padding: 0; border: 0; background: none; cursor: pointer; }
+.w3d__rail i { display: block; width: 8px; height: 2px; border-radius: 2px; background: rgb(255 255 255 / .28); transition: width .35s var(--ease), background-color .3s, box-shadow .3s; }
+.w3d__rail .is-near i { width: 15px; background: rgb(255 255 255 / .55); }
+.w3d__rail .is-on i { width: 30px; background: #fff; box-shadow: 0 0 14px rgb(var(--acc) / .9); }
+.w3d__rail button:hover i { background: #fff; }
+.w3d__hint, .s3d__hint {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(10px, 2.4vh, 24px);
+  text-align: center;
+  font-size: .8rem;
+  color: var(--text-3);
+}
+
+/* ---- Page chrome ---------------------------------------------------------- */
+.hud { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.dots { position: absolute; right: clamp(10px, 1.6vw, 22px); top: 50%; display: flex; flex-direction: column; gap: 6px; translate: 0 -50%; pointer-events: auto; }
+.dots__b { position: relative; display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; }
+.dots__b i { width: 7px; height: 7px; border-radius: 50%; background: rgb(255 255 255 / .32); transition: transform .35s var(--ease), background-color .3s, box-shadow .3s; }
+.dots__b.is-on i { background: #fff; transform: scale(1.55); box-shadow: 0 0 16px rgb(130 160 255 / .95); }
+.dots__b:hover i { background: #fff; }
+.dots__l {
+  position: absolute;
+  right: 30px; top: 50%;
+  padding: .3em .75em;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgb(24 24 28 / .8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: .76rem;
+  white-space: nowrap;
+  opacity: 0;
+  translate: 8px -50%;
+  transition: opacity .25s, translate .3s var(--ease);
+  pointer-events: none;
+}
+.dots__b:hover .dots__l, .dots__b:focus-visible .dots__l { opacity: 1; translate: 0 -50%; }
+
+.hint { position: absolute; right: clamp(14px, 2vw, 28px); bottom: clamp(70px, 11vh, 110px); display: flex; flex-direction: column; align-items: center; gap: .7rem; font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--text-2); opacity: 0; writing-mode: vertical-rl; }
+.hint i { display: block; width: 1px; height: 46px; background: linear-gradient(#fff, transparent); transform-origin: top; animation: hint-drop 1.9s var(--ease) infinite; }
+@keyframes hint-drop { 0% { transform: scaleY(0); } 55% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+.hud__motion {
+  position: absolute;
+  left: clamp(14px, 2vw, 26px);
+  bottom: clamp(14px, 2vw, 26px);
+  padding: .55em 1.05em;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgb(24 24 28 / .6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font-size: .76rem;
+  color: var(--text-2);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color .2s, color .2s;
+}
+.hud__motion:hover { background: #fff; color: #000; }
+.engine3d .to-top { right: clamp(14px, 2vw, 26px); bottom: clamp(14px, 2vw, 26px); }
+
+/* Leaving to open a project: the world rushes forward and fades */
+.is-leaving main, .is-leaving .hud, .is-leaving .site-header { opacity: 0; transition: opacity .4s; }
+.is-leaving #gl { transform: scale(1.14); filter: brightness(1.7); transition: transform .5s cubic-bezier(.7, 0, .3, 1), filter .5s; }
+
+/* ---- Phones and small windows ---------------------------------------------- */
+@media (max-width: 899px), (max-aspect-ratio: 21/20) {
+  .engine3d .hero { padding-bottom: clamp(70px, 12vh, 120px); }
+  .engine3d #work .section__intro, .engine3d #work .section__head .eyebrow { display: none; }
+  .engine3d #work .section__title { font-size: 1.6rem; }
+  .w3d { padding: 0 var(--gutter) calc(18px + env(safe-area-inset-bottom)); }
+  .w3d__info { width: 100%; }
+  .w3d__count { margin: .2rem 0; }
+  .w3d__num b { font-size: 2.6rem; }
+  .w3d__title { font-size: clamp(1.7rem, 7vw, 2.3rem); }
+  .w3d__text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: .5rem; font-size: .95rem; }
+  .w3d__tags { margin-top: .7rem; flex-wrap: nowrap; overflow: hidden; }
+  .w3d__actions { margin-top: 1rem; }
+  .w3d__nav { width: 3rem; height: 3rem; }
+  .w3d__rail, .w3d__hint, .dots { display: none; }
+  .hud__motion { bottom: 8px; left: var(--gutter); }
+  .engine3d .to-top, .hint { display: none; }
+  .engine3d .hero { padding: calc(var(--header-h) - 8px) 0 54px; justify-content: flex-start; }
+  .engine3d .hero__grid { gap: 8px; align-items: start; }
+  .engine3d .hero .pill { font-size: .78rem; padding: .45em .95em .45em .8em; }
+  .engine3d .hero__title { font-size: clamp(2.1rem, 9.2vw, 2.7rem); margin-top: 8px; }
+  .engine3d .hero__lead { font-size: .92rem; line-height: 1.5; margin-top: 8px; }
+  .engine3d .hero__cta { margin-top: 12px; gap: 8px; flex-wrap: nowrap; }
+  .engine3d .hero__cta .btn--lg { flex: 1 1 auto; padding: .8em 1.1em; font-size: .92rem; }
+  .engine3d .facts { margin-top: 12px; padding-top: 10px; gap: 6px 18px; flex-wrap: nowrap; justify-content: space-between; }
+  .engine3d .facts dt { font-size: .7rem; }
+  .engine3d .facts dd { font-size: .8rem; }
+  .engine3d .portrait { justify-self: center; width: clamp(6.9rem, min(52vw, calc((100svh - 29.4rem) * 0.8)), 14.4rem); margin-top: 2px; }
+  .engine3d .chip { left: 0; right: 0; bottom: -12px; width: max-content; margin-inline: auto; }
+  .w3d__glow { left: -30vw; width: 120vw; height: 120vw; }
+}
+/* Short phones: drop the small facts row so the portrait and marquee have room */
+@media (max-height: 720px) and (max-width: 899px) { .engine3d .facts { display: none; } }
+@media (max-height: 720px) and (max-aspect-ratio: 21/20) { .engine3d .facts { display: none; } }

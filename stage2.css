@@ -1,0 +1,178 @@
+/* ==========================================================================
+   3D version, part 2: About, Skills, Contact, small effects, the motion banner.
+   ========================================================================== */
+
+.wave { display: inline-flex; }
+.wave span { display: inline-block; }
+
+/* ---- About ----------------------------------------------------------------- */
+.engine3d #about > .container.about {
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: center;
+  height: 100%;
+  padding-top: var(--header-h);
+  padding-bottom: 4vh;
+}
+.engine3d .about__head { position: static; align-self: start; padding-top: clamp(12px, 5vh, 56px); }
+.engine3d .about__head .section__title { font-size: clamp(1.9rem, 3.6vw, 3.4rem); }
+.engine3d .about__lead { font-size: clamp(1.8rem, 3.1vw, 3rem); }
+.engine3d .about__text { margin-top: 1.1rem; font-size: 1.05rem; will-change: transform, opacity; }
+.engine3d .path { position: relative; gap: 10px; margin-top: clamp(20px, 3.5vh, 36px); }
+.engine3d .path li {
+  padding: 1rem 1.3rem;
+  background: rgb(12 12 16 / .62);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  will-change: transform, opacity;
+}
+.engine3d .path::before {
+  content: "";
+  position: absolute;
+  left: -20px; top: 6px; bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--g-blue);
+  transform-origin: top;
+  transform: scaleY(var(--pl, 0));
+}
+.engine3d .path__when { color: var(--accent-ink); }
+
+/* ---- Skills ---------------------------------------------------------------- */
+.engine3d #skills { justify-content: flex-start; }
+.engine3d #skills > .container { position: absolute; top: calc(var(--header-h) + 12px); left: 0; right: 0; }
+.engine3d #skills .section__head { margin: 0; }
+.engine3d #skills .section__title { font-size: clamp(1.7rem, 2.7vw, 2.5rem); margin-top: .2em; }
+.engine3d #skills .skills {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.s3d { position: absolute; inset: 0; pointer-events: none; }
+.s3d__info {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(48px, 11vh, 120px);
+  display: grid;
+  justify-items: center;
+  gap: .5rem;
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+.s3d__count { display: flex; align-items: baseline; gap: .55rem; color: var(--text-3); font-size: .95rem; }
+.s3d__num { display: inline-block; overflow: hidden; line-height: 1.2; }
+.s3d__num b { color: var(--c, #fff); font-size: 1.15rem; font-weight: 600; }
+.s3d__count i { width: 30px; height: 1px; background: var(--line-2); transform: translateY(-.3em); }
+.s3d__desc { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem 1rem; font-size: clamp(1.4rem, 3vw, 2.6rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.15; }
+.s3d__tag {
+  padding: .3em .85em;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: none;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  font-size: .9rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.s3d__dots { display: flex; justify-content: center; gap: 4px; margin-top: .8rem; }
+.s3d__dots button { display: grid; place-items: center; width: 26px; height: 20px; padding: 0; border: 0; background: none; cursor: pointer; }
+.s3d__dots i { display: block; width: 8px; height: 8px; border-radius: 8px; background: rgb(255 255 255 / .3); transition: width .35s var(--ease), background-color .3s, box-shadow .3s; }
+.s3d__dots .is-on i { width: 24px; background: var(--c, #fff); box-shadow: 0 0 14px var(--c, #fff); }
+
+/* ---- Contact --------------------------------------------------------------- */
+.engine3d #contact { justify-content: center; padding: var(--header-h) 0 56px; }
+.engine3d #contact > .container { width: 100%; }
+.engine3d .contact__panel {
+  padding: clamp(26px, 6vh, 70px) clamp(20px, 5vw, 70px);
+  background: rgb(8 8 12 / .5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  backdrop-filter: blur(22px) saturate(1.4);
+  will-change: transform;
+}
+.engine3d .contact__title { font-size: clamp(2.1rem, 5vw, 4.4rem); }
+.engine3d .contact__lead { margin-top: .9rem; will-change: transform, opacity; }
+.engine3d .contact__actions { margin-top: clamp(20px, 3.5vh, 36px); }
+.engine3d .contact__actions .btn, .engine3d .socials li { will-change: transform, opacity; }
+.engine3d .socials { margin-top: clamp(24px, 4vh, 44px); padding-top: 20px; }
+.engine3d .site-footer {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding-block: 16px;
+  border: 0;
+  font-size: .84rem;
+}
+.engine3d .site-footer__inner { padding-left: clamp(120px, 11vw, 160px); padding-right: clamp(60px, 6vw, 90px); }
+
+/* ---- Notice for visitors on the simple page -------------------------------- */
+.motion-banner {
+  position: fixed;
+  left: 50%; bottom: 18px;
+  z-index: 120;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  padding: .5em .5em .5em 1.2em;
+  border: 1px solid var(--line-2);
+  border-radius: 28px;
+  background: rgb(18 18 22 / .9);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--text-2);
+  font-size: .88rem;
+  translate: -50% 0;
+  animation: banner-in .8s var(--ease) 1.2s both;
+}
+.motion-banner button {
+  padding: .7em 1.2em;
+  border: 0;
+  border-radius: 999px;
+  background: var(--g-blue);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.motion-banner .motion-banner__x {
+  width: 34px; height: 34px;
+  padding: 0;
+  background: rgb(255 255 255 / .08);
+  color: var(--text-2);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.motion-banner .motion-banner__x:hover { background: rgb(255 255 255 / .16); color: #fff; }
+@keyframes banner-in { from { opacity: 0; translate: -50% 22px; } to { opacity: 1; translate: -50% 0; } }
+
+/* ---- Phones and small windows ---------------------------------------------- */
+@media (max-width: 899px), (max-aspect-ratio: 21/20) {
+  .engine3d #about > .container.about {
+    grid-template-columns: 1fr;
+    align-content: end;
+    gap: 12px;
+    padding-top: 0;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+  .engine3d .about__head { padding-top: 0; }
+  .engine3d .about__head .section__title { font-size: 1.6rem; }
+  .engine3d .about__lead { font-size: 1.45rem; }
+  .engine3d .about__text { margin-top: .5rem; font-size: .93rem; }
+  .engine3d .path { gap: 8px; margin-top: 12px; }
+  .engine3d .path li { grid-template-columns: 3.3rem 1fr; gap: .7rem; padding: .7rem .95rem; border-radius: 16px; }
+  .engine3d .path__what { font-size: .9rem; }
+  .engine3d .path::before { display: none; }
+  .engine3d #skills .section__title { font-size: 1.6rem; }
+  .engine3d #skills .eyebrow, .engine3d #contact .eyebrow { display: none; }
+  .s3d__info { bottom: calc(28px + env(safe-area-inset-bottom)); }
+  .s3d__hint { display: none; }
+  .engine3d .contact__panel { padding: 24px 18px; border-radius: 28px !important; }
+  .engine3d .contact__title { font-size: 2rem; }
+  .engine3d .site-footer { padding-block: 10px calc(12px + env(safe-area-inset-bottom)); }
+  .engine3d .site-footer__inner { padding-inline: var(--gutter); align-items: center; text-align: center; gap: 4px; }
+}

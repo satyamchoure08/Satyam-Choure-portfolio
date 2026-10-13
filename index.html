@@ -33,9 +33,39 @@
   <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Marks the page as script-enabled and shows the intro screen before first paint. -->
-  <script>document.documentElement.classList.add("js", "is-loading");</script>
+  <script>
+    /* Marks the page as script-enabled, shows the intro screen before first paint,
+       and decides between the 3D version and the simple page (see choreo.js). */
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js", "is-loading");
+      var why = "";
+      try {
+        var pref = null, blocked = false;
+        try { pref = localStorage.getItem("motion"); } catch (e) {}
+        try { blocked = sessionStorage.getItem("no3d") === "1"; } catch (e) {}
+        var q = location.search;
+        var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var off = /[?&]no3d\b/.test(q) || pref === "off" || blocked;
+        var on = /[?&]motion=on\b/.test(q) || pref === "on";
+        if (/[?&]motion=on\b/.test(q) && !off) { try { localStorage.setItem("motion", "on"); } catch (e) {} }
+        var short = innerHeight < 460;
+        var c = document.createElement("canvas");
+        var gl = c.getContext("webgl2") || c.getContext("webgl");
+        if (gl) { var x = gl.getExtension("WEBGL_lose_context"); if (x) x.loseContext(); }
+        if (!gl) why = "nogl";
+        else if (off) why = "off";
+        else if (short) why = "short";
+        else if (reduced && !on) why = "reduced";
+        else d.classList.add("engine3d");
+      } catch (e) { why = "off"; }
+      d.setAttribute("data-3d", why || "on");
+    })();
+  </script>
 
   <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="stage.css?v=3">
+  <link rel="stylesheet" href="stage2.css?v=3">
 
   <script type="application/ld+json">
     {
@@ -53,6 +83,7 @@
   </script>
 </head>
 <body>
+  <canvas id="gl" aria-hidden="true"></canvas>
   <div class="loader" data-loader aria-hidden="true">
     <span class="loader__name"><span style="--n:0">S</span><span style="--n:1">a</span><span style="--n:2">t</span><span style="--n:3">y</span><span style="--n:4">a</span><span style="--n:5">m</span><span style="--n:6">&nbsp;</span><span style="--n:7">C</span><span style="--n:8">h</span><span style="--n:9">o</span><span style="--n:10">u</span><span style="--n:11">r</span><span style="--n:12">e</span></span>
     <span class="loader__bar"></span>
@@ -395,7 +426,7 @@
         <h3 class="work-group reveal"><span>Learning projects</span><small>Where I started</small></h3>
         <div class="cards">
           <!-- 01 · Number Guessing Game -->
-          <article class="card reveal" data-spotlight>
+          <article class="card reveal" data-spotlight data-shot="assets/img/work/learn-guess">
             <div class="cover cover--guess" aria-hidden="true">
               <div class="mock-guess">
                 <div class="mock-guess__top"><span>Guess 1–100</span><span>6 / 10</span></div>
@@ -416,7 +447,7 @@
           </article>
 
           <!-- 02 · Quiz -->
-          <article class="card reveal" style="--d:90ms" data-spotlight>
+          <article class="card reveal" style="--d:90ms" data-spotlight data-shot="assets/img/work/learn-quiz">
             <div class="cover cover--quiz" aria-hidden="true">
               <div class="mock-quiz">
                 <div class="mock-quiz__top"><span>Question 3 of 7</span><span class="mock-quiz__timer">0:18</span></div>
@@ -439,7 +470,7 @@
           </article>
 
           <!-- 03 · WhatsApp UI -->
-          <article class="card reveal" data-spotlight>
+          <article class="card reveal" data-spotlight data-shot="assets/img/work/learn-chat">
             <div class="cover cover--chat" aria-hidden="true">
               <div class="mock-chat">
                 <div class="mock-chat__title">WhatsApp</div>
@@ -463,7 +494,7 @@
           </article>
 
           <!-- 04 · In progress -->
-          <article class="card card--soon reveal" style="--d:90ms">
+          <article class="card card--soon reveal" style="--d:90ms" data-shot="assets/img/work/learn-soon">
             <div class="cover cover--soon" aria-hidden="true">
               <span class="soon-label"><span class="pill__dot"></span>In progress</span>
             </div>
@@ -559,8 +590,7 @@
   <button class="to-top" id="topBtn" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 
   <script src="assets/vendor/gsap.min.js" defer></script>
-  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="script.js?v=4" defer></script>
-  <script src="motion.js?v=1" defer></script>
+  <script src="script.js?v=5" defer></script>
+  <script src="choreo.js?v=4" defer></script>
 </body>
 </html>

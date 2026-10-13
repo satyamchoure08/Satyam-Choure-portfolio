@@ -4,8 +4,16 @@
   const root = document.documentElement;
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-  const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // The 3D version (see choreo.js) sets this class in the <head> and drives scrolling itself.
+  // A visitor who asked for less motion only gets it after choosing "Play the 3D version".
+  const is3d = root.classList.contains("engine3d");
+  const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches && !is3d;
   const canHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (is3d && !window.__introGate) {
+    let open;
+    const promise = new Promise((resolve) => { open = resolve; });
+    window.__introGate = { promise, open };
+  }
 
   /* Footer year ----------------------------------------------------------- */
   const year = $("#year");
@@ -27,8 +35,9 @@
       if (document.readyState === "complete") resolve();
       else window.addEventListener("load", resolve, { once: true });
     });
-    Promise.all([minimum, loaded]).then(finishIntro);
-    setTimeout(finishIntro, 4000);
+    const gate = window.__introGate ? window.__introGate.promise : null;
+    Promise.all([minimum, loaded, gate]).then(finishIntro);
+    setTimeout(finishIntro, gate ? 12000 : 4000);
   } else {
     finishIntro();
   }
@@ -53,6 +62,7 @@
     document.addEventListener("pointerleave", () => cursor.classList.remove("is-on"));
     const label = $(".cursor__label", cursor);
     document.addEventListener("pointerover", (event) => {
+      if (is3d) { cursor.classList.toggle("is-big", !!event.target.closest("a, button")); return; }
       const card = event.target.closest(".card:not(.card--soon)");
       cursor.classList.toggle("is-label", !!card);
       if (label && card) label.textContent = "Open";
@@ -93,6 +103,7 @@
   let ticking = false;
 
   const onScroll = () => {
+    if (is3d) { ticking = false; return; }
     const y = window.scrollY;
     if (header) header.classList.toggle("is-scrolled", y > 8);
     if (topButton) topButton.classList.toggle("is-visible", y > 700);
@@ -107,7 +118,7 @@
   }, { passive: true });
   onScroll();
 
-  if (topButton) {
+  if (topButton && !is3d) {
     topButton.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
@@ -134,7 +145,7 @@
     .map((link) => $(link.getAttribute("href")))
     .filter(Boolean);
 
-  if ("IntersectionObserver" in window && sections.length) {
+  if ("IntersectionObserver" in window && sections.length && !is3d) {
     const setCurrent = (id) => {
       navLinks.forEach((link) => {
         if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "true");
