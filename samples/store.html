@@ -119,6 +119,7 @@ body:not(.show-dock):not(.has-picks) .basket-btn{transform:translateY(140%);opac
 .chips-in input:checked+span{background:var(--ink);color:#fff}
 .sheet .btn-wa{width:100%;margin-top:14px}
 </style>
+<link rel="stylesheet" href="assets/motion.css">
 </head>
 <body>
 
@@ -209,5 +210,6 @@ function closeBasket() { document.getElementById('basket').classList.remove('ope
 addEventListener('keydown', e => { if (e.key === 'Escape') closeBasket(); });
 </script>
 <script src="assets/core.js?v=5"></script>
+<script src="assets/motion.js?v=2" defer></script>
 </body>
 </html>
