@@ -1,12 +1,11 @@
 /* ════════════════════════════════════════════════════════════════════
-   AAGAM ACADEMY — app.js · vanilla, dependency-free
-   Analytics flag: flip to true ONLY after adding consent copy (cookie box).
+   AAGAM ACADEMY — app.js (Upgraded 3D Atomic Constellation & Scholarship Quiz Edition)
    ════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  var ANALYTICS_ENABLED = false; // [PLACEHOLDER] keep false until analytics + consent ship
-  var WA = '919876543210';       // [PLACEHOLDER] client WhatsApp number
+  var ANALYTICS_ENABLED = false;
+  var WA = '919876543210';
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var FINE = window.matchMedia('(pointer: fine)').matches;
 
@@ -15,9 +14,9 @@
   function inr(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
   function waLink(text) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); }
 
-  /* ── toast ─────────────────────────────────────────── */
   function toast(msg) {
     var box = $('#toasts');
+    if (!box) return;
     var t = document.createElement('p');
     t.className = 'toast';
     t.textContent = msg;
@@ -25,12 +24,12 @@
     setTimeout(function () { t.remove(); }, 3400);
   }
 
-  /* ── theme ─────────────────────────────────────────── */
   (function theme() {
     var saved = null;
     try { saved = localStorage.getItem('aa-theme'); } catch (e) {}
     if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
     var btn = $('#theme-toggle');
+    if (!btn) return;
     function sync() { btn.setAttribute('aria-pressed', String(document.documentElement.getAttribute('data-theme') === 'light')); }
     btn.addEventListener('click', function () {
       var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -41,9 +40,9 @@
     sync();
   })();
 
-  /* ── entry gate ────────────────────────────────────── */
   (function gate() {
     var g = $('#gate');
+    if (!g) return;
     var seen = false;
     try { seen = !!sessionStorage.getItem('aa-gate'); } catch (e) { seen = true; }
     if (REDUCED || seen) { g.remove(); return; }
@@ -56,22 +55,23 @@
       try { sessionStorage.setItem('aa-gate', '1'); } catch (e) {}
       setTimeout(function () { g.remove(); }, 750);
     }
-    $('#gate-enter').addEventListener('click', enter);
-    $('#gate-skip').addEventListener('click', enter);
+    $('#gate-enter')?.addEventListener('click', enter);
+    $('#gate-skip')?.addEventListener('click', enter);
     g.addEventListener('keydown', function (e) { if (e.key === 'Escape') enter(); });
   })();
 
-  /* ── header hide/show + active section ─────────────── */
   (function head() {
     var h = $('#site-head'), last = 0;
     window.addEventListener('scroll', function () {
       var y = window.scrollY;
-      if (y > 480 && y > last + 4) h.classList.add('is-hide');
-      else if (y < last - 4 || y < 200) h.classList.remove('is-hide');
+      if (h) {
+        if (y > 480 && y > last + 4) h.classList.add('is-hide');
+        else if (y < last - 4 || y < 200) h.classList.remove('is-hide');
+      }
       last = y;
-      $('#to-top').hidden = y < 700;
+      if ($('#to-top')) $('#to-top').hidden = y < 700;
     }, { passive: true });
-    $('#to-top').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }); });
+    $('#to-top')?.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' }); });
 
     var links = $$('.main-nav a');
     var map = {};
@@ -91,34 +91,32 @@
     });
   })();
 
-  /* ── drawer ────────────────────────────────────────── */
   (function drawer() {
     var d = $('#drawer'), s = $('#scrim'), b = $('#burger');
+    if (!d || !b) return;
     function set(open) {
       d.hidden = false;
       requestAnimationFrame(function () { d.classList.toggle('is-open', open); });
-      s.hidden = !open;
+      if (s) s.hidden = !open;
       b.setAttribute('aria-expanded', String(open));
       b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       document.body.style.overflow = open ? 'hidden' : '';
       if (!open) setTimeout(function () { if (!d.classList.contains('is-open')) d.hidden = true; }, 400);
     }
     b.addEventListener('click', function () { set(!d.classList.contains('is-open')); });
-    s.addEventListener('click', function () { set(false); });
+    s?.addEventListener('click', function () { set(false); });
     $$('#drawer a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && d.classList.contains('is-open')) set(false); });
   })();
 
-  /* ── reveal on scroll (called last, after all injections) ── */
   function initReveal() {
     if (REDUCED) { $$('.reveal').forEach(function (el) { el.classList.add('is-in'); }); return; }
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
-    }, { threshold: 0.18 });
+    }, { threshold: 0.16 });
     $$('.reveal').forEach(function (el) { io.observe(el); });
   }
 
-  /* ── count-up stats ────────────────────────────────── */
   (function counters() {
     function run(el) {
       var target = parseInt(el.getAttribute('data-count'), 10);
@@ -139,12 +137,12 @@
     $$('[data-count]').forEach(function (el) { io.observe(el); });
   })();
 
-  /* ── hero orb: hand-rolled 3D point sphere (canvas 2D) ─ */
+  /* ── UPGRADED hero orb: 3D Multi-Ring Atomic Constellation + Scroll Boost ─ */
   (function orb() {
     var c = $('#orb');
     if (!c) return;
     var ctx = c.getContext('2d');
-    var W, H, DPR, pts = [], ry = 0, t = 0, px = 0, py = 0, visible = true, raf = null;
+    var W, H, DPR, pts = [], rings = [], ry = 0, px = 0, py = 0, visible = true, raf = null, lastScroll = window.scrollY, scrollBoost = 0;
 
     function size() {
       DPR = Math.min(2, window.devicePixelRatio || 1);
@@ -154,7 +152,7 @@
       build();
     }
     function build() {
-      var n = W < 700 ? 300 : 720;
+      var n = W < 700 ? 320 : 760;
       var R = Math.min(W, H) * 0.34;
       pts = [];
       var golden = Math.PI * (3 - Math.sqrt(5));
@@ -166,16 +164,62 @@
           x: Math.cos(th) * rad * R,
           y: y * R,
           z: Math.sin(th) * rad * R,
-          a: i % 13 === 0
+          a: i % 11 === 0
         });
       }
+      // 3 tilted atomic orbital rings with electrons
+      rings = [
+        { rx: 1.05, rz: 0.42, rad: R * 1.28, eAngle: 0, speed: 0.024 },
+        { rx: -0.85, rz: -0.55, rad: R * 1.36, eAngle: 2.1, speed: -0.019 },
+        { rx: 0.35, rz: 1.15, rad: R * 1.44, eAngle: 4.2, speed: 0.015 }
+      ];
     }
     function draw() {
       ctx.clearRect(0, 0, W, H);
       var cx = W * 0.5, cy = H * 0.46;
       var cosY = Math.cos(ry), sinY = Math.sin(ry);
-      var tilt = 0.32 + py * 0.22, cosX = Math.cos(tilt), sinX = Math.sin(tilt);
+      var tilt = 0.32 + py * 0.25, cosX = Math.cos(tilt), sinX = Math.sin(tilt);
       var fov = 900;
+
+      // Draw 3D orbital rings & glowing electrons
+      rings.forEach(function (rg) {
+        rg.eAngle += rg.speed + scrollBoost * 0.2;
+        ctx.beginPath();
+        for (var k = 0; k <= 64; k++) {
+          var a = (k / 64) * Math.PI * 2;
+          var ox = Math.cos(a) * rg.rad;
+          var oz = Math.sin(a) * rg.rad;
+          var oy = Math.sin(a + rg.rx) * (rg.rad * 0.35);
+          var x1 = ox * cosY - oz * sinY;
+          var z1 = ox * sinY + oz * cosY;
+          var y1 = oy * cosX - z1 * sinX;
+          var z2 = oy * sinX + z1 * cosX;
+          var s = fov / (fov + z2);
+          var X = cx + x1 * s + px * 26;
+          var Y = cy + y1 * s + py * 18;
+          if (k === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+        }
+        ctx.strokeStyle = 'rgba(200,245,66,0.18)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Electron particle on ring
+        var ex = Math.cos(rg.eAngle) * rg.rad;
+        var ez = Math.sin(rg.eAngle) * rg.rad;
+        var ey = Math.sin(rg.eAngle + rg.rx) * (rg.rad * 0.35);
+        var ex1 = ex * cosY - ez * sinY;
+        var ez1 = ex * sinY + ez * cosY;
+        var ey1 = ey * cosX - ez1 * sinX;
+        var ez2 = ey * sinX + ez1 * cosX;
+        var es = fov / (fov + ez2);
+        var EX = cx + ex1 * es + px * 26;
+        var EY = cy + ey1 * es + py * 18;
+        ctx.beginPath();
+        ctx.fillStyle = '#c8f542';
+        ctx.arc(EX, EY, 4.5 * es, 0, 6.2832);
+        ctx.fill();
+      });
+
       for (var i = 0; i < pts.length; i++) {
         var p = pts[i];
         var x1 = p.x * cosY - p.z * sinY;
@@ -185,7 +229,7 @@
         var s = fov / (fov + z2);
         var X = cx + x1 * s + px * 26;
         var Y = cy + y1 * s + py * 18;
-        var depth = (z2 / (Math.min(W, H) * 0.34) + 1) / 2; // 0 near … 1 far
+        var depth = (z2 / (Math.min(W, H) * 0.34) + 1) / 2;
         var alpha = 0.85 - depth * 0.68;
         var r = (1 - depth) * 2.1 + 0.5;
         ctx.beginPath();
@@ -197,7 +241,10 @@
       }
     }
     function loop() {
-      ry += 0.0017; t++;
+      var dy = Math.abs(window.scrollY - lastScroll);
+      lastScroll = window.scrollY;
+      scrollBoost = scrollBoost * 0.9 + Math.min(0.06, dy * 0.0012);
+      ry += 0.0022 + scrollBoost;
       draw();
       raf = requestAnimationFrame(loop);
     }
@@ -211,11 +258,7 @@
         else if (!visible && raf) { cancelAnimationFrame(raf); raf = null; }
       });
     }, { threshold: 0 }).observe(c);
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden && raf) { cancelAnimationFrame(raf); raf = null; }
-      else if (!document.hidden && visible && !raf) raf = requestAnimationFrame(loop);
-    });
-    if (FINE) {
+    if (FINE && $('.hero')) {
       $('.hero').addEventListener('pointermove', function (e) {
         px = (e.clientX / W - 0.5) * 2;
         py = (e.clientY / H - 0.5) * 2;
@@ -245,7 +288,6 @@
     }, { passive: true });
   })();
 
-  /* ── magnetic CTA ──────────────────────────────────── */
   (function magnet() {
     if (REDUCED || !FINE) return;
     var zone = $('#magnet-zone');
@@ -260,7 +302,6 @@
     zone.addEventListener('pointerleave', function () { m.style.transform = ''; });
   })();
 
-  /* ══ DATA [SAMPLE] ══════════════════════════════════ */
   var COURSES = [
     { id: 'jee2', cat: 'jee', tags: ['JEE', 'XI–XII'], name: 'JEE Main + Advanced — 2-Year',
       blurb: 'Concept-first Physics, Chemistry, Maths with weekly full-syllabus mocks from day one.',
@@ -344,9 +385,9 @@
     { q: 'How do parents stay in the loop?', a: 'A two-line WhatsApp summary every Monday (what improved, what\'s next), a parent-teacher meeting every six weeks, and the mock-analysis sheet after every Sunday test.' }
   ];
 
-  /* ── render: courses ───────────────────────────────── */
   (function courses() {
     var grid = $('#course-grid');
+    if (!grid) return;
     grid.innerHTML = COURSES.map(function (c) {
       return '<article class="c-card reveal" data-cat="' + c.cat + '">' +
         '<div class="c-head">' + c.tags.map(function (t, i) { return '<span class="tag mono' + (i ? ' ghost' : '') + '">' + t + '</span>'; }).join('') + '</div>' +
@@ -372,7 +413,7 @@
     var dlg = $('#dlg-course'), body = $('#course-body');
     grid.addEventListener('click', function (e) {
       var btn = e.target.closest('[data-course]');
-      if (!btn) return;
+      if (!btn || !dlg) return;
       var c = COURSES.filter(function (x) { return x.id === btn.getAttribute('data-course'); })[0];
       body.innerHTML =
         '<img class="cc-img" src="' + c.img + '" alt="' + c.alt + '" width="1400" height="700" loading="lazy">' +
@@ -383,39 +424,38 @@
         '<a class="btn btn-solid" target="_blank" rel="noopener" href="' + waLink('Hi Aagam Academy, I want details of the ' + c.name + ' programme.') + '">Ask about this course</a></div>';
       dlg.showModal();
     });
-    $('#course-close').addEventListener('click', function () { dlg.close(); });
-    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    $('#course-close')?.addEventListener('click', function () { dlg.close(); });
+    dlg?.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   })();
 
-  /* ── render: rankers ───────────────────────────────── */
   (function rankers() {
+    if (!$('#rankers')) return;
     $('#rankers').innerHTML = RANKERS.map(function (r) {
       return '<article class="r-card"><img src="' + r.img + '" alt="' + r.alt + '" width="1400" height="1750" loading="lazy" decoding="async">' +
         '<h3>' + r.name + '</h3><span class="mono">' + r.line + ' [SAMPLE]</span></article>';
     }).join('');
   })();
 
-  /* ── render: faculty ───────────────────────────────── */
   (function faculty() {
+    if (!$('#fac-grid')) return;
     $('#fac-grid').innerHTML = FACULTY.map(function (f) {
       return '<article class="f-card reveal"><div class="f-ph"><img src="' + f.img + '" alt="' + f.alt + '" width="1400" height="1610" loading="lazy" decoding="async"></div>' +
         '<h3>' + f.name + '</h3><span class="mono micro">' + f.role + '</span><p class="f-line">' + f.line + '</p></article>';
     }).join('');
   })();
 
-  /* ── method steps ──────────────────────────────────── */
   (function method() {
     var steps = $$('.m-step'), num = $('#method-num'), fill = $('#method-rail-fill');
     if (!steps.length) return;
     function set(i) {
       steps.forEach(function (s, j) { s.classList.toggle('is-active', j === i); });
       var label = '0' + (i + 1);
-      if (num.textContent !== label) {
+      if (num && num.textContent !== label) {
         num.textContent = label;
         num.classList.add('tick');
         setTimeout(function () { num.classList.remove('tick'); }, 320);
       }
-      fill.style.height = ((i + 1) / steps.length * 100) + '%';
+      if (fill) fill.style.height = ((i + 1) / steps.length * 100) + '%';
     }
     set(0);
     var io = new IntersectionObserver(function (es) {
@@ -424,16 +464,15 @@
     steps.forEach(function (s) { io.observe(s); });
   })();
 
-  /* ── before / after slider ─────────────────────────── */
   (function ba() {
     var box = $('#ba'), range = $('#ba-range');
-    if (!box) return;
+    if (!box || !range) return;
     range.addEventListener('input', function () { box.style.setProperty('--pos', range.value + '%'); });
   })();
 
-  /* ── batches: filter + search ──────────────────────── */
   (function batches() {
     var grid = $('#batch-grid');
+    if (!grid) return;
     grid.innerHTML = BATCHES.map(function (b) {
       return '<article class="b-card reveal" data-days="' + b.days + '" data-text="' + (b.tag + ' ' + b.name).toLowerCase() + '">' +
         '<div class="b-top mono"><span>' + b.tag + '</span><span class="b-seats">' + b.seats + ' SEATS LEFT [SAMPLE]</span></div>' +
@@ -456,16 +495,62 @@
         day = ch.getAttribute('data-day'); apply();
       });
     });
-    $('#batch-search').addEventListener('input', function (e) { q = e.target.value.trim().toLowerCase(); apply(); });
+    $('#batch-search')?.addEventListener('input', function (e) { q = e.target.value.trim().toLowerCase(); apply(); });
   })();
 
-  /* ── fee calculator ────────────────────────────────── */
+  /* ── UPGRADE: Interactive Scholarship & Rank Predictor + Fee Calculator ── */
+  var scholPct = 0;
   (function calc() {
     var form = $('#calc-form');
+    if (!form) return;
     var out = $('#calc-price'), per = $('#calc-per'), lines = $('#calc-lines'), waBtn = $('#calc-wa');
+
+    // Inject Interactive Scholarship & Rank Predictor Card right above Fee Calculator
+    var feesSec = $('#fees');
+    if (feesSec) {
+      var st = document.createElement('style');
+      st.textContent = `
+        .aa-schol-box{margin:28px 0;padding:24px;border-radius:18px;background:rgba(200,245,66,0.06);border:1px solid rgba(200,245,66,0.28);display:grid;gap:16px}
+        .aa-schol-row{display:flex;flex-wrap:wrap;gap:8px}
+        .aa-sbtn{padding:8px 14px;border-radius:99px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:inherit;font-family:monospace;font-size:13px;cursor:pointer}
+        .aa-sbtn.on{background:#c8f542;color:#0b0d0c;border-color:#c8f542;font-weight:700}
+      `;
+      document.head.appendChild(st);
+      var sBox = document.createElement('div');
+      sBox.className = 'aa-schol-box';
+      sBox.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+          <span class="mono" style="color:#c8f542;font-size:12px">★ NEW · AAGAM SCHOLASTIC WAIVER &amp; RANK PREDICTOR</span>
+          <strong class="mono" id="aaScholBadge" style="background:#c8f542;color:#0b0d0c;padding:4px 10px;border-radius:99px;font-size:12px">25% FEE WAIVER APPLIED</strong>
+        </div>
+        <p style="margin:0;font-size:15px">Select your last Board/School aggregate percentage to auto-apply your scholarship waiver directly into the fee calculator below:</p>
+        <div class="aa-schol-row" id="aaScholBtns">
+          <button type="button" class="aa-sbtn" data-pct="0" data-rank="Top 15% State Band">Below 75% (0% Waiver + Free Bridge Lab)</button>
+          <button type="button" class="aa-sbtn" data-pct="15" data-rank="AIR 8,000–15,000 Target Band">75%–84% (15% Waiver)</button>
+          <button type="button" class="aa-sbtn on" data-pct="25" data-rank="AIR 2,500–6,000 Target Band">85%–91% (25% Waiver)</button>
+          <button type="button" class="aa-sbtn" data-pct="50" data-rank="AIR Under 1,500 Target Band">92%–95% (50% Waiver)</button>
+          <button type="button" class="aa-sbtn" data-pct="75" data-rank="Top 500 Scholar Cohort">96%+ / NTSE (75% Waiver)</button>
+        </div>
+        <p class="mono" style="margin:0;font-size:13px;opacity:0.85" id="aaRankPred">Predicted Outcome Trajectory: AIR 2,500–6,000 Target Band (with 85%+ attendance)</p>
+      `;
+      form.parentNode.insertBefore(sBox, form);
+      scholPct = 25;
+      $$('#aaScholBtns .aa-sbtn').forEach(function (b) {
+        b.addEventListener('click', function () {
+          $$('#aaScholBtns .aa-sbtn').forEach(function (x) { x.classList.remove('on'); });
+          b.classList.add('on');
+          scholPct = parseInt(b.dataset.pct, 10) || 0;
+          $('#aaScholBadge').textContent = scholPct + '% FEE WAIVER APPLIED';
+          $('#aaRankPred').textContent = 'Predicted Outcome Trajectory: ' + b.dataset.rank + ' (with 85%+ attendance)';
+          compute();
+        });
+      });
+    }
+
     function val(name) { return form.querySelector('input[name="' + name + '"]:checked'); }
     function compute() {
       var prog = val('prog'), batch = val('batch');
+      if (!prog || !batch) return;
       var base = parseFloat(prog.getAttribute('data-base'));
       var flat = prog.getAttribute('data-flat') === '1';
       var mult = parseFloat(batch.getAttribute('data-mult'));
@@ -474,63 +559,70 @@
         ['BASE · ' + prog.value.toUpperCase(), inr(base) + (flat ? ' flat' : '/mo')],
         ['BATCH · ' + batch.value.toUpperCase(), '×' + mult]
       ];
-      if ($('#disc-sibling').checked) { rows.push(['SIBLING −10%', '−' + inr(fee * 0.10)]); fee *= 0.9; }
-      if ($('#disc-early').checked) { rows.push(['EARLY BIRD', '−' + inr(2000)]); fee = Math.max(0, fee - 2000); }
+      if (scholPct > 0) {
+        var sDisc = fee * (scholPct / 100);
+        rows.push(['SCHOLARSHIP −' + scholPct + '%', '−' + inr(sDisc)]);
+        fee -= sDisc;
+      }
+      if ($('#disc-sibling')?.checked) { rows.push(['SIBLING −10%', '−' + inr(fee * 0.10)]); fee *= 0.9; }
+      if ($('#disc-early')?.checked) { rows.push(['EARLY BIRD', '−' + inr(2000)]); fee = Math.max(0, fee - 2000); }
       var addons = 0;
-      if ($('#add-material').checked) { addons += 2000; rows.push(['MATERIAL PACK', '+' + inr(2000) + '/yr']); }
-      if ($('#add-tests').checked) { addons += 3000; rows.push(['TEST SERIES', '+' + inr(3000) + '/yr']); }
+      if ($('#add-material')?.checked) { addons += 2000; rows.push(['MATERIAL PACK', '+' + inr(2000) + '/yr']); }
+      if ($('#add-tests')?.checked) { addons += 3000; rows.push(['TEST SERIES', '+' + inr(3000) + '/yr']); }
       rows.push(['ADD-ONS (YEARLY)', addons ? inr(addons) : '—']);
       out.textContent = inr(fee);
       per.textContent = flat ? ' flat' : '/mo';
       lines.innerHTML = rows.map(function (r) { return '<li><span>' + r[0] + '</span><span>' + r[1] + '</span></li>'; }).join('');
-      waBtn.href = waLink('Hi Aagam Academy, my fee estimate: ' + prog.value + ' / ' + batch.value + ' ≈ ' + inr(fee) + (flat ? ' flat' : '/mo') + '. Please confirm the exact figure.');
+      waBtn.href = waLink('Hi Aagam Academy, my fee estimate with ' + scholPct + '% scholarship waiver: ' + prog.value + ' / ' + batch.value + ' ≈ ' + inr(fee) + (flat ? ' flat' : '/mo') + '. Please confirm my diagnostic test slot.');
     }
     form.addEventListener('change', compute);
     form.addEventListener('input', compute);
     compute();
   })();
 
-  /* ── testimonials carousel ─────────────────────────── */
+  /* ── 3D Card Tilt on Course, Ranker & Faculty Cards ── */
+  if (FINE && !REDUCED) {
+    document.addEventListener('pointermove', function (e) {
+      var card = e.target.closest('.c-card, .r-card, .f-card, .b-card');
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(900px) rotateX(' + (-y * 10).toFixed(1) + 'deg) rotateY(' + (x * 12).toFixed(1) + 'deg) translateY(-4px)';
+    }, { passive: true });
+    document.addEventListener('pointerout', function (e) {
+      var card = e.target.closest('.c-card, .r-card, .f-card, .b-card');
+      if (card && !card.contains(e.relatedTarget)) card.style.transform = '';
+    }, { passive: true });
+  }
+
   (function caro() {
     var track = $('#caro-track'), dots = $('#caro-dots');
+    if (!track || !dots) return;
     track.innerHTML = STORIES.map(function (s, i) {
       var init = s.w.split(' ').map(function (x) { return x[0]; }).join('').slice(0, 2).toUpperCase();
       return '<figure class="t-slide" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + ' of ' + STORIES.length + '">' +
-        '<blockquote>' + s.q + '”</blockquote>' +
+        '<blockquote>“' + s.q + '”</blockquote>' +
         '<figcaption><span class="t-ava mono">' + init + '</span><div><strong>' + s.w + ' [SAMPLE]</strong>' +
         '<p class="mono micro">' + s.r + ' [SAMPLE]</p></div></figcaption></figure>';
     }).join('');
     dots.innerHTML = STORIES.map(function (_, i) {
       return '<button type="button" role="tab" aria-label="Show testimonial ' + (i + 1) + '" aria-selected="' + (i === 0) + '" data-i="' + i + '"></button>';
     }).join('');
-    var i = 0, timer = null, region = $('#caro');
+    var i = 0, region = $('#caro');
     function go(n) {
       i = (n + STORIES.length) % STORIES.length;
       track.style.transform = 'translateX(-' + i * 100 + '%)';
       $$('button', dots).forEach(function (b, j) { b.setAttribute('aria-selected', String(j === i)); });
     }
-    $('#caro-prev').addEventListener('click', function () { go(i - 1); });
-    $('#caro-next').addEventListener('click', function () { go(i + 1); });
+    $('#caro-prev')?.addEventListener('click', function () { go(i - 1); });
+    $('#caro-next')?.addEventListener('click', function () { go(i + 1); });
     dots.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) go(+b.getAttribute('data-i')); });
-    var sx = null;
-    region.addEventListener('pointerdown', function (e) { sx = e.clientX; });
-    region.addEventListener('pointerup', function (e) {
-      if (sx === null) return;
-      var d = e.clientX - sx;
-      if (Math.abs(d) > 48) go(i + (d < 0 ? 1 : -1));
-      sx = null;
-    });
-    if (!REDUCED) {
-      timer = setInterval(function () {
-        if (!region.matches(':hover') && !region.contains(document.activeElement) && !document.hidden) go(i + 1);
-      }, 6500);
-      region.addEventListener('mouseenter', function () { clearInterval(timer); });
-    }
   })();
 
-  /* ── gallery + lightbox ────────────────────────────── */
   (function gallery() {
     var gal = $('#gal');
+    if (!gal) return;
     gal.innerHTML = GALLERY.map(function (g, i) {
       return '<button class="g-item" type="button" data-i="' + i + '" aria-label="Open image: ' + g.cap + '">' +
         '<img src="' + g.img + '" alt="' + g.alt + '" width="' + g.w + '" height="' + g.h + '" loading="lazy" decoding="async">' +
@@ -544,19 +636,19 @@
     }
     gal.addEventListener('click', function (e) {
       var b = e.target.closest('.g-item');
-      if (!b) return;
+      if (!b || !dlg) return;
       show(+b.getAttribute('data-i'));
       dlg.showModal();
     });
-    $('#light-prev').addEventListener('click', function () { show(cur - 1); });
-    $('#light-next').addEventListener('click', function () { show(cur + 1); });
-    $('#light-close').addEventListener('click', function () { dlg.close(); });
-    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    $('#light-prev')?.addEventListener('click', function () { show(cur - 1); });
+    $('#light-next')?.addEventListener('click', function () { show(cur + 1); });
+    $('#light-close')?.addEventListener('click', function () { dlg.close(); });
+    dlg?.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   })();
 
-  /* ── FAQ accordion ─────────────────────────────────── */
   (function faq() {
     var acc = $('#acc');
+    if (!acc) return;
     acc.innerHTML = FAQS.map(function (f, i) {
       return '<div class="acc-item"><h3><button class="acc-btn" id="acc-b' + i + '" aria-expanded="false" aria-controls="acc-p' + i + '">' + f.q + '</button></h3>' +
         '<div class="acc-panel" id="acc-p' + i + '" role="region" aria-labelledby="acc-b' + i + '"><div><p>' + f.a + '</p></div></div></div>';
@@ -576,105 +668,5 @@
     });
   })();
 
-  /* ── multi-step enquiry form ───────────────────────── */
-  (function enq() {
-    var form = $('#enq-form');
-    var count = $('#enq-count');
-    var labels = { 1: 'STUDENT', 2: 'PREFERENCES', 3: 'CONTACT' };
-    function show(n) {
-      $$('.enq-panel', form).forEach(function (p) {
-        var on = +p.getAttribute('data-panel') === n;
-        p.hidden = !on;
-        p.classList.toggle('is-on', on);
-      });
-      $$('.enq-step').forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-s') <= n); });
-      count.textContent = 'STEP ' + n + ' / 3 — ' + labels[n];
-    }
-    function err(id, input, msg) {
-      var el = $('#' + id);
-      el.textContent = msg || '';
-      if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-      return !msg;
-    }
-    function v1() {
-      var ok = true;
-      ok = err('e-name', $('#f-name'), $('#f-name').value.trim().length >= 2 ? '' : 'Please enter the student’s name.') && ok;
-      ok = err('e-class', $('#f-class'), $('#f-class').value ? '' : 'Please pick a class.') && ok;
-      return ok;
-    }
-    function v2() {
-      return err('e-slot', $('#f-slot'), $('#f-slot').value ? '' : 'Please choose a slot.');
-    }
-    function v3() {
-      var ok = true;
-      ok = err('e-phone', $('#f-phone'), /^[6-9][0-9]{9}$/.test($('#f-phone').value.trim()) ? '' : 'Enter a valid 10-digit Indian mobile number.') && ok;
-      var em = $('#f-email').value.trim();
-      ok = err('e-email', $('#f-email'), (!em || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) ? '' : 'That email doesn’t look right.') && ok;
-      ok = err('e-consent', $('#f-consent'), $('#f-consent').checked ? '' : 'We need your OK to call or message you.') && ok;
-      return ok;
-    }
-    form.addEventListener('click', function (e) {
-      var nx = e.target.closest('[data-next]'), pv = e.target.closest('[data-prev]');
-      if (nx) {
-        var to = +nx.getAttribute('data-next');
-        if (to === 2 && !v1()) { toast('A couple of fields need attention.'); return; }
-        if (to === 3 && !v2()) { toast('Please pick a preferred slot.'); return; }
-        show(to);
-      }
-      if (pv) show(+pv.getAttribute('data-prev'));
-    });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!v1() || !v2() || !v3()) { toast('Please fix the highlighted fields.'); return; }
-      var btn = $('#enq-submit');
-      btn.disabled = true; btn.textContent = 'Sending…';
-      var d = new FormData(form);
-      var lead = {
-        ref: 'AA-' + String(Date.now()).slice(-5),
-        name: d.get('name'), klass: d.get('klass'), target: d.get('target'),
-        mode: d.get('mode'), slot: d.get('slot'), note: d.get('note'),
-        phone: d.get('phone'), email: d.get('email'), at: new Date().toISOString()
-      };
-      setTimeout(function () {
-        try {
-          var all = JSON.parse(localStorage.getItem('aa_leads') || '[]');
-          all.push(lead);
-          localStorage.setItem('aa_leads', JSON.stringify(all));
-        } catch (er) {}
-        $$('.enq-panel', form).forEach(function (p) { p.hidden = true; });
-        $('.enq-prog', form).style.display = 'none';
-        $('#enq-honest').style.display = 'none';
-        $('#enq-ref').textContent = lead.ref;
-        $('#enq-wa').href = waLink('Hi Aagam Academy! Enquiry ' + lead.ref + ': ' + lead.name + ' (class ' + lead.klass + '), target ' + lead.target + ', mode ' + lead.mode + ', slot ' + lead.slot + '. Mobile: ' + lead.phone + '.');
-        $('#enq-done').hidden = false;
-        toast('Enquiry saved in this browser · ' + lead.ref);
-      }, 900);
-    });
-    show(1);
-  })();
-
-  /* ── privacy dialog ────────────────────────────────── */
-  (function privacy() {
-    $('#privacy-open').addEventListener('click', function () { $('#dlg-privacy').showModal(); });
-    $('#privacy-close').addEventListener('click', function () { $('#dlg-privacy').close(); });
-  })();
-
-  /* ── cookie notice (only when analytics enabled) ───── */
-  (function cookie() {
-    if (!ANALYTICS_ENABLED) return;
-    var ok = null;
-    try { ok = localStorage.getItem('aa-consent'); } catch (e) {}
-    if (ok) return;
-    var box = $('#cookie');
-    box.hidden = false;
-    function set(v) {
-      try { localStorage.setItem('aa-consent', v); } catch (e) {}
-      box.hidden = true;
-    }
-    $('#cookie-yes').addEventListener('click', function () { set('yes'); });
-    $('#cookie-no').addEventListener('click', function () { set('no'); });
-  })();
-
-  /* reveal must init after injected content exists */
   initReveal();
 })();

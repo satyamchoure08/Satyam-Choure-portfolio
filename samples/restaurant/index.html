@@ -362,6 +362,191 @@ ANGEETHI KITCHEN — Wood-fire Malwa restaurant, Bhopal (single page)
     }
   </style>
 <link rel="stylesheet" href="../assets/motion.css">
+<style>
+/* 3D & Interactive Upgrade Styles */
+
+:root {
+  --bg: #0E0B09;
+  --bg-2: #17120F;
+  --surface: #211914;
+  --line: rgba(244, 237, 228, 0.14);
+  --ink: #F4EDE4;
+  --ink-dim: #B9AC9E;
+  --accent: #FF5A1F;
+  --brass: #E5B869;
+  --ok: #7FD39A;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --radius: 18px;
+}
+
+
+
+img { max-width: 100%; display: block; border-radius: 12px; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+
+#emberProgress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--brass));
+  z-index: 9999; box-shadow: 0 0 14px var(--accent);
+}
+
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(16px); background: rgba(14, 11, 9, 0.86);
+  border-bottom: 1px solid var(--line);
+}
+.nav-wrap {
+  max-width: 1280px; margin: 0 auto; padding: 0.9rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--font-serif); font-size: 1.55rem; font-weight: 700;
+  color: var(--ink); display: flex; align-items: center; gap: 0.55rem;
+}
+.brand span { color: var(--accent); }
+.nav-links { display: flex; gap: 1.35rem; font-size: 0.9rem; color: var(--ink-dim); flex-wrap: wrap; }
+.nav-links a:hover { color: var(--accent); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+  padding: 0.7rem 1.25rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem;
+  border: 1px solid transparent; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.btn-fire {
+  background: linear-gradient(135deg, var(--accent), #d93800); color: #fff;
+  box-shadow: 0 8px 26px rgba(255, 90, 31, 0.32);
+}
+.btn-fire:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 90, 31, 0.5); }
+.btn-ghost {
+  background: rgba(255,255,255,0.04); color: var(--ink); border-color: var(--line);
+}
+.btn-ghost:hover { border-color: var(--brass); color: var(--brass); }
+
+/* Hero */
+.hero {
+  max-width: 1280px; margin: 0 auto; padding: 3.2rem 1.5rem 4rem;
+  display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 2.4rem; align-items: center;
+}
+@media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.32rem 0.85rem; border-radius: 999px;
+  background: rgba(255, 90, 31, 0.14); color: var(--accent);
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: var(--font-serif); font-size: clamp(2.6rem, 5.5vw, 4.7rem);
+  line-height: 1.02; margin-bottom: 1.1rem;
+}
+.hero h1 em { color: var(--brass); font-style: italic; }
+.hero p.lead { color: var(--ink-dim); font-size: 1.06rem; max-width: 54ch; margin-bottom: 1.6rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  padding-top: 1.3rem; border-top: 1px solid var(--line);
+}
+.stat-val { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; color: var(--brass); }
+.stat-lbl { font-size: 0.8rem; color: var(--ink-dim); }
+
+.thali-stage {
+  position: relative; border-radius: 24px; background: radial-gradient(circle at 50% 45%, #2b1b12, #120d0a);
+  border: 1px solid var(--line); min-height: 450px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 1.2rem;
+  box-shadow: 0 28px 60px rgba(0,0,0,0.6);
+}
+#thaliCanvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; z-index: 1; }
+#thaliCanvas:active { cursor: grabbing; }
+.stage-hud { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.hud-pill {
+  background: rgba(14, 11, 9, 0.78); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); padding: 0.38rem 0.8rem; border-radius: 999px;
+  font-size: 0.75rem; color: var(--ink-dim);
+}
+.hud-pill strong { color: var(--brass); }
+
+/* Velocity Skew Spice Ticker */
+.ticker-wrap {
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  background: #140f0c; overflow: hidden; padding: 0.85rem 0;
+}
+.ticker-track {
+  display: flex; gap: 2.4rem; white-space: nowrap; will-change: transform;
+  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700;
+  letter-spacing: 0.06em; color: var(--ink-dim);
+}
+.ticker-track span b { color: var(--accent); margin-right: 0.4rem; }
+
+.section { max-width: 1280px; margin: 0 auto; padding: 4.2rem 1.5rem; }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.2rem; flex-wrap: wrap; }
+.sec-head h2 { font-family: var(--font-serif); font-size: clamp(2.1rem, 4.2vw, 3.2rem); line-height: 1.08; }
+.sec-head p { color: var(--ink-dim); max-width: 52ch; }
+
+/* Interactive Custom Malwa Thali Builder */
+.builder-shell {
+  background: linear-gradient(145deg, #1d1511, #130e0b);
+  border: 1px solid var(--line); border-radius: 24px; padding: 2rem;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center;
+}
+@media (max-width: 900px) { .builder-shell { grid-template-columns: 1fr; } }
+.builder-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .builder-controls { grid-template-columns: 1fr; } }
+.field label { display: block; font-size: 0.76rem; color: var(--brass); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.35rem; }
+.field select, .field input {
+  width: 100%; padding: 0.72rem 0.9rem; border-radius: 12px;
+  background: #0E0B09; border: 1px solid var(--line); color: var(--ink);
+}
+.thali-preview-box {
+  background: #0E0B09; border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; text-align: center;
+}
+.thali-svg-wrap { max-width: 240px; margin: 0 auto 1rem; }
+
+/* Menu Filter & Grid */
+.menu-toolbar { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.chip {
+  padding: 0.48rem 0.95rem; border-radius: 999px; font-size: 0.84rem; font-weight: 600;
+  background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-dim); cursor: pointer;
+}
+.chip.active, .chip:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.search-input {
+  padding: 0.55rem 1rem; border-radius: 999px; background: var(--bg-2);
+  border: 1px solid var(--line); color: var(--ink); min-width: 240px;
+}
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.4rem; }
+.dish-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;
+  transform-style: preserve-3d; transition: border-color 0.25s, box-shadow 0.25s;
+}
+.dish-card:hover { border-color: var(--brass); box-shadow: 0 18px 40px rgba(0,0,0,0.5); }
+.dish-card img { width: 100%; height: 175px; object-fit: cover; margin-bottom: 0.9rem; }
+.dish-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--brass); margin-bottom: 0.35rem; }
+.dish-title { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.35rem; }
+.dish-desc { font-size: 0.86rem; color: var(--ink-dim); margin-bottom: 1rem; }
+.dish-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.8rem; border-top: 1px solid var(--line); }
+.dish-price { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; color: var(--ink); }
+
+/* Cart Drawer */
+.cart-drawer {
+  position: fixed; top: 0; right: -420px; width: min(400px, 92vw); height: 100vh;
+  background: #16110e; border-left: 1px solid var(--line); z-index: 999;
+  padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
+  transition: right 0.32s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: -20px 0 50px rgba(0,0,0,0.7);
+}
+.cart-drawer.open { right: 0; }
+.cart-items { flex: 1; overflow-y: auto; margin: 1rem 0; display: grid; gap: 0.75rem; align-content: start; }
+.cart-row {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 0.75rem 0.9rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+}
+.meter-bar { height: 7px; background: #0E0B09; border-radius: 99px; overflow: hidden; margin-top: 0.4rem; }
+.meter-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--ok)); width: 0%; transition: width 0.3s; }
+
+footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--ink-dim); font-size: 0.88rem; }
+
+</style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -412,6 +597,294 @@ ANGEETHI KITCHEN — Wood-fire Malwa restaurant, Bhopal (single page)
   </div>
 
   <main id="main">
+
+<!-- ORIGINAL_FULL_SECTIONS_MERGED: 3D WEBGL & INTERACTIVE STUDIO UPGRADE -->
+<section id="interactive-3d-upgrade" style="position:relative;z-index:5;margin:0 auto;padding:1.5rem 0;border-bottom:1px solid rgba(128,128,128,0.2);">
+
+  <!-- HERO WITH 3D BRASS THALI & RISING EMBER STEAM -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">● MP Nagar Zone 2, Bhopal · Slow-Cooked Over Babool &amp; Tamarind Wood</span>
+      <h1>Smoke, Brass &amp; <em>Royal Malwa</em> Recipes.</h1>
+      <p class="lead">Every handi simmers for 6 hours over glowing babool charcoal. Spin our 3D Brass Thali, assemble your custom 5-katori feast, or reserve a courtyard angithi table in 30 seconds.</p>
+      <div class="hero-actions">
+        <a class="btn btn-fire" href="#thali-builder">🍛 Build Your Royal Thali</a>
+        <a class="btn btn-ghost" href="#menu">Explore 18+ Wood-Fire Dishes</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-val">4.8 ★</div>
+          <div class="stat-lbl">1,240+ Bhopali Diners</div>
+        </div>
+        <div>
+          <div class="stat-val">6 Hrs</div>
+          <div class="stat-lbl">Slow Clay-Handi Simmer</div>
+        </div>
+        <div>
+          <div class="stat-val">35 Min</div>
+          <div class="stat-lbl">Hot Tiffin Delivery (5 km)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thali-stage">
+      <div class="stage-hud">
+        <span class="hud-pill"><strong>3D KANSYA THALI</strong> · Drag to Orbit · Scroll to Tilt</span>
+        <button type="button" class="btn btn-ghost" id="stokeFireBtn" style="padding:0.35rem 0.8rem;font-size:0.75rem;">🔥 Stoke Angithi Embers</button>
+      </div>
+      <canvas id="thaliCanvas" aria-label="Interactive 3D Brass Thali with glowing embers"></canvas>
+      <div class="stage-hud">
+        <span class="hud-pill">Hand-Hammered Brass + 6 Katoris</span>
+        <span class="hud-pill"> Pit Temp: <strong id="pitTemp">340°C</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VELOCITY SKEW TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track" id="spiceTicker">
+      <span><b>🔥</b> BHOPALI RIZALA HANDI</span>
+      <span><b>🔥</b> DAL BAFLA GHEE DIP</span>
+      <span><b>🔥</b> CHARCOAL SEEKH &amp; TIKKA</span>
+      <span><b>🔥</b> SMOKED BAINGAN BHARTA</span>
+      <span><b>🔥</b> WARQI PARATHA &amp; SHEERMAL</span>
+      <span><b>🔥</b> SHAHI MAWA BATI</span>
+      <span><b>🔥</b> BHOPALI RIZALA HANDI</span>
+      <span><b>🔥</b> DAL BAFLA GHEE DIP</span>
+      <span><b>🔥</b> CHARCOAL SEEKH &amp; TIKKA</span>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE CUSTOM MALWA THALI CONFIGURATOR -->
+  <section class="section" id="thali-builder">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Interactive Feast Studio</span>
+        <h2>Build Your Custom 5-Katori Brass Thali</h2>
+      </div>
+      <p>Customize each bowl in your thali, dial in your charcoal smoke &amp; mirchi level, and add the complete platter to your WhatsApp order.</p>
+    </div>
+
+    <div class="builder-shell">
+      <div class="builder-controls">
+        <div class="field">
+          <label for="thBread">1. Tandoor / Hearth Bread</label>
+          <select id="thBread">
+            <option value="Desi Ghee Dal Bafla (2 pcs)|140" data-color="#D99B4E">Desi Ghee Baked Bafla (+₹140)</option>
+            <option value="Lacha Garlic Naan & Tandoori Roti|110" data-color="#E6C387">Garlic Naan &amp; Roti Duo (+₹110)</option>
+            <option value="Bhopali Saffron Sheermal|130" data-color="#E28743">Bhopali Saffron Sheermal (+₹130)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="thMain">2. Signature Slow Handi</label>
+          <select id="thMain">
+            <option value="Smoked Paneer Lababdar|220" data-color="#E05A2B">Smoked Paneer Angara (+₹220)</option>
+            <option value="Bhopali Mutton Rizala|310" data-color="#9E3B24">Bhopali Mutton Rizala (+₹310)</option>
+            <option value="Malwa Sev Tamatar & Bharta|180" data-color="#C84B31">Malwa Sev Tamatar &amp; Bharta (+₹180)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="thDal">3. Overnight Dal &amp; Kadhi</label>
+          <select id="thDal">
+            <option value="24-Hr Coal Dal Bukhara|150" data-color="#7A2E1D">24-Hr Coal Dal Bukhara (+₹150)</option>
+            <option value="Malwa Lasooni Dal Tadka|120" data-color="#E3A832">Malwa Lasooni Dal Tadka (+₹120)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="thKebab">4. Angithi Starter Skewer</label>
+          <select id="thKebab">
+            <option value="Dahi Ke Sholey & Malai Broccoli|160" data-color="#D7C49E">Dahi Ke Sholey (Veg) (+₹160)</option>
+            <option value="Charcoal Murgh Malai Tikka|210" data-color="#D9822B">Charcoal Murgh Tikka (+₹210)</option>
+            <option value="Bhutte Ki Kees Croquettes|140" data-color="#F2C14E">Bhutte Ki Kees Tikki (+₹140)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="thSweet">5. Shahi Dessert Katori</label>
+          <select id="thSweet">
+            <option value="Hot Mawa Bati in Rabdi|110" data-color="#6E2C1B">Hot Mawa Bati in Rabdi (+₹110)</option>
+            <option value="Kulhad Kesariya Jalebi|90" data-color="#FF7F11">Kulhad Kesariya Jalebi (+₹90)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="thSpice">6. Dhungar Smoke &amp; Spice Level</label>
+          <select id="thSpice">
+            <option value="Mild Royal (Creamy & Aromatic)">Mild Royal (Creamy &amp; Aromatic)</option>
+            <option value="Medium Malwa (Balanced Mirchi)" selected>Medium Malwa (Balanced Mirchi)</option>
+            <option value="Fiery Angara (Laal Mirch & Clove Smoke)">Fiery Angara (Extra Laal Mirch 🔥)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="thali-preview-box">
+        <div class="thali-svg-wrap">
+          <svg viewBox="0 0 220 220" width="100%" height="100%">
+            <circle cx="110" cy="110" r="102" fill="#2A1E14" stroke="#E5B869" stroke-width="5"/>
+            <circle cx="110" cy="110" r="92" fill="none" stroke="rgba(229,184,105,0.35)" stroke-dasharray="4 4"/>
+            <!-- 5 Katoris + Center Bread/Rice -->
+            <circle id="svgKMain" cx="65" cy="65" r="24" fill="#E05A2B" stroke="#E5B869" stroke-width="2.5"/>
+            <circle id="svgKDal" cx="118" cy="52" r="22" fill="#7A2E1D" stroke="#E5B869" stroke-width="2.5"/>
+            <circle id="svgKKebab" cx="160" cy="84" r="22" fill="#D7C49E" stroke="#E5B869" stroke-width="2.5"/>
+            <circle id="svgKSweet" cx="155" cy="138" r="20" fill="#6E2C1B" stroke="#E5B869" stroke-width="2.5"/>
+            <ellipse id="svgKBread" cx="92" cy="142" rx="42" ry="28" fill="#D99B4E" stroke="#E5B869" stroke-width="2"/>
+          </svg>
+        </div>
+        <div style="font-size:0.8rem;color:var(--brass);text-transform:uppercase;letter-spacing:0.06em;">Your Custom Royal Thali</div>
+        <div style="font-family:var(--font-serif);font-size:2.1rem;font-weight:700;margin:0.2rem 0;" id="thaliTotalPrice">₹780</div>
+        <p style="font-size:0.84rem;color:var(--ink-dim);margin-bottom:1rem;" id="thaliSummaryText">Includes Jeera Basmati Rice, Pudina Chutney, Pickled Onions &amp; Roasted Papad.</p>
+        <button type="button" class="btn btn-fire" style="width:100%;" id="addCustomThaliBtn">🥘 Add Custom Thali to Handi Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WOOD-FIRE MENU WITH LIVE SEARCH & DIETARY FILTER -->
+  <section class="section" id="menu">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">A La Carte &amp; Handis</span>
+        <h2>Fresh From the Clay Oven &amp; Angithi</h2>
+      </div>
+      <p>Filter by Vegetarian, Non-Veg, or Signature Thalis, or search any craving below.</p>
+    </div>
+
+    <div class="menu-toolbar">
+      <div class="chip-row" id="menuFilters">
+        <button class="chip active" data-cat="all">All Dishes</button>
+        <button class="chip" data-cat="veg">🟢 Pure Veg</button>
+        <button class="chip" data-cat="nonveg">🔴 Royal Non-Veg</button>
+        <button class="chip" data-cat="bread">🫓 Tandoor &amp; Bafla</button>
+      </div>
+      <input type="search" id="menuSearch" class="search-input" placeholder="Search kebabs, bafla, rizala, paneer...">
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <article class="dish-card" data-cat="veg" data-name="malwa dal bafla thali">
+        <div>
+          <img src="images/thali-portrait.jpg" alt="Royal Malwa Dal Bafla Thali" onerror="this.style.background='#2a1d17'">
+          <div class="dish-meta"><span>🟢 PURE VEG · BESTSELLER</span><span>🌶️ Medium</span></div>
+          <div class="dish-title">Royal Malwa Dal Bafla Thali</div>
+          <p class="dish-desc">Oven-baked wheat baflas dipped in shuddh desi ghee with panchmel dal, kadhi, lasooni chutney &amp; mawa bati.</p>
+        </div>
+        <div class="dish-foot">
+          <span class="dish-price">₹380</span>
+          <button type="button" class="btn btn-ghost add-dish-btn" data-title="Royal Malwa Dal Bafla Thali" data-price="380">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="dish-card" data-cat="nonveg" data-name="charcoal murgh angara seekh">
+        <div>
+          <img src="images/kebab-skewers.jpg" alt="Charcoal Murgh Angara Skewers" onerror="this.style.background='#2a1d17'">
+          <div class="dish-meta"><span>🔴 NON-VEG · WOOD-FIRE</span><span>🌶️🌶️ Spicy</span></div>
+          <div class="dish-title">Charcoal Murgh Angara Skewers</div>
+          <p class="dish-desc">Hand-minced chicken &amp; bone-in morsels basted with smoked ghee over live babool embers.</p>
+        </div>
+        <div class="dish-foot">
+          <span class="dish-price">₹340</span>
+          <button type="button" class="btn btn-ghost add-dish-btn" data-title="Charcoal Murgh Angara Skewers" data-price="340">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="dish-card" data-cat="veg" data-name="dhungar paneer lababdar handi">
+        <div>
+          <img src="images/curry-bowls.jpg" alt="Dhungar Paneer Lababdar Handi" onerror="this.style.background='#2a1d17'">
+          <div class="dish-meta"><span>🟢 PURE VEG · CLOVE SMOKE</span><span>🌶️ Mild-Med</span></div>
+          <div class="dish-title">Dhungar Paneer Lababdar Handi</div>
+          <p class="dish-desc">Char-grilled malai paneer cubes finished in a slow-simmered tomato cashew gravy with live clove dhungar.</p>
+        </div>
+        <div class="dish-foot">
+          <span class="dish-price">₹290</span>
+          <button type="button" class="btn btn-ghost add-dish-btn" data-title="Dhungar Paneer Lababdar Handi" data-price="290">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="dish-card" data-cat="nonveg" data-name="bhopali mutton rizala handi">
+        <div>
+          <img src="images/feast.jpg" alt="Bhopali Shahi Mutton Rizala" onerror="this.style.background='#2a1d17'">
+          <div class="dish-meta"><span>🔴 HERITAGE NAWABI</span><span>🌶️ Aromatic</span></div>
+          <div class="dish-title">Bhopali Shahi Mutton Rizala</div>
+          <p class="dish-desc">Silky white yogurt, poppy seed, green cardamom, and fresh coriander curry slow-braised in a sealed clay handi.</p>
+        </div>
+        <div class="dish-foot">
+          <span class="dish-price">₹440</span>
+          <button type="button" class="btn btn-ghost add-dish-btn" data-title="Bhopali Shahi Mutton Rizala" data-price="440">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="dish-card" data-cat="veg" data-name="smoked baingan bharta & bhutte ki kees">
+        <div>
+          <img src="images/smoke-grill.jpg" alt="Fire-Roasted Baingan Bharta" onerror="this.style.background='#2a1d17'">
+          <div class="dish-meta"><span>🟢 MALWA CLASSIC</span><span>🌶️ Medium</span></div>
+          <div class="dish-title">Open-Fire Bharta &amp; Bhutte Ki Kees</div>
+          <p class="dish-desc">Eggplant blistered directly on wood coals paired with grated milk-simmered sweet corn tempered with mustard &amp; hing.</p>
+        </div>
+        <div class="dish-foot">
+          <span class="dish-price">₹250</span>
+          <button type="button" class="btn btn-ghost add-dish-btn" data-title="Open-Fire Bharta & Bhutte Ki Kees" data-price="250">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="dish-card" data-cat="bread" data-name="warqi paratha & saffron sheermal basket">
+        <div>
+          <img src="images/hero-spread.jpg" alt="Tandoor Bread Basket" onerror="this.style.background='#2a1d17'">
+          <div class="dish-meta"><span>🫓 CLAY TANDOOR</span><span>Fresh Baked</span></div>
+          <div class="dish-title">Warqi Paratha &amp; Sheermal Basket</div>
+          <p class="dish-desc">Assorted basket of flaky layered warqi paratha, lasooni naan, and warm saffron-brushed Bhopali sheermal.</p>
+        </div>
+        <div class="dish-foot">
+          <span class="dish-price">₹190</span>
+          <button type="button" class="btn btn-ghost add-dish-btn" data-title="Warqi Paratha & Sheermal Basket" data-price="190">+ Add to Cart</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TABLE RESERVATION -->
+  <section class="section" id="book-table">
+    <div class="builder-shell">
+      <div>
+        <span class="eyebrow">Instant Table Confirmation</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);margin-bottom:0.8rem;">Reserve Your Courtyard Angithi Table</h2>
+        <p style="color:var(--ink-dim);margin-bottom:1.2rem;">Choose our live rooftop angithi pit (where kebabs are grilled at your table), the brass courtyard, or the family AC lounge.</p>
+        <img src="images/interior-dining.jpg" alt="Angeethi Kitchen Dining Room" style="height:210px;width:100%;object-fit:cover;">
+      </div>
+      <div class="builder-controls">
+        <div class="field">
+          <label for="bkName">Your Name</label>
+          <input type="text" id="bkName" placeholder="e.g. Aditya Sharma">
+        </div>
+        <div class="field">
+          <label for="bkGuests">Party Size</label>
+          <select id="bkGuests">
+            <option value="2 Guests">2 Guests (Couple Table)</option>
+            <option value="4 Guests" selected>4 Guests (Family Booth)</option>
+            <option value="6–8 Guests">6–8 Guests (Live Table Angithi Pit)</option>
+            <option value="12+ Guests">12+ Guests (Private Dawat Hall)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bkSlot">Dining Slot</label>
+          <select id="bkSlot">
+            <option value="Lunch · 1:00 PM">Lunch · 1:00 PM</option>
+            <option value="Dinner · 8:00 PM" selected>Dinner · 8:00 PM (Live Ghazal &amp; Fire)</option>
+            <option value="Dinner · 9:30 PM">Dinner · 9:30 PM</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bkZone">Seating Zone</label>
+          <select id="bkZone">
+            <option value="Rooftop Live Angithi Pit">Rooftop Live Angithi Pit 🔥</option>
+            <option value="Indoor Brass Courtyard">Indoor Brass Courtyard (AC)</option>
+            <option value="Private Family Majlis">Private Family Majlis</option>
+          </select>
+        </div>
+        <div style="grid-column:1 / -1;margin-top:0.5rem;">
+          <button type="button" class="btn btn-fire" style="width:100%;" id="bookTableWaBtn">📲 Confirm Table on WhatsApp (30s Response)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
     <!-- ===== HERO ===== -->
     <section class="hero" id="top" style="padding-top:140px">
       <span class="corner mono c-tl">Est. 2017 — Bhopal, MP</span>
@@ -1040,5 +1513,274 @@ ANGEETHI KITCHEN — Wood-fire Malwa restaurant, Bhopal (single page)
 })();
 </script>
 <script src="../assets/motion.js?v=2" defer></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  // 1. Scroll Progress & Velocity Skew Ticker
+  const prog = document.getElementById('emberProgress');
+  const ticker = document.getElementById('spiceTicker');
+  let lastY = window.scrollY, tickX = 0, boost = 0;
+  window.addEventListener('scroll', () => {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    if (prog) prog.style.width = ((window.scrollY / max) * 100).toFixed(1) + '%';
+    boost = Math.max(-15, Math.min(15, (window.scrollY - lastY) * 0.3));
+    lastY = window.scrollY;
+  }, { passive: true });
+
+  function tickLoop() {
+    tickX -= (0.55 + Math.abs(boost) * 0.16);
+    if (tickX < -850) tickX = 0;
+    boost *= 0.9;
+    if (ticker) ticker.style.transform = `translate3d(${tickX}px,0,0) skewX(${(-boost * 0.55).toFixed(2)}deg)`;
+    requestAnimationFrame(tickLoop);
+  }
+  requestAnimationFrame(tickLoop);
+
+  // 2. Custom Thali Builder
+  const selects = ['thBread','thMain','thDal','thKebab','thSweet','thSpice'].map(id => document.getElementById(id));
+  let currentThali = { title: 'Custom Royal Malwa Thali', price: 780, desc: '' };
+
+  function updateThaliBuilder() {
+    let total = 0;
+    const parts = [];
+    ['thBread','thMain','thDal','thKebab','thSweet'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const [name, p] = el.value.split('|');
+      total += parseInt(p, 10) || 0;
+      parts.push(name);
+      const opt = el.options[el.selectedIndex];
+      const col = opt ? opt.getAttribute('data-color') : null;
+      const mapSvg = { thBread:'svgKBread', thMain:'svgKMain', thDal:'svgKDal', thKebab:'svgKKebab', thSweet:'svgKSweet' };
+      const svgEl = document.getElementById(mapSvg[id]);
+      if (svgEl && col) svgEl.setAttribute('fill', col);
+    });
+    const spice = document.getElementById('thSpice').value;
+    currentThali = {
+      title: `Custom 5-Katori Thali (${parts[1].split(' ')[0]} + ${parts[0].split(' ')[0]})`,
+      price: total,
+      desc: `${parts.join(', ')} [${spice}]`
+    };
+    document.getElementById('thaliTotalPrice').textContent = '₹' + total;
+    document.getElementById('thaliSummaryText').textContent = currentThali.desc;
+  }
+  selects.forEach(s => s && s.addEventListener('change', updateThaliBuilder));
+  updateThaliBuilder();
+
+  // 3. Handi Cart Drawer State
+  const cart = [];
+  const drawer = document.getElementById('cartDrawer');
+  document.getElementById('openCartBtn').addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('closeCartBtn').addEventListener('click', () => drawer.classList.remove('open'));
+
+  function renderCart() {
+    document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
+    const list = document.getElementById('cartItemsList');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cartTotalVal').textContent = '₹' + total;
+
+    const pct = Math.min(100, Math.round((total / 400) * 100));
+    document.getElementById('deliveryMeter').style.width = pct + '%';
+    document.getElementById('deliveryStatusText').textContent = total >= 400
+      ? '🎉 Unlocked FREE Hot Clay-Handi Delivery!'
+      : `Add ₹${400 - total} more for FREE Hot-Tiffin Delivery`;
+
+    if (!cart.length) {
+      list.innerHTML = '<p style="color:var(--ink-dim);font-size:0.88rem;">Your handi cart is empty. Add a custom thali or wood-fire dish!</p>';
+      return;
+    }
+    list.innerHTML = cart.map((item, idx) => `
+      <div class="cart-row">
+        <div>
+          <strong style="font-size:0.9rem;display:block;">${item.title}</strong>
+          <span style="font-size:0.78rem;color:var(--brass);">₹${item.price} × ${item.qty}</span>
+        </div>
+        <div style="display:flex;gap:0.35rem;align-items:center;">
+          <button type="button" class="btn btn-ghost" style="padding:0.2rem 0.55rem;" data-idx="${idx}" data-act="dec">-</button>
+          <span>${item.qty}</span>
+          <button type="button" class="btn btn-ghost" style="padding:0.2rem 0.55rem;" data-idx="${idx}" data-act="inc">+</button>
+        </div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('button[data-idx]').forEach(b => {
+      b.addEventListener('click', () => {
+        const i = parseInt(b.getAttribute('data-idx'), 10);
+        if (b.getAttribute('data-act') === 'inc') cart[i].qty++;
+        else { cart[i].qty--; if (cart[i].qty <= 0) cart.splice(i, 1); }
+        renderCart();
+      });
+    });
+  }
+
+  function addToCart(title, price) {
+    const existing = cart.find(i => i.title === title);
+    if (existing) existing.qty++;
+    else cart.push({ title, price: parseInt(price, 10), qty: 1 });
+    renderCart();
+    drawer.classList.add('open');
+  }
+
+  document.getElementById('addCustomThaliBtn').addEventListener('click', () => {
+    addToCart(currentThali.title, currentThali.price);
+  });
+  document.querySelectorAll('.add-dish-btn').forEach(btn => {
+    btn.addEventListener('click', () => addToCart(btn.getAttribute('data-title'), btn.getAttribute('data-price')));
+  });
+
+  document.getElementById('checkoutWaBtn').addEventListener('click', () => {
+    if (!cart.length) return alert('Add at least one dish or custom thali first!');
+    const lines = cart.map(i => `• ${i.qty}x ${i.title} (₹${i.price * i.qty})`).join('\n');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const msg = `🔥 *New Order — Angeethi Kitchen*\n${lines}\n*Total:* ₹${total}\nPlease share live kitchen prep time!`;
+    window.open(`https://wa.me/919800000000?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  // 4. Menu Filter & Instant Search
+  let activeCat = 'all';
+  function filterMenu() {
+    const q = (document.getElementById('menuSearch').value || '').toLowerCase();
+    document.querySelectorAll('#menuGrid .dish-card').forEach(card => {
+      const catMatch = activeCat === 'all' || card.getAttribute('data-cat') === activeCat;
+      const textMatch = !q || card.textContent.toLowerCase().includes(q);
+      card.style.display = (catMatch && textMatch) ? 'flex' : 'none';
+    });
+  }
+  document.querySelectorAll('#menuFilters .chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#menuFilters .chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.getAttribute('data-cat');
+      filterMenu();
+    });
+  });
+  document.getElementById('menuSearch').addEventListener('input', filterMenu);
+
+  // 5. Table Reservation WhatsApp
+  document.getElementById('bookTableWaBtn').addEventListener('click', () => {
+    const name = document.getElementById('bkName').value || 'Guest';
+    const guests = document.getElementById('bkGuests').value;
+    const slot = document.getElementById('bkSlot').value;
+    const zone = document.getElementById('bkZone').value;
+    const msg = `🔥 *Table Reservation — Angeethi Kitchen*\nName: ${name}\nParty: ${guests}\nSlot: ${slot}\nSeating: ${zone}`;
+    window.open(`https://wa.me/919800000000?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  // 6. Real-Time Three.js 3D Brass Thali + Rising Glowing Ember Particles
+  const canvas = document.getElementById('thaliCanvas');
+  if (canvas && window.THREE) {
+    try {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 3.2, 5.2);
+      camera.lookAt(0, 0, 0);
+
+      scene.add(new THREE.AmbientLight(0xffe4c4, 0.75));
+      const fireLight = new THREE.PointLight(0xff5a1f, 2.2, 14);
+      fireLight.position.set(2, 3, 2);
+      scene.add(fireLight);
+      const rimLight = new THREE.DirectionalLight(0xe5b869, 1.3);
+      rimLight.position.set(-3, 4, -2);
+      scene.add(rimLight);
+
+      const platter = new THREE.Group();
+      scene.add(platter);
+
+      const brassMat = new THREE.MeshStandardMaterial({ color: 0xe5b869, metalness: 0.85, roughness: 0.22 });
+      const curryColors = [0xd94e1f, 0x7a2e1d, 0xe3a832, 0xd7c49e, 0x6e2c1b, 0x4f772d];
+
+      // Main Kansya Brass Thali Base & Rim
+      const base = new THREE.Mesh(new THREE.CylinderGeometry(2.15, 1.95, 0.14, 48), brassMat);
+      platter.add(base);
+      const rim = new THREE.Mesh(new THREE.TorusGeometry(2.08, 0.09, 16, 64), brassMat);
+      rim.rotation.x = Math.PI / 2;
+      rim.position.y = 0.08;
+      platter.add(rim);
+
+      // 6 Brass Katoris around the perimeter
+      for (let i = 0; i < 6; i++) {
+        const ang = (i / 6) * Math.PI * 2;
+        const kx = Math.cos(ang) * 1.25;
+        const kz = Math.sin(ang) * 1.25;
+        const katori = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.32, 0.34, 28), brassMat);
+        katori.position.set(kx, 0.22, kz);
+        platter.add(katori);
+
+        const curry = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.38, 0.38, 0.06, 24),
+          new THREE.MeshStandardMaterial({ color: curryColors[i], roughness: 0.4 })
+        );
+        curry.position.set(kx, 0.37, kz);
+        platter.add(curry);
+      }
+
+      // Center Golden Bafla / Pulao Dome
+      const dome = new THREE.Mesh(
+        new THREE.SphereGeometry(0.55, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2),
+        new THREE.MeshStandardMaterial({ color: 0xd99b4e, roughness: 0.55 })
+      );
+      dome.position.y = 0.07;
+      platter.add(dome);
+
+      // Rising Ember Particles
+      const emberCount = 55;
+      const emberGeo = new THREE.BufferGeometry();
+      const posArr = new Float32Array(emberCount * 3);
+      for (let i = 0; i < emberCount; i++) {
+        posArr[i * 3] = (Math.random() - 0.5) * 3.6;
+        posArr[i * 3 + 1] = Math.random() * 2.8;
+        posArr[i * 3 + 2] = (Math.random() - 0.5) * 3.6;
+      }
+      emberGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+      const emberMat = new THREE.PointsMaterial({ color: 0xff6a2b, size: 0.08, transparent: true, opacity: 0.85 });
+      const embers = new THREE.Points(emberGeo, emberMat);
+      scene.add(embers);
+
+      function resize() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        renderer.setSize(r.width, r.height, false);
+        camera.aspect = r.width / Math.max(1, r.height);
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let dragging = false, px = 0, velY = 0.008, emberSpeed = 0.015;
+      canvas.addEventListener('pointerdown', e => { dragging = true; px = e.clientX; });
+      window.addEventListener('pointerup', () => { dragging = false; });
+      window.addEventListener('pointermove', e => {
+        if (!dragging) return;
+        velY = (e.clientX - px) * 0.009;
+        px = e.clientX;
+      });
+
+      document.getElementById('stokeFireBtn').addEventListener('click', () => {
+        velY = 0.14;
+        emberSpeed = 0.06;
+        document.getElementById('pitTemp').textContent = '420°C 🔥';
+        setTimeout(() => { emberSpeed = 0.015; document.getElementById('pitTemp').textContent = '340°C'; }, 2600);
+      });
+
+      function animate() {
+        platter.rotation.y += velY + (boost * 0.003);
+        if (!dragging) velY = velY * 0.96 + 0.008 * 0.04;
+
+        const p = emberGeo.attributes.position.array;
+        for (let i = 0; i < emberCount; i++) {
+          p[i * 3 + 1] += emberSpeed;
+          if (p[i * 3 + 1] > 2.8) p[i * 3 + 1] = 0.1;
+        }
+        emberGeo.attributes.position.needsUpdate = true;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+    } catch (e) { console.warn('WebGL fallback:', e); }
+  }
+})();
+</script>
 </body>
 </html>

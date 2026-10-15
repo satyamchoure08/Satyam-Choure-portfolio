@@ -836,6 +836,152 @@ details.faq .faq-body{padding:0 1.35rem 1.25rem;color:var(--ink-soft)}
   .reveal{opacity:1 !important;transform:none !important}
 }
 </style>
+<style>
+/* 3D & Interactive Upgrade Styles */
+
+:root {
+  --bg: #FFF9F2;
+  --bg-2: #FCEEE0;
+  --card: #FFFFFF;
+  --ink: #2A1215;
+  --mute: #6E4F53;
+  --crimson: #8A1C2B;
+  --saffron: #E8871E;
+  --gold: #D4AF37;
+  --line: rgba(138, 28, 43, 0.14);
+  --font-head: "Baloo 2", cursive, sans-serif;
+  --font-body: "Mukta", system-ui, sans-serif;
+  --radius: 18px;
+}
+
+
+
+img { max-width: 100%; display: block; border-radius: 12px; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+
+#sweetProgress {
+  position: fixed; top: 0; left: 0; height: 4px; width: 0%;
+  background: linear-gradient(90deg, var(--crimson), var(--saffron));
+  z-index: 9999;
+}
+
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(14px); background: rgba(255, 249, 242, 0.9);
+  border-bottom: 1px solid var(--line);
+}
+.nav-wrap {
+  max-width: 1280px; margin: 0 auto; padding: 0.85rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.brand { font-family: var(--font-head); font-size: 1.55rem; font-weight: 800; color: var(--crimson); }
+.brand span { color: var(--saffron); }
+.nav-links { display: flex; gap: 1.25rem; font-size: 0.95rem; font-weight: 600; color: var(--mute); flex-wrap: wrap; }
+.nav-links a:hover { color: var(--crimson); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+  padding: 0.65rem 1.25rem; border-radius: 999px; font-weight: 700; font-size: 0.9rem;
+  border: 1px solid transparent; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-sweet {
+  background: linear-gradient(135deg, var(--crimson), #b82539); color: #fff;
+  box-shadow: 0 8px 22px rgba(138, 28, 43, 0.25);
+}
+.btn-sweet:hover { transform: translateY(-2px); }
+.btn-outline { background: var(--card); color: var(--crimson); border-color: var(--line); }
+.btn-outline:hover { border-color: var(--crimson); }
+
+/* Hero + Live 3D Cake Studio */
+.hero {
+  max-width: 1280px; margin: 0 auto; padding: 2.8rem 1.5rem 3.5rem;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.2rem; align-items: center;
+}
+@media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.85rem; border-radius: 999px;
+  background: rgba(232, 135, 30, 0.16); color: var(--crimson);
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 0.9rem;
+}
+.hero h1 { font-family: var(--font-head); font-size: clamp(2.4rem, 5vw, 4.1rem); line-height: 1.05; margin-bottom: 0.9rem; }
+.hero h1 span { color: var(--crimson); }
+.hero p.lead { color: var(--mute); font-size: 1.08rem; max-width: 54ch; margin-bottom: 1.5rem; }
+
+.cake-stage {
+  position: relative; border-radius: 24px; background: radial-gradient(circle at 50% 40%, #3a1219, #1b070b);
+  border: 2px solid rgba(212, 175, 55, 0.45); min-height: 440px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 1.15rem;
+  box-shadow: 0 24px 52px rgba(138, 28, 43, 0.24); color: #fff;
+}
+#cakeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; z-index: 1; }
+.stage-hud { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.hud-pill {
+  background: rgba(27, 7, 11, 0.78); backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.4); padding: 0.35rem 0.8rem; border-radius: 999px;
+  font-size: 0.78rem; color: #fceee0;
+}
+.hud-pill strong { color: var(--gold); }
+
+.section { max-width: 1280px; margin: 0 auto; padding: 3.8rem 1.5rem; }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.sec-head h2 { font-family: var(--font-head); font-size: clamp(2rem, 3.8vw, 2.9rem); line-height: 1.08; color: var(--crimson); }
+
+/* 3D Cake Configurator Panel */
+.config-shell {
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 24px; padding: 1.8rem;
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 1.8rem; align-items: center;
+}
+@media (max-width: 900px) { .config-shell { grid-template-columns: 1fr; } }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+@media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+.field label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--crimson); margin-bottom: 0.3rem; }
+.field select, .field input {
+  width: 100%; padding: 0.65rem 0.85rem; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--line); color: var(--ink);
+}
+.summary-box {
+  background: var(--card); border: 2px solid rgba(212,175,55,0.45); border-radius: 20px; padding: 1.5rem; text-align: center;
+}
+.plaque-preview {
+  display: inline-block; margin: 0.6rem 0; padding: 0.45rem 1.1rem; border-radius: 99px;
+  background: #3a1219; color: var(--gold); font-family: var(--font-head); font-weight: 700;
+  border: 1px dashed var(--gold);
+}
+
+/* Interactive Mithai Gift Box Builder */
+.hamper-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1rem 0; }
+.slot-box {
+  background: var(--bg); border: 2px dashed rgba(138,28,43,0.3); border-radius: 14px;
+  padding: 0.85rem; text-align: center; cursor: pointer; transition: transform 0.15s, border-color 0.15s;
+}
+.slot-box:hover { transform: scale(1.03); border-color: var(--crimson); }
+.slot-box strong { display: block; font-size: 0.88rem; color: var(--crimson); }
+
+/* Menu Catalog */
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 1.35rem; }
+.item-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.1rem; display: flex; flex-direction: column; justify-content: space-between;
+}
+.item-card img { width: 100%; height: 190px; object-fit: cover; margin-bottom: 0.8rem; }
+.item-title { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+.item-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; padding-top: 0.7rem; border-top: 1px solid var(--line); }
+
+/* Cart Drawer */
+.cart-drawer {
+  position: fixed; top: 0; right: -420px; width: min(400px, 92vw); height: 100vh;
+  background: var(--card); border-left: 1px solid var(--line); z-index: 999;
+  padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
+  transition: right 0.3s ease; box-shadow: -20px 0 50px rgba(0,0,0,0.18);
+}
+.cart-drawer.open { right: 0; }
+.cart-list { flex: 1; overflow-y: auto; margin: 1rem 0; display: grid; gap: 0.65rem; align-content: start; }
+
+footer { background: #2A1215; color: #FCEEE0; padding: 3rem 1.5rem; margin-top: 3rem; font-size: 0.9rem; }
+
+</style>
 </head>
 <body>
 <div class="page">
@@ -882,6 +1028,197 @@ details.faq .faq-body{padding:0 1.35rem 1.25rem;color:var(--ink-soft)}
 </header>
 
 <main id="top">
+
+<!-- ORIGINAL_FULL_SECTIONS_MERGED: 3D WEBGL & INTERACTIVE STUDIO UPGRADE -->
+<section id="interactive-3d-upgrade" style="position:relative;z-index:5;margin:0 auto;padding:1.5rem 0;border-bottom:1px solid rgba(128,128,128,0.2);">
+
+  <!-- HERO WITH LIVE-LINKED 3D TIERED CAKE STAGE -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">● Kolar Road, Bhopal · 100% Shuddh Desi Ghee &amp; 100% Eggless Bakery</span>
+      <h1>Har Khushi Ki Mithaas — <span>Live in 3D.</span></h1>
+      <p class="lead">Customize your celebration cake in real time — watch our 3D cake stage stack 1 to 3 tiers, change frosting shades, and sprinkle gold vark as you build your order below!</p>
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+        <a class="btn btn-sweet" href="#cake-studio">🎂 Customize 3D Cake</a>
+        <a class="btn btn-outline" href="#hamper-builder">🎁 Build Festival Gift Hamper</a>
+      </div>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;font-size:0.9rem;color:var(--mute);">
+        <span>⭐ <strong>4.8/5</strong> (2,000+ Bhopal Families)</span>
+        <span>🥛 <strong>100% Eggless</strong> &amp; Pure Ghee</span>
+        <span>🚚 <strong>Free Delivery</strong> above ₹500</span>
+      </div>
+    </div>
+
+    <div class="cake-stage">
+      <div class="stage-hud">
+        <span class="hud-pill"><strong>3D CAKE TURNTABLE</strong> · Linked to Builder Below</span>
+        <button type="button" class="btn btn-outline" id="spinCakeBtn" style="padding:0.3rem 0.75rem;font-size:0.75rem;background:rgba(255,255,255,0.12);color:#fff;">✨ Spin Turntable</button>
+      </div>
+      <canvas id="cakeCanvas" aria-label="Interactive 3D Multi-Tier Celebration Cake"></canvas>
+      <div class="stage-hud">
+        <span class="hud-pill" id="stageTierLabel">Tiers: <strong>2-Tier Celebration</strong></span>
+        <span class="hud-pill" id="stageFlavourLabel">Flavour: <strong>Shahi Rasmalai Fusion</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE 3D CAKE CONFIGURATOR -->
+  <section class="section" id="cake-studio">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Step-by-Step Designer</span>
+        <h2>3D Custom Celebration Cake Builder</h2>
+      </div>
+      <p>Every change updates the 3D cake turntable above and calculates your live Bhopal bakery price.</p>
+    </div>
+
+    <div class="config-shell">
+      <div class="form-grid">
+        <div class="field">
+          <label for="ckTiers">1. Tiers &amp; Weight</label>
+          <select id="ckTiers">
+            <option value="1|550|1-Tier Classic (0.5 kg)">1-Tier Classic · 0.5 kg (₹550)</option>
+            <option value="2|1150|2-Tier Celebration (1.5 kg)" selected>2-Tier Celebration · 1.5 kg (₹1,150)</option>
+            <option value="3|2200|3-Tier Royal Wedding (3.0 kg)">3-Tier Royal Wedding · 3.0 kg (₹2,200)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ckFlavour">2. Signature Flavour</label>
+          <select id="ckFlavour">
+            <option value="Shahi Rasmalai & Pistachio|150">Shahi Rasmalai &amp; Pista (+₹150)</option>
+            <option value="Belgian Dark Choco Truffle|120">Belgian Choco Truffle (+₹120)</option>
+            <option value="Fresh Pineapple & Cream|0">Classic Pineapple Cream (+₹0)</option>
+            <option value="Kesar Badam Gulab Jamun Fusion|180">Gulab Jamun Kesar Fusion (+₹180)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ckColor">3. Whipped Frosting Shade (Updates 3D)</label>
+          <select id="ckColor">
+            <option value="#FFF3D6|Kesar Ivory Cream">Kesar Ivory &amp; Pista</option>
+            <option value="#F7B2C4|Rosewater Pink">Rosewater Pastel Pink</option>
+            <option value="#4A2511|Belgian Chocolate Ganache">Rich Chocolate Ganache</option>
+            <option value="#D4AF37|Royal Golden Shimmer">Royal Shimmer Gold</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ckTop">4. Crown Topping</label>
+          <select id="ckTop">
+            <option value="Mini Rasmalai Rosettes & Silver Vark|120">Rasmalai Rosettes &amp; Vark (+₹120)</option>
+            <option value="Roasted Almond & Choco Drip|90">Almond &amp; Choco Drip (+₹90)</option>
+            <option value="Fresh Seasonal Berries & Flowers|140">Fresh Fruit &amp; Edible Roses (+₹140)</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column: 1 / -1;">
+          <label for="ckMsg">5. Chocolate Plaque Message</label>
+          <input type="text" id="ckMsg" value="Happy Birthday Aagam!" maxlength="36" placeholder="Write name or occasion...">
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <span class="eyebrow">100% Eggless · Baked Fresh to Order</span>
+        <div style="font-family:var(--font-head);font-size:1.35rem;font-weight:700;" id="ckSummaryTitle">2-Tier Celebration (1.5 kg)</div>
+        <div class="plaque-preview" id="ckPlaquePreview">“Happy Birthday Aagam!”</div>
+        <div style="font-family:var(--font-head);font-size:2.3rem;font-weight:800;color:var(--crimson);" id="ckTotalPrice">₹1,420</div>
+        <p style="font-size:0.84rem;color:var(--mute);margin-bottom:1rem;" id="ckSummarySub">Shahi Rasmalai &amp; Pistachio · Kesar Ivory Cream</p>
+        <button type="button" class="btn btn-sweet" style="width:100%;" id="addCakeToCartBtn">🎂 Add Custom Cake to Order Box</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FESTIVAL GIFT HAMPER BOX BUILDER -->
+  <section class="section" id="hamper-builder">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Diwali, Rakhi &amp; Wedding Shagun</span>
+        <h2>Interactive 6-Compartment Mithai Box Builder</h2>
+      </div>
+      <p>Tap any compartment below to cycle through your favourite pure desi ghee sweets and create a custom assorted gift box.</p>
+    </div>
+
+    <div class="config-shell">
+      <div>
+        <p style="font-size:0.9rem;color:var(--mute);margin-bottom:0.6rem;">👆 <strong>Tap any compartment</strong> to swap its mithai variety:</p>
+        <div class="hamper-grid" id="hamperSlots">
+          <div class="slot-box" data-slot="0"><span>Slot 1</span><strong>💎 Kaju Katli</strong></div>
+          <div class="slot-box" data-slot="1"><span>Slot 2</span><strong>🟠 Motichoor Laddu</strong></div>
+          <div class="slot-box" data-slot="2"><span>Slot 3</span><strong>🥛 Kesar Peda</strong></div>
+          <div class="slot-box" data-slot="3"><span>Slot 4</span><strong>🟢 Pista Roll</strong></div>
+          <div class="slot-box" data-slot="4"><span>Slot 5</span><strong>🍯 Milk Cake</strong></div>
+          <div class="slot-box" data-slot="5"><span>Slot 6</span><strong>🌰 Dry-Fruit Barfi</strong></div>
+        </div>
+      </div>
+      <div class="summary-box">
+        <span class="eyebrow">Gold-Foiled Rigid Gift Box</span>
+        <h3 style="font-family:var(--font-head);font-size:1.45rem;">1 kg Royal 6-Slot Shagun Hamper</h3>
+        <div style="font-family:var(--font-head);font-size:2.1rem;font-weight:800;color:var(--crimson);margin:0.4rem 0;">₹880 <small style="font-size:0.85rem;color:var(--mute);">/ box</small></div>
+        <p style="font-size:0.84rem;color:var(--mute);margin-bottom:1rem;" id="hamperContentsText">Kaju Katli, Motichoor Laddu, Kesar Peda, Pista Roll, Milk Cake, Dry-Fruit Barfi</p>
+        <button type="button" class="btn btn-sweet" style="width:100%;" id="addHamperBtn">🎁 Add Custom Gift Hamper to Box</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRESH MITHAI & BAKERY CATALOG -->
+  <section class="section" id="menu">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Aaj Ki Taaza Mithaas</span>
+        <h2>Desi Ghee Mithai, Designer Cakes &amp; Bakery</h2>
+      </div>
+    </div>
+
+    <div class="prod-grid">
+      <article class="item-card">
+        <div>
+          <img src="images/rasmalai-cake.jpg" alt="Shahi Rasmalai Fusion Cake" onerror="this.style.background='#f5e3d3'">
+          <div class="item-title">Shahi Rasmalai Fusion Cake (1 kg)</div>
+          <p style="font-size:0.85rem;color:var(--mute);">Cardamom sponge soaked in kesar rabdi milk with pistachio &amp; rose petals.</p>
+        </div>
+        <div class="item-foot">
+          <strong style="font-size:1.25rem;color:var(--crimson);">₹850</strong>
+          <button type="button" class="btn btn-outline add-item-btn" data-title="Shahi Rasmalai Fusion Cake (1 kg)" data-price="850">+ Add</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <div>
+          <img src="images/rasmalai.jpg" alt="Kesar Angoori Rasmalai" onerror="this.style.background='#f5e3d3'">
+          <div class="item-title">Kesar Angoori Rasmalai (500 g)</div>
+          <p style="font-size:0.85rem;color:var(--mute);">Soft chenna dumplings poached in saffron-pistachio rabdi.</p>
+        </div>
+        <div class="item-foot">
+          <strong style="font-size:1.25rem;color:var(--crimson);">₹280</strong>
+          <button type="button" class="btn btn-outline add-item-btn" data-title="Kesar Angoori Rasmalai (500 g)" data-price="280">+ Add</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <div>
+          <img src="images/wedding-cake.jpg" alt="Royal Fondant Tiered Cake" onerror="this.style.background='#f5e3d3'">
+          <div class="item-title">Royal Rose &amp; Gold Celebration Cake</div>
+          <p style="font-size:0.85rem;color:var(--mute);">Handcrafted floral buttercream &amp; edible gold leaf for engagements.</p>
+        </div>
+        <div class="item-foot">
+          <strong style="font-size:1.25rem;color:var(--crimson);">₹1,450</strong>
+          <button type="button" class="btn btn-outline add-item-btn" data-title="Royal Rose & Gold Celebration Cake" data-price="1450">+ Add</button>
+        </div>
+      </article>
+
+      <article class="item-card">
+        <div>
+          <img src="images/cream-roll.jpg" alt="Fresh Puff Bakery Cream Rolls" onerror="this.style.background='#f5e3d3'">
+          <div class="item-title">Flaky Vanilla Cream Rolls (Pack of 6)</div>
+          <p style="font-size:0.85rem;color:var(--mute);">Bhopal's nostalgic crisp puff pastry horns filled with fresh dairy cream.</p>
+        </div>
+        <div class="item-foot">
+          <strong style="font-size:1.25rem;color:var(--crimson);">₹180</strong>
+          <button type="button" class="btn btn-outline add-item-btn" data-title="Flaky Vanilla Cream Rolls (Pack of 6)" data-price="180">+ Add</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</section>
+
 
 <!-- ================= HERO ================= -->
 <section class="hero">
@@ -3295,6 +3632,185 @@ function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
   updatePriceUI();
 })();
 
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  // 1. Scroll Bar
+  const bar = document.getElementById('sweetProgress');
+  window.addEventListener('scroll', () => {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    if (bar) bar.style.width = ((window.scrollY / max) * 100).toFixed(1) + '%';
+  }, { passive: true });
+
+  // 2. Three.js 3D Multi-Tier Cake Stage + Builder Sync
+  let update3DCakeState = function(){};
+  const canvas = document.getElementById('cakeCanvas');
+  if (canvas && window.THREE) {
+    try {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 2.2, 5.4);
+      camera.lookAt(0, 0.5, 0);
+
+      scene.add(new THREE.AmbientLight(0xfff5e4, 0.85));
+      const key = new THREE.DirectionalLight(0xffffff, 1.1);
+      key.position.set(3, 5, 4);
+      scene.add(key);
+
+      const cakeGroup = new THREE.Group();
+      scene.add(cakeGroup);
+
+      const goldMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.25 });
+      const frostingMat = new THREE.MeshStandardMaterial({ color: 0xfff3d6, roughness: 0.45, metalness: 0.08 });
+
+      // Brass Cake Stand
+      const standBase = new THREE.Mesh(new THREE.CylinderGeometry(1.75, 1.85, 0.12, 48), goldMat);
+      standBase.position.y = -0.6;
+      cakeGroup.add(standBase);
+
+      const tier1 = new THREE.Mesh(new THREE.CylinderGeometry(1.45, 1.45, 0.72, 40), frostingMat);
+      tier1.position.y = -0.18;
+      cakeGroup.add(tier1);
+
+      const tier2 = new THREE.Mesh(new THREE.CylinderGeometry(1.02, 1.02, 0.65, 40), frostingMat);
+      tier2.position.y = 0.5;
+      cakeGroup.add(tier2);
+
+      const tier3 = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.66, 0.58, 40), frostingMat);
+      tier3.position.y = 1.1;
+      cakeGroup.add(tier3);
+
+      update3DCakeState = function(tiersCount, hexColor) {
+        tier2.visible = tiersCount >= 2;
+        tier3.visible = tiersCount >= 3;
+        frostingMat.color.set(hexColor);
+      };
+
+      function resize() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        renderer.setSize(r.width, r.height, false);
+        camera.aspect = r.width / Math.max(1, r.height);
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let velY = 0.01;
+      document.getElementById('spinCakeBtn').addEventListener('click', () => { velY = 0.16; });
+      function animate() {
+        cakeGroup.rotation.y += velY;
+        velY = velY * 0.96 + 0.01 * 0.04;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+    } catch (e) { console.warn('WebGL fallback:', e); }
+  }
+
+  // 3. Cake Configurator Logic
+  let currentCake = { title: 'Custom 2-Tier Celebration Cake', price: 1420 };
+  function syncCakeBuilder() {
+    const [tCount, tPrice, tLabel] = document.getElementById('ckTiers').value.split('|');
+    const [flavName, flavPrice] = document.getElementById('ckFlavour').value.split('|');
+    const [colHex, colName] = document.getElementById('ckColor').value.split('|');
+    const [topName, topPrice] = document.getElementById('ckTop').value.split('|');
+    const msg = document.getElementById('ckMsg').value || 'Happy Celebration!';
+
+    const total = (parseInt(tPrice, 10) || 0) + (parseInt(flavPrice, 10) || 0) + (parseInt(topPrice, 10) || 0);
+    document.getElementById('ckSummaryTitle').textContent = tLabel;
+    document.getElementById('ckPlaquePreview').textContent = `“${msg}”`;
+    document.getElementById('ckTotalPrice').textContent = '₹' + total.toLocaleString('en-IN');
+    document.getElementById('ckSummarySub').textContent = `${flavName} · ${colName} · ${topName}`;
+    document.querySelector('#stageTierLabel strong').textContent = tLabel;
+    document.querySelector('#stageFlavourLabel strong').textContent = flavName;
+
+    update3DCakeState(parseInt(tCount, 10), colHex);
+    currentCake = { title: `${tLabel} — ${flavName} (“${msg}”)`, price: total };
+  }
+  ['ckTiers','ckFlavour','ckColor','ckTop','ckMsg'].forEach(id => {
+    document.getElementById(id).addEventListener('input', syncCakeBuilder);
+  });
+  syncCakeBuilder();
+
+  // 4. Interactive 6-Slot Mithai Box Builder
+  const sweetsPool = ['💎 Kaju Katli', '🟠 Motichoor Laddu', '🥛 Kesar Peda', '🟢 Pista Roll', '🍯 Milk Cake', '🌰 Dry-Fruit Barfi', '🌹 Rose Kalakand', '🥥 Besan Chakki'];
+  const slotEls = document.querySelectorAll('#hamperSlots .slot-box');
+  function updateHamperSummary() {
+    const names = Array.from(slotEls).map(el => el.querySelector('strong').textContent.replace(/^[^\s]+\s/, ''));
+    document.getElementById('hamperContentsText').textContent = names.join(', ');
+  }
+  slotEls.forEach((el, idx) => {
+    let poolIdx = idx;
+    el.addEventListener('click', () => {
+      poolIdx = (poolIdx + 1) % sweetsPool.length;
+      el.querySelector('strong').textContent = sweetsPool[poolIdx];
+      updateHamperSummary();
+    });
+  });
+
+  // 5. Cart Drawer
+  const cart = [];
+  const drawer = document.getElementById('cartDrawer');
+  document.getElementById('openCartBtn').addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('closeCartBtn').addEventListener('click', () => drawer.classList.remove('open'));
+
+  function renderCart() {
+    document.getElementById('cartCount').textContent = cart.length;
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString('en-IN');
+    const list = document.getElementById('cartList');
+    if (!cart.length) {
+      list.innerHTML = '<p style="font-size:0.88rem;color:var(--mute);">Your mithai box is empty. Customize a 3D cake or gift hamper above!</p>';
+      return;
+    }
+    list.innerHTML = cart.map((item, i) => `
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:0.7rem;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <strong style="font-size:0.88rem;display:block;">${item.title}</strong>
+          <span style="font-size:0.78rem;color:var(--crimson);">₹${item.price}</span>
+        </div>
+        <button type="button" class="btn btn-outline" style="padding:0.2rem 0.55rem;" data-rm="${i}">✕</button>
+      </div>
+    `).join('');
+    list.querySelectorAll('button[data-rm]').forEach(b => {
+      b.addEventListener('click', () => {
+        cart.splice(parseInt(b.getAttribute('data-rm'), 10), 1);
+        renderCart();
+      });
+    });
+  }
+
+  document.getElementById('addCakeToCartBtn').addEventListener('click', () => {
+    cart.push({ ...currentCake });
+    renderCart();
+    drawer.classList.add('open');
+  });
+  document.getElementById('addHamperBtn').addEventListener('click', () => {
+    const contents = document.getElementById('hamperContentsText').textContent;
+    cart.push({ title: `1kg 6-Slot Royal Hamper (${contents})`, price: 880 });
+    renderCart();
+    drawer.classList.add('open');
+  });
+  document.querySelectorAll('.add-item-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cart.push({ title: btn.getAttribute('data-title'), price: parseInt(btn.getAttribute('data-price'), 10) });
+      renderCart();
+      drawer.classList.add('open');
+    });
+  });
+
+  document.getElementById('checkoutWaBtn').addEventListener('click', () => {
+    if (!cart.length) return alert('Add a cake, hamper, or mithai to your box first!');
+    const lines = cart.map(i => `• ${i.title} (₹${i.price})`).join('\n');
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const msg = `🍬 *New Order — Shree Krishna Sweets & Bakers*\n${lines}\n*Total Estimate:* ₹${total}`;
+    window.open(`https://wa.me/919826045123?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#15171c">
+<title>Your Salon — 3D Style Studio & Express Chair Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css?v=5">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+:root{--bone:#f3efe8;--ink:#15171c;--red:#d7263d;--blue:#1e4fd8;--gold:#eab308;--line:#ddd6c9;--focus:#1e4fd8;--sy:0}
+body{font-family:Archivo,system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.5;overflow-x:clip}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.wide{font-stretch:125%;font-variation-settings:"wdth" 125}
+.top{position:fixed;inset:0 0 auto;z-index:40;display:flex;align-items:center;gap:10px;padding:14px 18px;color:#fff;background:rgba(21,23,28,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.mark{width:14px;height:36px;border-radius:7px;background:repeating-linear-gradient(-45deg,var(--red) 0 6px,#fff 6px 12px,var(--blue) 12px 18px,#fff 18px 24px);background-size:100% 34px;animation:pole 1.2s linear infinite}
+@keyframes pole{to{background-position:0 34px}}
+.top .nm{font-weight:800;font-size:19px;font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-links{display:none;gap:18px;margin-left:24px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#d6d1c7}
+.top-links a:hover{color:#fff}
+@media(min-width:820px){.top-links{display:flex}}
+.top .st{margin-left:auto;flex:none;font-size:13px;font-weight:700;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.16)}
+.top .st.is-open{background:#22c55e;color:#052e16}
+.hero{position:relative;min-height:max(680px,94svh);display:grid;align-items:end;color:#fff;background:#111318 center 30%/cover no-repeat;padding-top:76px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 42%,rgba(30,79,216,.28),transparent 55%),radial-gradient(circle at 65% 58%,rgba(215,38,61,.24),transparent 50%),linear-gradient(180deg,rgba(12,14,18,.68) 0,rgba(12,14,18,.35) 40%,rgba(12,14,18,.94) 90%)}
+.hero-grid{position:relative;z-index:2;max-width:1120px;width:100%;margin:0 auto;padding:24px 16px 40px;display:grid;gap:24px;align-items:center}
+@media(min-width:860px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+.hero h1{font-weight:900;font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;font-size:clamp(42px,10vw,100px);line-height:.9;letter-spacing:-.02em;transform:translateY(calc(var(--sy,0) * -0.08px))}
+.stripe{height:8px;margin:16px 0;width:min(340px,75%);background:repeating-linear-gradient(-45deg,var(--red) 0 10px,#fff 10px 20px,var(--blue) 20px 30px,#fff 30px 40px);background-size:56px 56px;animation:stripeMove 1.6s linear infinite}
+@keyframes stripeMove{to{background-position:56px 0}}
+.hero p{font-size:18px;max-width:34ch;color:#e6e2da}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 22px;border-radius:6px;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.96)}
+.btn-w{background:#fff;color:var(--ink)}
+.btn-l{border:2px solid rgba(255,255,255,.6);color:#fff}
+.btn-i{background:var(--ink);color:#fff}
+.btn-wa{background:#25d366;color:#04361b}
+.pole-stage{position:relative;height:clamp(320px,48vh,480px);border-radius:20px;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.08),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.14);overflow:hidden;box-shadow:0 28px 60px rgba(0,0,0,.5)}
+.pole-stage .hint{position:absolute;left:14px;bottom:12px;z-index:3;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:99px;pointer-events:none}
+.pole-stage .spin-boost{position:absolute;right:14px;bottom:12px;z-index:3;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:var(--red);color:#fff;padding:7px 14px;border-radius:99px}
+.vel-marquee{background:var(--ink);color:#fff;border-top:2px solid #2b2f3a;border-bottom:2px solid #2b2f3a;padding:14px 0;overflow:hidden;user-select:none}
+.vel-track{display:flex;width:max-content;gap:36px;font-weight:900;font-stretch:125%;font-variation-settings:"wdth" 125;font-size:clamp(20px,3.5vw,30px);text-transform:uppercase;letter-spacing:.04em;will-change:transform}
+.vel-track span i{color:var(--red);font-style:normal;margin:0 10px}
+.sec{padding-top:76px}
+.kicker{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin-bottom:6px}
+.h2{font-weight:900;font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;font-size:clamp(32px,8vw,68px);line-height:.94}
+.sub{font-size:17px;margin-top:8px;color:#5b5a55;max-width:46ch}
+.coverflow-sec{overflow:hidden;padding-top:64px}
+.flow-card{background:var(--ink);color:#fff;border-radius:16px;overflow:hidden;box-shadow:0 22px 45px rgba(21,23,28,.28);position:relative;transition:transform .35s,filter .35s}
+.flow-card .fpic{height:280px;background:#333 center/cover}
+.flow-card .fmeta{padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+.flow-card .fmeta b{font-size:20px;text-transform:uppercase;font-stretch:125%}
+.flow-card .fmeta span{background:var(--red);color:#fff;padding:4px 10px;border-radius:99px;font-size:13px;font-weight:800}
+.filter-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.fpill{padding:8px 16px;border-radius:99px;border:2px solid var(--line);background:#fff;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.fpill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.styles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;perspective:1100px}
+@media(min-width:760px){.styles{grid-template-columns:repeat(3,1fr)}}
+.style{position:relative;display:block;width:100%;text-align:left;background:#fff;border-radius:10px;overflow:hidden;border:3px solid transparent;box-shadow:0 10px 24px rgba(0,0,0,.06);transition:border-color .2s,transform .25s,box-shadow .25s}
+.style::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.35),transparent 55%);opacity:0;transition:opacity .25s}
+.style:hover::after{opacity:1}
+.style .pic{aspect-ratio:4/5;background:#ccc center/cover;transition:transform .4s ease}
+.style:hover .pic{transform:scale(1.04)}
+.style .t{padding:12px 14px 14px;background:#fff;position:relative;z-index:2}
+.style .n{font-weight:800;font-size:17px;line-height:1.15}
+.style .dur{font-size:12px;color:#78756e;font-weight:700;text-transform:uppercase}
+.style .p{font-weight:800;font-size:16px;color:var(--red);margin-top:2px}
+.style .tick{position:absolute;top:10px;right:10px;z-index:3;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:none;place-items:center;font-weight:900}
+.style.on{border-color:var(--ink);box-shadow:0 18px 36px rgba(21,23,28,.2)}
+.style.on .tick{display:grid}
+.addons{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.addon{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;border-radius:99px;border:2px solid var(--line);background:#fff;font-weight:700;font-size:15px;transition:transform .15s,background .2s}
+.addon:hover{transform:translateY(-2px)}
+.addon .p{color:#5b5a55;font-weight:600}
+.addon.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.addon.on .p{color:#cfcac0}
+.builder{margin-top:22px;background:var(--ink);color:#fff;border-radius:16px;padding:24px 18px;display:grid;gap:24px;box-shadow:0 24px 50px rgba(21,23,28,.25)}
+@media(min-width:820px){.builder{grid-template-columns:1fr 1.25fr;align-items:center;padding:30px}}
+.b-stage{background:radial-gradient(circle at 50% 35%,#2b3142,#12141a);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px;text-align:center;position:relative;perspective:900px}
+.b-stage svg{width:min(240px,100%);height:auto;margin:0 auto;display:block;transition:transform .35s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+.b-price-pill{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:900;padding:6px 14px;border-radius:99px;font-size:16px;margin-top:10px}
+.b-controls{display:grid;gap:16px}
+.b-group label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#a7a39b;margin-bottom:8px}
+.b-chips{display:flex;flex-wrap:wrap;gap:8px}
+.b-chip{padding:9px 14px;border-radius:8px;background:#242832;color:#e5e1d8;font-weight:700;font-size:14px;border:2px solid transparent;transition:.18s}
+.b-chip.active{background:#fff;color:var(--ink);border-color:var(--red)}
+.ba-wrap{position:relative;margin-top:22px;border-radius:14px;overflow:hidden;aspect-ratio:16/9;max-height:480px;user-select:none;box-shadow:0 20px 44px rgba(0,0,0,.18)}
+.ba-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.ba-before{filter:grayscale(.65) contrast(.95)}
+.ba-after{clip-path:inset(0 0 0 var(--pos,50%))}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:4px;background:#fff;transform:translateX(-50%);pointer-events:none}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;border:3px solid #fff;display:grid;place-items:center;font-weight:900;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.ba-tag{position:absolute;bottom:14px;padding:6px 12px;border-radius:99px;background:rgba(15,17,22,.78);color:#fff;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.ba-tag.l{left:14px}.ba-tag.r{right:14px}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4}
+.barbers{display:grid;gap:12px;margin-top:18px}
+@media(min-width:720px){.barbers{grid-template-columns:repeat(3,1fr)}}
+.barber{background:#fff;border-radius:10px;padding:14px;display:flex;align-items:center;gap:14px;border:3px solid transparent;cursor:pointer;transition:.2s}
+.barber.active{border-color:var(--blue);background:#f8faff}
+.barber .av{width:64px;height:64px;border-radius:50%;background:#ccc center/cover;flex:none}
+.barber b{display:block;font-size:17px;font-weight:800}
+.barber span{display:block;font-size:13px;color:#5b5a55}
+.barber em{display:inline-block;margin-top:4px;font-style:normal;font-size:11px;font-weight:800;text-transform:uppercase;background:var(--bone);padding:3px 8px;border-radius:99px}
+.slot{margin-top:20px;background:var(--ink);color:#fff;border-radius:14px;padding:24px 20px;display:grid;gap:16px}
+.slot .l{display:block;font-weight:700;font-size:14px;margin-bottom:8px;color:#cfcac0;text-transform:uppercase;letter-spacing:.05em}
+.slot input[type=text]{width:100%;height:52px;border:0;border-radius:6px;padding:0 14px;font-size:16px;color:var(--ink);background:#fff}
+.chips-in span{background:#2a2d35;color:#fff;border-radius:6px}
+.chips-in input:checked+span{background:#fff;color:var(--ink)}
+.times{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.times span{width:100%;justify-content:center}
+.sum{font-size:16px;color:#cfcac0;background:#222630;padding:12px 14px;border-radius:8px;border-left:4px solid var(--red)}
+.sum b{color:#fff}
+.slot .btn{width:100%}
+.rev-grid{display:grid;gap:12px;margin-top:18px}
+@media(min-width:760px){.rev-grid{grid-template-columns:repeat(3,1fr)}}
+.rev{background:#fff;border-radius:10px;padding:18px;border:1px solid var(--line)}
+.rev .stars{color:#f59e0b;font-size:15px;letter-spacing:2px}
+.rev p{margin:8px 0 12px;font-size:15px;color:#333}
+.rev cite{font-style:normal;font-weight:800;font-size:13px;text-transform:uppercase;color:#666}
+.faq{margin-top:18px;display:grid;gap:10px}
+.faq details{background:#fff;border-radius:10px;padding:14px 18px;border:1px solid var(--line)}
+.faq summary{font-weight:800;font-size:16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;font-weight:900;color:var(--red)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:10px;color:#5b5a55;font-size:15px}
+.find{display:grid;gap:12px;margin-top:20px;padding-bottom:130px}
+@media(min-width:760px){.find{grid-template-columns:1fr 1fr}}
+.fc{background:#fff;border-radius:10px;padding:22px;border:1px solid var(--line)}
+.fc .k{font-size:13px;font-weight:700;text-transform:uppercase;color:#5b5a55}
+.fc p{font-weight:800;font-size:22px;line-height:1.2;margin-top:4px}
+.fc .btn{margin-top:14px}
+footer{text-align:center;font-size:14px;color:#5b5a55;margin-top:-100px;padding-bottom:110px}
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;display:flex;gap:8px;transition:transform .4s,opacity .3s}
+body:not(.show-dock):not(.has-picks) .bar{transform:translateY(140%);opacity:0;pointer-events:none}
+.bar .btn{flex:1;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.bar .go{display:none;justify-content:space-between;padding:0 18px}
+body.has-picks .bar .go{display:flex}
+body.has-picks .bar .idle{display:none}
+</style>
+<link rel="stylesheet" href="assets/motion.css">
+</head>
+<body>
+<nav class="top" aria-label="Primary">
+  <span class="mark" aria-hidden="true"></span>
+  <div class="nm" data-k="name">Your Salon</div>
+  <div class="top-links">
+    <a href="#styles">Cuts</a>
+    <a href="#customizer">3D Style Builder</a>
+    <a href="#transform">Before/After</a>
+    <a href="#book">Book Chair</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="st" data-status="9-21" data-off="2">Open</div>
+</nav>
+<header class="hero" data-photo style="background-image:url('https://images.unsplash.com/photo-1635273051368-de31ef6a8cc4?auto=format&fit=crop&w=1400&q=72')">
+  <div class="hero-grid">
+    <div>
+      <span class="kicker" style="color:#fff;background:var(--red);padding:4px 10px;border-radius:4px">Zero Waiting Bench · Live Chair Slot</span>
+      <h1 data-k="name">Your Salon</h1>
+      <div class="stripe" aria-hidden="true"></div>
+      <p data-e>Spin the 3D barber pole, customize your fade &amp; beard combo live, and lock your chair on WhatsApp before you leave home.</p>
+      <div class="cta">
+        <a class="btn btn-w" href="#styles">Choose a style</a>
+        <a class="btn btn-l" href="#customizer">Try 3D Look Builder</a>
+        <button class="btn btn-l" onclick="callNow()">Call Shop</button>
+      </div>
+    </div>
+    <div class="pole-stage" data-stage>
+      <canvas class="scene" id="poleCanvas" data-scene="pole" data-opts='{"stripes":["#d7263d","#ffffff","#1e4fd8","#ffffff"]}' aria-label="Interactive 3D Barber Pole"></canvas>
+      <span class="hint">Drag to spin 3D pole · Tilt phone</span>
+      <button type="button" class="spin-boost" id="boostPole">⚡ Turbo Spin</button>
+    </div>
+  </div>
+</header>
+<div class="vel-marquee" aria-hidden="true">
+  <div class="vel-track" id="velTrack">
+    <span>RAZOR SKIN FADES <i>✦</i> HOT TOWEL SHAVE <i>✦</i> BEARD SCULPTING <i>✦</i> KERATIN &amp; DETAN <i>✦</i> ZERO WAIT BOOKING <i>✦</i></span>
+    <span>RAZOR SKIN FADES <i>✦</i> HOT TOWEL SHAVE <i>✦</i> BEARD SCULPTING <i>✦</i> KERATIN &amp; DETAN <i>✦</i> ZERO WAIT BOOKING <i>✦</i></span>
+  </div>
+</div>
+<section class="coverflow-sec" aria-label="3D Signature Lookbook">
+  <div class="wrap">
+    <span class="kicker">Swipe in 3D Space</span>
+    <h2 class="h2" data-e>Signature Fades</h2>
+    <p class="sub" data-e>Scroll sideways through our most requested cuts this week.</p>
+  </div>
+  <div class="flow" data-flow>
+    <article class="flow-card"><div class="fpic" style="background-image:url('https://images.unsplash.com/photo-1578390432942-d323db577792?auto=format&fit=crop&w=600&q=70')"></div><div class="fmeta"><b>Zero Skin Fade</b><span>₹150 · 30m</span></div></article>
+    <article class="flow-card"><div class="fpic" style="background-image:url('https://images.unsplash.com/photo-1630827020718-3433092696e7?auto=format&fit=crop&w=600&q=70')"></div><div class="fmeta"><b>Fade + Viking Beard</b><span>₹200 · 45m</span></div></article>
+    <article class="flow-card"><div class="fpic" style="background-image:url('https://images.unsplash.com/photo-1599834562135-b6fc90e642ca?auto=format&fit=crop&w=600&q=70')"></div><div class="fmeta"><b>Textured French Crop</b><span>₹120 · 25m</span></div></article>
+    <article class="flow-card"><div class="fpic" style="background-image:url('https://images.unsplash.com/photo-1568339434343-2a640a1a9946?auto=format&fit=crop&w=600&q=70')"></div><div class="fmeta"><b>Freestyle Razor Line</b><span>₹180 · 35m</span></div></article>
+    <article class="flow-card"><div class="fpic" style="background-image:url('https://images.unsplash.com/photo-1599011176306-4a96f1516d4d?auto=format&fit=crop&w=600&q=70')"></div><div class="fmeta"><b>Sharp Beard Contour</b><span>₹60 · 15m</span></div></article>
+  </div>
+</section>
+<section class="wrap sec" id="styles">
+  <span class="kicker">Step 01 · Catalogue</span>
+  <h2 class="h2" data-e>Show us the cut</h2>
+  <p class="sub" data-e>Tap the cut you want. Hover any card for 3D depth. The barber gets the exact style with your booking.</p>
+  <div class="filter-pills" role="tablist" aria-label="Filter cuts">
+    <button type="button" class="fpill active" data-filter="all">All Cuts</button>
+    <button type="button" class="fpill" data-filter="fade">Fades</button>
+    <button type="button" class="fpill" data-filter="beard">Beard &amp; Shave</button>
+    <button type="button" class="fpill" data-filter="classic">Classic</button>
+  </div>
+  <div class="styles" data-single data-max="1" id="styleGrid">
+    <button type="button" class="style" data-tilt="14" data-cat="fade" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1578390432942-d323db577792?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><span class="dur">30 Mins · Razor Blend</span><div class="n" data-name data-e>Skin fade</div><div class="p" data-price data-e>₹150</div></div></button>
+    <button type="button" class="style" data-tilt="14" data-cat="fade beard" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1630827020718-3433092696e7?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><span class="dur">45 Mins · Bestseller</span><div class="n" data-name data-e>Fade with full beard</div><div class="p" data-price data-e>₹200</div></div></button>
+    <button type="button" class="style" data-tilt="14" data-cat="fade classic" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1599834562135-b6fc90e642ca?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><span class="dur">25 Mins · Low Maintenance</span><div class="n" data-name data-e>Textured crop</div><div class="p" data-price data-e>₹120</div></div></button>
+    <button type="button" class="style" data-tilt="14" data-cat="fade" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1568339434343-2a640a1a9946?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><span class="dur">35 Mins · Custom Track</span><div class="n" data-name data-e>Hair design line</div><div class="p" data-price data-e>₹180</div></div></button>
+    <button type="button" class="style" data-tilt="14" data-cat="beard" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1599011176306-4a96f1516d4d?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><span class="dur">15 Mins · Hot Towel</span><div class="n" data-name data-e>Beard shape only</div><div class="p" data-price data-e>₹60</div></div></button>
+    <button type="button" class="style" data-tilt="14" data-cat="classic" data-item data-add><span class="tick">✓</span><div class="pic" data-photo style="background-image:url('https://images.unsplash.com/photo-1648221122323-572c13a31663?auto=format&fit=crop&w=500&h=620&q=65')"></div><div class="t"><span class="dur">20 Mins · Scissor Cut</span><div class="n" data-name data-e>Regular haircut</div><div class="p" data-price data-e>₹100</div></div></button>
+  </div>
+  <h3 style="margin-top:26px;font-weight:800;font-size:18px" data-e>Grooming Add-ons (Multi-select)</h3>
+  <div class="addons" data-max="4">
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Clean shave</span><span class="p" data-price data-e>₹50</span></button>
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Champi head massage</span><span class="p" data-price data-e>₹100</span></button>
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Ammonia-free hair colour</span><span class="p" data-price data-e>₹250</span></button>
+    <button type="button" class="addon" data-item data-add><span data-name data-e>Charcoal detan facial</span><span class="p" data-price data-e>₹300</span></button>
+  </div>
+</section>
+<section class="wrap sec" id="customizer" data-reveal>
+  <span class="kicker">New Feature · Interactive Configurator</span>
+  <h2 class="h2" data-e>3D Style &amp; Beard Builder</h2>
+  <p class="sub" data-e>Not sure how the combo looks? Mix your crown cut, fade height, and beard shape below, then send your custom blueprint to WhatsApp.</p>
+  <div class="builder">
+    <div class="b-stage" data-tilt="10">
+      <svg id="avatarSvg" viewBox="0 0 220 260" aria-label="Live haircut and beard preview">
+        <defs>
+          <linearGradient id="skinG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8b89a"/><stop offset="100%" stop-color="#c99372"/></linearGradient>
+          <linearGradient id="hairG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1c23"/><stop offset="100%" stop-color="#353945"/></linearGradient>
+        </defs>
+        <circle cx="110" cy="130" r="98" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-dasharray="4 4"/>
+        <rect x="44" y="118" width="14" height="32" rx="7" fill="url(#skinG)"/>
+        <rect x="162" y="118" width="14" height="32" rx="7" fill="url(#skinG)"/>
+        <rect x="54" y="64" width="112" height="138" rx="48" fill="url(#skinG)"/>
+        <g id="svgFade" opacity="0.35"><path d="M54 115 C54 80, 166 80, 166 115 L166 95 C166 65, 54 65, 54 95 Z" fill="#1a1c23"/></g>
+        <path id="svgHair" d="M52 104 C50 52, 170 52, 168 104 C152 84, 68 84, 52 104 Z" fill="url(#hairG)"/>
+        <path id="svgLine" d="M60 88 L92 78" stroke="#f3efe8" stroke-width="3.5" stroke-linecap="round" opacity="0"/>
+        <path d="M74 114 Q86 109 96 114" stroke="#1a1c23" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M124 114 Q134 109 146 114" stroke="#1a1c23" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="85" cy="124" r="4.5" fill="#15171c"/><circle cx="135" cy="124" r="4.5" fill="#15171c"/>
+        <path d="M110 122 L106 146 L115 146" stroke="#a67254" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path id="svgBeard" d="M54 142 C54 205, 166 205, 166 142 L156 142 C152 178, 68 178, 64 142 Z" fill="url(#hairG)"/>
+        <path d="M96 164 Q110 171 124 164" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="b-price-pill" id="customPrice">Est. ₹200 · 40 mins</div>
+      <p style="font-size:13px;color:#cfcac0;margin-top:6px" id="customSummary">High Skin Fade + Full Boxed Beard</p>
+    </div>
+    <div class="b-controls">
+      <div class="b-group">
+        <label>1. Crown &amp; Top Style</label>
+        <div class="b-chips" data-bgroup="top">
+          <button type="button" class="b-chip active" data-val="Textured Crop" data-p="120" data-path="M52 104 C50 52, 170 52, 168 104 C152 84, 68 84, 52 104 Z">Textured Crop (₹120)</button>
+          <button type="button" class="b-chip" data-val="Pompadour Quiff" data-p="160" data-path="M50 106 C42 32, 182 26, 170 106 C150 82, 70 82, 50 106 Z">Pompadour Quiff (₹160)</button>
+          <button type="button" class="b-chip" data-val="Buzz Crew" data-p="100" data-path="M54 102 C54 62, 166 62, 166 102 C150 88, 70 88, 54 102 Z">Buzz Crew (₹100)</button>
+        </div>
+      </div>
+      <div class="b-group">
+        <label>2. Side Taper / Fade</label>
+        <div class="b-chips" data-bgroup="fade">
+          <button type="button" class="b-chip active" data-val="High Skin Fade" data-p="30" data-op="0.18">High Skin Fade (+₹30)</button>
+          <button type="button" class="b-chip" data-val="Mid Drop Fade" data-p="20" data-op="0.45">Mid Drop Fade (+₹20)</button>
+          <button type="button" class="b-chip" data-val="Classic Scissor Taper" data-p="0" data-op="0.8">Scissor Taper (+₹0)</button>
+        </div>
+      </div>
+      <div class="b-group">
+        <label>3. Beard Sculpture</label>
+        <div class="b-chips" data-bgroup="beard">
+          <button type="button" class="b-chip active" data-val="Full Boxed Beard" data-p="50" data-bpath="M54 142 C54 205, 166 205, 166 142 L156 142 C152 178, 68 178, 64 142 Z">Full Boxed Beard (+₹50)</button>
+          <button type="button" class="b-chip" data-val="Sharp Goatee + Stubble" data-p="40" data-bpath="M82 155 C82 202, 138 202, 138 155 L128 155 C124 176, 96 176, 92 155 Z">Sharp Goatee (+₹40)</button>
+          <button type="button" class="b-chip" data-val="Clean Hot-Towel Shave" data-p="50" data-bpath="M0 0">Clean Shave (+₹50)</button>
+        </div>
+      </div>
+      <div class="b-group">
+        <label>4. Freestyle Razor Track</label>
+        <div class="b-chips" data-bgroup="line">
+          <button type="button" class="b-chip active" data-val="No Line" data-p="0" data-line="0">No Razor Track</button>
+          <button type="button" class="b-chip" data-val="Single Slashed Track" data-p="30" data-line="1">Single Razor Slash (+₹30)</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-wa" id="sendCustomLook">Send Custom Look to Barber on WhatsApp</button>
+    </div>
+  </div>
+</section>
+<section class="wrap sec" id="transform" data-reveal>
+  <span class="kicker">Drag to Compare</span>
+  <h2 class="h2" data-e>Before &amp; After the Chair</h2>
+  <p class="sub" data-e>Slide across to inspect our skin-fade blend and razor-sharp beard lineups.</p>
+  <div class="ba-wrap" id="baSlider" style="--pos:52%">
+    <div class="ba-img ba-before" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=70')"></div>
+    <div class="ba-img ba-after" style="background-image:url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=75')"></div>
+    <div class="ba-handle"><div class="ba-knob">↔</div></div>
+    <span class="ba-tag l">Before · 5 Weeks Growth</span>
+    <span class="ba-tag r">After · Zero Skin Fade</span>
+    <input type="range" class="ba-range" min="5" max="95" value="52" aria-label="Compare before and after haircut">
+  </div>
+</section>
+<section class="wrap sec" id="book">
+  <span class="kicker">Step 02 · Lock Your Slot</span>
+  <h2 class="h2" data-e>Pick your barber &amp; time</h2>
+  <p class="sub" data-e>Choose who cuts your hair—or pick "Any available chair" for the fastest slot.</p>
+  <div class="barbers" id="barberList">
+    <div class="barber active" data-barber="Any Available Master"><div class="av" style="background-image:url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=200&q=65')"></div><div><b>Fastest Chair</b><span>First available barber</span><em>0 Min Wait</em></div></div>
+    <div class="barber" data-barber="Rohan (Fade Specialist)"><div class="av" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=65')"></div><div><b>Rohan</b><span>8 yrs · Skin Fades &amp; Lines</span><em>Top Rated ★ 4.9</em></div></div>
+    <div class="barber" data-barber="Imran (Beard & Hot Shave)"><div class="av" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=65')"></div><div><b>Imran</b><span>6 yrs · Beard Sculpt &amp; Detan</span><em>Beard Pro</em></div></div>
+  </div>
+  <form class="slot" data-wa="I want to book a chair." data-with-picks>
+    <input type="hidden" id="barberInput" data-label="Barber" value="Any Available Master">
+    <p class="sum" data-pick-list data-empty="No style picked yet. Tap a cut above or book a time slot directly."></p>
+    <div><label class="l" for="nm">Your name</label><input type="text" id="nm" data-label="Name" required autocomplete="given-name" placeholder="e.g. Aman Verma"></div>
+    <div><span class="l">Day</span><div class="chips-in" id="days"></div></div>
+    <div><span class="l">Time Slot</span><div class="chips-in times" id="times"></div></div>
+    <button class="btn btn-wa" type="submit">Confirm Chair on WhatsApp</button>
+  </form>
+</section>
+<section class="wrap sec" id="faq" data-reveal>
+  <span class="kicker">Voices &amp; Answers</span>
+  <h2 class="h2" data-e>Regulars &amp; FAQ</h2>
+  <div class="rev-grid">
+    <blockquote class="rev"><div class="stars">★★★★★</div><p>"Booked the 6 PM slot on WhatsApp, walked straight into Rohan's chair. Sharpest skin fade in town."</p><cite>— Rohit S. [SAMPLE]</cite></blockquote>
+    <blockquote class="rev"><div class="stars">★★★★★</div><p>"The 3D style builder let me show the exact beard + crop combo I wanted without explaining for 10 minutes."</p><cite>— Kartik M. [SAMPLE]</cite></blockquote>
+    <blockquote class="rev"><div class="stars">★★★★★</div><p>"Fresh disposable blades every single time and proper hot-towel finish. Worth every rupee."</p><cite>— Devendra P. [SAMPLE]</cite></blockquote>
+  </div>
+  <div class="faq">
+    <details open><summary>Do I pay online or at the shop?</summary><p>You pay at the shop by UPI or cash after your cut. WhatsApp booking simply holds your chair time so you skip the waiting bench.</p></details>
+    <details><summary>Do you use a fresh blade for every customer?</summary><p>Yes, 100%. Every shave and razor lineup uses a brand-new sealed disposable blade opened in front of you, plus UV-sterilised clippers.</p></details>
+    <details><summary>What if I'm 10 minutes late for my slot?</summary><p>Drop us a quick reply on the same WhatsApp chat and we'll hold or shift your chair by 15 minutes at no extra charge.</p></details>
+  </div>
+</section>
+<section class="wrap sec">
+  <h2 class="h2" data-e>Find the chair</h2>
+  <div class="find">
+    <div class="fc"><span class="k">Address</span><p id="addr"><span data-k="area">Main Market</span>, <span data-e>Your Town</span></p><button class="btn btn-i" onclick="directions()">Directions</button></div>
+    <div class="fc"><span class="k">9 AM to 9 PM, closed Tuesday</span><p data-k="phone">98260 45123</p><button class="btn btn-i" onclick="callNow()">Call</button></div>
+  </div>
+</section>
+<footer>© <span data-year></span> <span data-k="name">Your Salon</span></footer>
+<div class="bar">
+  <a class="btn btn-i idle" href="#styles">Choose a style</a>
+  <a class="btn btn-i go" href="#book"><span data-pick-total>₹0</span><span>Pick a time →</span></a>
+  <button class="btn btn-w" style="flex:none;width:60px;padding:0" onclick="callNow()" aria-label="Call"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></button>
+</div>
+<script>
+(function () {
+  const names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], out = [];
+  for (let i = 0; out.length < 3 && i < 7; i++) {
+    const d = new Date(); d.setDate(d.getDate() + i); if (d.getDay() === 2) continue;
+    const label = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : names[d.getDay()] + ' ' + d.getDate();
+    out.push(`<label><input type="radio" name="d" value="${label}" data-label="Day"${out.length ? '' : ' required'}><span>${label}</span></label>`);
+  }
+  document.getElementById('days').innerHTML = out.join('');
+  document.getElementById('times').innerHTML = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((h, i) => { const t = ((h + 11) % 12 + 1) + (h < 12 ? ' AM' : ' PM'); return `<label><input type="radio" name="t" value="${t}" data-label="Time"${i ? '' : ' required'}><span>${t}</span></label>`; }).join('');
+})();
+document.querySelectorAll('.fpill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fpill').forEach(b => b.classList.toggle('active', b === btn));
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#styleGrid .style').forEach(card => {
+      card.style.display = (f === 'all' || (card.dataset.cat || '').includes(f)) ? '' : 'none';
+    });
+  });
+});
+(function () {
+  const state = { top: 'Textured Crop', fade: 'High Skin Fade', beard: 'Full Boxed Beard', line: 'No Line', price: 200 };
+  function updateBuilder() {
+    let total = 0;
+    document.querySelectorAll('[data-bgroup]').forEach(grp => {
+      const act = grp.querySelector('.b-chip.active');
+      if (!act) return;
+      total += +(act.dataset.p || 0);
+      state[grp.dataset.bgroup] = act.dataset.val;
+      if (act.dataset.path) document.getElementById('svgHair').setAttribute('d', act.dataset.path);
+      if (act.dataset.op) document.getElementById('svgFade').setAttribute('opacity', act.dataset.op);
+      if (act.dataset.bpath !== undefined) document.getElementById('svgBeard').setAttribute('d', act.dataset.bpath);
+      if (act.dataset.line !== undefined) document.getElementById('svgLine').setAttribute('opacity', act.dataset.line);
+    });
+    state.price = total;
+    document.getElementById('customPrice').textContent = `Est. ₹${total} · ~40 mins`;
+    document.getElementById('customSummary').textContent = `${state.top} + ${state.fade} + ${state.beard}` + (state.line !== 'No Line' ? ` (${state.line})` : '');
+    const svg = document.getElementById('avatarSvg');
+    svg.style.transform = 'rotateY(14deg) scale(1.04)';
+    setTimeout(() => { svg.style.transform = ''; }, 260);
+  }
+  document.querySelectorAll('.b-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.parentElement.querySelectorAll('.b-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      updateBuilder();
+    });
+  });
+  document.getElementById('sendCustomLook').addEventListener('click', () => {
+    waSend(`Hello ${bizName()}, I built my custom look on your 3D Style Builder:\n• Crown: ${state.top}\n• Sides: ${state.fade}\n• Beard: ${state.beard}\n• Detail: ${state.line}\nEstimated Total: ₹${state.price}\nCan I book a chair for this?`);
+  });
+})();
+(function () {
+  const wrap = document.getElementById('baSlider'), range = wrap.querySelector('.ba-range');
+  range.addEventListener('input', () => wrap.style.setProperty('--pos', range.value + '%'));
+})();
+document.querySelectorAll('.barber').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.barber').forEach(x => x.classList.toggle('active', x === b));
+    document.getElementById('barberInput').value = b.dataset.barber;
+  });
+});
+(function () {
+  let lastY = window.scrollY, x = 0, skew = 0;
+  const track = document.getElementById('velTrack');
+  function loop() {
+    const dy = window.scrollY - lastY;
+    lastY = window.scrollY;
+    skew += (Math.max(-14, Math.min(14, dy * 0.45)) - skew) * 0.15;
+    x -= 0.7 + Math.min(6, Math.abs(dy) * 0.15);
+    if (x < -track.scrollWidth / 2) x = 0;
+    track.style.transform = `translate3d(${x}px,0,0) skewX(${skew.toFixed(2)}deg)`;
+    requestAnimationFrame(loop);
+  }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(loop);
+  document.getElementById('boostPole').addEventListener('click', () => {
+    const cv = document.getElementById('poleCanvas');
+    cv.dispatchEvent(new PointerEvent('pointerdown', { clientX: 100 }));
+    window.dispatchEvent(new PointerEvent('pointermove', { clientX: 460 }));
+    window.dispatchEvent(new PointerEvent('pointerup'));
+  });
+})();
+</script>
+<script src="assets/core.js?v=5"></script>
+<script type="module" src="assets/fx.js"></script>
+<script src="assets/motion.js?v=2" defer></script>
+</body>
+</html>

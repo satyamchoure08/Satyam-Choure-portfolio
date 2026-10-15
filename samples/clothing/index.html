@@ -536,6 +536,156 @@ section{padding:5rem 0;}
 .wa-mid-banner .btn-wa{font-size:1rem;padding:1rem 2rem;}
 </style>
 <link rel="stylesheet" href="../assets/motion.css">
+<style>
+/* 3D & Interactive Upgrade Styles */
+
+:root {
+  --bg: #FCF8F2;
+  --bg-2: #F4ECE1;
+  --card: #FFFFFF;
+  --ink: #221417;
+  --mute: #6E585D;
+  --maroon: #7A1828;
+  --gold: #C8963E;
+  --line: rgba(122, 24, 40, 0.14);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --radius: 18px;
+}
+
+
+
+img { max-width: 100%; display: block; border-radius: 12px; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+
+#zariProgress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--maroon), var(--gold));
+  z-index: 9999;
+}
+
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(16px); background: rgba(252, 248, 242, 0.88);
+  border-bottom: 1px solid var(--line);
+}
+.nav-wrap {
+  max-width: 1280px; margin: 0 auto; padding: 0.9rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.brand { font-family: var(--font-serif); font-size: 1.65rem; font-weight: 700; color: var(--maroon); }
+.brand span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.35rem; font-size: 0.9rem; color: var(--mute); flex-wrap: wrap; }
+.nav-links a:hover { color: var(--maroon); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+  padding: 0.68rem 1.25rem; border-radius: 999px; font-weight: 600; font-size: 0.86rem;
+  border: 1px solid transparent; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-royal {
+  background: linear-gradient(135deg, var(--maroon), #540d19); color: #fff;
+  box-shadow: 0 8px 24px rgba(122, 24, 40, 0.26);
+}
+.btn-royal:hover { transform: translateY(-2px); }
+.btn-outline {
+  background: var(--card); color: var(--maroon); border-color: var(--line);
+}
+.btn-outline:hover { border-color: var(--maroon); }
+
+/* Hero with 3D Silk & Zari Wave Canvas */
+.hero {
+  max-width: 1280px; margin: 0 auto; padding: 3rem 1.5rem 3.8rem;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.4rem; align-items: center;
+}
+@media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.32rem 0.85rem; border-radius: 999px;
+  background: rgba(200, 150, 62, 0.16); color: var(--maroon);
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+.hero h1 { font-family: var(--font-serif); font-size: clamp(2.6rem, 5.4vw, 4.5rem); line-height: 1.02; margin-bottom: 1rem; }
+.hero h1 em { color: var(--maroon); font-style: italic; }
+.hero p.lead { color: var(--mute); font-size: 1.05rem; max-width: 54ch; margin-bottom: 1.6rem; }
+.silk-stage {
+  position: relative; border-radius: 24px; background: linear-gradient(145deg, #2b0910, #160508);
+  border: 2px solid rgba(200, 150, 62, 0.45); min-height: 440px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 1.2rem;
+  box-shadow: 0 26px 56px rgba(122, 24, 40, 0.25); color: #FCF8F2;
+}
+#silkCanvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; z-index: 1; }
+.stage-hud { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.hud-pill {
+  background: rgba(22, 5, 8, 0.76); backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 150, 62, 0.4); padding: 0.36rem 0.8rem; border-radius: 999px;
+  font-size: 0.75rem; color: #f4ece1;
+}
+.hud-pill strong { color: var(--gold); }
+
+/* Velocity Ribbon */
+.ticker-wrap { background: var(--maroon); color: #FCF8F2; overflow: hidden; padding: 0.78rem 0; }
+.ticker-track { display: flex; gap: 2.4rem; white-space: nowrap; font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.06em; }
+.ticker-track span b { color: var(--gold); }
+
+.section { max-width: 1280px; margin: 0 auto; padding: 4rem 1.5rem; }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.2rem; flex-wrap: wrap; }
+.sec-head h2 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.08; }
+.sec-head p { color: var(--mute); max-width: 52ch; }
+
+/* Interactive Mix & Match Ethnic Outfit Studio */
+.studio-shell {
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 24px; padding: 2rem;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center;
+}
+@media (max-width: 900px) { .studio-shell { grid-template-columns: 1fr; } }
+.controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .controls-grid { grid-template-columns: 1fr; } }
+.field label { display: block; font-size: 0.76rem; color: var(--maroon); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
+.field select, .field input {
+  width: 100%; padding: 0.7rem 0.9rem; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--line); color: var(--ink);
+}
+.mannequin-box {
+  background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; text-align: center;
+}
+
+/* Catalog Grid */
+.toolbar { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.chip-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.chip {
+  padding: 0.45rem 0.95rem; border-radius: 999px; font-size: 0.84rem; font-weight: 600;
+  background: var(--bg-2); border: 1px solid var(--line); color: var(--mute); cursor: pointer;
+}
+.chip.active, .chip:hover { background: var(--maroon); color: #fff; border-color: var(--maroon); }
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 1.4rem; }
+.prod-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.1rem; display: flex; flex-direction: column; justify-content: space-between;
+  transform-style: preserve-3d; transition: box-shadow 0.25s, border-color 0.25s;
+}
+.prod-card:hover { border-color: var(--gold); box-shadow: 0 18px 38px rgba(122, 24, 40, 0.12); }
+.prod-card img { width: 100%; height: 240px; object-fit: cover; margin-bottom: 0.85rem; }
+.prod-cat { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--maroon); font-weight: 700; }
+.prod-title { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; margin: 0.2rem 0 0.4rem; }
+.prod-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--line); margin-top: 0.75rem; }
+.prod-price { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; color: var(--maroon); }
+
+/* Bag Drawer */
+.bag-drawer {
+  position: fixed; top: 0; right: -420px; width: min(400px, 92vw); height: 100vh;
+  background: var(--card); border-left: 1px solid var(--line); z-index: 999;
+  padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
+  transition: right 0.32s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: -20px 0 50px rgba(0,0,0,0.18);
+}
+.bag-drawer.open { right: 0; }
+.bag-list { flex: 1; overflow-y: auto; margin: 1rem 0; display: grid; gap: 0.7rem; align-content: start; }
+.bag-item { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 0.75rem; display: flex; justify-content: space-between; align-items: center; }
+
+footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--mute); font-size: 0.88rem; background: var(--bg-2); }
+
+</style>
 </head>
 <body>
 
@@ -597,6 +747,280 @@ section{padding:5rem 0;}
 </nav>
 
 <main>
+
+<!-- ORIGINAL_FULL_SECTIONS_MERGED: 3D WEBGL & INTERACTIVE STUDIO UPGRADE -->
+<section id="interactive-3d-upgrade" style="position:relative;z-index:5;margin:0 auto;padding:1.5rem 0;border-bottom:1px solid rgba(128,128,128,0.2);">
+
+  <!-- HERO WITH 3D SILK & ZARI WAVE STAGE -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">● 12, Bapu Bazar · Handloom Sarees, Bridal Lehengas &amp; Royal Kurtas</span>
+      <h1>Woven in Pure <em>Banarasi Zari</em> &amp; Festive Color.</h1>
+      <p class="lead">Ripple our interactive 3D Silk &amp; Zari loom stage, mix and match your custom ethnic ensemble, or schedule custom Master-Ji boutique stitching with 48-hour express delivery.</p>
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1.8rem;">
+        <a class="btn btn-royal" href="#drape-studio">🎨 Launch Mix &amp; Match Studio</a>
+        <a class="btn btn-outline" href="#collection">Browse 12+ Signature Looks</a>
+      </div>
+    </div>
+
+    <div class="silk-stage">
+      <div class="stage-hud">
+        <span class="hud-pill"><strong>3D KATAN SILK &amp; ZARI LOOM</strong> · Move Pointer to Ripple</span>
+        <button type="button" class="btn btn-outline" id="weaveSwitchBtn" style="padding:0.32rem 0.75rem;font-size:0.74rem;background:rgba(255,255,255,0.1);color:#fff;">✨ Switch Loom Color</button>
+      </div>
+      <canvas id="silkCanvas" aria-label="Interactive 3D Silk and Gold Zari Wave"></canvas>
+      <div class="stage-hud">
+        <span class="hud-pill">Pure Tested Zari · Hand-Dyed Palette</span>
+        <span class="hud-pill" id="loomShadeLabel">Shade: <strong>Sindoor Crimson &amp; Gold</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VELOCITY RIBBON -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track" id="zariTicker">
+      <span><b>✦</b> PURE KATAN BANARASI SAREES</span>
+      <span><b>✦</b> BRIDAL ZARDOZI LEHENGAS</span>
+      <span><b>✦</b> LUCKNOWI CHIKANKARI KURTIS</span>
+      <span><b>✦</b> MEN'S SILK KURTA &amp; PATHANI SETS</span>
+      <span><b>✦</b> CUSTOM BOUTIQUE BLOUSE STITCHING</span>
+      <span><b>✦</b> PURE KATAN BANARASI SAREES</span>
+      <span><b>✦</b> BRIDAL ZARDOZI LEHENGAS</span>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MIX & MATCH ETHNIC OUTFIT STUDIO -->
+  <section class="section" id="drape-studio">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Interactive Bespoke Stylist</span>
+        <h2>Mix &amp; Match Ethnic Outfit &amp; Zari Studio</h2>
+      </div>
+      <p>Combine silhouette, royal dye shade, dupatta contrast, and zari border width to preview your custom look and send directly to our boutique stylists.</p>
+    </div>
+
+    <div class="studio-shell">
+      <div class="controls-grid">
+        <div class="field">
+          <label for="stSil">1. Ensemble Silhouette</label>
+          <select id="stSil">
+            <option value="Banarasi Silk Saree + Brocade Blouse|2499">Banarasi Silk Saree + Blouse (₹2,499)</option>
+            <option value="Bandhani Festive Lehenga Choli|3899">Bandhani Festive Lehenga Choli (₹3,899)</option>
+            <option value="Anarkali Ghera Suit + Organza Dupatta|1899">Anarkali Ghera Suit + Dupatta (₹1,899)</option>
+            <option value="Men's Royal Silk Kurta + Jacket Set|2199">Men's Royal Kurta + Nehru Jacket (₹2,199)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="stColor">2. Primary Fabric Dye</label>
+          <select id="stColor">
+            <option value="Sindoor Red|#8E1B2C">Sindoor Bridal Red</option>
+            <option value="Peacock Royal Blue|#1B4965">Peacock Royal Blue</option>
+            <option value="Panna Emerald Green|#1F5E3B">Panna Emerald Green</option>
+            <option value="Haldi Marigold Gold|#D48C1C">Haldi Marigold Gold</option>
+            <option value="Rani Magenta Pink|#A61C5C">Rani Magenta Pink</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="stDupatta">3. Contrast Dupatta / Pallu</label>
+          <select id="stDupatta">
+            <option value="Champagne Tissue Gold|#E3C16F">Champagne Tissue Gold (+₹0)</option>
+            <option value="Gulabi Banarasi Organza|#D96B8A">Gulabi Banarasi Organza (+₹350)</option>
+            <option value="Mint Meenakari Border|#5FA88D">Mint Meenakari Contrast (+₹450)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="stStitch">4. Boutique Stitching Add-On</label>
+          <select id="stStitch">
+            <option value="Unstitched / Ready Standard Size|0">Standard Ready Size (+₹0)</option>
+            <option value="Custom Padded Blouse / Kurta Tailoring|650">Custom Padded Blouse / Fit (+₹650)</option>
+            <option value="Full Bridal Latkan + Pico Fall + Custom Fit|950">Full Bridal Finish + Latkan (+₹950)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mannequin-box">
+        <svg viewBox="0 0 200 230" width="175" height="200" style="margin:0 auto 0.8rem;">
+          <!-- Royal Arch Frame -->
+          <path d="M25,220 L25,75 Q25,15 100,15 Q175,15 175,75 L175,220 Z" fill="#F8F1E5" stroke="#C8963E" stroke-width="2.5"/>
+          <!-- Main Garment Silhouette -->
+          <path id="svgGarment" d="M68,62 L132,62 L156,205 L44,205 Z" fill="#8E1B2C" stroke="#C8963E" stroke-width="3"/>
+          <!-- Zari Hem Border -->
+          <rect x="44" y="190" width="112" height="15" fill="#C8963E" opacity="0.88"/>
+          <!-- Contrast Dupatta / Pallu Drape -->
+          <path id="svgDupatta" d="M62,58 L142,88 L122,195 L82,180 Z" fill="#E3C16F" opacity="0.82" stroke="#C8963E" stroke-width="1.5"/>
+          <circle cx="100" cy="40" r="12" fill="#D2A679"/>
+        </svg>
+        <div style="font-size:0.78rem;color:var(--maroon);font-weight:700;text-transform:uppercase;" id="studioOutfitTitle">Banarasi Silk Saree + Brocade Blouse</div>
+        <div style="font-family:var(--font-serif);font-size:2.1rem;font-weight:700;color:var(--ink);margin:0.2rem 0;" id="studioOutfitPrice">₹2,499</div>
+        <p style="font-size:0.83rem;color:var(--mute);margin-bottom:0.9rem;" id="studioOutfitSub">Sindoor Red with Champagne Tissue Gold &amp; Standard Ready Size</p>
+        <button type="button" class="btn btn-royal" style="width:100%;" id="addStudioOutfitBtn">🛍️ Add Custom Outfit to Trousseau Bag</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTERABLE PRODUCT COLLECTION -->
+  <section class="section" id="collection">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Ready-to-Ship &amp; Boutique Classics</span>
+        <h2>Explore Our Curated Showpieces</h2>
+      </div>
+      <p>Filter by Women's Ethnic, Bridal Lehengas, Men's Royal Wear, or Kids' Festive Sets.</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="chip-row" id="catFilters">
+        <button class="chip active" data-cat="all">All Pieces (8)</button>
+        <button class="chip" data-cat="women">Women's Sarees &amp; Suits</button>
+        <button class="chip" data-cat="wedding">Bridal &amp; Lehengas</button>
+        <button class="chip" data-cat="men">Men's Kurtas</button>
+        <button class="chip" data-cat="kids">Kids' Festive</button>
+      </div>
+      <input type="search" id="prodSearch" placeholder="Search Banarasi, Chikankari, Kurta..." style="padding:0.5rem 1rem;border-radius:99px;border:1px solid var(--line);background:var(--card);min-width:240px;">
+    </div>
+
+    <div class="prod-grid" id="prodGrid">
+      <article class="prod-card" data-cat="women">
+        <div>
+          <img src="images/prod-saree-red.jpg" alt="Katan Banarasi Silk Saree" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Pure Katan Silk</span>
+          <div class="prod-title">Sindoor Banarasi Zari Saree</div>
+          <p style="font-size:0.84rem;color:var(--mute);">Rich floral jangla weave with unstitched zari brocade blouse piece.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹2,499</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Sindoor Banarasi Zari Saree" data-price="2499">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="wedding">
+        <div>
+          <img src="images/prod-lehenga-fest.jpg" alt="Bandhani Zardozi Lehenga Choli" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Bridal &amp; Sangeet</span>
+          <div class="prod-title">Bandhani Zardozi Lehenga Set</div>
+          <p style="font-size:0.84rem;color:var(--mute);">Hand-tied Jaipur bandhej skirt with mirror-work choli &amp; net dupatta.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹4,299</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Bandhani Zardozi Lehenga Set" data-price="4299">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="women">
+        <div>
+          <img src="images/prod-anarkali-blue.jpg" alt="Indigo Mulmul Anarkali Suit" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Festive Suit Set</span>
+          <div class="prod-title">Royal Indigo Gota-Patti Anarkali</div>
+          <p style="font-size:0.84rem;color:var(--mute);">16-kali breathable cotton silk flare with kota doria dupatta.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹1,699</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Royal Indigo Gota-Patti Anarkali" data-price="1699">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="men">
+        <div>
+          <img src="images/prod-kurta-men.jpg" alt="Men's Festive Linen Kurta Set" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Men's Haldi &amp; Puja</span>
+          <div class="prod-title">Marigold Woven Kurta Pyjama</div>
+          <p style="font-size:0.84rem;color:var(--mute);">Textured festive kurta with mandarin collar and churidar bottoms.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹1,399</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Marigold Woven Kurta Pyjama" data-price="1399">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="women">
+        <div>
+          <img src="images/prod-chikankari.jpg" alt="Lucknowi Chikankari Mul Kurta" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Hand Embroidered</span>
+          <div class="prod-title">Lucknowi Resham Chikankari Set</div>
+          <p style="font-size:0.84rem;color:var(--mute);">Fine tepchi and bakhiya stitch kurti paired with lace palazzo.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹1,450</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Lucknowi Resham Chikankari Set" data-price="1450">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="men">
+        <div>
+          <img src="images/prod-pathani.jpg" alt="Men's Silk Pathani Suit" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Men's Evening</span>
+          <div class="prod-title">Nawab Raw Silk Pathani Suit</div>
+          <p style="font-size:0.84rem;color:var(--mute);">Structured shoulder tabs, antique brass buttons, and comfortable salwar.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹1,899</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Nawab Raw Silk Pathani Suit" data-price="1899">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="women">
+        <div>
+          <img src="images/prod-dupatta.jpg" alt="Chanderi Silk Phulkari Dupatta" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Heirloom Drape</span>
+          <div class="prod-title">Chanderi Zari &amp; Phulkari Dupatta</div>
+          <p style="font-size:0.84rem;color:var(--mute);">2.5-meter statement festive drape with hand-knotted tassels.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹799</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Chanderi Zari & Phulkari Dupatta" data-price="799">+ Add to Bag</button>
+        </div>
+      </article>
+
+      <article class="prod-card" data-cat="kids">
+        <div>
+          <img src="images/prod-kids-lehenga.jpg" alt="Kids Festive Lehenga Choli" onerror="this.style.background='#e9decb'">
+          <span class="prod-cat">Little Royals (2–12 Yrs)</span>
+          <div class="prod-title">Kids' Gota-Work Lehenga Set</div>
+          <p style="font-size:0.84rem;color:var(--mute);">Soft cotton-lined festive lehenga with zero-scratch seams for kids.</p>
+        </div>
+        <div class="prod-foot">
+          <span class="prod-price">₹1,199</span>
+          <button type="button" class="btn btn-outline add-bag-btn" data-title="Kids Gota-Work Lehenga Set" data-price="1199">+ Add to Bag</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- MASTER-JI TAILORING SECTION -->
+  <section class="section" id="stitching">
+    <div class="studio-shell">
+      <div>
+        <span class="eyebrow">In-House Master-Ji Atelier</span>
+        <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,3.8vw,2.8rem);margin-bottom:0.8rem;">Custom Boutique Stitching &amp; Fall-Pico</h2>
+        <p style="color:var(--mute);margin-bottom:1.1rem;">Bought a saree or unstitched suit? Our senior Master-Ji team crafts padded princess-cut blouses, lehenga can-can skirts, and kurta alterations with doorstep measurement pickup.</p>
+        <img src="images/stitching-tailor.jpg" alt="Master-Ji Custom Tailoring" style="height:210px;width:100%;object-fit:cover;">
+      </div>
+      <div>
+        <h3 style="font-family:var(--font-serif);font-size:1.6rem;margin-bottom:0.8rem;">Instant Tailoring Quote</h3>
+        <div class="controls-grid">
+          <div class="field">
+            <label for="tlService">Garment Type</label>
+            <select id="tlService">
+              <option value="Designer Padded Saree Blouse|750">Designer Padded Blouse (₹750)</option>
+              <option value="Salwar / Palazzo Suit Stitching|850">Salwar / Palazzo Suit (₹850)</option>
+              <option value="Bridal Lehenga Blouse + Tassels|1450">Bridal Lehenga Choli + Latkan (₹1,450)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tlSpeed">Turnaround</label>
+            <select id="tlSpeed">
+              <option value="Standard 5-Day Delivery|0">Standard 5-Day Delivery (+₹0)</option>
+              <option value="Express 48-Hour Wedding Rush|300">Express 48-Hr Wedding Rush (+₹300)</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn btn-royal" style="width:100%;margin-top:1.2rem;" id="bookTailorBtn">✂️ Book Master-Ji Stitching on WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+</section>
+
 
 <!-- ══════════════ HERO ══════════════ -->
 <section class="hero" id="home" aria-label="Hero">
@@ -1559,5 +1983,199 @@ document.addEventListener('keydown',e=>{
 document.querySelectorAll('.cat-tile').forEach(tile=>{ tile.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tile.click(); } }); });
 </script>
 <script src="../assets/motion.js?v=2" defer></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  // 1. Scroll bar
+  const bar = document.getElementById('zariProgress');
+  window.addEventListener('scroll', () => {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    if (bar) bar.style.width = ((window.scrollY / max) * 100).toFixed(1) + '%';
+  }, { passive: true });
+
+  // 2. Mix & Match Ethnic Studio
+  const stIds = ['stSil','stColor','stDupatta','stStitch'];
+  let studioSelection = { title: 'Custom Banarasi Silk Saree', price: 2499 };
+
+  function updateStudio() {
+    const [silName, silP] = document.getElementById('stSil').value.split('|');
+    const [colName, colHex] = document.getElementById('stColor').value.split('|');
+    const [dupName, dupHex] = document.getElementById('stDupatta').value.split('|');
+    const [stName, stP] = document.getElementById('stStitch').value.split('|');
+    const dupExtra = dupName.includes('350') ? 350 : dupName.includes('450') ? 450 : 0;
+    const total = (parseInt(silP, 10) || 0) + dupExtra + (parseInt(stP, 10) || 0);
+
+    document.getElementById('svgGarment').setAttribute('fill', colHex);
+    document.getElementById('svgDupatta').setAttribute('fill', dupHex);
+    document.getElementById('studioOutfitTitle').textContent = silName;
+    document.getElementById('studioOutfitPrice').textContent = '₹' + total.toLocaleString('en-IN');
+    document.getElementById('studioOutfitSub').textContent = `${colName} with ${dupName} · ${stName}`;
+    studioSelection = { title: `${silName} (${colName} + ${dupName})`, price: total };
+  }
+  stIds.forEach(id => document.getElementById(id).addEventListener('change', updateStudio));
+  updateStudio();
+
+  // 3. Trousseau Bag Drawer
+  const bag = [];
+  const drawer = document.getElementById('bagDrawer');
+  document.getElementById('openBagBtn').addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('closeBagBtn').addEventListener('click', () => drawer.classList.remove('open'));
+
+  function renderBag() {
+    document.getElementById('bagCount').textContent = bag.length;
+    const total = bag.reduce((s, i) => s + i.price, 0);
+    document.getElementById('bagTotal').textContent = '₹' + total.toLocaleString('en-IN');
+    const list = document.getElementById('bagList');
+    if (!bag.length) {
+      list.innerHTML = '<p style="font-size:0.86rem;color:var(--mute);">Your trousseau bag is empty. Add a custom look or festive piece!</p>';
+      return;
+    }
+    list.innerHTML = bag.map((item, idx) => `
+      <div class="bag-item">
+        <div>
+          <strong style="font-size:0.88rem;display:block;">${item.title}</strong>
+          <span style="font-size:0.78rem;color:var(--maroon);">₹${item.price.toLocaleString('en-IN')}</span>
+        </div>
+        <button type="button" class="btn btn-outline" style="padding:0.2rem 0.55rem;" data-rm="${idx}">✕</button>
+      </div>
+    `).join('');
+    list.querySelectorAll('button[data-rm]').forEach(b => {
+      b.addEventListener('click', () => {
+        bag.splice(parseInt(b.getAttribute('data-rm'), 10), 1);
+        renderBag();
+      });
+    });
+  }
+
+  document.getElementById('addStudioOutfitBtn').addEventListener('click', () => {
+    bag.push({ ...studioSelection });
+    renderBag();
+    drawer.classList.add('open');
+  });
+  document.querySelectorAll('.add-bag-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bag.push({ title: btn.getAttribute('data-title'), price: parseInt(btn.getAttribute('data-price'), 10) });
+      renderBag();
+      drawer.classList.add('open');
+    });
+  });
+
+  document.getElementById('checkoutBagBtn').addEventListener('click', () => {
+    if (!bag.length) return alert('Add an outfit to your bag first!');
+    const lines = bag.map(i => `• ${i.title} (₹${i.price})`).join('\n');
+    const total = bag.reduce((s, i) => s + i.price, 0);
+    const msg = `👑 *Rang Mahal Fashion — Trousseau Inquiry*\n${lines}\n*Total:* ₹${total}\nPlease share live video call or delivery details!`;
+    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  // 4. Filter & Search
+  let activeCat = 'all';
+  function filterCatalog() {
+    const q = (document.getElementById('prodSearch').value || '').toLowerCase();
+    document.querySelectorAll('#prodGrid .prod-card').forEach(c => {
+      const mCat = activeCat === 'all' || c.getAttribute('data-cat') === activeCat;
+      const mTxt = !q || c.textContent.toLowerCase().includes(q);
+      c.style.display = (mCat && mTxt) ? 'flex' : 'none';
+    });
+  }
+  document.querySelectorAll('#catFilters .chip').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#catFilters .chip').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      activeCat = b.getAttribute('data-cat');
+      filterCatalog();
+    });
+  });
+  document.getElementById('prodSearch').addEventListener('input', filterCatalog);
+
+  document.getElementById('bookTailorBtn').addEventListener('click', () => {
+    const s = document.getElementById('tlService').value.split('|')[0];
+    const sp = document.getElementById('tlSpeed').value.split('|')[0];
+    const msg = `✂️ *Master-Ji Stitching Booking*\nService: ${s}\nTimeline: ${sp}`;
+    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  // 5. Real-Time Three.js 3D Silk & Zari Loom Wave
+  const canvas = document.getElementById('silkCanvas');
+  if (canvas && window.THREE) {
+    try {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+      camera.position.set(0, 1.8, 4.6);
+      camera.lookAt(0, 0, 0);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+      const goldLight = new THREE.PointLight(0xffd166, 2.2, 15);
+      goldLight.position.set(2, 3, 3);
+      scene.add(goldLight);
+
+      const geo = new THREE.PlaneGeometry(5.2, 3.4, 48, 36);
+      const mat = new THREE.MeshStandardMaterial({
+        color: 0x8e1b2c, emissive: 0x2a050b, metalness: 0.62, roughness: 0.28,
+        side: THREE.DoubleSide, wireframe: false
+      });
+      const silkMesh = new THREE.Mesh(geo, mat);
+      silkMesh.rotation.x = -0.55;
+      scene.add(silkMesh);
+
+      // Gold Zari Wireframe Overlay
+      const zariMat = new THREE.MeshBasicMaterial({ color: 0xc8963e, wireframe: true, transparent: true, opacity: 0.28 });
+      const zariMesh = new THREE.Mesh(geo, zariMat);
+      zariMesh.rotation.x = -0.55;
+      zariMesh.position.y = 0.01;
+      scene.add(zariMesh);
+
+      const shades = [
+        { name: 'Sindoor Crimson & Gold', hex: 0x8e1b2c },
+        { name: 'Peacock Royal Indigo & Zari', hex: 0x1b4965 },
+        { name: 'Panna Emerald & Champagne', hex: 0x1f5e3b },
+        { name: 'Rani Pink & Kundan Gold', hex: 0xa61c5c }
+      ];
+      let shadeIdx = 0;
+      document.getElementById('weaveSwitchBtn').addEventListener('click', () => {
+        shadeIdx = (shadeIdx + 1) % shades.length;
+        mat.color.setHex(shades[shadeIdx].hex);
+        document.querySelector('#loomShadeLabel strong').textContent = shades[shadeIdx].name;
+      });
+
+      function resize() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        renderer.setSize(r.width, r.height, false);
+        camera.aspect = r.width / Math.max(1, r.height);
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let mouseX = 0, mouseY = 0;
+      canvas.addEventListener('pointermove', e => {
+        const r = canvas.getBoundingClientRect();
+        mouseX = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        mouseY = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      });
+
+      let t = 0;
+      const pos = geo.attributes.position;
+      function animate() {
+        t += 0.035;
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i);
+          const y = pos.getY(i);
+          const z = Math.sin(x * 1.8 + t + mouseX * 2) * 0.22 + Math.cos(y * 2.1 + t * 0.8 + mouseY * 2) * 0.16;
+          pos.setZ(i, z);
+        }
+        pos.needsUpdate = true;
+        geo.computeVertexNormals();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+    } catch (e) { console.warn('WebGL fallback:', e); }
+  }
+})();
+</script>
 </body>
 </html>

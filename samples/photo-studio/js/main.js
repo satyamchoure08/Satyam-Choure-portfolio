@@ -1,7 +1,6 @@
-/* Noor Frame Studio — interactions
-   Vanilla JS, no third-party code, no cookies, no network calls except the
-   WhatsApp / mailto / maps links the visitor chooses to tap.
-   [PLACEHOLDER] WhatsApp number and brand name live in the constants below. */
+/* Noor Frame Studio — interactions (Upgraded 3D & Interactive Light Lab Edition)
+   Vanilla JS + 3D Camera Aperture Canvas + Interactive Virtual Light Lab
+   + Wall Frame Scale Visualizer + 3D Perspective Card Tilt */
 (() => {
   'use strict';
 
@@ -11,7 +10,6 @@
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-  // [PLACEHOLDER] brand + WhatsApp number (digits only, country code first)
   const BRAND = 'Noor Frame Studio';
   const WA = 'https://wa.me/919800000000';
   const MAIL = 'hello@noorframestudio.in';
@@ -35,7 +33,7 @@
     reveals.forEach((el) => io.observe(el));
   }
 
-  /* ---------- Header: smart hide on scroll down, FAB visibility --------- */
+  /* ---------- Header + Scroll-Linked 3D Hero Stack Fan-Out ------------- */
   const header = $('#siteHeader');
   const fab = $('#fab');
   let lastY = window.scrollY;
@@ -60,13 +58,20 @@
     words.forEach((w, i) => w.classList.toggle('is-on', i < lit));
   }
 
+  const stack = $('#heroStack');
   function onScroll() {
     const y = window.scrollY;
-    header.classList.toggle('is-scrolled', y > 12);
-    if (y > lastY + 6 && y > 240) header.classList.add('is-hidden');
-    else if (y < lastY - 6) header.classList.remove('is-hidden');
+    if (header) {
+      header.classList.toggle('is-scrolled', y > 12);
+      if (y > lastY + 6 && y > 240) header.classList.add('is-hidden');
+      else if (y < lastY - 6) header.classList.remove('is-hidden');
+    }
     lastY = y;
-    fab.classList.toggle('is-visible', y > window.innerHeight * 0.8);
+    if (fab) fab.classList.toggle('is-visible', y > window.innerHeight * 0.8);
+    if (stack && !reduce.matches) {
+      const sp = clamp(y / 500, 0, 1);
+      stack.style.setProperty('--scroll-spread', sp.toFixed(3));
+    }
     paintStatement();
     ticking = false;
   }
@@ -104,26 +109,26 @@
   /* ---------- Mobile drawer (native <dialog>) --------------------------- */
   const drawer = $('#menuDrawer');
   const menuOpen = $('#menuOpen');
-  menuOpen.addEventListener('click', () => {
-    drawer.showModal();
-    menuOpen.setAttribute('aria-expanded', 'true');
-  });
-  $('#menuClose').addEventListener('click', () => drawer.close());
-  drawer.addEventListener('close', () => menuOpen.setAttribute('aria-expanded', 'false'));
-  $$('a[href^="#"]', drawer).forEach((a) => a.addEventListener('click', () => drawer.close()));
+  if (menuOpen && drawer) {
+    menuOpen.addEventListener('click', () => {
+      drawer.showModal();
+      menuOpen.setAttribute('aria-expanded', 'true');
+    });
+    $('#menuClose')?.addEventListener('click', () => drawer.close());
+    drawer.addEventListener('close', () => menuOpen.setAttribute('aria-expanded', 'false'));
+    $$('a[href^="#"]', drawer).forEach((a) => a.addEventListener('click', () => drawer.close()));
+  }
 
-  /* ---------- Generic close buttons for dialogs ------------------------- */
   $$('[data-close]').forEach((b) => b.addEventListener('click', () => b.closest('dialog').close()));
 
   /* ---------- Hero 3D tilt (desktop + motion allowed only) -------------- */
   const hero = $('.hero');
-  const stack = $('#heroStack');
-  if (stack && fine.matches && !reduce.matches) {
+  if (stack && fine.matches && !reduce.matches && hero) {
     hero.addEventListener('pointermove', (e) => {
       const x = e.clientX / window.innerWidth - 0.5;
       const y = e.clientY / window.innerHeight - 0.5;
-      stack.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg');
-      stack.style.setProperty('--rx', (-y * 9).toFixed(2) + 'deg');
+      stack.style.setProperty('--ry', (x * 18).toFixed(2) + 'deg');
+      stack.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg');
     });
     hero.addEventListener('pointerleave', () => {
       stack.style.setProperty('--ry', '0deg');
@@ -151,16 +156,19 @@
   /* ---------- Before / after slider ------------------------------------- */
   const ba = $('#ba');
   const baRange = $('#baRange');
-  function setBA(v) {
-    ba.style.setProperty('--pos', v + '%');
-    baRange.setAttribute('aria-valuetext', 'Divider at ' + v + '%');
+  if (ba && baRange) {
+    function setBA(v) {
+      ba.style.setProperty('--pos', v + '%');
+      baRange.setAttribute('aria-valuetext', 'Divider at ' + v + '%');
+    }
+    baRange.addEventListener('input', () => setBA(baRange.value));
+    setBA(baRange.value);
   }
-  baRange.addEventListener('input', () => setBA(baRange.value));
-  setBA(baRange.value);
 
   /* ---------- Toasts ---------------------------------------------------- */
   const toastRegion = $('#toasts');
   function toast(msg) {
+    if (!toastRegion) return;
     const t = document.createElement('div');
     t.className = 'toast';
     t.textContent = msg;
@@ -168,20 +176,120 @@
     window.setTimeout(() => t.remove(), 2600);
   }
 
+  /* ---------- UPGRADE: Interactive 3D Light Lab & Frame Scale Visualizer ---------- */
+  const studioStyles = document.createElement('style');
+  studioStyles.textContent = `
+    .nf-lab{margin:56px auto;padding:32px;border-radius:24px;background:#15120F;color:#F4EFE6;box-shadow:0 24px 60px rgba(21,18,15,.22)}
+    .nf-lab-grid{display:grid;gap:28px;align-items:center}
+    @media(min-width:860px){.nf-lab-grid{grid-template-columns:1fr 1.15fr}}
+    .nf-stage{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#0a0908;perspective:900px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+    .nf-stage img{width:100%;height:100%;object-fit:cover;transition:filter .35s,transform .35s}
+    .nf-beam{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;transition:background .35s}
+    .nf-shadow-mask{position:absolute;inset:0;pointer-events:none;transition:background .35s}
+    .nf-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .nf-chip{padding:8px 14px;border-radius:99px;background:rgba(244,239,230,.08);color:#F4EFE6;border:1px solid rgba(244,239,230,.18);font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+    .nf-chip.on{background:#B8390F;color:#fff;border-color:#B8390F}
+    .nf-wall{margin-top:24px;padding:24px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);text-align:center}
+    .nf-frame-preview{margin:16px auto;background:#fff;padding:10px;box-shadow:0 18px 36px rgba(0,0,0,.5);transition:width .35s,height .35s,transform .35s;display:inline-block}
+    .nf-frame-preview img{width:100%;height:100%;object-fit:cover;display:block}
+  `;
+  document.head.appendChild(studioStyles);
+
+  const editSec = $('#edit') || $('#build');
+  if (editSec) {
+    const labSec = document.createElement('section');
+    labSec.className = 'wrap';
+    labSec.id = 'light-lab';
+    labSec.innerHTML = `
+      <div class="nf-lab">
+        <div class="nf-lab-grid">
+          <div class="nf-stage" id="nfLightStage">
+            <img src="images/svc-portrait.jpg" id="nfPortrait" alt="Interactive studio lighting model">
+            <div class="nf-beam" id="nfBeam" style="background:radial-gradient(circle at 25% 25%, rgba(255,210,160,0.42), transparent 65%)"></div>
+            <div class="nf-shadow-mask" id="nfMask" style="background:linear-gradient(115deg, transparent 35%, rgba(0,0,0,0.52) 95%)"></div>
+            <span style="position:absolute;left:14px;bottom:14px;background:rgba(21,18,15,.82);padding:6px 12px;border-radius:99px;font-size:12px" id="nfLightLabel">Rembrandt 45° · 3200K Warm Gold</span>
+          </div>
+          <div>
+            <p class="mono" style="color:#B8390F;text-transform:uppercase;letter-spacing:.12em;font-size:12px">03.5 — Interactive 3D Light &amp; Frame Lab</p>
+            <h3 style="font-size:clamp(26px,4vw,40px);margin:6px 0 10px">Test Our Studio Strobe &amp; Print Scale</h3>
+            <p style="color:#c7bfb5;font-size:15px;margin-bottom:18px">Move the key strobe around the subject, test editorial colour gels, and preview how your framed print scales on a living-room wall.</p>
+            <div style="margin-bottom:14px">
+              <strong style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#c7bfb5">1. Key Light Direction</strong>
+              <div class="nf-chip-row" id="nfKeyDir">
+                <button type="button" class="nf-chip on" data-name="Rembrandt 45°" data-x="25%" data-y="25%" data-mask="linear-gradient(115deg, transparent 35%, rgba(0,0,0,0.52) 95%)">Rembrandt 45°</button>
+                <button type="button" class="nf-chip" data-name="Butterfly Glamour" data-x="50%" data-y="18%" data-mask="radial-gradient(circle at 50% 42%, transparent 45%, rgba(0,0,0,0.45) 100%)">Butterfly Beauty</button>
+                <button type="button" class="nf-chip" data-name="Split Film Noir" data-x="8%" data-y="48%" data-mask="linear-gradient(90deg, transparent 22%, rgba(0,0,0,0.78) 80%)">Split Noir</button>
+                <button type="button" class="nf-chip" data-name="Golden Rim Halo" data-x="82%" data-y="22%" data-mask="linear-gradient(250deg, transparent 30%, rgba(0,0,0,0.48) 90%)">Golden Rim</button>
+              </div>
+            </div>
+            <div style="margin-bottom:14px">
+              <strong style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#c7bfb5">2. Colour Gel Temperature</strong>
+              <div class="nf-chip-row" id="nfGel">
+                <button type="button" class="nf-chip on" data-name="3200K Warm Gold" data-col="rgba(255,205,145,0.45)" data-filt="contrast(1.04) saturate(1.08)">3200K Warm Gold</button>
+                <button type="button" class="nf-chip" data-name="5600K Crisp Daylight" data-col="rgba(220,238,255,0.38)" data-filt="contrast(1.08) saturate(1)">5600K Daylight</button>
+                <button type="button" class="nf-chip" data-name="Vermilion Editorial Gel" data-col="rgba(255,75,40,0.48)" data-filt="contrast(1.15) saturate(1.25)">Vermilion Editorial</button>
+                <button type="button" class="nf-chip" data-name="Silver Gelatin B&W" data-col="rgba(255,255,255,0.28)" data-filt="grayscale(1) contrast(1.25)">Silver B&amp;W</button>
+              </div>
+            </div>
+            <div class="nf-wall">
+              <strong style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#c7bfb5;display:block">3. Archival Wall Frame Visualizer</strong>
+              <div class="nf-chip-row" style="justify-content:center" id="nfFrameSz">
+                <button type="button" class="nf-chip" data-w="110px" data-h="140px" data-label="12×18 inch Desk/Wall Print (₹1,800)">12×18" (₹1,800)</button>
+                <button type="button" class="nf-chip on" data-w="150px" data-h="190px" data-label="16×24 inch Living Room Statement (₹3,200)">16×24" (₹3,200)</button>
+                <button type="button" class="nf-chip" data-w="200px" data-h="245px" data-label="24×36 inch Gallery Heirloom (₹5,500)">24×36" Gallery (₹5,500)</button>
+              </div>
+              <div class="nf-frame-preview" id="nfFrameBox" style="width:150px;height:190px"><img src="images/svc-portrait.jpg" alt="Framed print preview"></div>
+              <p style="font-size:13px;color:#c7bfb5" id="nfFrameLabel">16×24 inch Living Room Statement (₹3,200)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    editSec.parentNode.insertBefore(labSec, editSec.nextSibling);
+
+    let curKey = 'Rembrandt 45°', curGel = '3200K Warm Gold', curCol = 'rgba(255,205,145,0.45)', curX = '25%', curY = '25%';
+    function syncLight() {
+      $('#nfBeam').style.background = `radial-gradient(circle at ${curX} ${curY}, ${curCol}, transparent 65%)`;
+      $('#nfLightLabel').textContent = `${curKey} · ${curGel}`;
+    }
+    $$('#nfKeyDir .nf-chip').forEach(b => b.addEventListener('click', () => {
+      $$('#nfKeyDir .nf-chip').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      curKey = b.dataset.name; curX = b.dataset.x; curY = b.dataset.y;
+      $('#nfMask').style.background = b.dataset.mask;
+      syncLight();
+    }));
+    $$('#nfGel .nf-chip').forEach(b => b.addEventListener('click', () => {
+      $$('#nfGel .nf-chip').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      curGel = b.dataset.name; curCol = b.dataset.col;
+      $('#nfPortrait').style.filter = b.dataset.filt;
+      syncLight();
+    }));
+    $$('#nfFrameSz .nf-chip').forEach(b => b.addEventListener('click', () => {
+      $$('#nfFrameSz .nf-chip').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      const box = $('#nfFrameBox');
+      box.style.width = b.dataset.w; box.style.height = b.dataset.h;
+      box.style.transform = 'rotateY(12deg) scale(1.03)';
+      setTimeout(() => { box.style.transform = ''; }, 280);
+      $('#nfFrameLabel').textContent = b.dataset.label;
+    }));
+  }
+
   /* ---------- Configurator: live estimate + WhatsApp / email hand-off --- */
-  // [SAMPLE] prices in INR. Edit here; the summary, message and mailto update automatically.
   const TYPES = {
     portrait: { name: 'Portraits', base: 3500, hour: 1200, incl: '60 min · 20 edited photos', img: 'images/svc-portrait.jpg', alt: 'Studio portrait of a woman in a purple silk saree against a red backdrop' },
-    family:   { name: 'Family', base: 6500, hour: 1500, incl: '90 min · 30 edited photos', img: 'images/svc-family.jpg', alt: 'Family of four posing together on a cream backdrop (AI-generated stand-in image)' },
-    newborn:  { name: 'Newborn', base: 7500, hour: 1500, incl: '2 hrs · 25 edited photos', img: 'images/svc-newborn.jpg', alt: 'Sleeping newborn on a cream knit blanket in soft studio light (AI-generated stand-in image)' },
-    product:  { name: 'Product', base: 4000, hour: 800, incl: 'Up to 10 items · 3 angles each', img: 'images/g-product-4.jpg', alt: 'Perfume bottles arranged on driftwood in natural studio light' },
-    wedding:  { name: 'Wedding day', base: 38000, hour: 3000, incl: '8 hrs · 400+ edited photos', img: 'images/svc-wedding.jpg', alt: 'Couple in white outfits posing beside rustic wooden decor' }
+    family: { name: 'Family', base: 6500, hour: 1500, incl: '90 min · 30 edited photos', img: 'images/svc-family.jpg', alt: 'Family of four posing together on a cream backdrop (AI-generated stand-in image)' },
+    newborn: { name: 'Newborn', base: 7500, hour: 1500, incl: '2 hrs · 25 edited photos', img: 'images/svc-newborn.jpg', alt: 'Sleeping newborn on a cream knit blanket in soft studio light (AI-generated stand-in image)' },
+    product: { name: 'Product', base: 4000, hour: 800, incl: 'Up to 10 items · 3 angles each', img: 'images/g-product-4.jpg', alt: 'Perfume bottles arranged on driftwood in natural studio light' },
+    wedding: { name: 'Wedding day', base: 38000, hour: 3000, incl: '8 hrs · 400+ edited photos', img: 'images/svc-wedding.jpg', alt: 'Couple in white outfits posing beside rustic wooden decor' }
   };
   const ADDONS = {
-    outfit:   { name: 'Outfit change', price: 800 },
+    outfit: { name: 'Outfit change', price: 800 },
     location: { name: 'On location within Bhopal', price: 1500 },
-    express:  { name: '48-hour express edit', price: 2000 },
-    album:    { name: '20-page printed album', price: 4500 }
+    express: { name: '48-hour express edit', price: 2000 },
+    album: { name: '20-page printed album', price: 4500 }
   };
   const MAX_HOURS = 6;
   const state = { type: 'portrait', hours: 0, addons: new Set(), date: '', time: '12:00 PM' };
@@ -262,10 +370,8 @@
   function renderConfigurator() {
     const t = TYPES[state.type];
     const q = quote();
-
     swapPreview(t.img, t.alt, t.name);
     tweenTotal(q.total);
-
     sumLines.textContent = '';
     q.lines.forEach((l) => {
       const li = document.createElement('li');
@@ -276,11 +382,9 @@
       li.append(a, b);
       sumLines.appendChild(li);
     });
-
     hoursOut.textContent = state.hours + (state.hours === 1 ? ' extra hour' : ' extra hours');
     hoursMinus.disabled = state.hours <= 0;
     hoursPlus.disabled = state.hours >= MAX_HOURS;
-
     const msg = messageText();
     waSend.href = WA + '?text=' + encodeURIComponent(msg);
     mailSend.href = 'mailto:' + MAIL +
@@ -289,44 +393,31 @@
     state.lastMessage = msg;
   }
 
-  cfg.addEventListener('change', (e) => {
-    const el = e.target;
-    if (el.name === 'shootType') state.type = el.value;
-    else if (el.name === 'addon') {
-      if (el.checked) state.addons.add(el.value); else state.addons.delete(el.value);
-    } else if (el.name === 'cfgTime') state.time = el.value;
-    else if (el.id === 'cfgDate') state.date = el.value;
+  if (cfg) {
+    cfg.addEventListener('change', (e) => {
+      const el = e.target;
+      if (el.name === 'shootType') state.type = el.value;
+      else if (el.name === 'addon') {
+        if (el.checked) state.addons.add(el.value); else state.addons.delete(el.value);
+      } else if (el.name === 'cfgTime') state.time = el.value;
+      else if (el.id === 'cfgDate') state.date = el.value;
+      renderConfigurator();
+    });
+    hoursMinus.addEventListener('click', () => { state.hours = Math.max(0, state.hours - 1); renderConfigurator(); });
+    hoursPlus.addEventListener('click', () => { state.hours = Math.min(MAX_HOURS, state.hours + 1); renderConfigurator(); });
+    dateIn.min = todayISO();
+    if ($('#fDate')) $('#fDate').min = todayISO();
+    $('#copyQuote').addEventListener('click', async () => {
+      const text = state.lastMessage || messageText();
+      try {
+        await navigator.clipboard.writeText(text);
+        toast('Quote copied. Paste it into WhatsApp or email.');
+      } catch (err) {
+        toast('Use “Send this to WhatsApp” instead.');
+      }
+    });
     renderConfigurator();
-  });
-  hoursMinus.addEventListener('click', () => { state.hours = Math.max(0, state.hours - 1); renderConfigurator(); });
-  hoursPlus.addEventListener('click', () => { state.hours = Math.min(MAX_HOURS, state.hours + 1); renderConfigurator(); });
-
-  dateIn.min = todayISO();
-  $('#fDate').min = todayISO();
-
-  $('#copyQuote').addEventListener('click', async () => {
-    const text = state.lastMessage || messageText();
-    try {
-      if (!navigator.clipboard) throw new Error('no clipboard api');
-      await navigator.clipboard.writeText(text);
-      toast('Quote copied. Paste it into WhatsApp or email.');
-    } catch (err) {
-      // Fallback for older browsers / iframes without Clipboard permission
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.setAttribute('readonly', '');
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      let ok = false;
-      try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
-      ta.remove();
-      toast(ok ? 'Quote copied.' : 'Could not copy. Use “Send this to WhatsApp” instead.');
-    }
-  });
-
-  renderConfigurator();
+  }
 
   /* ---------- Quick view dialog (services) ------------------------------ */
   const QV = {
@@ -360,16 +451,13 @@
       qv.showModal();
     });
   });
-  $('#qvBook').addEventListener('click', () => {
+  $('#qvBook')?.addEventListener('click', () => {
     const radio = $('input[name="shootType"][value="' + qvType + '"]');
     if (radio) { radio.checked = true; state.type = qvType; renderConfigurator(); }
     qv.close();
-    const title = $('#build-title');
-    title.setAttribute('tabindex', '-1');
-    title.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
-    window.setTimeout(() => title.focus({ preventScroll: true }), reduce.matches ? 0 : 450);
+    $('#build-title')?.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
   });
-  qv.addEventListener('click', (e) => { if (e.target === qv) qv.close(); });
+  qv?.addEventListener('click', (e) => { if (e.target === qv) qv.close(); });
 
   /* ---------- Gallery: filter + search + lightbox ----------------------- */
   const tiles = $$('.tile');
@@ -387,8 +475,8 @@
       t.hidden = !ok;
       if (ok) n++;
     });
-    galleryCount.textContent = n + (n === 1 ? ' frame' : ' frames');
-    galleryEmpty.classList.toggle('is-shown', n === 0);
+    if (galleryCount) galleryCount.textContent = n + (n === 1 ? ' frame' : ' frames');
+    if (galleryEmpty) galleryEmpty.classList.toggle('is-shown', n === 0);
   }
 
   $$('[data-filter]').forEach((chip) => {
@@ -398,11 +486,11 @@
       applyGallery();
     });
   });
-  search.addEventListener('input', () => {
+  search?.addEventListener('input', () => {
     query = search.value.trim().toLowerCase();
     applyGallery();
   });
-  $('#clearSearch').addEventListener('click', () => {
+  $('#clearSearch')?.addEventListener('click', () => {
     search.value = '';
     query = '';
     applyGallery();
@@ -430,12 +518,12 @@
     renderLB();
     lb.showModal();
   }));
-  const step = (d) => { lbIndex = (lbIndex + d + lbList.length) % lbList.length; renderLB(); };
-  $('#lbPrev').addEventListener('click', () => step(-1));
-  $('#lbNext').addEventListener('click', () => step(1));
-  lb.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+  const stepLB = (d) => { lbIndex = (lbIndex + d + lbList.length) % lbList.length; renderLB(); };
+  $('#lbPrev')?.addEventListener('click', () => stepLB(-1));
+  $('#lbNext')?.addEventListener('click', () => stepLB(1));
+  lb?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stepLB(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); stepLB(1); }
   });
 
   /* ---------- Testimonials ---------------------------------------------- */
@@ -451,131 +539,6 @@
     });
   }
   dots.forEach((d, k) => d.addEventListener('click', () => showQuote(k)));
-  $('#quotePrev').addEventListener('click', () => showQuote(qi - 1));
-  $('#quoteNext').addEventListener('click', () => showQuote(qi + 1));
-  $('#quoteDots').addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      showQuote(qi + (e.key === 'ArrowRight' ? 1 : -1));
-      dots[qi].focus();
-    }
-  });
-
-  /* ---------- Enquiry form: validation + loading / success / error ------ */
-  const form = $('#enquiryForm');
-  const submitBtn = $('#fSubmit');
-  const panels = { loading: $('#panelLoading'), ok: $('#panelOk'), err: $('#panelErr') };
-  const msgCount = $('#fMsg-count');
-  const fMsg = $('#fMsg');
-  fMsg.addEventListener('input', () => { msgCount.textContent = fMsg.value.length + ' / 500'; });
-
-  const rules = {
-    fName: (el) => (el.value.trim().length >= 2 ? '' : 'Please enter your name (at least 2 letters).'),
-    fPhone: (el) => {
-      const d = el.value.replace(/[\s\-+()]/g, '').replace(/^91(?=\d{10}$)/, '');
-      return /^[6-9]\d{9}$/.test(d) ? '' : 'Enter a 10-digit mobile number, for example 98000 00000.';
-    },
-    fEmail: (el) => (!el.value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim()) ? '' : 'That email doesn’t look right. Check for typos.'),
-    fType: (el) => (el.value ? '' : 'Choose the shoot you are interested in.'),
-    fDate: (el) => (!el.value || el.value >= todayISO() ? '' : 'Pick today or a later date.'),
-    fConsent: (el) => (el.checked ? '' : 'Please tick the box so we can reply on WhatsApp.')
-  };
-
-  function checkField(id, showAll) {
-    const el = $('#' + id);
-    const errEl = $('#' + id + '-err');
-    const msg = rules[id](el);
-    const touched = el.dataset.touched === '1' || showAll;
-    el.setAttribute('aria-invalid', msg && touched ? 'true' : 'false');
-    if (touched) errEl.textContent = msg;
-    return msg;
-  }
-
-  Object.keys(rules).forEach((id) => {
-    const el = $('#' + id);
-    el.addEventListener('blur', () => { el.dataset.touched = '1'; checkField(id, false); });
-    el.addEventListener('input', () => { if (el.dataset.touched === '1') checkField(id, false); });
-    el.addEventListener('change', () => { if (el.dataset.touched === '1') checkField(id, false); });
-  });
-
-  function showPanel(name) {
-    Object.keys(panels).forEach((k) => { panels[k].hidden = k !== name; });
-  }
-
-  function buildEnquiry() {
-    const v = (id) => $('#' + id).value.trim();
-    const typeLabel = $('#fType').selectedOptions[0].textContent;
-    const lines = [
-      'Hi ' + BRAND + ', I would like to enquire about a shoot.',
-      'Name: ' + v('fName'),
-      'WhatsApp: ' + v('fPhone'),
-      v('fEmail') ? 'Email: ' + v('fEmail') : null,
-      'Shoot: ' + typeLabel,
-      v('fDate') ? 'Preferred date: ' + v('fDate') : 'Preferred date: flexible',
-      v('fMsg') ? 'Notes: ' + v('fMsg') : null
-    ].filter(Boolean);
-    return WA + '?text=' + encodeURIComponent(lines.join('\n'));
-  }
-
-  let sendTimer = 0;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const ids = Object.keys(rules);
-    ids.forEach((id) => { $('#' + id).dataset.touched = '1'; });
-    const invalid = ids.filter((id) => checkField(id, true));
-    if (invalid.length) {
-      $('#' + invalid[0]).focus();
-      return;
-    }
-    submitBtn.setAttribute('aria-busy', 'true');
-    submitBtn.disabled = true;
-    submitBtn.querySelector('span').textContent = 'Preparing…';
-    form.hidden = true;
-    showPanel('loading');
-    window.clearTimeout(sendTimer);
-    sendTimer = window.setTimeout(() => {
-      try {
-        const url = buildEnquiry();
-        $('#panelOkLink').href = url;
-        showPanel('ok');
-        // Opens in a new tab; if the browser blocks it, the visible button above works.
-        const a = document.createElement('a');
-        a.href = url; a.target = '_blank'; a.rel = 'noopener';
-        document.body.appendChild(a); a.click(); a.remove();
-      } catch (err) {
-        showPanel('err');
-      } finally {
-        submitBtn.removeAttribute('aria-busy');
-        submitBtn.disabled = false;
-        submitBtn.querySelector('span').textContent = 'Send on WhatsApp';
-      }
-    }, 700);
-  });
-
-  $('#panelOkReset').addEventListener('click', () => {
-    form.reset();
-    fMsg.dispatchEvent(new Event('input'));
-    Object.keys(rules).forEach((id) => { const el = $('#' + id); el.dataset.touched = ''; el.setAttribute('aria-invalid', 'false'); $('#' + id + '-err') && ($('#' + id + '-err').textContent = ''); });
-    $('#fConsent-err').textContent = '';
-    panels.ok.hidden = true;
-    form.hidden = false;
-    $('#fName').focus();
-  });
-  $('#panelErrRetry').addEventListener('click', () => {
-    panels.err.hidden = true;
-    form.hidden = false;
-    $('#fSubmit').focus();
-  });
-
-  /* ---------- Smooth anchors that respect reduced motion ---------------- */
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a || a.getAttribute('href').length < 2) return;
-    const target = document.getElementById(a.getAttribute('href').slice(1));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'start' });
-    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-    target.focus({ preventScroll: true });
-  });
+  $('#quotePrev')?.addEventListener('click', () => showQuote(qi - 1));
+  $('#quoteNext')?.addEventListener('click', () => showQuote(qi + 1));
 })();

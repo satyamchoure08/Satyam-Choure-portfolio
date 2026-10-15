@@ -446,6 +446,247 @@ footer{padding:var(--sp-4) 0 var(--sp-3);border-top:1px solid var(--ink-3);backg
 .noscript-note{padding:var(--sp-2);background:var(--ink-2);border:1px solid var(--ink-3);border-radius:14px;margin:var(--sp-2) 0}
 </style>
 <link rel="stylesheet" href="../assets/motion.css">
+<style>
+/* 3D & Interactive Upgrade Styles */
+
+:root {
+  --ink: #0a0a0b;
+  --ink-2: #131316;
+  --ink-3: #1f1f25;
+  --paper: #f4f2ee;
+  --mute: #9e9da8;
+  --accent: #c6ff3d;
+  --accent-dim: rgba(198, 255, 61, 0.14);
+  --accent-ink: #0a0a0b;
+  --danger: #ff6b6b;
+  --ok: #4cd97b;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --radius: 18px;
+}
+
+
+
+img { max-width: 100%; display: block; border-radius: 12px; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+
+/* Scroll Progress Laser Bar */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), #52ff9b);
+  z-index: 9999; box-shadow: 0 0 14px var(--accent);
+}
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(16px); background: rgba(10, 10, 11, 0.82);
+  border-bottom: 1px solid var(--ink-3);
+}
+.nav-wrap {
+  max-width: 1280px; margin: 0 auto; padding: 0.95rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.brand {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
+  letter-spacing: -0.03em; display: flex; align-items: center; gap: 0.6rem;
+}
+.brand-dot {
+  width: 11px; height: 11px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+.nav-links { display: flex; gap: 1.4rem; font-size: 0.9rem; color: var(--mute); flex-wrap: wrap; }
+.nav-links a:hover { color: var(--accent); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.72rem 1.3rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem;
+  border: 1px solid transparent; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn-accent {
+  background: var(--accent); color: var(--accent-ink);
+  box-shadow: 0 8px 26px rgba(198, 255, 61, 0.25);
+}
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(198, 255, 61, 0.4); }
+.btn-ghost {
+  background: rgba(255,255,255,0.04); color: var(--paper); border-color: var(--ink-3);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Hero Section with 3D WebGL Rig */
+.hero {
+  max-width: 1280px; margin: 0 auto; padding: 3.5rem 1.5rem 4rem;
+  display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 2.5rem; align-items: center;
+}
+@media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.85rem; border-radius: 999px;
+  background: var(--accent-dim); color: var(--accent);
+  font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+}
+.hero h1 {
+  font-family: var(--font-display); font-size: clamp(2.6rem, 5.6vw, 4.8rem);
+  line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 1.2rem;
+}
+.hero h1 em { font-family: var(--font-serif); font-weight: 600; color: var(--accent); }
+.hero p.lead {
+  font-size: 1.1rem; color: var(--mute); max-width: 56ch; margin-bottom: 1.8rem;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-bottom: 2rem; }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  padding-top: 1.4rem; border-top: 1px solid var(--ink-3);
+}
+.stat-val { font-family: var(--font-display); font-size: 1.65rem; font-weight: 700; color: var(--paper); }
+.stat-lbl { font-size: 0.8rem; color: var(--mute); }
+
+.stage-card {
+  position: relative; border-radius: 24px; background: linear-gradient(155deg, #17171c, #0d0d10);
+  border: 1px solid var(--ink-3); min-height: 450px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 1.25rem;
+  box-shadow: 0 28px 60px rgba(0,0,0,0.55);
+}
+#dumbbellCanvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; z-index: 1;
+}
+#dumbbellCanvas:active { cursor: grabbing; }
+.stage-hud-top, .stage-hud-bottom {
+  position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+}
+.hud-pill {
+  background: rgba(10,10,11,0.75); backdrop-filter: blur(10px);
+  border: 1px solid var(--ink-3); padding: 0.4rem 0.8rem; border-radius: 999px;
+  font-size: 0.75rem; color: var(--mute);
+}
+.hud-pill strong { color: var(--accent); }
+
+/* Velocity Skew Ticker */
+.ticker-wrap {
+  border-top: 1px solid var(--ink-3); border-bottom: 1px solid var(--ink-3);
+  background: #0f0f12; overflow: hidden; padding: 0.9rem 0;
+}
+.ticker-track {
+  display: flex; gap: 2.5rem; white-space: nowrap; will-change: transform;
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute);
+}
+.ticker-track span b { color: var(--accent); margin-right: 0.4rem; }
+
+/* Generic Section */
+.section { max-width: 1280px; margin: 0 auto; padding: 4.5rem 1.5rem; }
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.4rem; flex-wrap: wrap; }
+.sec-head h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3.8vw, 3rem); letter-spacing: -0.03em; line-height: 1.08; }
+.sec-head p { color: var(--mute); max-width: 52ch; }
+
+/* 3D Tilt Cards */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+.tilt-card {
+  background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: var(--radius);
+  padding: 1.5rem; transition: border-color 0.25s, box-shadow 0.25s;
+  transform-style: preserve-3d; will-change: transform;
+}
+.tilt-card:hover { border-color: rgba(198,255,61,0.5); box-shadow: 0 20px 44px rgba(0,0,0,0.45); }
+.tilt-card img { width: 100%; height: 200px; object-fit: cover; margin-bottom: 1.1rem; }
+.tag {
+  display: inline-block; padding: 0.25rem 0.65rem; border-radius: 99px;
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  background: var(--accent-dim); color: var(--accent); margin-bottom: 0.65rem;
+}
+.tilt-card h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.5rem; }
+.tilt-card p { color: var(--mute); font-size: 0.92rem; margin-bottom: 1.1rem; }
+.meta-list { list-style: none; display: grid; gap: 0.4rem; font-size: 0.85rem; color: var(--paper); margin-bottom: 1.2rem; }
+.meta-list li::before { content: "⚡ "; color: var(--accent); }
+
+/* Interactive BMI / TDEE Macro & Plan Calculator */
+.calc-shell {
+  background: linear-gradient(145deg, #15151a, #101013);
+  border: 1px solid var(--ink-3); border-radius: 24px; padding: 2rem;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2rem; align-items: center;
+}
+@media (max-width: 900px) { .calc-shell { grid-template-columns: 1fr; } }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+.field label { display: block; font-size: 0.78rem; color: var(--mute); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
+.field input, .field select {
+  width: 100%; padding: 0.75rem 0.9rem; border-radius: 12px;
+  background: #0b0b0d; border: 1px solid var(--ink-3); color: var(--paper);
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--accent); }
+.calc-output {
+  background: #0b0b0d; border: 1px solid var(--ink-3); border-radius: 18px; padding: 1.6rem;
+}
+.macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.1rem 0; }
+.macro-box {
+  background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 12px;
+  padding: 0.85rem; text-align: center;
+}
+.macro-box strong { display: block; font-family: var(--font-display); font-size: 1.35rem; color: var(--accent); }
+.macro-box span { font-size: 0.75rem; color: var(--mute); }
+
+/* Interactive Class Timetable */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.chip {
+  padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.84rem; font-weight: 600;
+  background: var(--ink-2); border: 1px solid var(--ink-3); color: var(--mute); cursor: pointer;
+}
+.chip.active, .chip:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.slot-card {
+  background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 16px;
+  padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.8rem;
+}
+.slot-top { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+.slot-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; }
+.slot-sub { font-size: 0.84rem; color: var(--mute); }
+
+/* Before / After Transformation Compare */
+.ba-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+}
+@media (max-width: 860px) { .ba-wrap { grid-template-columns: 1fr; } }
+.ba-stage {
+  position: relative; border-radius: 20px; overflow: hidden; height: 360px;
+  border: 1px solid var(--ink-3); user-select: none;
+}
+.ba-layer {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.5rem; background-size: cover; background-position: center;
+}
+.ba-before {
+  background: linear-gradient(180deg, rgba(10,10,11,0.2), rgba(10,10,11,0.88)), url('images/facility.jpg') center/cover;
+}
+.ba-after {
+  background: linear-gradient(180deg, rgba(198,255,61,0.12), rgba(10,10,11,0.9)), url('images/programs-strength.jpg') center/cover;
+  clip-path: inset(0 0 0 50%);
+}
+.ba-slider-input {
+  position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 4;
+}
+.ba-divider {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: var(--accent);
+  z-index: 3; pointer-events: none; box-shadow: 0 0 12px var(--accent);
+}
+
+/* Pricing Grid */
+.price-card {
+  background: var(--ink-2); border: 1px solid var(--ink-3); border-radius: 20px;
+  padding: 1.8rem; position: relative; display: flex; flex-direction: column; justify-content: space-between;
+}
+.price-card.featured { border-color: var(--accent); box-shadow: 0 0 36px rgba(198,255,61,0.12); }
+.price-num { font-family: var(--font-display); font-size: 2.3rem; font-weight: 700; margin: 0.6rem 0; }
+.price-num small { font-size: 0.9rem; color: var(--mute); font-weight: 400; }
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--ink-3); padding: 3rem 1.5rem; margin-top: 3rem;
+  color: var(--mute); font-size: 0.88rem;
+}
+.footer-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+
+</style>
 </head>
 <body class="grain">
 <a class="skip" href="#main">Skip to content</a>
@@ -487,6 +728,378 @@ footer{padding:var(--sp-4) 0 var(--sp-3);border-top:1px solid var(--ink-3);backg
 </div>
 
 <main id="main">
+
+<!-- ORIGINAL_FULL_SECTIONS_MERGED: 3D WEBGL & INTERACTIVE STUDIO UPGRADE -->
+<section id="interactive-3d-upgrade" style="position:relative;z-index:5;margin:0 auto;padding:1.5rem 0;border-bottom:1px solid rgba(128,128,128,0.2);">
+
+  <!-- HERO WITH REALTIME 3D HEX DUMBBELL RIG -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow">● Arera Hills, Bhopal · Strength &amp; Conditioning Lab</span>
+      <h1>Built Under <em>Heavy Iron</em>, Coached With Precision.</h1>
+      <p class="lead">No crowded treadmill rows or guesswork. Small-group barbell strength, metabolic conditioning, and biomechanics coaching with calibrated Eleiko &amp; Rogue rigs.</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href="#macro-lab">Calculate My Macros &amp; Plan</a>
+        <a class="btn btn-ghost" href="#timetable">Explore Live Class Schedule</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-val">4.9 ★</div>
+          <div class="stat-lbl">340+ Bhopal Athlete Reviews</div>
+        </div>
+        <div>
+          <div class="stat-val">12 : 1</div>
+          <div class="stat-lbl">Max Athlete-to-Coach Cap</div>
+        </div>
+        <div>
+          <div class="stat-val">05:30–22:00</div>
+          <div class="stat-lbl">Open 7 Days · Free Parking</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-card" id="rigStage">
+      <div class="stage-hud-top">
+        <span class="hud-pill"><strong>3D IRON RIG</strong> · Drag to Rotate · Scroll to Spin</span>
+        <button type="button" class="btn btn-ghost" id="turboSpinBtn" style="padding:0.38rem 0.85rem;font-size:0.76rem;">⚡ Turbo Spin</button>
+      </div>
+      <canvas id="dumbbellCanvas" aria-label="Interactive 3D Hex Dumbbell"></canvas>
+      <div class="stage-hud-bottom">
+        <span class="hud-pill">Knurled Chrome + Competition Urethane</span>
+        <span class="hud-pill" id="rpmReadout">RPM: <strong>18</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLL VELOCITY TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track" id="velocityTicker">
+      <span><b>01</b> BARBELL STRENGTH</span>
+      <span><b>02</b> METABOLIC ENGINE HIIT</span>
+      <span><b>03</b> OLYMPIC WEIGHTLIFTING</span>
+      <span><b>04</b> ATHLETIC MOBILITY &amp; PREHAB</span>
+      <span><b>05</b> 1-ON-1 BODY RECOMPOSITION</span>
+      <span><b>06</b> INBODY 570 SCAN INCLUDED</span>
+      <span><b>01</b> BARBELL STRENGTH</span>
+      <span><b>02</b> METABOLIC ENGINE HIIT</span>
+      <span><b>03</b> OLYMPIC WEIGHTLIFTING</span>
+      <span><b>04</b> ATHLETIC MOBILITY &amp; PREHAB</span>
+    </div>
+  </div>
+
+  <!-- 3D TILT TRAINING PROGRAMS -->
+  <section class="section" id="programs">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Training Tracks</span>
+        <h2>Three Pillars of Total Athletic Output</h2>
+      </div>
+      <p>Hover any card to inspect in 3D perspective. Every track is periodized in 8-week blocks so you track real PRs instead of random sweat.</p>
+    </div>
+
+    <div class="grid-3">
+      <article class="tilt-card" data-tilt="12">
+        <img src="images/programs-strength.jpg" alt="Foundational Barbell Strength" onerror="this.style.background='#222'">
+        <span class="tag">Hypertrophy &amp; Force</span>
+        <h3>Forge Strength (Barbell Lab)</h3>
+        <p>Progressive overload on squat, bench, deadlift, and overhead press with velocity tracking and form checks.</p>
+        <ul class="meta-list">
+          <li>60-min coached pod (max 10 lifters)</li>
+          <li>8-week progressive strength logbook</li>
+          <li>Competition racks &amp; calibrated plates</li>
+        </ul>
+        <a class="btn btn-ghost" style="width:100%" href="https://wa.me/919800000000?text=Hi!%20I%20want%20to%20try%20the%20Forge%20Strength%20Barbell%20track." target="_blank" rel="noopener">Book Strength Trial →</a>
+      </article>
+
+      <article class="tilt-card" data-tilt="12">
+        <img src="images/hero.jpg" alt="Metabolic Conditioning & Engine" onerror="this.style.background='#222'">
+        <span class="tag">Fat Loss &amp; Stamina</span>
+        <h3>Form Engine (MetCon HIIT)</h3>
+        <p>SkiErgs, Assault bikes, sled pushes, and kettlebell complexes engineered to torch fat while sparing muscle.</p>
+        <ul class="meta-list">
+          <li>Heart-rate zone pacing (Zone 2 to Zone 5)</li>
+          <li>Zero high-impact joint thrashing</li>
+          <li>650–850 kcal average session burn</li>
+        </ul>
+        <a class="btn btn-ghost" style="width:100%" href="https://wa.me/919800000000?text=Hi!%20I%20want%20to%20try%20the%20Form%20Engine%20MetCon%20track." target="_blank" rel="noopener">Book MetCon Trial →</a>
+      </article>
+
+      <article class="tilt-card" data-tilt="12">
+        <img src="images/facility.jpg" alt="Personal Coaching & Recomp" onerror="this.style.background='#222'">
+        <span class="tag">1-on-1 Bespoke</span>
+        <h3>Private Transformation Pod</h3>
+        <p>Dedicated head coach, weekly high-protein Indian meal blueprints, bi-weekly InBody scans, and injury rehab.</p>
+        <ul class="meta-list">
+          <li>Custom vegetarian / non-veg macro plans</li>
+          <li>Flexible slot scheduling 05:30–22:00</li>
+          <li>Direct WhatsApp coach accountability</li>
+        </ul>
+        <a class="btn btn-ghost" style="width:100%" href="https://wa.me/919800000000?text=Hi!%20I%20want%20to%20enquire%20about%201-on-1%20Personal%20Transformation%20Coaching." target="_blank" rel="noopener">Consult Head Coach →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE BMI / TDEE MACRO & PLAN RECOMMENDER -->
+  <section class="section" id="macro-lab">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Interactive Bio-Calculator</span>
+        <h2>TDEE, Protein &amp; Training Blueprint Lab</h2>
+      </div>
+      <p>Dial in your metrics below for an instant daily calorie &amp; protein target plus your matched Forge &amp; Form training split.</p>
+    </div>
+
+    <div class="calc-shell">
+      <div class="form-grid">
+        <div class="field">
+          <label for="calcWeight">Weight (kg)</label>
+          <input type="number" id="calcWeight" value="74" min="35" max="180">
+        </div>
+        <div class="field">
+          <label for="calcHeight">Height (cm)</label>
+          <input type="number" id="calcHeight" value="173" min="130" max="220">
+        </div>
+        <div class="field">
+          <label for="calcAge">Age (years)</label>
+          <input type="number" id="calcAge" value="28" min="15" max="80">
+        </div>
+        <div class="field">
+          <label for="calcGender">Biological Profile</label>
+          <select id="calcGender">
+            <option value="male">Male (+5 BMR offset)</option>
+            <option value="female">Female (-161 BMR offset)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="calcDays">Training Days / Week</label>
+          <select id="calcDays">
+            <option value="3">3 Days / Week (Busy Professional)</option>
+            <option value="4" selected>4–5 Days / Week (Athletic Sweet Spot)</option>
+            <option value="6">6 Days / Week (High Volume)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="calcGoal">Primary Goal</label>
+          <select id="calcGoal">
+            <option value="cut">Fat Loss &amp; Definition (-400 kcal)</option>
+            <option value="recomp" selected>Lean Recomposition (Maintenance)</option>
+            <option value="bulk">Strength &amp; Muscle Gain (+300 kcal)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-output">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+          <span class="tag" id="outBmiTag">BMI: 24.7 · Athletic Normal</span>
+          <span style="font-size:0.8rem;color:var(--mute);">Mifflin-St Jeor Formula</span>
+        </div>
+        <h3 style="font-family:var(--font-display);font-size:1.45rem;margin-top:0.4rem;" id="outTrackTitle">Recommended: 4-Day Upper/Lower Strength + 1 MetCon</h3>
+        <div class="macro-grid">
+          <div class="macro-box">
+            <strong id="outKcal">2,410</strong>
+            <span>Daily kcal</span>
+          </div>
+          <div class="macro-box">
+            <strong id="outProtein">148g</strong>
+            <span>Protein / day</span>
+          </div>
+          <div class="macro-box">
+            <strong id="outCarbs">255g</strong>
+            <span>Carbs / day</span>
+          </div>
+        </div>
+        <p style="font-size:0.88rem;color:var(--mute);margin-bottom:1.1rem;" id="outPlanNote">Matches best with our <strong>All-Access Pro Membership (₹2,499/mo)</strong> including monthly InBody 570 tracking.</p>
+        <a id="calcWaBtn" class="btn btn-accent" style="width:100%" href="https://wa.me/919800000000" target="_blank" rel="noopener">📲 Send My Macro Blueprint &amp; Book Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CLASS TIMETABLE -->
+  <section class="section" id="timetable">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Live Studio Roster</span>
+        <h2>Filter Weekly Pods by Track or Time</h2>
+      </div>
+      <p>Tap any filter to isolate Strength, MetCon, Olympic Lifting, or Mobility pods and reserve your rack on WhatsApp.</p>
+    </div>
+
+    <div class="filter-bar" id="scheduleFilters">
+      <button class="chip active" data-filter="all">All Classes (8)</button>
+      <button class="chip" data-filter="strength">Barbell Strength</button>
+      <button class="chip" data-filter="metcon">MetCon HIIT</button>
+      <button class="chip" data-filter="olympic">Olympic Lifting</button>
+      <button class="chip" data-filter="mobility">Mobility &amp; Core</button>
+    </div>
+
+    <div class="schedule-grid" id="scheduleGrid">
+      <div class="slot-card" data-track="strength">
+        <div>
+          <div class="slot-top"><span>MON / WED / FRI</span><span>06:30 AM</span></div>
+          <div class="slot-title">Dawn Barbell Compound</div>
+          <div class="slot-sub">Squat &amp; Pull focus · Coach Vikram · 3 spots left</div>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Reserve%2006:30%20AM%20Dawn%20Barbell%20Compound%20trial" target="_blank" rel="noopener">Reserve Rack →</a>
+      </div>
+
+      <div class="slot-card" data-track="metcon">
+        <div>
+          <div class="slot-top"><span>TUE / THU / SAT</span><span>07:30 AM</span></div>
+          <div class="slot-title">Redline Engine MetCon</div>
+          <div class="slot-sub">Row + Sled + Kettlebell · Coach Rhea · 4 spots left</div>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Reserve%2007:30%20AM%20Redline%20Engine%20MetCon%20trial" target="_blank" rel="noopener">Reserve Spot →</a>
+      </div>
+
+      <div class="slot-card" data-track="mobility">
+        <div>
+          <div class="slot-top"><span>MON – SAT</span><span>09:00 AM</span></div>
+          <div class="slot-title">Bulletproof Joints &amp; Core</div>
+          <div class="slot-sub">Hip/shoulder CARs &amp; anti-rotation · Coach Kabir</div>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Reserve%2009:00%20AM%20Bulletproof%20Joints%20trial" target="_blank" rel="noopener">Reserve Spot →</a>
+      </div>
+
+      <div class="slot-card" data-track="strength">
+        <div>
+          <div class="slot-top"><span>MON / WED / FRI</span><span>05:30 PM</span></div>
+          <div class="slot-title">Hypertrophy Upper/Lower</div>
+          <div class="slot-sub">Dumbbell &amp; cable volume · Coach Vikram · 2 spots left</div>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Reserve%2005:30%20PM%20Hypertrophy%20Upper/Lower%20trial" target="_blank" rel="noopener">Reserve Rack →</a>
+      </div>
+
+      <div class="slot-card" data-track="olympic">
+        <div>
+          <div class="slot-top"><span>TUE / THU / SAT</span><span>06:45 PM</span></div>
+          <div class="slot-title">Clean &amp; Snatch Lab</div>
+          <div class="slot-sub">Explosive triple extension · Coach Arjun</div>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Reserve%2006:45%20PM%20Clean%20%26%20Snatch%20Lab%20trial" target="_blank" rel="noopener">Reserve Platform →</a>
+      </div>
+
+      <div class="slot-card" data-track="metcon">
+        <div>
+          <div class="slot-top"><span>MON – FRI</span><span>08:00 PM</span></div>
+          <div class="slot-title">Night Shift Burnout</div>
+          <div class="slot-sub">45-min high-output conditioning · Coach Rhea</div>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Reserve%2008:00%20PM%20Night%20Shift%20Burnout%20trial" target="_blank" rel="noopener">Reserve Spot →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE BEFORE/AFTER SLIDER -->
+  <section class="section" id="results">
+    <div class="ba-wrap">
+      <div>
+        <span class="eyebrow">Real Bhopal Member Data</span>
+        <h2 style="font-family:var(--font-display);font-size:clamp(1.9rem,3.6vw,2.8rem);margin-bottom:1rem;">Drag the Slider: 16-Week Body Recomposition</h2>
+        <p style="color:var(--mute);margin-bottom:1.2rem;">Our members don't starve on 1,000-calorie crash diets. By pairing progressive barbell overload with 1.8g/kg protein targets, athletes drop visceral fat while adding lean shoulder and back density.</p>
+        <ul class="meta-list">
+          <li><strong>Rohan M. (32, Architect):</strong> -9.4 kg fat, +3.1 kg skeletal muscle, Deadlift 80 kg → 155 kg</li>
+          <li><strong>Ananya S. (29, Doctor):</strong> -11 cm waist circumference, first 5 strict pull-ups in 14 weeks</li>
+        </ul>
+      </div>
+      <div class="ba-stage">
+        <div class="ba-layer ba-before">
+          <span class="tag" style="align-self:flex-start;background:rgba(0,0,0,0.75);">WEEK 1 · BASELINE INBODY SCAN</span>
+          <strong>28.4% Body Fat · 62 kg Squat 1RM</strong>
+        </div>
+        <div class="ba-layer ba-after" id="baAfterLayer">
+          <span class="tag" style="align-self:flex-start;">WEEK 16 · POST-BLOCK SCAN</span>
+          <strong>16.2% Body Fat · 135 kg Squat 1RM</strong>
+        </div>
+        <div class="ba-divider" id="baDivider"></div>
+        <input type="range" min="5" max="95" value="50" class="ba-slider-input" id="baRange" aria-label="Compare Week 1 vs Week 16">
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIPS -->
+  <section class="section" id="pricing">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Transparent Pricing</span>
+        <h2>No Hidden Joining Fees. Cancel Anytime.</h2>
+      </div>
+      <p>Every plan begins with a 60-minute movement screen and InBody 570 body composition scan.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="price-card tilt-card" data-tilt="8">
+        <div>
+          <span class="tag">Starter Trial</span>
+          <h3>7-Day Iron Pass</h3>
+          <div class="price-num">₹999 <small>/ 7 days</small></div>
+          <p style="color:var(--mute);font-size:0.9rem;margin-bottom:1rem;">Test our racks, coaches, and community for a full week. Fully credited if you upgrade.</p>
+          <ul class="meta-list">
+            <li>3 coached group sessions</li>
+            <li>Unlimited Open Gym access</li>
+            <li>1 Baseline InBody 570 scan</li>
+          </ul>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Hi!%20I%20want%20the%207-Day%20Iron%20Pass%20(Rs%20999)." target="_blank" rel="noopener">Claim 7-Day Pass</a>
+      </div>
+
+      <div class="price-card featured tilt-card" data-tilt="8">
+        <div>
+          <span class="tag">Most Popular</span>
+          <h3>All-Access Pro Monthly</h3>
+          <div class="price-num">₹2,499 <small>/ month</small></div>
+          <p style="color:var(--mute);font-size:0.9rem;margin-bottom:1rem;">Full access to Barbell Strength, MetCon HIIT, Olympic Lifting, and Open Gym.</p>
+          <ul class="meta-list">
+            <li>Unlimited coached group classes</li>
+            <li>Monthly InBody scan &amp; macro review</li>
+            <li>8-week PR tracking app logbook</li>
+          </ul>
+        </div>
+        <a class="btn btn-accent" href="https://wa.me/919800000000?text=Hi!%20I%20want%20to%20join%20All-Access%20Pro%20Monthly%20(Rs%202499)." target="_blank" rel="noopener">Start Pro Membership</a>
+      </div>
+
+      <div class="price-card tilt-card" data-tilt="8">
+        <div>
+          <span class="tag">Best Value · Save 27%</span>
+          <h3>Annual Founder Pass</h3>
+          <div class="price-num">₹21,999 <small>/ year</small></div>
+          <p style="color:var(--mute);font-size:0.9rem;margin-bottom:1rem;">Committed athletes lock in ₹1,833/mo effective rate plus 4 private 1-on-1 form clinics.</p>
+          <ul class="meta-list">
+            <li>All Pro benefits + 30-day freeze pause</li>
+            <li>4 × 1-on-1 biomechanics PT sessions</li>
+            <li>Complimentary guest pass every month</li>
+          </ul>
+        </div>
+        <a class="btn btn-ghost" href="https://wa.me/919800000000?text=Hi!%20I%20want%20the%20Annual%20Founder%20Pass%20(Rs%2021999)." target="_blank" rel="noopener">Lock Annual Rate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions Before You Chalk Up</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="tilt-card">
+        <h3>I've never touched a barbell. Can I join?</h3>
+        <p>Absolutely. Over 60% of our members started as beginners. Every lifter completes a foundational technique onboarding using light 10 kg aluminium technique bars before loading plates.</p>
+      </div>
+      <div class="tilt-card">
+        <h3>Do you give vegetarian protein plans?</h3>
+        <p>Yes — our TDEE &amp; Macro Lab blueprints include realistic Bhopal-friendly vegetarian options (whey, paneer, soya chunks, Greek dahi, dal/legume combos) alongside non-veg options.</p>
+      </div>
+      <div class="tilt-card">
+        <h3>Where exactly are you located?</h3>
+        <p>12 Arera Hills Road, Bhopal 462016 — with dedicated basement car &amp; two-wheeler parking, shower lockers, and post-workout espresso &amp; protein shake bar.</p>
+      </div>
+    </div>
+  </section>
+
+</section>
+
 
 <!-- ========== HERO ========== -->
 <section class="hero" aria-labelledby="hero-title" style="padding-top:clamp(2rem,6vw,5rem);padding-bottom:var(--sp-5)">
@@ -1220,5 +1833,219 @@ footer{padding:var(--sp-4) 0 var(--sp-3);border-top:1px solid var(--ink-3);backg
 })();
 </script>
 <script src="../assets/motion.js?v=2" defer></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  // 1. Scroll Progress & Velocity Skew Ticker
+  const progress = document.getElementById('scrollProgress');
+  const ticker = document.getElementById('velocityTicker');
+  let lastScrollY = window.scrollY;
+  let tickerX = 0;
+  let scrollBoost = 0;
+
+  window.addEventListener('scroll', () => {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const pct = (window.scrollY / maxScroll) * 100;
+    if (progress) progress.style.width = pct.toFixed(1) + '%';
+    const delta = window.scrollY - lastScrollY;
+    lastScrollY = window.scrollY;
+    scrollBoost = Math.max(-18, Math.min(18, delta * 0.35));
+  }, { passive: true });
+
+  function animateTicker() {
+    tickerX -= (0.65 + Math.abs(scrollBoost) * 0.18);
+    if (tickerX < -900) tickerX = 0;
+    scrollBoost *= 0.9;
+    if (ticker) {
+      ticker.style.transform = `translate3d(${tickerX}px, 0, 0) skewX(${(-scrollBoost * 0.6).toFixed(2)}deg)`;
+    }
+    requestAnimationFrame(animateTicker);
+  }
+  requestAnimationFrame(animateTicker);
+
+  // 2. 3D Perspective Card Tilt
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    const maxTilt = parseFloat(card.getAttribute('data-tilt')) || 10;
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${(-y * maxTilt).toFixed(2)}deg) rotateY(${(x * maxTilt).toFixed(2)}deg) translateZ(6px)`;
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+    });
+  });
+
+  // 3. Interactive TDEE & Macro Calculator
+  const els = ['calcWeight','calcHeight','calcAge','calcGender','calcDays','calcGoal'].map(id => document.getElementById(id));
+  function updateMacros() {
+    const w = parseFloat(document.getElementById('calcWeight').value) || 74;
+    const h = parseFloat(document.getElementById('calcHeight').value) || 173;
+    const a = parseFloat(document.getElementById('calcAge').value) || 28;
+    const g = document.getElementById('calcGender').value;
+    const d = parseInt(document.getElementById('calcDays').value, 10) || 4;
+    const goal = document.getElementById('calcGoal').value;
+
+    const bmi = w / Math.pow(h / 100, 2);
+    const bmiCat = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Athletic Normal' : bmi < 30 ? 'Overweight' : 'High Adiposity';
+    document.getElementById('outBmiTag').textContent = `BMI: ${bmi.toFixed(1)} · ${bmiCat}`;
+
+    const bmr = (10 * w) + (6.25 * h) - (5 * a) + (g === 'male' ? 5 : -161);
+    const mult = d === 3 ? 1.42 : d === 4 ? 1.55 : 1.7;
+    let tdee = Math.round(bmr * mult);
+    if (goal === 'cut') tdee -= 400;
+    if (goal === 'bulk') tdee += 300;
+
+    const protein = Math.round(w * (goal === 'cut' ? 2.1 : 1.9));
+    const fat = Math.round((tdee * 0.26) / 9);
+    const carbs = Math.max(60, Math.round((tdee - (protein * 4) - (fat * 9)) / 4));
+
+    document.getElementById('outKcal').textContent = tdee.toLocaleString('en-IN');
+    document.getElementById('outProtein').textContent = protein + 'g';
+    document.getElementById('outCarbs').textContent = carbs + 'g';
+
+    const splitTitle = goal === 'cut'
+      ? `Recommended: ${d}-Day MetCon Engine + Barbell Retention`
+      : goal === 'bulk'
+      ? `Recommended: ${d}-Day Forge Hypertrophy & Heavy Compound Split`
+      : `Recommended: ${d}-Day Upper/Lower Strength + 1 MetCon Pod`;
+    document.getElementById('outTrackTitle').textContent = splitTitle;
+
+    const waMsg = `Hi Forge & Form! My TDEE Lab profile: ${w}kg, ${h}cm, Goal: ${goal.toUpperCase()} (${tdee} kcal, ${protein}g protein/day). I'd like to book my Free Trial for the ${splitTitle}!`;
+    document.getElementById('calcWaBtn').href = `https://wa.me/919800000000?text=${encodeURIComponent(waMsg)}`;
+  }
+  els.forEach(el => el && el.addEventListener('input', updateMacros));
+  updateMacros();
+
+  // 4. Interactive Class Timetable Filter
+  document.querySelectorAll('#scheduleFilters .chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#scheduleFilters .chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.getAttribute('data-filter');
+      document.querySelectorAll('#scheduleGrid .slot-card').forEach(card => {
+        card.style.display = (f === 'all' || card.getAttribute('data-track') === f) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // 5. Before / After Slider
+  const baRange = document.getElementById('baRange');
+  const baAfter = document.getElementById('baAfterLayer');
+  const baDiv = document.getElementById('baDivider');
+  if (baRange) {
+    baRange.addEventListener('input', () => {
+      const v = baRange.value;
+      baAfter.style.clipPath = `inset(0 0 0 ${v}%)`;
+      baDiv.style.left = v + '%';
+    });
+  }
+
+  // 6. Real-Time Three.js 3D Chrome & Signal-Lime Hex Dumbbell Rig
+  const canvas = document.getElementById('dumbbellCanvas');
+  if (canvas && window.THREE) {
+    try {
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+      camera.position.set(0, 0.4, 5.6);
+
+      const amb = new THREE.AmbientLight(0xffffff, 0.65);
+      scene.add(amb);
+      const keyLight = new THREE.DirectionalLight(0xc6ff3d, 1.5);
+      keyLight.position.set(4, 5, 4);
+      scene.add(keyLight);
+      const rimLight = new THREE.PointLight(0xffffff, 1.2, 15);
+      rimLight.position.set(-4, -3, 3);
+      scene.add(rimLight);
+
+      const rig = new THREE.Group();
+      scene.add(rig);
+
+      const chromeMat = new THREE.MeshStandardMaterial({ color: 0xd8dce3, metalness: 0.88, roughness: 0.18 });
+      const ironMat = new THREE.MeshStandardMaterial({ color: 0x18191d, metalness: 0.45, roughness: 0.55 });
+      const limeMat = new THREE.MeshStandardMaterial({ color: 0xc6ff3d, emissive: 0x3b5208, metalness: 0.3, roughness: 0.25 });
+
+      // Knurled Handle
+      const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 2.2, 24), chromeMat);
+      handle.rotation.z = Math.PI / 2;
+      rig.add(handle);
+
+      // Hex Heads on both sides
+      [-1.15, 1.15].forEach(side => {
+        const sign = Math.sign(side);
+        const hexOuter = new THREE.Mesh(new THREE.CylinderGeometry(0.78, 0.78, 0.55, 6), ironMat);
+        hexOuter.rotation.z = Math.PI / 2;
+        hexOuter.position.x = side;
+        rig.add(hexOuter);
+
+        const hexInner = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.38, 6), ironMat);
+        hexInner.rotation.z = Math.PI / 2;
+        hexInner.position.x = side + sign * 0.38;
+        rig.add(hexInner);
+
+        // Signal-lime competition bumper accent ring
+        const accentRing = new THREE.Mesh(new THREE.TorusGeometry(0.68, 0.045, 12, 6), limeMat);
+        accentRing.rotation.y = Math.PI / 2;
+        accentRing.position.x = side + sign * 0.28;
+        rig.add(accentRing);
+      });
+
+      // Orbiting energy ring
+      const orbitRing = new THREE.Mesh(
+        new THREE.TorusGeometry(2.05, 0.018, 16, 90),
+        new THREE.MeshBasicMaterial({ color: 0xc6ff3d, transparent: true, opacity: 0.38 })
+      );
+      orbitRing.rotation.x = 1.1;
+      scene.add(orbitRing);
+
+      rig.rotation.set(0.35, -0.5, 0.22);
+
+      function resize() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        renderer.setSize(r.width, r.height, false);
+        camera.aspect = r.width / Math.max(1, r.height);
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let isDragging = false, prevX = 0, prevY = 0, velY = 0.012, velX = 0.004;
+      canvas.addEventListener('pointerdown', e => { isDragging = true; prevX = e.clientX; prevY = e.clientY; });
+      window.addEventListener('pointerup', () => { isDragging = false; });
+      window.addEventListener('pointermove', e => {
+        if (!isDragging) return;
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        prevX = e.clientX; prevY = e.clientY;
+        velY = dx * 0.008;
+        velX = dy * 0.008;
+      });
+
+      const rpmEl = document.querySelector('#rpmReadout strong');
+      document.getElementById('turboSpinBtn').addEventListener('click', () => {
+        velY = 0.22;
+      });
+
+      function renderLoop() {
+        rig.rotation.y += velY + (scrollBoost * 0.004);
+        rig.rotation.x += velX;
+        orbitRing.rotation.z -= 0.006;
+        if (!isDragging) {
+          velY = velY * 0.96 + 0.012 * 0.04;
+          velX = velX * 0.94 + 0.003 * 0.06;
+        }
+        if (rpmEl) rpmEl.textContent = Math.max(12, Math.round(Math.abs(velY) * 1400));
+        renderer.render(scene, camera);
+        requestAnimationFrame(renderLoop);
+      }
+      renderLoop();
+    } catch (err) { console.warn('WebGL fallback:', err); }
+  }
+})();
+</script>
 </body>
 </html>
