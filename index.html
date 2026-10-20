@@ -1,596 +1,586 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Satyam Choure — Web Developer</title>
-  <meta name="description" content="Satyam Choure is a web developer who learns by building: clean, useful and interactive websites today, products that solve real problems next.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Satyam Choure — Independent Web Designer &amp; Developer</title>
+  <meta name="description" content="Satyam Choure designs and builds custom websites for businesses — shops, studios, clinics and restaurants. Made from scratch, quick on every phone. Based in India, working worldwide.">
   <meta name="author" content="Satyam Choure">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#000000">
-
+  <meta name="theme-color" content="#EFEBE3">
+  <meta name="color-scheme" content="light">
   <link rel="canonical" href="https://satyamchoure08.github.io/Satyam-Choure-portfolio/">
 
-  <!-- Link previews (X, WhatsApp, LinkedIn, Slack…). Image URLs must be absolute. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Satyam Choure">
   <meta property="og:url" content="https://satyamchoure08.github.io/Satyam-Choure-portfolio/">
-  <meta property="og:title" content="Satyam Choure — Web Developer">
-  <meta property="og:description" content="I turn ideas into clean, useful websites, and I&rsquo;m building toward products that solve real problems.">
+  <meta property="og:title" content="Satyam Choure — Websites that look like you mean business">
+  <meta property="og:description" content="Independent web designer &amp; developer. Custom websites for shops, studios, clinics and restaurants — made from scratch.">
   <meta property="og:image" content="https://satyamchoure08.github.io/Satyam-Choure-portfolio/assets/img/og-image.jpg">
-  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Satyam Choure, web developer. I turn ideas into clean, useful websites.">
+  <meta property="og:image:alt" content="Satyam Choure — Websites that look like you mean business.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@satyamchoure08">
-  <meta name="twitter:title" content="Satyam Choure — Web Developer">
-  <meta name="twitter:description" content="I turn ideas into clean, useful websites, and I&rsquo;m building toward products that solve real problems.">
+  <meta name="twitter:title" content="Satyam Choure — Websites that look like you mean business">
+  <meta name="twitter:description" content="Independent web designer &amp; developer. Custom websites for shops, studios, clinics and restaurants — made from scratch.">
   <meta name="twitter:image" content="https://satyamchoure08.github.io/Satyam-Choure-portfolio/assets/img/og-image.jpg">
-  <meta name="twitter:image:alt" content="Satyam Choure, web developer. I turn ideas into clean, useful websites.">
 
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
 
-  <!-- Marks the page as script-enabled and shows the intro screen before first paint. -->
+  <link rel="preload" href="assets/fonts/newsreader-display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/newsreader-display-italic.woff2" as="font" type="font/woff2" crossorigin>
+
   <script>
-    /* Marks the page as script-enabled, shows the intro screen before first paint,
-       and decides between the 3D version and the simple page (see choreo.js). */
+    /* Marks the page as script-enabled before first paint and decides on the intro + motion. */
     (function () {
       var d = document.documentElement;
-      d.classList.add("js", "is-loading");
-      var why = "";
-      try {
-        var pref = null, blocked = false;
-        try { pref = localStorage.getItem("motion"); } catch (e) {}
-        try { blocked = sessionStorage.getItem("no3d") === "1"; } catch (e) {}
-        var q = location.search;
-        var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-        var off = /[?&]no3d\b/.test(q) || pref === "off" || blocked;
-        var on = /[?&]motion=on\b/.test(q) || pref === "on";
-        if (/[?&]motion=on\b/.test(q) && !off) { try { localStorage.setItem("motion", "on"); } catch (e) {} }
-        var short = innerHeight < 460;
-        var c = document.createElement("canvas");
-        var gl = c.getContext("webgl2") || c.getContext("webgl");
-        if (gl) { var x = gl.getExtension("WEBGL_lose_context"); if (x) x.loseContext(); }
-        if (!gl) why = "nogl";
-        else if (off) why = "off";
-        else if (short) why = "short";
-        else if (reduced && !on) why = "reduced";
-        else d.classList.add("engine3d");
-      } catch (e) { why = "off"; }
-      d.setAttribute("data-3d", why || "on");
+      d.classList.add("js");
+      var reduce = false;
+      try { reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+      if (reduce) d.classList.add("reduce");
+      var seen = false;
+      try { seen = sessionStorage.getItem("sc-intro") === "1"; } catch (e) {}
+      if (!reduce && !seen) d.classList.add("has-intro");
     })();
   </script>
 
-  <link rel="stylesheet" href="style.css?v=4">
-  <link rel="stylesheet" href="stage.css?v=4">
-  <link rel="stylesheet" href="stage2.css?v=4">
+  <link rel="stylesheet" href="assets/css/site.css?v=1">
 
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Satyam Choure",
-      "jobTitle": "Web Developer",
-      "email": "mailto:satyamchoure08@gmail.com",
-      "sameAs": [
-        "https://x.com/satyamchoure08",
-        "https://www.youtube.com/@satyamchoure-x3k",
-        "https://github.com/satyamchoure08"
-      ]
-    }
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Satyam Choure",
+    "jobTitle": "Web Designer & Developer",
+    "url": "https://satyamchoure08.github.io/Satyam-Choure-portfolio/",
+    "email": "mailto:satyamchoure08@gmail.com",
+    "address": { "@type": "PostalAddress", "addressRegion": "Madhya Pradesh", "addressCountry": "IN" },
+    "sameAs": [
+      "https://x.com/satyamchoure08",
+      "https://www.youtube.com/@satyamchoure-x3k",
+      "https://github.com/satyamchoure08"
+    ]
+  }
   </script>
 </head>
 <body>
-  <canvas id="gl" aria-hidden="true"></canvas>
-  <div class="loader" data-loader aria-hidden="true">
-    <span class="loader__name"><span style="--n:0">S</span><span style="--n:1">a</span><span style="--n:2">t</span><span style="--n:3">y</span><span style="--n:4">a</span><span style="--n:5">m</span><span style="--n:6">&nbsp;</span><span style="--n:7">C</span><span style="--n:8">h</span><span style="--n:9">o</span><span style="--n:10">u</span><span style="--n:11">r</span><span style="--n:12">e</span></span>
-    <span class="loader__bar"></span>
-  </div>
-  <div class="cursor" data-cursor aria-hidden="true"><span class="cursor__label"></span></div>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H16"/></g></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="seal" viewBox="0 0 100 100"><rect width="100" height="100" rx="9" fill="var(--seal-bg,#C23A1E)"/><rect x="5.5" y="5.5" width="89" height="89" rx="5" fill="none" stroke="var(--seal-fg,#F3EFE7)" stroke-width="1.3" opacity=".9"/><g fill="var(--seal-fg,#F3EFE7)"><path transform="translate(24.133 73.457) scale(0.07619 -0.07619)" d="M316 -20H306L129 196Q80 257 63.0 288.5Q46 320 46 342Q46 374 97 374Q112 374 138.5 372.0Q165 370 183 368Q188 393 189.5 425.5Q191 458 191 482Q191 504 190.5 518.5Q190 533 189 545H6L-28 610V620H673L707 555V545H590L592 -10H582L502 42L503 239Q462 224 417 224Q389 224 345.0 235.5Q301 247 244 293Q220 249 159 237L367 22ZM260 333Q272 326 294.5 318.5Q317 311 342.5 306.0Q368 301 391 301Q426 301 457.0 312.5Q488 324 504 338L506 545H270Q272 526 272.5 503.0Q273 480 273 471Q273 427 269.5 391.0Q266 355 260 333Z"/></g></symbol>
+    <symbol id="i-ne" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-e" viewBox="0 0 24 24"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-s" viewBox="0 0 24 24"><path d="M12 4v15.5M6 13.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-n" viewBox="0 0 24 24"><path d="M12 20V4.5M6 10.5l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </svg>
 
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header" data-header>
-    <div class="container site-header__inner">
-      <a class="brand" href="#top" aria-label="Satyam Choure, back to top">
-        <span class="brand__mark" aria-hidden="true">S</span>
-        <span class="brand__name">Satyam Choure</span>
-      </a>
+  <!-- Intro (first visit per session, script only) -->
+  <div class="intro" data-intro aria-hidden="true">
+    <div class="intro__mark"><svg class="seal"><use href="#seal"/></svg></div>
+    <p class="intro__name"><span>Satyam</span> <span>Choure</span></p>
+    <p class="intro__count"><span data-intro-count>00</span></p>
+    <p class="intro__note">Websites, made properly</p>
+  </div>
 
-      <nav class="nav" id="primary-nav" aria-label="Primary">
-        <ul class="nav__list">
-          <li><a href="#work"><span class="nav__idx" aria-hidden="true">01</span>Work</a></li>
-          <li><a href="#about"><span class="nav__idx" aria-hidden="true">02</span>About</a></li>
-          <li><a href="#skills"><span class="nav__idx" aria-hidden="true">03</span>Skills</a></li>
-          <li><a href="#contact"><span class="nav__idx" aria-hidden="true">04</span>Contact</a></li>
-        </ul>
-        <a class="btn btn--primary nav__cta" href="mailto:satyamchoure08@gmail.com">Say hello <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </nav>
-
-      <div class="site-header__actions">
-        <a class="btn btn--primary btn--sm header-cta" href="#contact">Let&rsquo;s talk</a>
-        <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-          <span class="menu-toggle__bar"></span>
-          <span class="menu-toggle__bar"></span>
-        </button>
-      </div>
+  <!-- Header -->
+  <header class="hdr" data-hdr>
+    <a class="hdr__brand" href="#top" aria-label="Satyam Choure, back to top">
+      <svg class="seal" aria-hidden="true"><use href="#seal"/></svg>
+      <span class="hdr__name">Satyam Choure</span>
+    </a>
+    <nav class="hdr__nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#index">Index</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="hdr__end">
+      <p class="hdr__time js-only"><span class="dot" aria-hidden="true"></span><span data-clock>--:--</span> IST</p>
+      <a class="hdr__cta" href="#contact"><span>Start a project</span><svg aria-hidden="true"><use href="#i-e"/></svg></a>
+      <button class="hdr__menu" type="button" data-menu-open aria-expanded="false" aria-controls="menu">Menu</button>
     </div>
   </header>
 
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" data-menu hidden>
+    <div class="menu__top">
+      <span class="label">Menu</span>
+      <button class="menu__close" type="button" data-menu-close>Close</button>
+    </div>
+    <nav class="menu__nav" aria-label="Menu">
+      <a href="#work"><span class="menu__no">01</span>Work</a>
+      <a href="#index"><span class="menu__no">02</span>Index</a>
+      <a href="#services"><span class="menu__no">03</span>Services</a>
+      <a href="#about"><span class="menu__no">04</span>About</a>
+      <a href="#contact"><span class="menu__no">05</span>Contact</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="mailto:satyamchoure08@gmail.com">satyamchoure08@gmail.com</a>
+      <p><span class="js-only"><span data-clock>--:--</span> IST · </span>Madhya Pradesh, India</p>
+    </div>
+  </div>
+
   <main id="main">
-    <!-- ───────────── Hero ───────────── -->
-    <section class="hero" id="top" data-hero>
-      <div class="hero__glow" aria-hidden="true"></div>
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="pill hero-in" style="--i:0"><span class="pill__dot" aria-hidden="true"></span>Open to projects &amp; ideas</p>
 
-          <h1 class="hero__title">
-            <span class="line"><span class="hero-in" style="--i:1">I turn ideas into</span></span>
-            <span class="line"><span class="hero-in" style="--i:2"><em>clean, useful</em></span></span>
-            <span class="line"><span class="hero-in" style="--i:3">websites.</span></span>
-          </h1>
-
-          <p class="hero__lead hero-in" style="--i:4">
-            I&rsquo;m Satyam Choure, a web developer who learns by building. I ship clean, interactive
-            websites today and I&rsquo;m working toward products that solve real problems.
-          </p>
-
-          <div class="hero__cta hero-in" style="--i:5">
-            <a class="btn btn--primary btn--lg" href="#work">See my work <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn--ghost btn--lg" href="#contact">Get in touch</a>
-          </div>
-
-          <dl class="facts hero-in" style="--i:6">
-            <div><dt>Role</dt><dd>Web developer</dd></div>
-            <div><dt>Stack</dt><dd>HTML · CSS · JavaScript</dd></div>
-            <div><dt>Next up</dt><dd>Full-stack</dd></div>
-          </dl>
+    <!-- ───────────────── Hero ───────────────── -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero__in">
+        <div class="hero__meta">
+          <p class="label">Independent web designer &amp; developer</p>
+          <p class="label hero__meta-mid">Madhya Pradesh, India — working worldwide</p>
+          <p class="label hero__meta-end"><span class="dot" aria-hidden="true"></span>Taking new projects</p>
         </div>
 
-        <figure class="portrait hero-in" style="--i:2">
-          <div class="portrait__frame">
-            <picture>
-              <source type="image/webp" srcset="assets/img/satyam-480.webp 480w, assets/img/satyam-860.webp 860w" sizes="(min-width: 900px) 440px, 80vw">
-              <img src="assets/img/satyam-860.jpg" srcset="assets/img/satyam-480.jpg 480w, assets/img/satyam-860.jpg 860w" sizes="(min-width: 900px) 440px, 80vw" width="860" height="1075" alt="Portrait of Satyam Choure" fetchpriority="high" decoding="async">
-            </picture>
+        <h1 class="hero__title" id="hero-title">
+          <span class="ln"><span class="ln__i">Websites that</span></span>
+          <span class="ln"><span class="ln__i">look like you</span></span>
+          <span class="ln"><span class="ln__i"><em>mean business<span class="acc">.</span></em></span></span>
+        </h1>
+
+        <figure class="reel" data-reel aria-hidden="true">
+          <div class="phone">
+            <div class="phone__screen">
+              <img class="is-on" src="assets/img/work/noor-frame/mob-600.webp" width="600" height="1298" alt="" decoding="async" fetchpriority="high">
+              <img src="assets/img/work/angeethi/mob-600.webp" width="600" height="1298" alt="" decoding="async" loading="lazy">
+              <img src="assets/img/work/kohinoor/mob-600.webp" width="600" height="1298" alt="" decoding="async" loading="lazy">
+              <img src="assets/img/work/super-boot-house/mob-600.webp" width="600" height="1298" alt="" decoding="async" loading="lazy">
+              <img src="assets/img/work/aagam/mob-600.webp" width="600" height="1298" alt="" decoding="async" loading="lazy">
+              <img src="assets/img/work/shree-krishna/mob-600.webp" width="600" height="1298" alt="" decoding="async" loading="lazy">
+            </div>
           </div>
-          <figcaption class="chip">
-            <span class="pill__dot" aria-hidden="true"></span>
-            <span><small>Now building</small>My next project</span>
+          <figcaption class="reel__cap">
+            <span class="label">Now showing</span>
+            <span class="reel__name" data-reel-name>Noor Frame Studio</span>
+            <span class="reel__count mono"><span data-reel-no>01</span> / 06</span>
           </figcaption>
         </figure>
-      </div>
-    </section>
 
-
-    <!-- ───────────── Marquee ───────────── -->
-    <div class="marquee" aria-hidden="true"><div class="marquee__track"><span>Web developer</span><i></i><span>HTML</span><i></i><span>CSS</span><i></i><span>JavaScript</span><i></i><span>Clean websites</span><i></i><span>Full-stack next</span><i></i></div></div>
-
-    <!-- ───────────── Work ───────────── -->
-    <section class="section" id="work" aria-labelledby="work-title">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="eyebrow"><span>01</span> Selected work</p>
-          <h2 class="section__title" id="work-title">Things I&rsquo;ve <em>built</em>.</h2>
-          <p class="section__intro">Small, focused projects where I learn by building. Every one is live, so open one and try it.</p>
-        </header>
-
-        <!-- ───── Websites for businesses ───── -->
-        <h3 class="work-group reveal"><span>Websites for businesses</span><small>Concepts &amp; samples</small></h3>
-        <div class="cards cards--samples">
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/super-boot-house.webp"><img src="assets/img/work/super-boot-house.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Concept · Sneaker shop</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/super-boot-house/">Super Boot House</a></h4>
-              <p class="card__text">A concept site for a sneaker shop in Chhindwara: a 3D shoe carousel you can spin, tilt-to-feel product cards, a live map and one-tap directions.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" style="--d:90ms" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/flexippo.webp"><img src="assets/img/work/flexippo.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">My product · flexippo.com</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="https://flexippo.com" target="_blank" rel="noopener noreferrer">Flexippo<span class="sr-only"> (opens in a new tab)</span></a></h4>
-              <p class="card__text">Personal pages that put your socials, collection and music in one link, with themes, a guestbook and QR sharing.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/store.webp"><img src="assets/img/work/store.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Kirana store</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/store/">Kirana Store</a></h4>
-              <p class="card__text">A shop-front signboard, product shelves you scroll like a real rack, and a basket that sends the order on WhatsApp.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/restaurant.webp"><img src="assets/img/work/restaurant.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Restaurant</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/restaurant/">Thali Restaurant</a></h4>
-              <p class="card__text">Today&rsquo;s thali up front, a full menu, family and birthday bookings, and an order list sent on WhatsApp.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" style="--d:90ms" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/gym.webp"><img src="assets/img/work/gym.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Gym</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/gym/">Gym</a></h4>
-              <p class="card__text">Pick a goal, check your BMI, see fees and batch timings, and book a free first workout.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/clinic.webp"><img src="assets/img/work/clinic.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Clinic</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/clinic/">Doctor&rsquo;s Clinic</a></h4>
-              <p class="card__text">A Hindi and English clinic page with what&rsquo;s treated, clinic hours and a token you can take before you arrive.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/salon.webp"><img src="assets/img/work/salon.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Barber salon</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/salon/">Barber Salon</a></h4>
-              <p class="card__text">Choose a cut from photos, add extras and pick a time, so customers skip the waiting bench.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" style="--d:90ms" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/parlour.webp"><img src="assets/img/work/parlour.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Beauty parlour</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/parlour/">Beauty Parlour</a></h4>
-              <p class="card__text">Bridal, party and everyday looks by occasion, with booking and a gallery of past work.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/hotel.webp"><img src="assets/img/work/hotel.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Hotel</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/hotel/">Hotel</a></h4>
-              <p class="card__text">Pick dates and guests, compare rooms and prices, and find the way from the bus stand.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/academy.webp"><img src="assets/img/work/academy.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Coaching academy</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/academy/">Aagam Academy</a></h4>
-              <p class="card__text">A coaching-institute site for JEE, NEET and Boards: courses, results, faculty, fees and a free demo class booked on WhatsApp.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" style="--d:90ms" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/bakery.webp"><img src="assets/img/work/bakery.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Sweets &amp; bakery</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/bakery/">Shree Krishna Sweets &amp; Bakers</a></h4>
-              <p class="card__text">A Hinglish sweets and bakery shop page with today&rsquo;s specials, custom cakes, gift boxes and orders sent on WhatsApp.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/clothing.webp"><img src="assets/img/work/clothing.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Clothing store</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/clothing/">Rang Mahal Fashion</a></h4>
-              <p class="card__text">A fashion store page with categories, new arrivals, wedding wear and stitching, plus a wishlist and chat on WhatsApp.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" style="--d:90ms" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/gym-forge.webp"><img src="assets/img/work/gym-forge.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Gym (version 2)</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/gym/">Forge &amp; Form Studio</a></h4>
-              <p class="card__text">A strength-studio site with programmes, pricing, class schedule, member stories and a free trial session booking.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/photo-studio.webp"><img src="assets/img/work/photo-studio.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Photographer</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/photo-studio/">Noor Frame Studio</a></h4>
-              <p class="card__text">A portrait and wedding photographer&rsquo;s page with a work gallery, services, FAQ and shoot booking on WhatsApp.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" style="--d:90ms" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/real-estate.webp"><img src="assets/img/work/real-estate.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Real estate</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/real-estate/">Kohinoor Estates</a></h4>
-              <p class="card__text">A multi-page real estate site with property listings, property details, a journal, dark mode and site-visit booking.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <article class="card reveal" data-spotlight>
-            <div class="cover cover--shot" aria-hidden="true">
-              <picture><source type="image/webp" srcset="assets/img/work/restaurant-angeethi.webp"><img src="assets/img/work/restaurant-angeethi.jpg" alt="" width="800" height="500" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">Sample · Restaurant (version 2)</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="samples/restaurant/">Angeethi Kitchen</a></h4>
-              <p class="card__text">A wood-fire restaurant site with a menu, gallery, a basket that sends orders on WhatsApp, and table booking.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-        </div>
-
-        <!-- ───── Learning projects ───── -->
-        <h3 class="work-group reveal"><span>Learning projects</span><small>Where I started</small></h3>
-        <div class="cards">
-          <!-- 01 · Number Guessing Game -->
-          <article class="card reveal" data-spotlight data-shot="assets/img/work/learn-guess">
-            <div class="cover cover--guess" aria-hidden="true">
-              <div class="mock-guess">
-                <div class="mock-guess__top"><span>Guess 1–100</span><span>6 / 10</span></div>
-                <div class="mock-guess__num">?</div>
-                <div class="mock-guess__hints"><span>Too low</span><span class="is-on">Too high</span></div>
-                <div class="mock-guess__dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
-              </div>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">01</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="portfolio/projects/numberGuessingGame/index.html">Number Guessing Game</a></h4>
-              <p class="card__text">A browser game: find the hidden number from 1 to 100 in ten tries, with Too high / Too low hints and a one-click restart.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <!-- 02 · Quiz -->
-          <article class="card reveal" style="--d:90ms" data-spotlight data-shot="assets/img/work/learn-quiz">
-            <div class="cover cover--quiz" aria-hidden="true">
-              <div class="mock-quiz">
-                <div class="mock-quiz__top"><span>Question 3 of 7</span><span class="mock-quiz__timer">0:18</span></div>
-                <div class="mock-quiz__bar"><i></i></div>
-                <div class="mock-quiz__lines"><i></i><i></i></div>
-                <div class="mock-quiz__opt"><b></b><i></i></div>
-                <div class="mock-quiz__opt is-on"><b></b><i></i></div>
-                <div class="mock-quiz__opt"><b></b><i></i></div>
-              </div>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">02</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="portfolio/projects/Quiz%20app/index.html">Motivational Quiz</a></h4>
-              <p class="card__text">A seven-question quiz with a 30-second timer, a live progress bar and a scored results screen.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-            </div>
-          </article>
-
-          <!-- 03 · WhatsApp UI -->
-          <article class="card reveal" data-spotlight data-shot="assets/img/work/learn-chat">
-            <div class="cover cover--chat" aria-hidden="true">
-              <div class="mock-chat">
-                <div class="mock-chat__title">WhatsApp</div>
-                <div class="mock-chat__search"></div>
-                <div class="mock-chat__chips"><span class="is-on">All</span><span>Unread</span><span>Groups</span></div>
-                <div class="mock-chat__row"><b></b><span><i></i><i></i></span></div>
-                <div class="mock-chat__row"><b></b><span><i></i><i></i></span></div>
-                <div class="mock-chat__row"><b></b><span><i></i><i></i></span></div>
-                <div class="mock-chat__fab"></div>
-              </div>
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <span class="card__idx">03</span>
-                <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
-              </div>
-              <h4 class="card__title"><a class="card__link" href="portfolio/projects/wassup/index.html">WhatsApp UI</a></h4>
-              <p class="card__text">A non-functional messaging interface recreated from scratch to practice layout and styling.</p>
-              <ul class="tags"><li>HTML</li><li>CSS</li></ul>
-            </div>
-          </article>
-
-          <!-- 04 · In progress -->
-          <article class="card card--soon reveal" style="--d:90ms" data-shot="assets/img/work/learn-soon">
-            <div class="cover cover--soon" aria-hidden="true">
-              <span class="soon-label"><span class="pill__dot"></span>In progress</span>
-            </div>
-            <div class="card__body">
-              <div class="card__top"><span class="card__idx">04</span></div>
-              <h4 class="card__title">Coming soon</h4>
-              <p class="card__text">The next project is already being built. This space will be updated soon.</p>
-              <ul class="tags"><li>JavaScript</li><li>Web</li></ul>
-            </div>
-          </article>
+        <p class="hero__lead">I design and build custom websites for businesses — shops, studios, clinics and restaurants. Made from scratch, quick on every phone, and built so customers can call, book or order in a tap.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--ink" href="#contact" data-magnetic><span>Start a project</span><svg aria-hidden="true"><use href="#i-e"/></svg></a>
+          <a class="btn btn--line" href="#work"><span>See the work</span><svg aria-hidden="true"><use href="#i-s"/></svg></a>
         </div>
       </div>
     </section>
 
-    <!-- ───────────── About ───────────── -->
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="container about">
-        <header class="about__head reveal">
-          <p class="eyebrow"><span>02</span> About</p>
-          <h2 class="section__title" id="about-title">A little <em>about me</em>.</h2>
-        </header>
+    <!-- ───────────────── Selected work ───────────────── -->
+    <section class="work tone-night" id="work" data-tone="night" aria-labelledby="work-title">
+      <div class="work__panel" data-panel>
+        <div class="wrap sec-head">
+          <p class="label sec-head__label"><span class="mono">(01)</span> Selected work</p>
+          <h2 class="display" id="work-title" data-split>Selected <em>work</em></h2>
+          <p class="sec-head__note">Six concept websites for real kinds of businesses — designed and built end to end, from first sketch to live link. Every one is live, so open any of them.</p>
+        </div>
 
-        <div class="about__body">
-          <p class="about__lead reveal">I&rsquo;m a web developer who learns by building.</p>
-          <p class="about__text reveal">
-            I enjoy taking an idea, breaking it into smaller pieces and turning it into a working
-            website: clean structure, responsive layouts and interactions that feel right.
-          </p>
+        <div class="plates">
+          <!-- 01 -->
+          <article class="plate" data-plate style="--tint:#F4ECE4">
+            <a class="plate__media" href="samples/super-boot-house/" target="_blank" rel="noopener" aria-label="Open the Super Boot House website (opens in a new tab)">
+              <div class="plate__screen">
+                <img class="plate__pan" src="assets/img/work/super-boot-house/pan-960.webp" srcset="assets/img/work/super-boot-house/pan-960.webp 960w, assets/img/work/super-boot-house/pan-1440.webp 1440w" sizes="(min-width: 1100px) 64vw, 92vw" width="1440" height="3960" alt="Super Boot House website on a desktop screen: hero, product vault and limited drops" loading="lazy" decoding="async">
+              </div>
+              <div class="phone phone--sm"><div class="phone__screen"><img src="assets/img/work/super-boot-house/mob-600.webp" width="600" height="1298" alt="" loading="lazy" decoding="async"></div></div>
+              <span class="plate__visit" aria-hidden="true">Visit site <svg><use href="#i-ne"/></svg></span>
+            </a>
+            <div class="plate__info">
+              <p class="plate__no mono">01 / 06</p>
+              <h3 class="plate__title">Super Boot House</h3>
+              <p class="plate__line">A concept site for a boot and sneaker store in Chhindwara — loud type, a 3D hero and a vault of limited drops.</p>
+              <dl class="plate__meta">
+                <div><dt>Type</dt><dd>Concept</dd></div>
+                <div><dt>Sector</dt><dd>Retail, footwear</dd></div>
+                <div><dt>City</dt><dd>Chhindwara</dd></div>
+                <div><dt>Year</dt><dd>2026</dd></div>
+              </dl>
+              <ul class="plate__feats">
+                <li>3D hero built with Three.js</li>
+                <li>Limited-drop product vault</li>
+                <li>Store map and directions</li>
+              </ul>
+              <a class="link" href="samples/super-boot-house/" target="_blank" rel="noopener"><span>Visit the live site</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </article>
 
-          <ol class="path reveal">
-            <li><span class="path__when">Now</span><span class="path__what">Strengthening my HTML, CSS and JavaScript through real projects.</span></li>
-            <li><span class="path__when">Next</span><span class="path__what">Growing into a strong full-stack developer.</span></li>
-            <li><span class="path__when">Goal</span><span class="path__what">Building products that solve real problems.</span></li>
-          </ol>
+          <!-- 02 -->
+          <article class="plate plate--flip" data-plate style="--tint:#14140C">
+            <a class="plate__media" href="samples/restaurant/" target="_blank" rel="noopener" aria-label="Open the Angeethi Kitchen website (opens in a new tab)">
+              <div class="plate__screen">
+                <img class="plate__pan" src="assets/img/work/angeethi/pan-960.webp" srcset="assets/img/work/angeethi/pan-960.webp 960w, assets/img/work/angeethi/pan-1440.webp 1440w" sizes="(min-width: 1100px) 64vw, 92vw" width="1440" height="3960" alt="Angeethi Kitchen website on a desktop screen: 3D thali, menu and table booking" loading="lazy" decoding="async">
+              </div>
+              <div class="phone phone--sm"><div class="phone__screen"><img src="assets/img/work/angeethi/mob-600.webp" width="600" height="1298" alt="" loading="lazy" decoding="async"></div></div>
+              <span class="plate__visit" aria-hidden="true">Visit site <svg><use href="#i-ne"/></svg></span>
+            </a>
+            <div class="plate__info">
+              <p class="plate__no mono">02 / 06</p>
+              <h3 class="plate__title">Angeethi Kitchen</h3>
+              <p class="plate__line">A wood-fire restaurant in Bhopal, imagined online — build your own brass thali in 3D, browse the menu by fire, book a courtyard table.</p>
+              <dl class="plate__meta">
+                <div><dt>Type</dt><dd>Concept</dd></div>
+                <div><dt>Sector</dt><dd>Restaurant</dd></div>
+                <div><dt>City</dt><dd>Bhopal</dd></div>
+                <div><dt>Year</dt><dd>2026</dd></div>
+              </dl>
+              <ul class="plate__feats">
+                <li>3D thali builder</li>
+                <li>Menu filters and search</li>
+                <li>Table booking request</li>
+              </ul>
+              <a class="link" href="samples/restaurant/" target="_blank" rel="noopener"><span>Visit the live site</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="plate" data-plate style="--tint:#F4ECEC">
+            <a class="plate__media" href="samples/photo-studio/" target="_blank" rel="noopener" aria-label="Open the Noor Frame Studio website (opens in a new tab)">
+              <div class="plate__screen">
+                <img class="plate__pan" src="assets/img/work/noor-frame/pan-960.webp" srcset="assets/img/work/noor-frame/pan-960.webp 960w, assets/img/work/noor-frame/pan-1440.webp 1440w" sizes="(min-width: 1100px) 64vw, 92vw" width="1440" height="3960" alt="Noor Frame Studio website on a desktop screen: hero, services and photo gallery" loading="lazy" decoding="async">
+              </div>
+              <div class="phone phone--sm"><div class="phone__screen"><img src="assets/img/work/noor-frame/mob-600.webp" width="600" height="1298" alt="" loading="lazy" decoding="async"></div></div>
+              <span class="plate__visit" aria-hidden="true">Visit site <svg><use href="#i-ne"/></svg></span>
+            </a>
+            <div class="plate__info">
+              <p class="plate__no mono">03 / 06</p>
+              <h3 class="plate__title">Noor Frame Studio</h3>
+              <p class="plate__line">A portrait and wedding photographer’s site that lets clients build a shoot and see the price before they ask.</p>
+              <dl class="plate__meta">
+                <div><dt>Type</dt><dd>Concept</dd></div>
+                <div><dt>Sector</dt><dd>Photography</dd></div>
+                <div><dt>City</dt><dd>Bhopal</dd></div>
+                <div><dt>Year</dt><dd>2026</dd></div>
+              </dl>
+              <ul class="plate__feats">
+                <li>Shoot builder with live price</li>
+                <li>Searchable photo gallery</li>
+                <li>Before-and-after light slider</li>
+              </ul>
+              <a class="link" href="samples/photo-studio/" target="_blank" rel="noopener"><span>Visit the live site</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="plate plate--flip" data-plate style="--tint:#FCFCFC">
+            <a class="plate__media" href="samples/real-estate/" target="_blank" rel="noopener" aria-label="Open the Kohinoor Estates website (opens in a new tab)">
+              <div class="plate__screen">
+                <img class="plate__pan" src="assets/img/work/kohinoor/pan-960.webp" srcset="assets/img/work/kohinoor/pan-960.webp 960w, assets/img/work/kohinoor/pan-1440.webp 1440w" sizes="(min-width: 1100px) 64vw, 92vw" width="1440" height="3960" alt="Kohinoor Estates website on a desktop screen: hero, property listings and agent promises" loading="lazy" decoding="async">
+              </div>
+              <div class="phone phone--sm"><div class="phone__screen"><img src="assets/img/work/kohinoor/mob-600.webp" width="600" height="1298" alt="" loading="lazy" decoding="async"></div></div>
+              <span class="plate__visit" aria-hidden="true">Visit site <svg><use href="#i-ne"/></svg></span>
+            </a>
+            <div class="plate__info">
+              <p class="plate__no mono">04 / 06</p>
+              <h3 class="plate__title">Kohinoor Estates</h3>
+              <p class="plate__line">A multi-page real estate site — listings, property pages, a journal and an EMI calculator, in English or Hindi at a tap.</p>
+              <dl class="plate__meta">
+                <div><dt>Type</dt><dd>Concept</dd></div>
+                <div><dt>Sector</dt><dd>Real estate</dd></div>
+                <div><dt>City</dt><dd>Bhopal &amp; Indore</dd></div>
+                <div><dt>Year</dt><dd>2026</dd></div>
+              </dl>
+              <ul class="plate__feats">
+                <li>Shortlist and compare homes</li>
+                <li>EMI calculator</li>
+                <li>English / <span lang="hi">हिन्दी</span> switch and dark mode</li>
+              </ul>
+              <a class="link" href="samples/real-estate/" target="_blank" rel="noopener"><span>Visit the live site</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="plate" data-plate style="--tint:#0C0C0C">
+            <a class="plate__media" href="samples/academy/" target="_blank" rel="noopener" aria-label="Open the Aagam Academy website (opens in a new tab)">
+              <div class="plate__screen">
+                <img class="plate__pan" src="assets/img/work/aagam/pan-960.webp" srcset="assets/img/work/aagam/pan-960.webp 960w, assets/img/work/aagam/pan-1440.webp 1440w" sizes="(min-width: 1100px) 64vw, 92vw" width="1440" height="3960" alt="Aagam Academy website on a desktop screen: hero, mentorship approach and courses" loading="lazy" decoding="async">
+              </div>
+              <div class="phone phone--sm"><div class="phone__screen"><img src="assets/img/work/aagam/mob-600.webp" width="600" height="1298" alt="" loading="lazy" decoding="async"></div></div>
+              <span class="plate__visit" aria-hidden="true">Visit site <svg><use href="#i-ne"/></svg></span>
+            </a>
+            <div class="plate__info">
+              <p class="plate__no mono">05 / 06</p>
+              <h3 class="plate__title">Aagam Academy</h3>
+              <p class="plate__line">A coaching institute site for JEE, NEET and Boards that answers what parents ask first — batches, timings, results and fees.</p>
+              <dl class="plate__meta">
+                <div><dt>Type</dt><dd>Concept</dd></div>
+                <div><dt>Sector</dt><dd>Education</dd></div>
+                <div><dt>City</dt><dd>Bhopal</dd></div>
+                <div><dt>Year</dt><dd>2026</dd></div>
+              </dl>
+              <ul class="plate__feats">
+                <li>Course and timetable filters</li>
+                <li>Fee calculator</li>
+                <li>Free demo class on WhatsApp</li>
+              </ul>
+              <a class="link" href="samples/academy/" target="_blank" rel="noopener"><span>Visit the live site</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </article>
+
+          <!-- 06 -->
+          <article class="plate plate--flip" data-plate style="--tint:#FCF4EC">
+            <a class="plate__media" href="samples/bakery/" target="_blank" rel="noopener" aria-label="Open the Shree Krishna Sweets and Bakers website (opens in a new tab)">
+              <div class="plate__screen">
+                <img class="plate__pan" src="assets/img/work/shree-krishna/pan-960.webp" srcset="assets/img/work/shree-krishna/pan-960.webp 960w, assets/img/work/shree-krishna/pan-1440.webp 1440w" sizes="(min-width: 1100px) 64vw, 92vw" width="1440" height="3960" alt="Shree Krishna Sweets and Bakers website on a desktop screen: 3D cake builder and mithai box" loading="lazy" decoding="async">
+              </div>
+              <div class="phone phone--sm"><div class="phone__screen"><img src="assets/img/work/shree-krishna/mob-600.webp" width="600" height="1298" alt="" loading="lazy" decoding="async"></div></div>
+              <span class="plate__visit" aria-hidden="true">Visit site <svg><use href="#i-ne"/></svg></span>
+            </a>
+            <div class="plate__info">
+              <p class="plate__no mono">06 / 06</p>
+              <h3 class="plate__title">Shree Krishna Sweets &amp;&nbsp;Bakers</h3>
+              <p class="plate__line">A sweets shop that talks the way its customers do — in Hinglish — with a 3D cake builder and a pick-your-own mithai box.</p>
+              <dl class="plate__meta">
+                <div><dt>Type</dt><dd>Concept</dd></div>
+                <div><dt>Sector</dt><dd>Sweets &amp; bakery</dd></div>
+                <div><dt>City</dt><dd>Bhopal</dd></div>
+                <div><dt>Year</dt><dd>2026</dd></div>
+              </dl>
+              <ul class="plate__feats">
+                <li>3D cake builder with pricing</li>
+                <li>Mithai box builder</li>
+                <li>Orders on WhatsApp</li>
+              </ul>
+              <a class="link" href="samples/bakery/" target="_blank" rel="noopener"><span>Visit the live site</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Own product -->
+        <aside class="wrap product" aria-labelledby="product-title">
+          <div class="product__card">
+            <div class="product__text">
+              <p class="label"><span class="mono">Also building</span> — my own product</p>
+              <h3 class="product__title" id="product-title">Flexippo</h3>
+              <p class="product__line">Personal pages that put your socials, collection and music behind one link — with themes, a guestbook and QR sharing. Live on its own domain.</p>
+              <a class="link" href="https://flexippo.com" target="_blank" rel="noopener"><span>flexippo.com</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+            <a class="product__media" href="https://flexippo.com" target="_blank" rel="noopener" aria-label="Open flexippo.com (opens in a new tab)">
+              <div class="phone phone--md"><div class="phone__screen"><img src="assets/img/work/flexippo/mob-600.webp" width="600" height="1298" alt="Flexippo personal page on a phone" loading="lazy" decoding="async"></div></div>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ───────────────── Index ───────────────── -->
+    <section class="index" id="index" aria-labelledby="index-title">
+      <div class="wrap sec-head sec-head--row">
+        <div>
+          <p class="label sec-head__label"><span class="mono">(02)</span> Index</p>
+          <h2 class="display" id="index-title" data-split>Every site, <em>so far</em></h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filter the index">
+          <button type="button" class="chip is-on" data-filter="all" aria-pressed="true">All <span class="mono">14</span></button>
+          <button type="button" class="chip" data-filter="concept" aria-pressed="false">Concepts <span class="mono">08</span></button>
+          <button type="button" class="chip" data-filter="template" aria-pressed="false">Templates <span class="mono">05</span></button>
+          <button type="button" class="chip" data-filter="product" aria-pressed="false">Product <span class="mono">01</span></button>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="idx" data-index>
+          <div class="idx__head" aria-hidden="true">
+            <span>No.</span><span>Project</span><span>Sector</span><span>City</span><span>Type</span><span></span>
+          </div>
+          <ul class="idx__list">
+            <li data-type="concept"><a class="idx__row" href="samples/super-boot-house/" target="_blank" rel="noopener" data-thumb="assets/img/work/super-boot-house/desk-800.webp"><span class="idx__no mono">01</span><span class="idx__name">Super Boot House</span><span class="idx__sector">Footwear store</span><span class="idx__city">Chhindwara</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/restaurant/" target="_blank" rel="noopener" data-thumb="assets/img/work/angeethi/desk-800.webp"><span class="idx__no mono">02</span><span class="idx__name">Angeethi Kitchen</span><span class="idx__sector">Restaurant</span><span class="idx__city">Bhopal</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/photo-studio/" target="_blank" rel="noopener" data-thumb="assets/img/work/noor-frame/desk-800.webp"><span class="idx__no mono">03</span><span class="idx__name">Noor Frame Studio</span><span class="idx__sector">Photographer</span><span class="idx__city">Bhopal</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/real-estate/" target="_blank" rel="noopener" data-thumb="assets/img/work/kohinoor/desk-800.webp"><span class="idx__no mono">04</span><span class="idx__name">Kohinoor Estates</span><span class="idx__sector">Real estate</span><span class="idx__city">Bhopal &amp; Indore</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/academy/" target="_blank" rel="noopener" data-thumb="assets/img/work/aagam/desk-800.webp"><span class="idx__no mono">05</span><span class="idx__name">Aagam Academy</span><span class="idx__sector">Coaching institute</span><span class="idx__city">Bhopal</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/bakery/" target="_blank" rel="noopener" data-thumb="assets/img/work/shree-krishna/desk-800.webp"><span class="idx__no mono">06</span><span class="idx__name">Shree Krishna Sweets &amp; Bakers</span><span class="idx__sector">Sweets &amp; bakery</span><span class="idx__city">Bhopal</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/gym/" target="_blank" rel="noopener" data-thumb="assets/img/work/forge-form/desk-800.webp"><span class="idx__no mono">07</span><span class="idx__name">Forge &amp; Form Studio</span><span class="idx__sector">Gym</span><span class="idx__city">Bhopal</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="concept"><a class="idx__row" href="samples/clothing/" target="_blank" rel="noopener" data-thumb="assets/img/work/rang-mahal/desk-800.webp"><span class="idx__no mono">08</span><span class="idx__name">Rang Mahal Fashion</span><span class="idx__sector">Clothing store</span><span class="idx__city">Jaipur</span><span class="idx__type">Concept</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="product"><a class="idx__row" href="https://flexippo.com" target="_blank" rel="noopener" data-thumb="assets/img/work/flexippo/desk-800.webp"><span class="idx__no mono">09</span><span class="idx__name">Flexippo</span><span class="idx__sector">Personal pages</span><span class="idx__city">flexippo.com</span><span class="idx__type">Product</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="template"><a class="idx__row" href="samples/store/" target="_blank" rel="noopener" data-thumb="assets/img/work/kirana/desk-800.webp"><span class="idx__no mono">10</span><span class="idx__name">Kirana Store</span><span class="idx__sector">Grocery</span><span class="idx__city">Any town</span><span class="idx__type">Template</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="template"><a class="idx__row" href="samples/clinic/" target="_blank" rel="noopener" data-thumb="assets/img/work/clinic/desk-800.webp"><span class="idx__no mono">11</span><span class="idx__name">Doctor’s Clinic</span><span class="idx__sector">Clinic, Hindi + English</span><span class="idx__city">Any town</span><span class="idx__type">Template</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="template"><a class="idx__row" href="samples/salon/" target="_blank" rel="noopener" data-thumb="assets/img/work/salon/desk-800.webp"><span class="idx__no mono">12</span><span class="idx__name">Barber Salon</span><span class="idx__sector">Salon</span><span class="idx__city">Any town</span><span class="idx__type">Template</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="template"><a class="idx__row" href="samples/parlour/" target="_blank" rel="noopener" data-thumb="assets/img/work/parlour/desk-800.webp"><span class="idx__no mono">13</span><span class="idx__name">Beauty Parlour</span><span class="idx__sector">Beauty &amp; bridal</span><span class="idx__city">Any town</span><span class="idx__type">Template</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+            <li data-type="template"><a class="idx__row" href="samples/hotel/" target="_blank" rel="noopener" data-thumb="assets/img/work/hotel/desk-800.webp"><span class="idx__no mono">14</span><span class="idx__name">Hotel</span><span class="idx__sector">Hotel</span><span class="idx__city">Any town</span><span class="idx__type">Template</span><svg class="idx__go" aria-hidden="true"><use href="#i-ne"/></svg></a></li>
+          </ul>
+          <p class="idx__note">Concepts are self-initiated sites for real kinds of businesses. Templates are ready-to-brand starters for local shops. All links open the live site in a new tab.</p>
+        </div>
+      </div>
+      <div class="peek" data-peek aria-hidden="true"><img alt="" decoding="async"></div>
+    </section>
+
+    <!-- ───────────────── Services ───────────────── -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="wrap sec-head">
+        <p class="label sec-head__label"><span class="mono">(03)</span> Services</p>
+        <h2 class="display" id="services-title" data-split>What I <em>build</em></h2>
+      </div>
+
+      <div class="wrap">
+        <ol class="svc">
+          <li class="svc__row" data-reveal>
+            <span class="svc__no mono">01</span>
+            <h3 class="svc__title">Business websites</h3>
+            <div class="svc__body">
+              <p>Your shop, clinic, studio or restaurant, properly online — products, prices, timings, photos and directions, designed around what your customers actually come to do.</p>
+              <ul class="tags"><li>Custom design</li><li>Mobile-first build</li><li>Maps &amp; directions</li><li>English &amp; Hindi</li></ul>
+            </div>
+          </li>
+          <li class="svc__row" data-reveal>
+            <span class="svc__no mono">02</span>
+            <h3 class="svc__title">Orders &amp; bookings</h3>
+            <div class="svc__body">
+              <p>Let customers order, book a table, reserve a slot or take a token from their phone — with WhatsApp carrying the conversation.</p>
+              <ul class="tags"><li>WhatsApp ordering</li><li>Booking forms</li><li>Price calculators</li><li>Click to call</li></ul>
+            </div>
+          </li>
+          <li class="svc__row" data-reveal>
+            <span class="svc__no mono">03</span>
+            <h3 class="svc__title">Motion &amp; 3D</h3>
+            <div class="svc__body">
+              <p>For brands that want to stand apart: art direction, typography, scroll-led motion and interactive 3D that make a site feel crafted, not assembled.</p>
+              <ul class="tags"><li>Art direction</li><li>Scroll motion</li><li>Three.js</li><li>Micro-interactions</li></ul>
+            </div>
+          </li>
+          <li class="svc__row" data-reveal>
+            <span class="svc__no mono">04</span>
+            <h3 class="svc__title">Personal pages</h3>
+            <div class="svc__body">
+              <p>One page that holds everything about you — work, socials, music and links — on a domain with your name on it.</p>
+              <ul class="tags"><li>Custom domain</li><li>Themes</li><li>QR sharing</li></ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="wrap process">
+        <div class="process__head">
+          <p class="label"><span class="mono">(04)</span> Process</p>
+          <h3 class="process__title" data-split>How a project runs</h3>
+        </div>
+        <ol class="process__steps">
+          <li data-reveal><span class="process__no">i.</span><h4>Talk</h4><p>We talk about your business, your customers and what the site needs to do.</p></li>
+          <li data-reveal><span class="process__no">ii.</span><h4>Design</h4><p>I design the key screens and share a live link you can open on your phone.</p></li>
+          <li data-reveal><span class="process__no">iii.</span><h4>Build</h4><p>I build the full site — WhatsApp, maps, forms — and refine it with your feedback.</p></li>
+          <li data-reveal><span class="process__no">iv.</span><h4>Launch</h4><p>It goes live on your own domain, and I check that every link and button works.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────────────── About ───────────────── -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about__grid">
+        <figure class="about__portrait" data-reveal-img>
+          <picture>
+            <source type="image/webp" srcset="assets/img/satyam-480.webp 480w, assets/img/satyam-860.webp 860w" sizes="(min-width: 1100px) 34vw, 80vw">
+            <img src="assets/img/satyam-860.jpg" srcset="assets/img/satyam-480.jpg 480w, assets/img/satyam-860.jpg 860w" sizes="(min-width: 1100px) 34vw, 80vw" width="860" height="1075" alt="Portrait of Satyam Choure" loading="lazy" decoding="async">
+          </picture>
+          <figcaption class="mono">Satyam Choure — Madhya Pradesh, India</figcaption>
+        </figure>
+
+        <div class="about__text">
+          <p class="label sec-head__label"><span class="mono">(05)</span> About</p>
+          <h2 class="display display--md" id="about-title" data-split>The name means <em>truth</em></h2>
+
+          <div class="entry" data-reveal>
+            <p class="entry__word"><em>satyam</em> <span class="entry__deva" lang="sa">सत्यम्</span></p>
+            <p class="entry__gram mono">Sanskrit · noun</p>
+            <p class="entry__def">Truth; that which is real.</p>
+          </div>
+
+          <div class="about__copy">
+            <p data-reveal>I’m Satyam Choure, an independent web designer and developer from Madhya Pradesh, India. I build websites the way I’d want my own business’s website built — from a blank page, around what customers actually come to do: see the prices, check the timings, call, book or order.</p>
+            <p data-reveal>I take my name as a brief. Real content over filler. Honest claims over inflated ones. Sites that do exactly what they say.</p>
+            <p data-reveal>When I’m not building for clients, I’m building my own products — starting with Flexippo.</p>
+          </div>
+
+          <dl class="facts" data-reveal>
+            <div><dt>Based in</dt><dd>Madhya Pradesh, India</dd></div>
+            <div><dt>Works with</dt><dd>Clients anywhere, remotely</dd></div>
+            <div><dt>Builds with</dt><dd>HTML, CSS, JavaScript, GSAP, Three.js</dd></div>
+            <div><dt>Writes sites in</dt><dd>English, Hindi &amp; Hinglish</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <!-- ───────────── Skills ───────────── -->
-    <section class="section" id="skills" aria-labelledby="skills-title">
-      <div class="container">
-        <header class="section__head reveal">
-          <p class="eyebrow"><span>03</span> Skills</p>
-          <h2 class="section__title" id="skills-title">What I <em>work with</em>.</h2>
-        </header>
+    <!-- ───────────────── Contact ───────────────── -->
+    <section class="contact tone-night" id="contact" data-tone="night" aria-labelledby="contact-title">
+      <div class="wrap contact__grid">
+        <div class="contact__intro">
+          <p class="label sec-head__label"><span class="mono">(06)</span> Contact</p>
+          <h2 class="display" id="contact-title" data-split>Start a <em>project</em></h2>
+          <p class="contact__lead">Tell me about your business — a few lines is enough to start.</p>
 
-        <ul class="skills reveal">
-          <li class="skill"><span class="skill__idx">01</span><span class="skill__name">HTML</span><span class="skill__desc">Semantic structure</span></li>
-          <li class="skill"><span class="skill__idx">02</span><span class="skill__name">CSS</span><span class="skill__desc">Responsive design</span></li>
-          <li class="skill"><span class="skill__idx">03</span><span class="skill__name">JavaScript</span><span class="skill__desc">Interactive websites</span></li>
-          <li class="skill"><span class="skill__idx">04</span><span class="skill__name">Git</span><span class="skill__desc">Version control</span></li>
-          <li class="skill skill--next"><span class="skill__idx">05</span><span class="skill__name">Full-stack</span><span class="skill__desc">Learning next <span class="skill__tag">Up next</span></span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ───────────── Contact ───────────── -->
-    <section class="section contact" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="contact__panel reveal">
-          <p class="eyebrow"><span>04</span> Contact</p>
-          <h2 class="contact__title" id="contact-title">Have a project or idea?<br><em>Let&rsquo;s build something.</em></h2>
-          <p class="contact__lead">Send me a message and let&rsquo;s talk.</p>
-
-          <div class="contact__actions">
-            <a class="btn btn--primary btn--lg" href="mailto:satyamchoure08@gmail.com">satyamchoure08@gmail.com <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <button class="btn btn--ghost btn--lg" type="button" data-copy="satyamchoure08@gmail.com">
-              <svg class="icon-copy" aria-hidden="true"><use href="#i-copy"/></svg>
-              <svg class="icon-check" aria-hidden="true"><use href="#i-check"/></svg>
+          <div class="mail">
+            <a class="mail__addr" href="mailto:satyamchoure08@gmail.com">satyamchoure08@gmail.com</a>
+            <button class="mail__copy" type="button" data-copy="satyamchoure08@gmail.com">
+              <svg class="i-copy" aria-hidden="true"><use href="#i-copy"/></svg><svg class="i-check" aria-hidden="true"><use href="#i-check"/></svg>
               <span data-copy-label>Copy email</span>
             </button>
           </div>
           <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
 
           <ul class="socials">
-            <li><a href="https://x.com/satyamchoure08" target="_blank" rel="noopener noreferrer"><span>X</span> @satyamchoure08 <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
-            <li><a href="https://www.youtube.com/@satyamchoure-x3k" target="_blank" rel="noopener noreferrer"><span>YouTube</span> Satyam Choure <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
-            <li><a href="https://github.com/satyamchoure08" target="_blank" rel="noopener noreferrer"><span>GitHub</span> satyamchoure08 <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+            <li><a href="https://x.com/satyamchoure08" target="_blank" rel="noopener"><span>X</span><span>@satyamchoure08</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.youtube.com/@satyamchoure-x3k" target="_blank" rel="noopener"><span>YouTube</span><span>Satyam Choure</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://github.com/satyamchoure08" target="_blank" rel="noopener"><span>GitHub</span><span>satyamchoure08</span><svg aria-hidden="true"><use href="#i-ne"/></svg><span class="sr-only"> (opens in a new tab)</span></a></li>
           </ul>
         </div>
+
+        <form class="brief" data-brief novalidate aria-labelledby="brief-title">
+          <p class="brief__title" id="brief-title"><span class="label">Project brief</span><span class="mono">Opens in your email app</span></p>
+          <div class="field">
+            <label for="b-name">Your name</label>
+            <input id="b-name" name="name" type="text" autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="b-biz">Business</label>
+            <input id="b-biz" name="business" type="text" autocomplete="organization" placeholder="e.g. a bakery in Indore">
+          </div>
+          <fieldset class="field">
+            <legend>What do you need?</legend>
+            <div class="opts">
+              <label class="opt"><input type="checkbox" name="need" value="A new website"><span>A new website</span></label>
+              <label class="opt"><input type="checkbox" name="need" value="A redesign"><span>A redesign</span></label>
+              <label class="opt"><input type="checkbox" name="need" value="Orders or bookings"><span>Orders or bookings</span></label>
+              <label class="opt"><input type="checkbox" name="need" value="A personal page"><span>A personal page</span></label>
+              <label class="opt"><input type="checkbox" name="need" value="Not sure yet"><span>Not sure yet</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field">
+            <legend>When?</legend>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="when" value="As soon as possible"><span>As soon as possible</span></label>
+              <label class="opt"><input type="radio" name="when" value="In the next month"><span>In the next month</span></label>
+              <label class="opt"><input type="radio" name="when" value="Just exploring"><span>Just exploring</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="b-msg">Anything else</label>
+            <textarea id="b-msg" name="message" rows="3" placeholder="Your city, a site you like, a budget if you have one."></textarea>
+          </div>
+          <div class="brief__actions">
+            <button class="btn btn--paper" type="submit" data-magnetic><span>Send by email</span><svg aria-hidden="true"><use href="#i-e"/></svg></button>
+            <button class="btn btn--ghost" type="button" data-brief-copy><span data-brief-copy-label>Copy message</span></button>
+          </div>
+          <p class="brief__hint" data-brief-hint role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <p>© <span id="year">2026</span> Satyam Choure</p>
-      <p class="site-footer__note">Built with HTML, CSS &amp; JavaScript. <em>Peace.</em></p>
-      <a class="site-footer__top" href="#top">Back to top <svg aria-hidden="true"><use href="#i-up"/></svg></a>
+  <footer class="ftr tone-night" data-tone="night">
+    <div class="wrap">
+      <p class="ftr__mark" aria-hidden="true"><span class="ftr__word" data-ftr-word>Satyam Choure</span><svg class="seal ftr__seal"><use href="#seal"/></svg></p>
+      <div class="ftr__row">
+        <p>© <span data-year>2026</span> Satyam Choure</p>
+        <p>Made from scratch in India</p>
+        <p class="js-only"><span data-clock>--:--</span> IST</p>
+        <a class="ftr__top" href="#top"><span>Back to top</span><svg aria-hidden="true"><use href="#i-n"/></svg></a>
+      </div>
     </div>
   </footer>
 
-  <button class="to-top" id="topBtn" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
-
   <script src="assets/vendor/gsap.min.js" defer></script>
-  <script src="script.js?v=5" defer></script>
-  <script src="choreo.js?v=5" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/site.js?v=1" defer></script>
 </body>
 </html>

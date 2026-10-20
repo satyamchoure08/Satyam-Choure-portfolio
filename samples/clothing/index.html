@@ -2019,8 +2019,8 @@ document.querySelectorAll('.cat-tile').forEach(tile=>{ tile.addEventListener('ke
   // 3. Trousseau Bag Drawer
   const bag = [];
   const drawer = document.getElementById('bagDrawer');
-  document.getElementById('openBagBtn').addEventListener('click', () => drawer.classList.add('open'));
-  document.getElementById('closeBagBtn').addEventListener('click', () => drawer.classList.remove('open'));
+  document.getElementById('openBagBtn')?.addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('closeBagBtn')?.addEventListener('click', () => drawer.classList.remove('open'));
 
   function renderBag() {
     document.getElementById('bagCount').textContent = bag.length;
@@ -2048,7 +2048,7 @@ document.querySelectorAll('.cat-tile').forEach(tile=>{ tile.addEventListener('ke
     });
   }
 
-  document.getElementById('addStudioOutfitBtn').addEventListener('click', () => {
+  document.getElementById('addStudioOutfitBtn')?.addEventListener('click', () => {
     bag.push({ ...studioSelection });
     renderBag();
     drawer.classList.add('open');
@@ -2061,7 +2061,7 @@ document.querySelectorAll('.cat-tile').forEach(tile=>{ tile.addEventListener('ke
     });
   });
 
-  document.getElementById('checkoutBagBtn').addEventListener('click', () => {
+  document.getElementById('checkoutBagBtn')?.addEventListener('click', () => {
     if (!bag.length) return alert('Add an outfit to your bag first!');
     const lines = bag.map(i => `• ${i.title} (₹${i.price})`).join('\n');
     const total = bag.reduce((s, i) => s + i.price, 0);
@@ -2087,9 +2087,9 @@ document.querySelectorAll('.cat-tile').forEach(tile=>{ tile.addEventListener('ke
       filterCatalog();
     });
   });
-  document.getElementById('prodSearch').addEventListener('input', filterCatalog);
+  document.getElementById('prodSearch')?.addEventListener('input', filterCatalog);
 
-  document.getElementById('bookTailorBtn').addEventListener('click', () => {
+  document.getElementById('bookTailorBtn')?.addEventListener('click', () => {
     const s = document.getElementById('tlService').value.split('|')[0];
     const sp = document.getElementById('tlSpeed').value.split('|')[0];
     const msg = `✂️ *Master-Ji Stitching Booking*\nService: ${s}\nTimeline: ${sp}`;
@@ -2135,7 +2135,7 @@ document.querySelectorAll('.cat-tile').forEach(tile=>{ tile.addEventListener('ke
         { name: 'Rani Pink & Kundan Gold', hex: 0xa61c5c }
       ];
       let shadeIdx = 0;
-      document.getElementById('weaveSwitchBtn').addEventListener('click', () => {
+      document.getElementById('weaveSwitchBtn')?.addEventListener('click', () => {
         shadeIdx = (shadeIdx + 1) % shades.length;
         mat.color.setHex(shades[shadeIdx].hex);
         document.querySelector('#loomShadeLabel strong').textContent = shades[shadeIdx].name;

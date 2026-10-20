@@ -1571,8 +1571,8 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--i
   // 3. Handi Cart Drawer State
   const cart = [];
   const drawer = document.getElementById('cartDrawer');
-  document.getElementById('openCartBtn').addEventListener('click', () => drawer.classList.add('open'));
-  document.getElementById('closeCartBtn').addEventListener('click', () => drawer.classList.remove('open'));
+  document.getElementById('openCartBtn')?.addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('closeCartBtn')?.addEventListener('click', () => drawer.classList.remove('open'));
 
   function renderCart() {
     document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
@@ -1622,14 +1622,14 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--i
     drawer.classList.add('open');
   }
 
-  document.getElementById('addCustomThaliBtn').addEventListener('click', () => {
+  document.getElementById('addCustomThaliBtn')?.addEventListener('click', () => {
     addToCart(currentThali.title, currentThali.price);
   });
   document.querySelectorAll('.add-dish-btn').forEach(btn => {
     btn.addEventListener('click', () => addToCart(btn.getAttribute('data-title'), btn.getAttribute('data-price')));
   });
 
-  document.getElementById('checkoutWaBtn').addEventListener('click', () => {
+  document.getElementById('checkoutWaBtn')?.addEventListener('click', () => {
     if (!cart.length) return alert('Add at least one dish or custom thali first!');
     const lines = cart.map(i => `• ${i.qty}x ${i.title} (₹${i.price * i.qty})`).join('\n');
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -1655,10 +1655,10 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--i
       filterMenu();
     });
   });
-  document.getElementById('menuSearch').addEventListener('input', filterMenu);
+  document.getElementById('menuSearch')?.addEventListener('input', filterMenu);
 
   // 5. Table Reservation WhatsApp
-  document.getElementById('bookTableWaBtn').addEventListener('click', () => {
+  document.getElementById('bookTableWaBtn')?.addEventListener('click', () => {
     const name = document.getElementById('bkName').value || 'Guest';
     const guests = document.getElementById('bkGuests').value;
     const slot = document.getElementById('bkSlot').value;
@@ -1757,7 +1757,7 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--i
         px = e.clientX;
       });
 
-      document.getElementById('stokeFireBtn').addEventListener('click', () => {
+      document.getElementById('stokeFireBtn')?.addEventListener('click', () => {
         velY = 0.14;
         emberSpeed = 0.06;
         document.getElementById('pitTemp').textContent = '420°C 🔥';

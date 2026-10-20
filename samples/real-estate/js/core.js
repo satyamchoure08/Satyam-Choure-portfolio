@@ -103,17 +103,29 @@
   /* ---------- reveal on scroll ---------- */
   function initReveal() {
     var els = $$(".rv, .lines");
-    if (!els.length) return;
-    if (reduced || !("IntersectionObserver" in window)) {
-      els.forEach(function (el) { el.classList.add("in"); });
-      return;
-    }
-    var io = new IntersectionObserver(function (es) {
+    var instant = reduced || !("IntersectionObserver" in window);
+    var io = instant ? null : new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
       });
     }, { threshold: 0.18, rootMargin: "0px 0px -6% 0px" });
-    els.forEach(function (el) { io.observe(el); });
+    var watch = function (el) {
+      if (el.classList.contains("in")) return;
+      if (instant) el.classList.add("in"); else io.observe(el);
+    };
+    els.forEach(watch);
+    /* cards and lists rendered later by script (e.g. the property rails) also get revealed */
+    if ("MutationObserver" in window) {
+      new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          m.addedNodes.forEach(function (n) {
+            if (n.nodeType !== 1) return;
+            if (n.matches && n.matches(".rv, .lines")) watch(n);
+            if (n.querySelectorAll) n.querySelectorAll(".rv, .lines").forEach(watch);
+          });
+        });
+      }).observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   /* ---------- count-up ---------- */

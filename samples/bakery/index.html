@@ -3700,7 +3700,7 @@ function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
       window.addEventListener('resize', resize);
 
       let velY = 0.01;
-      document.getElementById('spinCakeBtn').addEventListener('click', () => { velY = 0.16; });
+      document.getElementById('spinCakeBtn')?.addEventListener('click', () => { velY = 0.16; });
       function animate() {
         cakeGroup.rotation.y += velY;
         velY = velY * 0.96 + 0.01 * 0.04;
@@ -3755,8 +3755,8 @@ function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
   // 5. Cart Drawer
   const cart = [];
   const drawer = document.getElementById('cartDrawer');
-  document.getElementById('openCartBtn').addEventListener('click', () => drawer.classList.add('open'));
-  document.getElementById('closeCartBtn').addEventListener('click', () => drawer.classList.remove('open'));
+  document.getElementById('openCartBtn')?.addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('closeCartBtn')?.addEventListener('click', () => drawer.classList.remove('open'));
 
   function renderCart() {
     document.getElementById('cartCount').textContent = cart.length;
@@ -3784,12 +3784,12 @@ function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
     });
   }
 
-  document.getElementById('addCakeToCartBtn').addEventListener('click', () => {
+  document.getElementById('addCakeToCartBtn')?.addEventListener('click', () => {
     cart.push({ ...currentCake });
     renderCart();
     drawer.classList.add('open');
   });
-  document.getElementById('addHamperBtn').addEventListener('click', () => {
+  document.getElementById('addHamperBtn')?.addEventListener('click', () => {
     const contents = document.getElementById('hamperContentsText').textContent;
     cart.push({ title: `1kg 6-Slot Royal Hamper (${contents})`, price: 880 });
     renderCart();
@@ -3803,7 +3803,7 @@ function rupee(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
     });
   });
 
-  document.getElementById('checkoutWaBtn').addEventListener('click', () => {
+  document.getElementById('checkoutWaBtn')?.addEventListener('click', () => {
     if (!cart.length) return alert('Add a cake, hamper, or mithai to your box first!');
     const lines = cart.map(i => `• ${i.title} (₹${i.price})`).join('\n');
     const total = cart.reduce((s, i) => s + i.price, 0);
