@@ -1,6 +1,6 @@
 /* Ivarna Dental Studio — concept site */
 
-@font-face { font-family: "Hanken Grotesk"; src: url("../fonts/hanken-grotesk-normal.woff2") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("../fonts/hanken-grotesk-normal.woff2?v=3") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
 
 :root {
   --porcelain: #F4F5F1;
