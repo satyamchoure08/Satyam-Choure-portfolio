@@ -534,6 +534,11 @@ section{padding:5rem 0;}
 .wa-mid-banner h2{color:#fff;margin-bottom:.5rem;}
 .wa-mid-banner p{color:rgba(255,255,255,.8);margin-bottom:1.5rem;font-size:1rem;}
 .wa-mid-banner .btn-wa{font-size:1rem;padding:1rem 2rem;}
+
+/* Phone fix (4 Nov 2026): form fields never push the page wider than the screen */
+.field, .controls-grid > *, .builder-controls > * { min-width: 0; }
+select { max-width: 100%; }
+html, body { overflow-x: clip; }
 </style>
 <link rel="stylesheet" href="../assets/motion.css">
 <style>
@@ -578,6 +583,7 @@ button, input, select { font: inherit; color: inherit; }
 .brand span { color: var(--gold); }
 .nav-links { display: flex; gap: 1.35rem; font-size: 0.9rem; color: var(--mute); flex-wrap: wrap; }
 .nav-links a:hover { color: var(--maroon); }
+@media (max-width: 900px) { .nav-links { display: none; } }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
   padding: 0.68rem 1.25rem; border-radius: 999px; font-weight: 600; font-size: 0.86rem;
@@ -729,12 +735,31 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--m
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.136 1.535 5.872L0 24l6.322-1.508A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.848 0-3.578-.504-5.065-1.38l-.363-.216-3.752.895.908-3.664-.235-.378A9.97 9.97 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
         WhatsApp pe poochein
       </a>
+      <button class="wishlist-btn" id="openBagBtn" aria-label="Bag dekhein" aria-controls="bagDrawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Bag
+        <span class="wishlist-count" id="bagCount" style="display:flex">0</span>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Menu kholein" aria-expanded="false" onclick="toggleMobileNav()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
+
+<aside class="bag-drawer" id="bagDrawer" aria-label="Your trousseau bag" style="z-index:10000;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+    <strong style="font-family:var(--font-serif);font-size:1.35rem;">Your Trousseau Bag</strong>
+    <button type="button" class="btn btn-outline" id="closeBagBtn" style="padding:0.3rem 0.7rem;" aria-label="Bag band karein">✕</button>
+  </div>
+  <div class="bag-list" id="bagList"><p style="font-size:0.86rem;color:var(--mute);">Your trousseau bag is empty. Add a custom look or festive piece!</p></div>
+  <div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-top:1px solid var(--line);margin-bottom:0.75rem;">
+      <span>Total</span><strong id="bagTotal" style="font-family:var(--font-serif);font-size:1.25rem;color:var(--maroon);">₹0</strong>
+    </div>
+    <button type="button" class="btn btn-wa" id="checkoutBagBtn" style="width:100%;justify-content:center;">Order on WhatsApp</button>
+  </div>
+</aside>
 
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <a href="#categories" onclick="closeMobileNav()">Shop by Category</a>

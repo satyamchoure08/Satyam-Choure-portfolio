@@ -360,7 +360,12 @@ ANGEETHI KITCHEN — Wood-fire Malwa restaurant, Bhopal (single page)
       body::after{display:none}
       .hero-marquee span{animation:none}
     }
-  </style>
+  
+/* Phone fix (4 Nov 2026): form fields never push the page wider than the screen */
+.field, .controls-grid > *, .builder-controls > * { min-width: 0; }
+select { max-width: 100%; }
+html, body { overflow-x: clip; }
+</style>
 <link rel="stylesheet" href="../assets/motion.css">
 <style>
 /* 3D & Interactive Upgrade Styles */
@@ -1235,6 +1240,22 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--i
 
   <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
+<button type="button" class="btn btn-primary" id="openCartBtn" aria-controls="cartDrawer" style="position:fixed;left:16px;bottom:16px;z-index:998;">🔥 Handi cart (<span id="handiCount">0</span>)</button>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Your handi cart" style="z-index:10000;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+    <strong style="font-family:var(--font-serif);font-size:1.35rem;color:var(--ink);">Your Handi Cart</strong>
+    <button type="button" class="btn btn-ghost" id="closeCartBtn" style="padding:0.3rem 0.7rem;" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItemsList"><p style="color:var(--ink-dim);font-size:0.88rem;">Your handi cart is empty. Add a custom thali or wood-fire dish!</p></div>
+  <div>
+    <p id="deliveryStatusText" style="color:var(--ink-dim);font-size:0.85rem;margin:0;">Add ₹400 more for FREE Hot-Tiffin Delivery</p>
+    <div class="meter-bar"><div class="meter-fill" id="deliveryMeter"></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;margin:0.75rem 0;border-top:1px solid var(--line);color:var(--ink);">
+      <span>Total</span><strong id="cartTotalVal" style="font-family:var(--font-serif);font-size:1.25rem;">₹0</strong>
+    </div>
+    <button type="button" class="btn btn-primary" id="checkoutWaBtn" style="width:100%;justify-content:center;">Order on WhatsApp</button>
+  </div>
+</aside>
 <script>
 (() => {
   'use strict';
@@ -1575,7 +1596,7 @@ footer { border-top: 1px solid var(--line); padding: 3rem 1.5rem; color: var(--i
   document.getElementById('closeCartBtn')?.addEventListener('click', () => drawer.classList.remove('open'));
 
   function renderCart() {
-    document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('handiCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
     const list = document.getElementById('cartItemsList');
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
     document.getElementById('cartTotalVal').textContent = '₹' + total;

@@ -970,6 +970,9 @@ button, input, select { font: inherit; color: inherit; }
 .item-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; padding-top: 0.7rem; border-top: 1px solid var(--line); }
 
 /* Cart Drawer */
+#openCartBtn{white-space:nowrap}
+@media (max-width:600px){#openCartBtn .cart-lbl{display:none}#openCartBtn{padding:.3em .35em;font-size:.85rem}#openCartBtn #cartCount{margin-left:.15em!important}}
+
 .cart-drawer {
   position: fixed; top: 0; right: -420px; width: min(400px, 92vw); height: 100vh;
   background: var(--card); border-left: 1px solid var(--line); z-index: 999;
@@ -1006,6 +1009,9 @@ footer { background: #2A1215; color: #FCEEE0; padding: 3rem 1.5rem; margin-top: 
       <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.2 18L0 24l6.2-1.2A12 12 0 0 0 12 24a11.9 11.9 0 0 0 8.5-20.5zM12 22a9.9 9.9 0 0 1-5.1-1.4l-.4-.2-3.7.7.7-3.6-.2-.4A10 10 0 1 1 12 22zm5.7-7.4c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.2 8.2 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6s0-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4a3.7 3.7 0 0 0-1.2 2.8 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5 18.3 18.3 0 0 0 1.8.7 4.4 4.4 0 0 0 2 .2 3.3 3.3 0 0 0 2.1-1.5 2.7 2.7 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg>
       WhatsApp pe order
     </a>
+    <button type="button" class="btn btn-outline btn-sm" id="openCartBtn" aria-label="Order box dekhein" aria-controls="cartDrawer">
+      🧺<span class="cart-lbl"> Box</span> <span id="cartCount" style="display:inline-flex;align-items:center;justify-content:center;min-width:1.4em;height:1.4em;border-radius:999px;background:var(--crimson);color:#fff;font-size:0.75rem;font-weight:700;margin-left:0.3em;">0</span>
+    </button>
     <button class="hamb" id="hambBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menu kholein">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       Menu
@@ -1026,6 +1032,7 @@ footer { background: #2A1215; color: #FCEEE0; padding: 3rem 1.5rem; margin-top: 
     </div>
   </div>
 </header>
+
 
 <main id="top">
 
@@ -2545,6 +2552,20 @@ footer { background: #2A1215; color: #FCEEE0; padding: 3rem 1.5rem; margin-top: 
 </footer>
 
 </div><!-- /.page -->
+
+<aside class="cart-drawer" id="cartDrawer" aria-label="Your mithai box" style="z-index:10000;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+    <strong style="font-family:var(--font-head);font-size:1.35rem;color:var(--ink);">Your Mithai Box</strong>
+    <button type="button" class="btn btn-outline" id="closeCartBtn" style="padding:0.3rem 0.7rem;min-height:auto;" aria-label="Box band karein">✕</button>
+  </div>
+  <div class="cart-list" id="cartList"><p style="font-size:0.88rem;color:var(--mute);">Your mithai box is empty. Customize a 3D cake or gift hamper above!</p></div>
+  <div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.75rem 0;border-top:1px solid var(--line);margin-bottom:0.75rem;">
+      <span>Total</span><strong id="cartTotal" style="font-size:1.25rem;color:var(--crimson);">₹0</strong>
+    </div>
+    <button type="button" class="btn btn-wa btn-block" id="checkoutWaBtn">Order on WhatsApp</button>
+  </div>
+</aside>
 
 <!-- FLOATING WHATSAPP BUTTON -->
 <a class="fab" href="https://wa.me/919826045123?text=Namaste!%20Mujhe%20order%20karna%20hai.%20Kripya%20menu%20bhejein." target="_blank" rel="noopener" aria-label="WhatsApp pe order karein — floating button">
