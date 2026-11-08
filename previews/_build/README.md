@@ -36,7 +36,7 @@ Live address: `https://satyamchoure08.github.io/Satyam-Choure-portfolio/previews
 ## CarpenterBabu (Gorakhpur Interior Decor), added 8 Nov 2026
 - Hand-built page, NOT made by `build.py`: edit `previews/carpenterbabu/index.html` directly. Its photos are in `previews/carpenterbabu/img/`.
 - Satyam's rule for this client: no "demo", "preview" or "sample" wording anywhere on the page. It is their personal website.
-- Reviews on the page are short excerpts from the business's real Google reviews (4.9, 144 reviews on 8 Nov 2026). Never add invented reviews.
+- Reviews on the page are Gorakhpuri (Bhojpuri-style) translations of the business's real Google reviews (4.9, 144 reviews on 8 Nov 2026), each labelled "Google review, Gorakhpuri anuvaad" (anuvaad = translation). Satyam asked for a strong Gorakhpuri accent on 8 Nov. Keep the meaning of the real review; never add invented reviews.
 - Business details came from the owner's own WhatsApp reply: brand CarpenterBabu, tagline "Dream | Design | Create", services (PVC and fluted panels, false ceiling, wardrobe, TV unit, modular kitchen, bedroom and living room design, 3D design + supply + installation), hours Monday to Sunday 9 AM to 6 PM, phone +91 88407 74021, email gorakhpurinteriordecor@gmail.com.
 - Photos are stock for now. When the client sends their own photos, replace these files (keep the names, or update the `src` in index.html):
   - `img/living-room-wall-panels.webp` (top photo)
