@@ -13,6 +13,7 @@ Each folder is one client. Pages are unlisted and carry `noindex`, so search eng
 | `hauss-studio/` | Hauss Studio Architects & Interior Designers | Ludhiana |
 | `ra3designs/` | Ra3Designs | Sonipat |
 | `yashraj-architects/` | Yashraj Architects & Interiors | Khandwa |
+| `carpenterbabu/` | CarpenterBabu / Gorakhpur Interior Decor | Gorakhpur |
 
 Live address: `https://satyamchoure08.github.io/Satyam-Choure-portfolio/previews/<folder>/`
 
@@ -31,3 +32,17 @@ Live address: `https://satyamchoure08.github.io/Satyam-Choure-portfolio/previews
 1. Add an entry to `CLIENTS` in `build.py` (this folder) (copy one that fits: architect or uPVC furniture).
 2. Pick a hero photo and three work photos from `assets/img/`, or add the client's own photos there as `.webp`.
 3. Run the build, open the page at phone width and desktop width, then push.
+
+## CarpenterBabu (Gorakhpur Interior Decor), added 8 Nov 2026
+- Hand-built page, NOT made by `build.py`: edit `previews/carpenterbabu/index.html` directly. Its photos are in `previews/carpenterbabu/img/`.
+- Satyam's rule for this client: no "demo", "preview" or "sample" wording anywhere on the page. It is their personal website.
+- Reviews on the page are short excerpts from the business's real Google reviews (4.9, 144 reviews on 8 Nov 2026). Never add invented reviews.
+- Business details came from the owner's own WhatsApp reply: brand CarpenterBabu, tagline "Dream | Design | Create", services (PVC and fluted panels, false ceiling, wardrobe, TV unit, modular kitchen, bedroom and living room design, 3D design + supply + installation), hours Monday to Sunday 9 AM to 6 PM, phone +91 88407 74021, email gorakhpurinteriordecor@gmail.com.
+- Photos are stock for now. When the client sends their own photos, replace these files (keep the names, or update the `src` in index.html):
+  - `img/living-room-wall-panels.webp` (top photo)
+  - `img/modular-kitchen.webp`
+  - `img/bedroom.webp`
+  - `img/tv-unit.webp`
+  - `img/living-room.webp`
+  - `og.jpg` (1200 x 630, the picture WhatsApp shows when the link is shared)
+- The page keeps `noindex` while stock photos are on it. Remove that meta tag once all photos are the client's own.
