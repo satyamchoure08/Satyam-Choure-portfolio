@@ -1,16 +1,19 @@
-/* Shared behaviour for the studio previews: homepage, projects page and sample project page.
+/* Shared behaviour for the studio preview websites: homepage, projects page, project pages, about and contact.
    Plain JavaScript, no libraries, nothing loaded from another website.
    Each part runs on its own: if one ever fails, the others still work and every section still shows.
-   1. Gentle movement: photos fade in once loaded, sections rise into place (only when allowed).
+   0. Old links: a shared photo link from the old homepage opens that photo on the projects page.
+   1. Gentle movement: photos fade in once loaded, sections rise, headings rise word by word, lines draw in, cover wipe.
    2. Header line once the page scrolls.
    3. Menu on phones and tablets.
-   4. Photo and project filters (tabs): the big first photo, the "See all" link.
-   5. Projects page: By project / By room, and links that open a view or a room.
-   6. Photo viewer: full screen, arrows, swipe, keyboard, back button, WhatsApp "I like this photo".
+   4. Projects: filters that combine (property type + room) with live counts, greyed-out chips, Projects/Photos view,
+      Grid/List layout, "Show more", the link keeps the filters, WhatsApp messages that name the filter.
+   5. Project cards: the line drawing fades in on hover (laptops; loaded only when needed).
+   6. Photo viewer: full screen, arrows, swipe, keyboard, back button, WhatsApp "I liked this ...".
    7. Drawing vs finished slider.
    8. Live "open now" status in Indian time.
    9. Enquiry form: three steps, budgets that fit the project, live WhatsApp message, opens WhatsApp.
-   10. Note to the studio owner, shown once, remembered when closed. */
+   10. Note to the studio owner, shown once, remembered when closed.
+   11. Process line that fills as you scroll. */
 (function () {
   "use strict";
   window.PREVIEW_READY = true;
@@ -19,13 +22,24 @@
   var root = document.documentElement;
   var MO = root.classList.contains("mo");
   var params = new URLSearchParams(window.location.search);
-  var setView = null; // set by part 5, used by part 6
+  var body = document.body;
+  var hello = body.getAttribute("data-hello") || "Hello, ";
+  var waNum = body.getAttribute("data-wa") || "";
+  var pageUrl = body.getAttribute("data-page") || window.location.href.split("?")[0];
   function uniq(list) { return list.filter(function (x, i) { return list.indexOf(x) === i; }); }
   function safe(fn) { try { fn(); } catch (err) { if (window.console) console.warn("Preview: part skipped", err); } }
+  function waLink(line, page) { return "https://wa.me/" + waNum + "?text=" + encodeURIComponent(hello + line + "\nPage: " + page); }
+  function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
+
+  /* 0. Old links */
+  safe(function () {
+    var old = params.get("photo");
+    if (body.classList.contains("home") && old) window.location.replace("projects/?photo=" + encodeURIComponent(old.replace(/^\d+-/, "")));
+  });
 
   /* 1. Gentle movement */
   safe(function () {
-    $$(".ph img, .pcard-ph img").forEach(function (im) {
+    $$(".ph img, .pc-img, .np-ph img").forEach(function (im) {
       var done = function () { im.classList.add("is-in"); };
       if (im.complete && im.naturalWidth) done();
       else { im.addEventListener("load", done); im.addEventListener("error", done); }
@@ -33,23 +47,50 @@
     $$("[data-rv-kids]").forEach(function (list) {
       Array.prototype.forEach.call(list.children, function (k, i) {
         k.setAttribute("data-rv", "");
-        k.style.transitionDelay = Math.min(i, 6) * 70 + "ms";
+        k.style.transitionDelay = Math.min(i, 6) * 80 + "ms";
       });
     });
-    var rvs = $$("[data-rv]");
+    if (MO) {
+      // Headings rise word by word. Only plain-text headings; the words stay real text for screen readers.
+      $$(".h1, .h2, .hero-h, .np-t").forEach(function (h) {
+        if (h.children.length || !h.textContent.trim()) return;
+        var words = h.textContent.trim().split(/\s+/);
+        h.textContent = "";
+        words.forEach(function (w, i) {
+          if (i) h.appendChild(document.createTextNode(" "));
+          var outer = document.createElement("span"), inner = document.createElement("span");
+          outer.className = "w";
+          inner.textContent = w;
+          inner.style.setProperty("--i", String(i));
+          outer.appendChild(inner);
+          h.appendChild(outer);
+        });
+        h.classList.add("wr");
+      });
+      // Lines in one group draw one after another
+      $$("[data-wl]").forEach(function (el) {
+        var sibs = Array.prototype.filter.call(el.parentNode.children, function (k) { return k.hasAttribute("data-wl"); });
+        var i = sibs.indexOf(el);
+        if (i > 0) el.style.setProperty("--wd", Math.min(i, 8) * 0.08 + "s");
+      });
+    }
+    var els = $$("[data-rv], .wr, [data-wl], .wipe");
+    // A wiped photo starts fully clipped, which the browser counts as "not on screen", so its frame is watched instead
+    var watched = function (el) { return el.classList.contains("wipe") ? el.parentNode : el; };
     if (MO && "IntersectionObserver" in window) {
-      var rio = new IntersectionObserver(function (entries) {
+      var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
           if (!en.isIntersecting) return;
-          var el = en.target;
-          el.classList.add("in");
-          rio.unobserve(el);
-          if (el.style.transitionDelay) setTimeout(function () { el.style.transitionDelay = ""; }, 1200);
+          io.unobserve(en.target);
+          els.filter(function (el) { return watched(el) === en.target; }).forEach(function (el) {
+            el.classList.add("in");
+            if (el.style.transitionDelay) setTimeout(function () { el.style.transitionDelay = ""; }, 1500);
+          });
         });
       }, { rootMargin: "0px 0px -6% 0px", threshold: 0.01 });
-      rvs.forEach(function (el) { rio.observe(el); });
+      els.forEach(function (el) { io.observe(watched(el)); });
     } else {
-      rvs.forEach(function (el) { el.classList.add("in"); });
+      els.forEach(function (el) { el.classList.add("in"); });
     }
   });
 
@@ -81,63 +122,202 @@
     window.addEventListener("resize", function () { if (menuOpen && window.innerWidth >= 1080) setMenu(false); });
   });
 
-  /* 4. Filters. Items carry data-cat; tabs carry the category to show ("all" shows everything).
-        data-max limits how many show at once (the homepage shows 5, the big first one leading). */
+  /* 4. Projects: filters, views, layouts */
+  // Cards go 1 big + 2 small, the next three mirrored; a group of one or two at the end shares the row equally.
+  function rhythm(list) {
+    var n = list.length;
+    list.forEach(function (el, i) {
+      el.classList.remove("pc-big", "pc-s", "pc-half");
+      var t = Math.floor(i / 3), k = i % 3, inGroup = Math.min(3, n - t * 3);
+      if (inGroup === 3) el.classList.add((t % 2 === 0 ? k === 0 : k === 2) ? "pc-big" : "pc-s");
+      else el.classList.add("pc-half");
+    });
+  }
   safe(function () {
-    $$("[data-filter]").forEach(function (box) {
-      var tabs = $$(".tab", box);
-      var items = $$(".tile, .pcard", box);
-      var grid = $(".grid, .cards", box);
-      var max = +box.getAttribute("data-max") || 0;
-      var lead = box.hasAttribute("data-lead");
-      var more = $(".gal-all", box);
-      var moreBase = box.getAttribute("data-all-href") || "";
-      var apply = function (cat, animate) {
-        var shown = 0, total = 0;
-        items.forEach(function (it) {
-          var match = cat === "all" || (it.getAttribute("data-cat") || "").split(" ").indexOf(cat) > -1;
-          var show = match && (!max || shown < max);
-          if (match) { total++; it.setAttribute("data-match", ""); } else it.removeAttribute("data-match");
-          if (show) shown++;
-          it.hidden = !show;
-          it.classList.remove("is-lead", "is-enter");
-          if (show && animate && MO) { void it.offsetWidth; it.classList.add("is-enter"); }
-        });
-        if (grid) grid.setAttribute("data-count", String(shown));
-        if (lead && max && shown === max) {
-          var first = items.filter(function (it) { return !it.hidden; })[0];
-          if (first) first.classList.add("is-lead");
+    $$("[data-gal]").forEach(function (box) {
+      var urlSync = box.hasAttribute("data-url");
+      var step = +box.getAttribute("data-step") || 0;
+      var cards = $$(".pc", box), rows = $$(".lv-row", box), tiles = $$(".tile", box);
+      var chips = $$(".tab[data-k]", box);
+      var viewBtns = $$("[data-view]", box), layoutBtns = $$("[data-layout]", box);
+      var panels = $$("[data-panel]", box), layoutBox = $("[data-layouts]", box);
+      var cardsBox = $(".cards", box), lv = $(".lv", box), peek = $(".lv-peek img", box);
+      var moreBtn = $(".pj-more", box), status = $(".pj-status", box), empty = $(".pj-empty", box);
+      var clearBar = $(".pj-bar .pj-clear", box);
+      var allLink = $("[data-all]", box);
+      var st = { view: "projects", type: "all", space: "all", layout: "grid", limit: step };
+      var keepPhoto = "";
+      var has = function (k, v) { return v === "all" || chips.some(function (b) { return b.getAttribute("data-k") === k && b.getAttribute("data-v") === v; }); };
+      var label = function (k, v) {
+        var b = chips.filter(function (x) { return x.getAttribute("data-k") === k && x.getAttribute("data-v") === v; })[0];
+        return b && b.firstChild ? b.firstChild.textContent.trim() : v;
+      };
+      var match = function (el, t, s) {
+        var sp = (el.getAttribute("data-spaces") || el.getAttribute("data-space") || "").split(" ");
+        return (t === "all" || el.getAttribute("data-type") === t) && (s === "all" || sp.indexOf(s) > -1);
+      };
+      var count = function (list, t, s) { return list.filter(function (el) { return match(el, t, s); }).length; };
+      var picked = function () { return [st.type !== "all" ? label("type", st.type) : "", st.space !== "all" ? label("space", st.space) : ""].filter(Boolean).join(", "); };
+
+      if (urlSync) {
+        if (params.get("view") === "photos") st.view = "photos";
+        if (params.get("layout") === "list") st.layout = "list";
+        var t0 = params.get("type"), s0 = params.get("space"), r0 = params.get("room");
+        if (t0 && has("type", t0)) st.type = t0;
+        if (s0 && has("space", s0)) st.space = s0;
+        else if (r0) { // old links used plural room names (?room=kitchens)
+          if (has("space", r0)) st.space = r0;
+          else if (has("space", r0.replace(/s$/, ""))) st.space = r0.replace(/s$/, "");
+          st.view = "photos";
         }
-        tabs.forEach(function (t) { t.setAttribute("aria-pressed", String(t.getAttribute("data-cat") === cat)); });
-        if (more) {
-          more.hidden = !max || total <= max;
-          more.textContent = "See all " + total + " photos";
-          more.setAttribute("href", moreBase + (cat === "all" ? "" : "&room=" + cat));
+        var ph = params.get("photo");
+        var phTile = ph ? tiles.filter(function (t) { return $("[data-photo]", t).getAttribute("data-photo") === ph; })[0] : null;
+        if (phTile) {
+          keepPhoto = ph;
+          st.view = "photos";
+          var pos = tiles.filter(function (t) { return match(t, st.type, st.space); }).indexOf(phTile);
+          if (step && pos >= step) st.limit = Math.ceil((pos + 1) / step) * step;
+        }
+      }
+
+      var setPeek = function (row) {
+        if (!peek || !row) return;
+        var src = $(".lv-a", row).getAttribute("data-peek");
+        if (!src || peek.getAttribute("src") === src) return;
+        peek.classList.add("is-swap");
+        var im = new Image();
+        im.onload = im.onerror = function () { peek.src = src; peek.classList.remove("is-swap"); };
+        im.src = src;
+      };
+      rows.forEach(function (r) {
+        var a = $(".lv-a", r);
+        a.addEventListener("pointerenter", function () { setPeek(r); });
+        a.addEventListener("focus", function () { setPeek(r); });
+      });
+
+      var render = function (animate) {
+        var L = st.view === "photos" ? tiles : cards;
+        chips.forEach(function (b) {
+          var k = b.getAttribute("data-k"), v = b.getAttribute("data-v");
+          var n = k === "type" ? count(L, v, st.space) : count(L, st.type, v);
+          var on = st[k] === v;
+          var nEl = $(".tab-n", b);
+          if (nEl) nEl.textContent = String(n);
+          b.setAttribute("aria-pressed", String(on));
+          b.disabled = n === 0 && !on;
+        });
+        viewBtns.forEach(function (b) {
+          var v = b.getAttribute("data-view");
+          b.setAttribute("aria-pressed", String(v === st.view));
+          var nEl = $(".seg-n", b);
+          if (nEl) nEl.textContent = String(count(v === "photos" ? tiles : cards, st.type, st.space));
+        });
+        panels.forEach(function (pn) { pn.hidden = pn.getAttribute("data-panel") !== st.view; });
+        if (layoutBox) layoutBox.hidden = st.view !== "projects";
+        layoutBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-layout") === st.layout)); });
+        if (cardsBox && lv) { cardsBox.hidden = st.layout === "list"; lv.hidden = st.layout !== "list"; }
+
+        var visible = [];
+        cards.forEach(function (el) {
+          var m = match(el, st.type, st.space);
+          el.hidden = !m;
+          el.classList.remove("is-enter");
+          if (m) {
+            visible.push(el);
+            if (animate && MO) { void el.offsetWidth; el.classList.add("is-enter"); }
+          }
+        });
+        rhythm(visible);
+
+        var firstRow = null;
+        rows.forEach(function (r) {
+          var m = match(r, st.type, st.space);
+          r.classList.toggle("is-dim", !m);
+          if (m && !firstRow) firstRow = r;
+        });
+        if (st.layout === "list") setPeek(firstRow);
+
+        var total = 0;
+        tiles.forEach(function (t) {
+          var m = match(t, st.type, st.space);
+          if (m) { total++; t.setAttribute("data-match", ""); } else t.removeAttribute("data-match");
+          var show = m && (!st.limit || total <= st.limit);
+          var was = !t.hidden;
+          t.hidden = !show;
+          t.classList.remove("is-enter");
+          if (show && animate && MO && (!was || animate === "all")) { void t.offsetWidth; t.classList.add("is-enter"); }
+        });
+        var shownPhotos = st.limit ? Math.min(total, st.limit) : total;
+        if (moreBtn) {
+          var left = total - shownPhotos;
+          moreBtn.hidden = left <= 0;
+          moreBtn.textContent = "Show " + Math.min(step || left, left) + " more of " + left;
+        }
+
+        var sel = picked();
+        var n = st.view === "photos" ? total : visible.length;
+        if (status) {
+          if (st.view === "photos") status.textContent = sel ? plural(total, "photo") + ": " + sel : "All " + plural(total, "photo");
+          else status.textContent = sel ? visible.length + " of " + plural(cards.length, "project") + ": " + sel : "Showing all " + plural(cards.length, "project");
+        }
+        if (empty) empty.hidden = n > 0;
+        if (clearBar) clearBar.hidden = !sel;
+        if (allLink) allLink.setAttribute("href", allLink.getAttribute("data-all") + (st.type !== "all" ? "?type=" + st.type : ""));
+
+        if (urlSync) {
+          var q = new URLSearchParams();
+          if (st.view === "photos") q.set("view", "photos");
+          if (st.type !== "all") q.set("type", st.type);
+          if (st.space !== "all") q.set("space", st.space);
+          if (st.view === "projects" && st.layout === "list") q.set("layout", "list");
+          if (keepPhoto) q.set("photo", keepPhoto); // a shared photo link keeps its photo until the visitor changes a filter
+          keepPhoto = "";
+          var qs = q.toString();
+          try { history.replaceState(history.state, "", window.location.pathname + (qs ? "?" + qs : "")); } catch (err) { /* ignore */ }
+          // Every WhatsApp button on this page now says what the visitor was looking at, with this exact link
+          var line = sel ? "I was looking at your projects: " + sel + "." : "I was looking at your projects.";
+          var href = waLink(line, pageUrl + (qs ? "?" + qs : ""));
+          $$(".js-wa").forEach(function (a) { a.setAttribute("href", href); });
         }
       };
-      tabs.forEach(function (t) { t.addEventListener("click", function () { apply(t.getAttribute("data-cat"), true); }); });
-      box.filterTo = function (cat) { if ($('.tab[data-cat="' + cat + '"]', box)) apply(cat, false); };
-      apply("all", false);
+
+      chips.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var k = b.getAttribute("data-k"), v = b.getAttribute("data-v");
+          st[k] = st[k] === v ? "all" : v; // tapping the chosen chip again clears it
+          st.limit = step;
+          render("all");
+        });
+      });
+      viewBtns.forEach(function (b) { b.addEventListener("click", function () { st.view = b.getAttribute("data-view"); st.limit = step; render("all"); }); });
+      layoutBtns.forEach(function (b) { b.addEventListener("click", function () { st.layout = b.getAttribute("data-layout"); render("all"); }); });
+      $$(".pj-clear", box).forEach(function (b) { b.addEventListener("click", function () { st.type = st.space = "all"; st.limit = step; render("all"); }); });
+      if (moreBtn) moreBtn.addEventListener("click", function () {
+        var before = tiles.filter(function (t) { return !t.hidden; }).length;
+        st.limit += step;
+        render(true);
+        var next = tiles.filter(function (t) { return !t.hidden; })[before];
+        var nb = next && $("[data-photo]", next);
+        if (nb) nb.focus({ preventScroll: true });
+      });
+      render(false);
     });
   });
 
-  /* 5. Projects page views */
+  /* 5. Project cards: line drawing on hover (laptops) */
   safe(function () {
-    var segBtns = $$(".seg button");
-    if (!segBtns.length) return;
-    var views = $$(".pj-view");
-    setView = function (v, remember) {
-      segBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-view") === v)); });
-      views.forEach(function (x) { x.hidden = x.getAttribute("data-v") !== v; });
-      if (remember) {
-        try { history.replaceState(history.state, "", v === "photos" ? "?view=photos" : window.location.pathname); } catch (err) { /* ignore */ }
-      }
-    };
-    segBtns.forEach(function (b) { b.addEventListener("click", function () { setView(b.getAttribute("data-view"), true); }); });
-    var room = params.get("room");
-    if (params.get("view") === "photos" || room) setView("photos", false);
-    var photosBox = $('.pj-view[data-v="photos"]');
-    if (room && photosBox && photosBox.filterTo) photosBox.filterTo(room);
+    if (!window.matchMedia || !window.matchMedia("(hover: hover)").matches) return;
+    $$(".pc-a").forEach(function (a) {
+      var sk = $(".pc-sk", a);
+      if (!sk) return;
+      var load = function () {
+        if (sk.getAttribute("src") || !sk.getAttribute("data-src")) return;
+        sk.addEventListener("load", function () { sk.classList.add("is-ready"); }, { once: true });
+        sk.setAttribute("src", sk.getAttribute("data-src"));
+      };
+      a.addEventListener("pointerenter", load);
+      a.addEventListener("focus", load);
+    });
   });
 
   /* 6. Photo viewer */
@@ -148,21 +328,21 @@
     JSON.parse(dataEl.textContent).forEach(function (p) { photos[p.id] = p; });
     var vImg = $(".vw-img", vw), vCap = $(".vw-cap", vw), vCount = $(".vw-count", vw);
     var vOpen = $(".vw-open", vw), vWa = $(".vw-wa", vw), vClose = $(".vw-close", vw);
-    var waNum = document.body.getAttribute("data-wa") || "";
-    var hello = document.body.getAttribute("data-hello") || "Hello, ";
     var list = [], idx = 0, lastFocus = null, isOpen = false, pushed = false;
 
     var show = function (i) {
       idx = (i + list.length) % list.length;
       var p = photos[list[idx]];
       if (!p) return;
+      vImg.classList.remove("is-new");
       vImg.src = p.src;
       vImg.alt = p.alt;
+      if (MO) { void vImg.offsetWidth; vImg.classList.add("is-new"); }
       vCap.textContent = p.cap;
       vCount.textContent = list.length > 1 ? (idx + 1) + " / " + list.length : "";
       vOpen.hidden = !p.href;
       if (p.href) vOpen.setAttribute("href", p.href);
-      vWa.setAttribute("href", "https://wa.me/" + waNum + "?text=" + encodeURIComponent(hello + "I like this photo: " + p.cap + "\n" + p.share));
+      vWa.setAttribute("href", p.wa);
       $$(".vw-nav", vw).forEach(function (b) { b.hidden = list.length < 2; });
       [idx + 1, idx - 1].forEach(function (k) {
         var q = photos[list[(k + list.length) % list.length]];
@@ -197,7 +377,7 @@
 
     // The arrows move through the photos that match the current filter, in page order
     var groupFor = function (btn) {
-      var box = btn.closest("[data-filter]");
+      var box = btn.closest("[data-gal]");
       var els = box ? $$("[data-match] [data-photo]", box)
         : $$("[data-photo]").filter(function (el) { return !el.closest("[hidden]") && !vw.contains(el); });
       return uniq(els.map(function (el) { return el.getAttribute("data-photo"); }).filter(function (id) { return photos[id]; }));
@@ -242,8 +422,7 @@
     // A shared photo link (?photo=...) opens that photo
     var pid = params.get("photo");
     if (pid && photos[pid]) {
-      var btn = $('[data-photo="' + pid + '"]');
-      if (btn && btn.closest(".pj-view[hidden]") && setView) setView("photos", false);
+      var btn = $$("[data-photo]").filter(function (el) { return el.getAttribute("data-photo") === pid && !vw.contains(el); })[0];
       openAt(pid, btn ? groupFor(btn) : null);
     }
   });
@@ -271,16 +450,16 @@
             if (!en.isIntersecting) return;
             seen.disconnect();
             var t0 = null;
-            var step = function (ts) {
+            var stepFn = function (ts) {
               if (dragging) return;
               if (t0 === null) t0 = ts;
               var p = Math.min(1, (ts - t0) / 1600);
               var v = 50 + Math.sin(p * Math.PI * 2) * 16 * (1 - p);
               range.value = v;
               set(v);
-              if (p < 1) requestAnimationFrame(step);
+              if (p < 1) requestAnimationFrame(stepFn);
             };
-            setTimeout(function () { requestAnimationFrame(step); }, 400);
+            setTimeout(function () { requestAnimationFrame(stepFn); }, 400);
           });
         }, { threshold: 0.6 });
         seen.observe(frame);
@@ -381,16 +560,25 @@
         }).join("");
       };
 
+      // The message, in the order the studio reads it best
       var studio = form.getAttribute("data-studio");
+      var from = form.getAttribute("data-from");
+      var page = form.getAttribute("data-page");
       var compose = function () {
         var lines = ["Hello " + studio + ", I'm " + (val("name") || "…") + "."];
-        var prop = [val("type"), val("size"), val("sqft") ? val("sqft") + " sq ft" : ""].filter(Boolean).join(", ");
+        if (from) lines.push("From your website: " + from);
+        var prop = [val("type"), val("size")].filter(Boolean).join(", ");
+        var raw = val("sqft"), num = raw.replace(/[^\d]/g, "");
+        var area = num && +num >= 50 ? "about " + Number(num).toLocaleString("en-IN") + " sq ft" : raw;
+        if (area) prop = (prop ? prop + ", " : "") + area;
+        if (prop) lines.push("Property: " + prop);
+        if (val("scope")) lines.push("Scope: " + val("scope"));
         var place = [val("area"), val("city")].filter(Boolean).join(", ");
-        if (prop || place) lines.push("Property: " + [prop, place].filter(Boolean).join(" in "));
-        if (val("scope")) lines.push("Need: " + val("scope"));
+        if (place) lines.push("City: " + place);
         if (val("budget")) lines.push("Budget: " + val("budget"));
-        if (val("timeline")) lines.push("Start: " + val("timeline"));
-        if (val("note")) lines.push(val("note"));
+        if (val("timeline")) lines.push("Timeline: " + val("timeline"));
+        if (val("note")) lines.push("Note: " + val("note"));
+        lines.push("Page: " + page);
         return lines;
       };
       var bubble = $(".bubble", form);
@@ -413,10 +601,7 @@
           var m = problem(i);
           if (m) { go(i, true); showError(i, m); return; }
         }
-        var lines = compose();
-        lines.push("(Sent from your website, " + form.getAttribute("data-from") + ")");
-        lines.push("Page: " + form.getAttribute("data-page"));
-        window.open("https://wa.me/" + form.getAttribute("data-wa") + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
+        window.open("https://wa.me/" + form.getAttribute("data-wa") + "?text=" + encodeURIComponent(compose().join("\n")), "_blank", "noopener");
         var thanks = $(".enq-thanks", form);
         if (thanks) { thanks.hidden = false; thanks.textContent = "WhatsApp is opening with your message. Press send there to reach the studio."; }
       });
@@ -448,5 +633,30 @@
       setTimeout(function () { note.hidden = true; }, 400);
       try { window.localStorage.setItem(key, "closed"); } catch (err) { /* ignore */ }
     });
+  });
+
+  /* 11. Process: the line fills as you scroll and each stop lights up as the line reaches it */
+  safe(function () {
+    var wrap = $(".steps-wrap[data-fill]");
+    if (!wrap) return;
+    var steps = $$(".step", wrap);
+    if (!MO) { steps.forEach(function (s) { s.classList.add("is-on"); }); return; }
+    var wide = window.matchMedia("(min-width: 900px)");
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var r = wrap.getBoundingClientRect(), vh = window.innerHeight || 800;
+      var p = wide.matches ? (vh * 0.85 - r.top) / (vh * 0.45) : (vh * 0.72 - r.top) / Math.max(1, r.height);
+      p = Math.max(0, Math.min(1, p));
+      wrap.style.setProperty("--fill", p.toFixed(3));
+      steps.forEach(function (s) {
+        var at = wide.matches ? s.offsetLeft / Math.max(1, wrap.offsetWidth) : s.offsetTop / Math.max(1, wrap.offsetHeight);
+        s.classList.toggle("is-on", p > 0 && p + 0.001 >= at);
+      });
+    };
+    var onScroll = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
   });
 })();
