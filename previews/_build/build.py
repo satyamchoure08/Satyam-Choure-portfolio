@@ -87,6 +87,14 @@ FURN_SERVICES = [
     ("Furniture for the whole home", "Beds, side units and study tables in matching finishes."),
     ("Office and shop furniture", "Counters, cabinets and storage that survive daily use."),
 ]
+# Interior designers who don't do architecture: set services=INT_SERVICES, title="" and enq="int" on the studio.
+INT_SERVICES = [
+    ("Interior design", "Layouts, materials, lighting and furniture, planned room by room."),
+    ("Turnkey interiors", "One team from design to handover, so you deal with one person instead of ten."),
+    ("Kitchens and wardrobes", "Planned around how you cook and what you store, made to the exact size of the room."),
+    ("3D views", "See every room in 3D before work starts on site."),
+    ("Renovation", "Older homes and offices reworked for the way you live and work now."),
+]
 # Five steps, design to handover: title, what happens, what you get
 ARCH_STEPS = [
     ("Consultation and site visit", "We listen to what you need, measure every room and photograph the site.", "a measured plan"),
@@ -120,6 +128,7 @@ ENQ = {
                  "big": ["Under ₹3 lakh", "₹3–6 lakh", "₹6–12 lakh", "Above ₹12 lakh", "Not sure yet"]},
         big=["Furniture for the whole home", "Office or shop furniture"], build=[], default="small"),
 }
+ENQ["int"] = dict(ENQ["arch"], scopes=[s for s in ENQ["arch"]["scopes"] if s != "New build"], build=[])
 
 
 def P(title, ptype, photos, did, scope=()):
@@ -218,6 +227,152 @@ CLIENTS = [
                    P("Restaurant", "Café / Restaurant", ["dining-warm"], "Interior design"),
                    P("Office", "Office", ["office"], "Interior design")],
          kind="arch", wa_home="I saw your website and want to discuss my home interiors.", quotes=[]),
+    # ---- Added 15 Nov 2026: warm leads from Call Desk (said yes or asked for a preview). Facts from their Google listing.
+    dict(slug="balaji-homes-architects", name="Balaji Homes Architects", short="Balaji Homes", hero_name="Balaji Homes Architects",
+         label="Architects", city="Neemuch", what="Architects in Neemuch.", accent="#5A3E4B",
+         phone="9993399402", rating="5.0", reviews=47, place="ChIJT-kSAMJ1ZjkRbJb1o1BFfUA",
+         address="Mhow–Neemuch Road, opposite Police Control Room, Neemuch", hours=None, open=None, email=None,
+         hero=("split", "house-dusk", "Modern house lit up at dusk"),
+         say="A house should suit the family that lives in it, the plot it stands on and the budget agreed at the start.",
+         more="Houses and interiors in Neemuch, designed with you and followed through on site until the keys are handed over.",
+         projects=[P("House at dusk", "Independent house", ["house-dusk", "living-bright", "kitchen-island", "bedroom", "bath", "dining-table"], "Architecture and interiors", ["New build"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-terrace", "living-atrium"], "Architecture and interiors", ["New build"]),
+                   P("Modern white villa", "Villa / Bungalow", ["villa-day", "living-styled"], "Architecture", ["New build"]),
+                   P("House and lawn", "Independent house", ["villa-modern", "living-warm"], "Architecture", ["New build"]),
+                   P("Living room renovation", "Apartment", ["living-tv", "tv-unit"], "Renovation", ["Renovation"]),
+                   P("Office", "Office", ["office"], "Architecture and interiors")],
+         kind="arch", wa_home="I saw your website and want to discuss building my house.", quotes=[]),
+    dict(slug="balaji-engineer-architects", name="Balaji Engineer Architects", short="Balaji Engineer", hero_name="Balaji Engineer Architects",
+         label="Engineers & architects", city="Khargone", what="Engineers and architects in Khargone.", accent="#2F4C5A",
+         phone="9754010787", rating="4.8", reviews=36, place="ChIJ2fU4r3-F2DsRL4iXA-CDIwQ",
+         address="Maya Devi Complex, Khargone", hours=None, open=None, email=None,
+         hero=("split", "villa-modern", "Modern white house with a pool and lawn"),
+         say="Plans that are drawn right, approved on time and built the way they were drawn.",
+         more="Houses and buildings in Khargone, from the first drawing to the finished structure and the rooms inside it.",
+         projects=[P("Modern house", "Independent house", ["villa-modern", "living-atrium", "kitchen-island", "bedroom", "bath"], "Architecture and interiors", ["New build"]),
+                   P("House at dusk", "Independent house", ["house-dusk", "dining-table", "living-bright"], "Architecture and interiors", ["New build"]),
+                   P("Apartment interior", "Apartment", ["living-styled", "living-warm", "tv-unit"], "Interiors and furniture", ["Full home"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-day"], "Architecture", ["New build"]),
+                   P("Clinic", "Clinic", ["clinic"], "Interior design"),
+                   P("Office", "Office", ["office"], "Architecture and interiors")],
+         kind="arch", wa_home="I saw your website and want to discuss my project.", quotes=[]),
+    dict(slug="devine-architects", name="Devine Architects", short="Devine", hero_name="Devine Architects",
+         label="Architects & interior designers", city="Nagpur", what="Architecture and interiors in Nagpur.", accent="#5B4A36",
+         phone="9766963495", rating="4.7", reviews=80, place="ChIJab1GzTjH1DsR4nU-edXGchI",
+         address="Plot 52, opposite Shri Ram Kunj Apartment, near Kacchi Visa Oswal Bhawan, Lakadganj, Nagpur 440008",
+         hours=None, open=None, email=None,
+         hero=("split", "living-styled", "Bright living room with a gallery wall"),
+         say="Spaces that feel open and bright, planned around how you actually live.",
+         more="Architecture and interiors in Nagpur, from the first site visit to the day you move in.",
+         projects=[P("Apartment interior", "Apartment", ["living-styled", "kitchen-island", "bedroom", "bath", "dining-table", "tv-unit"], "Interiors and furniture", ["Full home"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-terrace", "living-atrium"], "Architecture and interiors", ["New build"]),
+                   P("Bungalow and lawn", "Villa / Bungalow", ["villa-modern", "living-warm", "living-tv"], "Architecture and interiors", ["New build"]),
+                   P("Modern house", "Independent house", ["house-dusk", "living-bright"], "Architecture", ["New build"]),
+                   P("Restaurant", "Café / Restaurant", ["dining-warm"], "Interior design"),
+                   P("Clinic", "Clinic", ["clinic"], "Interior design")],
+         kind="arch", wa_home="I saw your website and want to discuss my home interiors.", quotes=[]),
+    dict(slug="dnk-architects", name="DNK Architects & Interior Designers", short="DNK", hero_name="DNK Architects & Interior Designers",
+         label="Architects & interior designers", city="Gwalior", what="Architecture and interiors in Gwalior.", accent="#4A4458",
+         phone="6264986205", rating="5.0", reviews=24, place="ChIJWQNb3MzDdjkR4dTSaf1atcw",
+         address="45-D, New Colony, Ghosipura, Morar, Gwalior 474006", hours=None, open=None, email=None,
+         hero=("split", "villa-day", "Modern white villa with a pool"),
+         say="Every project starts with listening: to the family, to the site and to the budget.",
+         more="Architecture and interiors from Morar, Gwalior, planned with you and checked on site at every stage.",
+         projects=[P("Villa with a pool", "Villa / Bungalow", ["villa-day", "villa-pool", "living-atrium", "dining-table", "bedroom"], "Architecture and interiors", ["New build"]),
+                   P("Apartment interior", "Apartment", ["living-warm", "living-styled", "kitchen-island", "bath"], "Interiors and furniture", ["Full home"]),
+                   P("Living room renovation", "Apartment", ["living-tv", "tv-unit", "living-bright"], "Renovation", ["Renovation"]),
+                   P("House at dusk", "Independent house", ["house-dusk", "villa-terrace"], "Architecture", ["New build"]),
+                   P("Office", "Office", ["office"], "Interior design"),
+                   P("Restaurant", "Café / Restaurant", ["dining-warm"], "Interior design")],
+         kind="arch", wa_home="I saw your website and want to discuss my project.", quotes=[]),
+    dict(slug="aakriti-engineers-architects", name="AAKRITI Engineers & Architects", short="AAKRITI", hero_name="AAKRITI Engineers & Architects",
+         label="Engineers & architects", city="Jabalpur", what="Engineers, architects and interiors in Jabalpur.", accent="#6B3A3A",
+         phone="8989894019", rating="5.0", reviews=37, place="ChIJ8WkL356tgTkRX3K_XyHV6CU",
+         address="Shop 2, first floor, Shivhari Complex, beside Gulzar Hotel, Mahanadda, Jabalpur 482001",
+         hours=None, open=None, email=None,
+         hero=("split", "villa-modern", "Modern white house with a pool and lawn"),
+         say="Strong structures, clear drawings and interiors you will enjoy living in.",
+         more="Engineers and architects in Jabalpur: we plan the structure and the rooms inside it together, so nothing clashes on site.",
+         projects=[P("Modern villa", "Villa / Bungalow", ["villa-modern", "living-atrium", "kitchen-island", "dining-table", "bedroom", "bath"], "Architecture and interiors", ["New build"]),
+                   P("House at dusk", "Independent house", ["house-dusk", "living-bright", "living-tv"], "Architecture and interiors", ["New build"]),
+                   P("Apartment interior", "Apartment", ["living-styled", "living-warm", "tv-unit"], "Interiors and furniture", ["Full home"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-terrace"], "Architecture", ["New build"]),
+                   P("Clinic", "Clinic", ["clinic"], "Interior design"),
+                   P("Office", "Office", ["office"], "Architecture and interiors")],
+         kind="arch", wa_home="I saw your website and want to discuss my project.", quotes=[]),
+    dict(slug="designcart-studio", name="Designcart Studio", short="Designcart", hero_name="Designcart Studio",
+         label="Architects & interior designers", city="Gwalior", what="Architecture and interiors in Gwalior.", accent="#3C5148",
+         phone="9039068210", rating="5.0", reviews=44, place="ChIJHziZGPTFdjkRbzHl92cNSGM",
+         address="1st floor, Aashiyana Complex, Moti Mahal Road, Phool Bagh, Lashkar, Gwalior 474002", hours=None, open=None, email=None,
+         hero=("split", "living-bright", "Living room with a sofa and round coffee table"),
+         say="Good design should be easy to live with: clear plans, honest materials and rooms that stay practical.",
+         more="Architecture and interiors from Phool Bagh, Gwalior, for homes and workplaces.",
+         projects=[P("Apartment interior", "Apartment", ["living-bright", "kitchen-island", "dining-table", "bedroom", "bath", "living-warm"], "Interiors and furniture", ["Full home"]),
+                   P("Modern house", "Independent house", ["villa-modern", "house-dusk", "living-atrium"], "Architecture and interiors", ["New build"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-day", "villa-terrace"], "Architecture", ["New build"]),
+                   P("Living room and TV wall", "Apartment", ["living-tv", "tv-unit", "living-styled"], "Interiors and furniture", ["Living room"]),
+                   P("Café", "Café / Restaurant", ["dining-warm"], "Interior design"),
+                   P("Clinic", "Clinic", ["clinic"], "Interior design")],
+         kind="arch", wa_home="I saw your website and want to discuss my home interiors.", quotes=[]),
+    dict(slug="ghar-sansar", name="Ghar Sansar – Architect & Interior", short="Ghar Sansar", hero_name="Ghar Sansar",
+         label="Architects & interiors", city="Bikaner", what="Architecture and interiors in Bikaner.", accent="#7A5230",
+         phone="7728888588", rating="4.6", reviews=278, place="ChIJjwFryIbnPzkRpMuhv-bsJO0",
+         address="Behind Samsung TV showroom, Sharma Colony, Rani Bazar, Bikaner", hours=None, open=None, email=None,
+         hero=("split", "house-dusk", "Modern house lit up at dusk"),
+         say="A home built for the way your family lives, bright inside and easy to look after.",
+         more="Architecture and interiors in Bikaner, from the plan of the house to the last light fitting.",
+         projects=[P("Family house", "Independent house", ["house-dusk", "living-styled", "kitchen-island", "dining-table", "bedroom", "bath"], "Architecture and interiors", ["New build"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-day", "living-atrium"], "Architecture and interiors", ["New build"]),
+                   P("Bungalow and lawn", "Villa / Bungalow", ["villa-modern", "villa-terrace", "living-bright"], "Architecture", ["New build"]),
+                   P("Living room renovation", "Apartment", ["living-tv", "tv-unit", "living-warm"], "Renovation", ["Renovation"]),
+                   P("Restaurant", "Café / Restaurant", ["dining-warm"], "Interior design"),
+                   P("Office", "Office", ["office"], "Interior design")],
+         kind="arch", wa_home="I saw your website and want to discuss my house.", quotes=[]),
+    dict(slug="luxura-interior", name="Luxura Interior Solution", short="Luxura", hero_name="Luxura Interior Solution",
+         label="Interior designers", city="Indore", what="Interior design in Indore.", accent="#2E3F4F",
+         phone="9926811803", rating="4.9", reviews=27, place="ChIJrSBLYtT9YjkRY61_guuqyJw",
+         address="G-5, Apollo Premier, Vijay Nagar Square, Indore", hours=None, open=None, email=None,
+         hero=("split", "living-styled", "Bright living room with a gallery wall"),
+         say="Interiors that look rich without feeling crowded, finished to last.",
+         more="Interior design from Vijay Nagar, Indore, planned room by room and handed over ready to live in.",
+         projects=[P("Apartment interior", "Apartment", ["living-styled", "kitchen-island", "bedroom", "bath", "dining-table"], "Full home interiors", ["Full home"]),
+                   P("Villa interior", "Villa / Bungalow", ["living-atrium", "dining-warm", "living-warm"], "Interiors and furniture", ["Full home"]),
+                   P("Living room and TV wall", "Apartment", ["living-tv", "tv-unit"], "Living room design", ["Living room"]),
+                   P("House interior", "Independent house", ["living-bright"], "Interiors and furniture", ["Full home"]),
+                   P("Office", "Office", ["office"], "Interior design"),
+                   P("Clinic", "Clinic", ["clinic"], "Interior design")],
+         kind="arch", enq="int", services=INT_SERVICES, title="",
+         wa_home="I saw your website and want to discuss my home interiors.", quotes=[]),
+    dict(slug="suamrit-creations", name="Suamrit Creation's", short="Suamrit", hero_name="Suamrit Creation's",
+         label="Interior designers", city="Indore", what="Interior design in Indore.", accent="#4E4A3F",
+         phone="7987949004", rating="5.0", reviews=21, place="ChIJS-ud7sD7YjkRUinMsT8wr5g",
+         address="Lotus, Silver Star City, Indore", hours=None, open=None, email=None,
+         hero=("split", "living-warm", "Corner with a yellow armchair and a floor lamp"),
+         say="Rooms planned around your family's day, with a place for everything and nothing extra.",
+         more="Interior design from Silver Star City, Indore, from the first layout to the final handover.",
+         projects=[P("Family apartment", "Apartment", ["living-warm", "tv-unit", "kitchen-island", "bedroom", "dining-table", "bath"], "Full home interiors", ["Full home"]),
+                   P("Bungalow interior", "Villa / Bungalow", ["living-atrium", "living-styled"], "Interiors and furniture", ["Full home"]),
+                   P("Living room makeover", "Apartment", ["living-tv", "living-bright"], "Living room design", ["Living room"]),
+                   P("Restaurant", "Café / Restaurant", ["dining-warm"], "Interior design"),
+                   P("Clinic", "Clinic", ["clinic"], "Interior design"),
+                   P("Office", "Office", ["office"], "Interior design")],
+         kind="arch", enq="int", services=INT_SERVICES, title="",
+         wa_home="I saw your website and want to discuss my home interiors.", quotes=[]),
+    dict(slug="harleen-virk", name="Ar. Harleen Virk", short="Harleen Virk", hero_name="Ar. Harleen Virk",
+         label="Architect", city="Chandigarh", what="Architecture and interiors in Chandigarh.", accent="#3D4A5E",
+         phone="9814810050", rating="4.5", reviews=154, place="ChIJw2jghB7tDzkRG99IHD0rhmQ",
+         address="Sector 27A, Chandigarh", hours=None, open=None, email=None,
+         hero=("split", "villa-terrace", "Villa terrace beside a pool"),
+         say="Homes designed around light, open space and the way your family actually lives.",
+         more="Architecture and interiors in Chandigarh, designed personally and followed through on site.",
+         person="Ar. Harleen Virk", person_role="Architect, Chandigarh", person_h="The architect",
+         projects=[P("Modern villa", "Villa / Bungalow", ["villa-terrace", "living-atrium", "kitchen-island", "bedroom", "bath", "dining-table"], "Architecture and interiors", ["New build"]),
+                   P("House at dusk", "Independent house", ["house-dusk", "living-bright", "living-warm"], "Architecture and interiors", ["New build"]),
+                   P("Villa with a pool", "Villa / Bungalow", ["villa-pool", "villa-day"], "Architecture", ["New build"]),
+                   P("House and lawn", "Independent house", ["villa-modern", "living-styled"], "Architecture", ["New build"]),
+                   P("Apartment renovation", "Apartment", ["living-tv", "tv-unit"], "Renovation", ["Renovation"]),
+                   P("Office", "Office", ["office"], "Interior design")],
+         kind="arch", wa_home="I saw your website and want to discuss my project.", quotes=[]),
 ]
 # Google review quotes: add 3 to 6 per studio, copied word for word from their Google listing, as
 #   quotes=[("Exact words of the review.", "First name", "Month Year"), ...]
@@ -372,7 +527,7 @@ def prepare(c):
 
 def type_values(c):
     present = {p["type"] for p in c["projects"]}
-    wanted = present | set(ENQ[c["kind"]]["types"])
+    wanted = present | set(ENQ[c.get("enq", c["kind"])]["types"])
     order = [t for t in TYPE_ORDER if t in wanted] + sorted(wanted - set(TYPE_ORDER))
     return [t for t in order if t in present] + [t for t in order if t not in present]
 
@@ -603,7 +758,7 @@ def chips_html(name, values, kind="radio", checked=()):
 def enquiry_form(c, ctx, pid, scope_preset=(), type_preset=None):
     """Qualified WhatsApp enquiry: three short steps, mostly taps, with a live preview of the message.
     Opened from a project page, the project's property type and scope are already picked (and can be changed)."""
-    o = ENQ[c["kind"]]
+    o = ENQ[c.get("enq", c["kind"])]
     start = o["default"]
     if any(s in o["build"] for s in scope_preset):
         start = "build"
@@ -683,10 +838,11 @@ def proof(c):
 
 
 def founder(c):
-    title = "Ar. " if c["kind"] == "arch" else ""
+    title = c.get("title", "Ar. " if c["kind"] == "arch" else "")
     return (f'<p class="studio-more">{e(c["more"])}</p>'
-            f'<p class="studio-story yours-text">Your story goes here: how {e(c["short"])} started, the projects you are proudest of, and how you like to work with clients.</p>'
-            f'<p class="sign"><b>{title}<span class="yours-text">Your name</span></b><span>Founder, {e(c["short"])}</span></p>')
+            f'<p class="studio-story yours-text">Your story goes here: how {"you" if c.get("person") else e(c["short"])} started, the projects you are proudest of, and how you like to work with clients.</p>'
+            + (f'<p class="sign"><b>{e(c["person"])}</b><span>{e(c["person_role"])}</span></p>' if c.get("person") else
+               f'<p class="sign"><b>{title}<span class="yours-text">Your name</span></b><span>Founder, {e(c["short"])}</span></p>'))
 
 
 def contact_rows(c, ctx):
@@ -790,7 +946,7 @@ def work(c, ctx):
 
 
 def services(c, ctx):
-    lst = ARCH_SERVICES if c["kind"] == "arch" else FURN_SERVICES
+    lst = c.get("services") or (ARCH_SERVICES if c["kind"] == "arch" else FURN_SERVICES)
     items = ""
     for n, d in lst:
         link = wa(c, "I'm interested in " + lower_first(n) + ".", ctx["url"] + "#services")
@@ -832,7 +988,7 @@ def studio(c, ctx):
     """The person behind the studio, and what Google reviewers say."""
     return f'''<section class="sec" id="studio" aria-labelledby="studio-h">
     <div class="wrap split">
-      <div class="sec-head" data-rv><h2 class="h2" id="studio-h">The person behind {e(c["short"])}</h2></div>
+      <div class="sec-head" data-rv><h2 class="h2" id="studio-h">{e(c.get("person_h") or "The person behind " + c["short"])}</h2></div>
       <div class="studio-body" data-rv>
         <div>{founder(c)}<p class="studio-link"><a class="link" href="about/">More about {e(c["short"])}</a></p></div>
         {proof(c)}
@@ -1136,7 +1292,7 @@ def about_page(c):
 
   <section class="sec" aria-labelledby="ab-person-h">
     <div class="wrap split">
-      <div class="sec-head" data-rv><h2 class="h2" id="ab-person-h">The person behind {e(c["short"])}</h2></div>
+      <div class="sec-head" data-rv><h2 class="h2" id="ab-person-h">{e(c.get("person_h") or "The person behind " + c["short"])}</h2></div>
       <div class="ab-body" data-rv>{founder(c)}</div>
     </div>
   </section>
