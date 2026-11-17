@@ -99,7 +99,7 @@ const LISTINGS = [
     areas: ["Sadar", "Gorewada", "Mankapur", "Jaripatka"],
     price: 9000,
     priceNote: "per month",
-    images: ["1791727672_00.webp", "1791727672_01.webp", "1791727672_03.webp", "1791727672_04.webp", "1791727672_05.webp", "1791727672_06.webp", "1791727672_02.webp"],
+    images: ["1791727672_00.webp", "1791727672_01.webp", "1791727672_03.webp", "1791727672_06.webp", "1791727672_02.webp"],
     details: { "Bedrooms": "1 & 2 BHK", "Bathrooms": "2", "Furnishing": "Semi-furnished", "Facing": "East", "Car parking": "Yes", "Bachelors": "Families only" },
     description: "Bright 1 & 2 BHK flats with a furnished hall and bedrooms. Available in Sadar, Gorewada, Mankapur and Jaripatka.",
   },
@@ -375,9 +375,10 @@ const AREAS = [
     const open = nav.classList.toggle("is-open");
     navToggle.setAttribute("aria-expanded", open);
     document.body.classList.toggle("no-scroll", open);
+    header.classList.toggle("nav-open", open);
   });
   $$("#nav a").forEach(a => a.addEventListener("click", () => {
-    nav.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); document.body.classList.remove("no-scroll");
+    nav.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); document.body.classList.remove("no-scroll"); header.classList.remove("nav-open");
   }));
 
   /* ---------- scroll effects ---------- */

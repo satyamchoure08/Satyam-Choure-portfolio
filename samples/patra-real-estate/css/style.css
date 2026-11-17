@@ -91,7 +91,9 @@ dl, dd, dt, ol, ul { margin: 0; padding: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
-.nav.is-open { display: flex; position: fixed; inset: 68px 0 0 0; background: var(--navy); flex-direction: column; padding: 28px var(--gutter); gap: 6px; z-index: 49; }
+.nav.is-open { display: flex; position: fixed; top: 68px; left: 0; right: 0; height: calc(100vh - 68px); height: calc(100dvh - 68px); overflow-y: auto; background: var(--navy); flex-direction: column; padding: 28px var(--gutter); gap: 6px; z-index: 49; }
+/* open menu: solid header, no blur (blur made the fixed menu collapse and look see-through) */
+.header.nav-open, .header:has(.nav.is-open) { background: var(--navy); -webkit-backdrop-filter: none; backdrop-filter: none; }
 .nav.is-open a { font-family: var(--serif); font-size: 1.6rem; color: #fff; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
 .nav.is-open .nav__wa { color: var(--gold-2); border: 0; margin-top: 10px; }
 
@@ -292,12 +294,12 @@ dl, dd, dt, ol, ul { margin: 0; padding: 0; }
 
 /* ---------- footer ---------- */
 .footer { background: var(--navy); color: rgba(255,255,255,0.75); font-size: 0.9rem; }
-.footer__inner { display: grid; gap: 30px; padding: 56px 0 36px; }
+.footer__inner { display: grid; gap: 30px; padding-top: 56px; padding-bottom: 36px; }
 .footer__brand p { margin-top: 14px; line-height: 1.6; }
 .footer__links { display: grid; gap: 8px; }
 .footer__links a:hover, .footer__brand a:hover { color: var(--gold-2); }
 .footer__services p { color: rgba(255,255,255,0.55); }
-.footer__base { display: flex; flex-direction: column; gap: 6px; padding: 18px 0 28px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+.footer__base { display: flex; flex-direction: column; gap: 6px; padding-top: 18px; padding-bottom: 28px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: rgba(255,255,255,0.45); }
 @media (min-width: 900px) {
   .footer__inner { grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; }
   .footer__base { flex-direction: row; justify-content: space-between; }
