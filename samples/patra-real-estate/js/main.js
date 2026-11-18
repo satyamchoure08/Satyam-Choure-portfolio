@@ -7,8 +7,8 @@
    ===================================================================== */
 
 const CONFIG = {
-  whatsapp: "[ADD NUMBER]",          // e.g. "919876543210" (country code + number, digits only)
-  phoneDisplay: "[ADD NUMBER]",      // shown on the page, e.g. "+91 98765 43210"
+  whatsapp: "919822362656",          // e.g. "919876543210" (country code + number, digits only)
+  phoneDisplay: "+91 98223 62656",      // shown on the page, e.g. "+91 98765 43210"
   officeHours: "[ADD HOURS]",        // e.g. "Mon–Sat, 10 am – 7 pm"
   mapsQuery: "Jagdamba Heights Apartment, near SBI Bank, Mankapur, Nagpur",
   businessName: "Patra Real Estate",
