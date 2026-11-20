@@ -10,9 +10,9 @@
   const WA_NUM = '919669039996';
   const PRODUCTS = [
     { id: 'trailblazer', name: 'TRAILBLAZER 07', tag: 'BEST SELLER', price: '₹6,499', rawPrice: 6499,
-      desc: 'Wheat nubuck work boot with storm welt & recycled lug sole.', img: 'assets/shoes/shoe-trailblazer.png' },
+      desc: 'Wheat nubuck work boot with storm welt & recycled lug sole.', img: 'assets/shoes/shoe-trailblazer.webp' },
     { id: 'arctic', name: 'ARCTIC TACTICAL', tag: 'NEW DROP', price: '₹7,999', rawPrice: 7999,
-      desc: 'Bone-white combat boot. Zip-shaft, chunky platform, zero mercy.', img: 'assets/shoes/shoe-arctic.png' },
+      desc: 'Bone-white combat boot. Zip-shaft, chunky platform, zero mercy.', img: 'assets/shoes/shoe-arctic.webp' },
     { id: 'sierra', name: 'SIERRA DUO', tag: 'LIMITED', price: '₹5,499', rawPrice: 5499,
       desc: 'Slate-blue knit trainers on a soft, springy sole. Built for long days on your feet.', img: 'assets/shoes/shoe-sierra-sneaker.webp' },
     { id: 'nomad', name: 'NOMAD RIDER', tag: 'HANDMADE', price: '₹8,299', rawPrice: 8299,
@@ -20,7 +20,7 @@
     { id: 'oxford', name: 'OXFORD WANDERER', tag: 'CLASSIC', price: '₹4,999', rawPrice: 4999,
       desc: 'Cherry-red leather low-tops with crisp white laces. Boardroom today, weekend tomorrow.', img: 'assets/shoes/shoe-oxford-sneaker.webp' },
     { id: 'blaze', name: 'BLAZE RUNNER', tag: 'HOT', price: '₹5,999', rawPrice: 5999,
-      desc: 'Signal-red knit runner with cloud foam. Outrun your excuses.', img: 'assets/shoes/shoe-blaze.png' },
+      desc: 'Signal-red knit runner with cloud foam. Outrun your excuses.', img: 'assets/shoes/shoe-blaze.webp' },
   ];
 
   const $ = (s, r) => (r || document).querySelector(s);
@@ -127,7 +127,7 @@
     card.style.transform = `rotateY(${i * STEP}deg) translateZ(${RADIUS}px)`;
     card.innerHTML = `
       <span class="tag ${p.tag === 'HOT' || p.tag === 'NEW DROP' ? 'hot' : ''}">${p.tag}</span>
-      <div class="ph"><img src="${p.img}" alt="${p.name}" loading="lazy" draggable="false"></div>
+      <div class="ph"><img src="${p.img}" alt="${p.name}" decoding="async" draggable="false"></div>
       <h4>${p.name}</h4><span class="price">${p.price}</span>`;
     ringEl.appendChild(card);
   });
@@ -316,7 +316,7 @@
         <div class="sbh-stage" id="customStage">
           <span style="display:inline-block;background:#FF4D00;color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:.1em;margin-bottom:10px">INTERACTIVE 3D BOOT LAB · TAP HOTSPOTS</span>
           <div style="position:relative;display:inline-block">
-            <img src="assets/shoes/shoe-trailblazer.png" id="labBootImg" alt="Customizable 3D Boot">
+            <img src="assets/shoes/shoe-trailblazer.webp" id="labBootImg" alt="Customizable 3D Boot">
             <button type="button" class="sbh-hotspot" style="top:18%;left:24%" data-tip="Storm-proof brass speed hooks & waxed paracord laces">1</button>
             <button type="button" class="sbh-hotspot" style="top:48%;right:18%" data-tip="100% Full-grain Chhindwara hand-oiled hide">2</button>
             <button type="button" class="sbh-hotspot" style="bottom:12%;left:45%" data-tip="360° Goodyear Storm Welt — resoleable for life">3</button>
