@@ -1,0 +1,747 @@
+@import "tailwindcss";
+
+/* ── Invisible Design System Tokens (§3) ─────────────────────── */
+@theme {
+  --color-subtle: #f8fafc;
+  --color-border-hairline: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --color-heading: #0f172a;
+  --color-body: #475569;
+  --color-muted: #64748b;
+  --color-brand: #0b3b8c;
+  --color-brand-hover: #082b66;
+  --color-brand-tint: #eff6ff;
+  --color-savings: #15803d;
+  --color-savings-hover: #166534;
+  --color-navy: #0f2c59;
+
+  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  --ring-focus: 0 0 0 3px rgba(11, 59, 140, 0.12);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optical Heading Balance: balance headlines so no orphan single word on last line.
+   In the base layer so colour utilities (e.g. the footer's text-white headings) can override it. */
+@layer base {
+  h1, h2, h3 {
+    color: var(--color-heading);
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* ── Strict Optical Typography Scale (§3) ───────────────────── */
+  .t-h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  @media (min-width: 768px) {
+    .t-h1 {
+      font-size: 48px;
+    }
+  }
+
+  .t-h2 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  @media (min-width: 768px) {
+    .t-h2 {
+      font-size: 34px;
+    }
+  }
+
+  .t-h3 {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .t-body {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    max-width: 58ch;
+  }
+
+  .t-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  /* Tabular numbers for clean, non-jittering alignment on stats & metrics */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Layout Containers & Section Padding (§2 & Additive Upgrade Spacing) ──── */
+  /* Every section: padding 88px 20px (desktop) and 56px 16px (mobile) inside max-width container */
+  .site-container {
+    width: 100%;
+    max-width: 1160px;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  @media (min-width: 768px) {
+    .site-container {
+      padding-inline: 20px;
+    }
+  }
+
+  .site-section {
+    padding-block: 56px;
+  }
+  @media (min-width: 768px) {
+    .site-section {
+      padding-block: 88px;
+    }
+  }
+
+  /* ── Interactive Component Proportions (§3) ─────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding-inline: 24px;
+    border-radius: 8px;
+    background-color: var(--color-brand);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 150ms ease, border-color 150ms ease, box-shadow 200ms ease, transform 150ms ease;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-brand-hover);
+    box-shadow: 0 8px 18px -10px rgba(11, 59, 140, 0.55);
+  }
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow: var(--ring-focus);
+  }
+
+  /* Was referenced by Hero but never defined (rendered as a plain link). */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding-inline: 22px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-hover);
+    background-color: #ffffff;
+    color: var(--color-heading);
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(11, 59, 140, 0.45);
+    color: var(--color-brand);
+    background-color: var(--color-subtle);
+  }
+  .btn-secondary:focus-visible {
+    outline: none;
+    box-shadow: var(--ring-focus);
+  }
+
+  /* Was referenced by System Types but never defined. */
+  .btn-savings {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 42px;
+    padding-inline: 18px;
+    border-radius: 8px;
+    background-color: var(--color-savings);
+    color: #ffffff;
+    white-space: nowrap;
+    transition: background-color 150ms ease, box-shadow 200ms ease, transform 150ms ease;
+  }
+  .btn-savings:hover {
+    background-color: var(--color-savings-hover);
+    box-shadow: 0 8px 18px -10px rgba(21, 128, 61, 0.6);
+  }
+  .btn-savings:focus-visible {
+    outline: none;
+    box-shadow: var(--ring-focus);
+  }
+
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-whatsapp:active,
+  .btn-savings:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  /* Arrow inside a button nudges in its direction on hover. */
+  .btn-arrow,
+  .btn-arrow-down {
+    display: inline-block;
+    transition: transform 220ms var(--ease-out);
+  }
+  a:hover > .btn-arrow,
+  button:hover > .btn-arrow {
+    transform: translateX(3px);
+  }
+  a:hover > .btn-arrow-down {
+    transform: translateY(3px);
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border-hairline);
+    background-color: #ffffff;
+    color: var(--color-heading);
+    transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  }
+  .icon-btn:hover {
+    border-color: rgba(11, 59, 140, 0.45);
+    color: var(--color-brand);
+  }
+  .icon-btn:active {
+    transform: scale(0.94);
+  }
+  .icon-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--ring-focus);
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding-inline: 24px;
+    border-radius: 8px;
+    background-color: var(--color-savings);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 150ms ease, transform 150ms ease;
+  }
+  .btn-whatsapp:hover {
+    background-color: var(--color-savings-hover);
+  }
+  .btn-whatsapp:focus-visible {
+    outline: none;
+    box-shadow: var(--ring-focus);
+  }
+
+  .pill-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding-inline: 12px;
+    border-radius: 9999px;
+    background-color: var(--color-brand-tint);
+    color: var(--color-brand);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .form-control {
+    width: 100%;
+    height: 48px;
+    padding-inline: 14px;
+    border: 1px solid var(--color-border-hover);
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: var(--color-heading);
+    font-size: 16px; /* 16px strictly avoids iOS Safari zoom */
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .form-control::placeholder {
+    color: #94a3b8;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: var(--ring-focus);
+  }
+  .form-control[aria-invalid="true"] {
+    border-color: #dc2626;
+  }
+
+  select.form-control {
+    appearance: none;
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%2364748B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+
+  .card-bordered {
+    background-color: #ffffff;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  @media (min-width: 768px) {
+    .card-bordered {
+      padding: 28px;
+    }
+  }
+
+  /* Range Slider with fill effect */
+  .calculator-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 24px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .calculator-range:focus {
+    outline: none;
+  }
+  .calculator-range::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, var(--color-brand) var(--slider-fill, 0%), var(--color-border-hairline) var(--slider-fill, 0%));
+  }
+  .calculator-range::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-border-hairline);
+  }
+  .calculator-range::-moz-range-progress {
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-brand);
+  }
+  .calculator-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid var(--color-brand);
+    transition: border-color 150ms ease;
+  }
+  .calculator-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid var(--color-brand);
+  }
+  .calculator-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: var(--ring-focus);
+  }
+  .calculator-range:focus-visible::-moz-range-thumb {
+    box-shadow: var(--ring-focus);
+  }
+}
+
+/* ── Soft-edged photos (image melts into whatever is behind it) ─────── */
+@utility feather {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent),
+    linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent),
+    linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
+  mask-composite: intersect;
+}
+@utility feather-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 92%);
+}
+@utility feather-r {
+  -webkit-mask-image: linear-gradient(to right, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 50%, transparent 100%);
+}
+
+/* ── Motion system ──────────────────────────────────────────────────
+   Calm, purpose-only motion: ease-out, 0.5–0.8s entrances, nothing bouncy.
+   Scroll reveals are driven by MotionRoot.tsx (html[data-motion] + [data-revealed]). */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-up-sm {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes drop-in {
+  from { opacity: 0; transform: translate3d(0, -6px, 0) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.6); }
+  60% { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-in-l {
+  from { opacity: 0; transform: translate3d(-12px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-in-r {
+  from { opacity: 0; transform: translate3d(12px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.07) translate3d(-1.2%, -1%, 0); }
+}
+@keyframes flow-sweep {
+  from { transform: translateX(0); }
+  to { transform: translateX(500%); }
+}
+@keyframes link-pulse {
+  0% { transform: translateX(-100%); }
+  45%, 100% { transform: translateX(100%); }
+}
+@keyframes step-timer {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes live-ring {
+  from { transform: scale(1); opacity: 0.65; }
+  to { transform: scale(2.8); opacity: 0; }
+}
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Scroll reveal: hidden only after MotionRoot has run (no-JS = fully visible). */
+html[data-motion] [data-reveal]:not([data-revealed]),
+html[data-motion] [data-reveal-stagger]:not([data-revealed]) > * {
+  opacity: 0;
+}
+html[data-motion] [data-reveal][data-revealed=""] {
+  animation: reveal-up 0.75s var(--ease-out) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+html[data-motion] [data-reveal-stagger][data-revealed=""] > * {
+  animation: reveal-up 0.7s var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 90ms + var(--reveal-delay, 0ms));
+}
+[data-reveal-stagger] > :nth-child(2) { --i: 1; }
+[data-reveal-stagger] > :nth-child(3) { --i: 2; }
+[data-reveal-stagger] > :nth-child(4) { --i: 3; }
+[data-reveal-stagger] > :nth-child(5) { --i: 4; }
+[data-reveal-stagger] > :nth-child(6) { --i: 5; }
+[data-reveal-stagger] > :nth-child(7) { --i: 6; }
+[data-reveal-stagger] > :nth-child(8) { --i: 7; }
+
+/* Hero plays once on load (pure CSS, no JS needed). */
+.hero-in {
+  animation: reveal-up 0.8s var(--ease-out) backwards;
+  animation-delay: var(--d, 0ms);
+}
+.hero-badge-l {
+  animation: slide-in-l 0.7s var(--ease-out) 0.75s backwards;
+}
+.hero-badge-r {
+  animation: slide-in-r 0.7s var(--ease-out) 0.9s backwards;
+}
+.kenburns {
+  animation: kenburns 24s var(--ease-in-out) infinite alternate;
+  transform-origin: 60% 40%;
+}
+
+/* Small "live" dot with an expanding ring. */
+.live-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: currentColor;
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: currentColor;
+  animation: live-ring 1.8s var(--ease-out) infinite;
+}
+
+/* Power current: an amber glow travelling along a line (sun → grid). */
+/* (positioned by the `absolute` utility where used; no position here so utilities win) */
+.flow-track {
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--color-border-hairline);
+}
+.flow-track::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+  width: 25%;
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.95), transparent);
+  animation: flow-sweep 2.8s var(--ease-in-out) infinite;
+}
+/* Short connector between two stages; pulses one after another via --i. */
+.flow-link {
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--color-border-hover);
+}
+.flow-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+  transform: translateX(-100%);
+  animation: link-pulse 2.6s var(--ease-in-out) infinite;
+  animation-delay: calc(var(--i, 0) * 0.4s);
+}
+
+/* Auto-tour timer bar; its animationend advances the tour. */
+.step-timer {
+  transform-origin: left center;
+  animation: step-timer var(--dur, 5000ms) linear both;
+}
+.step-timer[data-paused] {
+  animation-play-state: paused;
+}
+
+/* Content swapped in place (tabs, stages): quick fade-up on mount. */
+.anim-swap {
+  animation: fade-up-sm 0.45s var(--ease-out) both;
+}
+.anim-drop {
+  animation: drop-in 0.2s var(--ease-out) both;
+}
+.anim-pop {
+  animation: pop-in 0.55s var(--ease-out) both;
+}
+
+/* Header scroll progress: CSS scroll timeline where supported, JS fallback otherwise. */
+.scroll-progress {
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation-name: progress-grow;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+/* Process: connector lines draw across, step badges light up in order. */
+.process-line {
+  transform-origin: left center;
+  transition: transform 0.8s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 280ms + 450ms);
+}
+html[data-motion] .process-line:not([data-revealed] *) {
+  transform: scaleX(0);
+}
+.process-badge {
+  transition: background-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease;
+  transition-delay: calc(var(--i, 0) * 280ms + 250ms);
+}
+html[data-motion] .process-badge:not([data-revealed] *) {
+  background-color: #ffffff;
+  color: var(--color-brand);
+}
+
+/* Reviews: old bill gets struck through, new bill slides in, stars light up. */
+.bill-before {
+  position: relative;
+}
+.bill-before::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 52%;
+  height: 1.5px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transform-origin: left center;
+  transition: transform 0.5s var(--ease-out) 0.35s;
+}
+html[data-motion] .bill-before:not([data-revealed] *)::after {
+  transform: scaleX(0);
+}
+.bill-after {
+  display: inline-block;
+  transition: opacity 0.45s var(--ease-out) 0.8s, transform 0.45s var(--ease-out) 0.8s;
+}
+html[data-motion] .bill-after:not([data-revealed] *) {
+  opacity: 0;
+  transform: translateX(-6px);
+}
+.review-star {
+  transition: opacity 0.35s ease, transform 0.35s var(--ease-out);
+  transition-delay: calc(var(--s, 0) * 70ms + 300ms);
+}
+html[data-motion] .review-star:not([data-revealed] *) {
+  opacity: 0.25;
+  transform: scale(0.7);
+}
+
+/* ── Micro-interactions ─────────────────────────────────────────── */
+
+/* Hamburger: three bars turn into an X (and back). */
+.menu-morph {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 14px;
+  transition: rotate 0.4s var(--ease-out);
+}
+.menu-morph > span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: top 0.25s var(--ease-out) 0.15s, rotate 0.3s var(--ease-out), opacity 0.2s ease, scale 0.25s ease;
+}
+.menu-morph > span:nth-child(1) { top: 0; }
+.menu-morph > span:nth-child(2) { top: 6px; }
+.menu-morph > span:nth-child(3) { top: 12px; }
+.menu-morph.is-open { rotate: 90deg; }
+.menu-morph.is-open > span {
+  transition: top 0.25s var(--ease-out), rotate 0.3s var(--ease-out) 0.18s, opacity 0.2s ease, scale 0.25s ease;
+}
+.menu-morph.is-open > span:nth-child(1) { top: 6px; rotate: 45deg; }
+.menu-morph.is-open > span:nth-child(2) { opacity: 0; scale: 0.2 1; }
+.menu-morph.is-open > span:nth-child(3) { top: 6px; rotate: -45deg; }
+
+@keyframes ring-wiggle {
+  0%, 100% { rotate: 0deg; }
+  20% { rotate: -14deg; }
+  40% { rotate: 12deg; }
+  60% { rotate: -8deg; }
+  80% { rotate: 4deg; }
+}
+@keyframes icon-swap {
+  from { opacity: 0; transform: scale(0.4) rotate(-90deg); }
+  to { opacity: 1; transform: none; }
+}
+.anim-icon {
+  animation: icon-swap 0.3s var(--ease-out) both;
+}
+
+/* Range sliders: thumb grows under the finger, soft halo on hover. */
+.calculator-range::-webkit-slider-thumb {
+  transition: border-color 150ms ease, transform 200ms var(--ease-out), box-shadow 200ms ease;
+}
+.calculator-range:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 0 6px rgba(11, 59, 140, 0.1);
+}
+.calculator-range:active::-webkit-slider-thumb {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 8px rgba(11, 59, 140, 0.14);
+}
+.calculator-range::-moz-range-thumb {
+  transition: transform 200ms var(--ease-out), box-shadow 200ms ease;
+}
+.calculator-range:active::-moz-range-thumb {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 8px rgba(11, 59, 140, 0.14);
+}
+
+/* WhatsApp icon gives a small nod on hover. */
+.btn-whatsapp svg,
+.btn-whatsapp-link svg {
+  transition: transform 250ms var(--ease-out);
+}
+.btn-whatsapp:hover svg,
+.btn-whatsapp-link:hover svg {
+  transform: rotate(-10deg) scale(1.12);
+}
+
+/* Success tick draws itself. */
+@keyframes draw-stroke {
+  from { stroke-dashoffset: 30; }
+  to { stroke-dashoffset: 0; }
+}
+.draw-check polyline,
+.draw-check path {
+  stroke-dasharray: 30;
+  animation: draw-stroke 0.5s var(--ease-out) 0.3s both;
+}
+
+/* Modals fade in, card rises in. */
+@keyframes modal-rise {
+  from { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.anim-fade {
+  animation: fade-in 0.25s ease both;
+}
+.anim-modal {
+  animation: modal-rise 0.35s var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .kenburns,
+  .flow-track::after,
+  .flow-link::after,
+  .live-dot::after {
+    animation: none !important;
+  }
+  .scroll-progress {
+    display: none;
+  }
+}
