@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Satyam Choure — Web Designer & Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>
+(function () {
+  var base = '/Satyam-Choure-portfolio/';
+  var p = location.pathname;
+  // Fix wrong letter case in the folder name (e.g. /satyam-choure-portfolio/...)
+  var lower = p.toLowerCase();
+  if (lower.indexOf(base.toLowerCase()) === 0 && p.indexOf(base) !== 0) {
+    location.replace(base + p.slice(base.length) + location.search + location.hash);
+    return;
+  }
+  // Any other missing page goes to the portfolio home
+  location.replace(base);
+})();
+</script>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#111;color:#eee;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#fff}</style>
+</head>
+<body><p>Opening the portfolio… <a href="/Satyam-Choure-portfolio/">Click here if it doesn't open</a>.</p></body>
+</html>
